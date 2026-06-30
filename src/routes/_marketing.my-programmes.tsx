@@ -90,9 +90,9 @@ function MyProgrammesPage() {
         </div>
       </section>
 
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-3 gap-12 lg:gap-16">
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-12 lg:gap-x-12 xl:lg:gap-x-16">
         {/* LEFT — programmes lists */}
-        <div className="lg:col-span-2 space-y-12">
+        <div className="space-y-14 lg:space-y-16 lg:pr-4 xl:pr-8">
           {/* ACTIVE */}
           <div>
             <div className="flex items-end justify-between mb-6">
@@ -138,8 +138,11 @@ function MyProgrammesPage() {
           </div>
         </div>
 
+        {/* vertical divider — desktop only */}
+        <div aria-hidden className="hidden lg:block w-px bg-border/60" />
+
         {/* RIGHT — sidebar */}
-        <aside className="space-y-8">
+        <aside className="space-y-10 lg:pl-4 xl:pl-8">
           <SidebarCard title="Quick actions">
             <SideLink to="/programmes" label="Browse programmes" />
             <SideLink to="/my-programmes/athx-2026" label="View ATHX cover" />
