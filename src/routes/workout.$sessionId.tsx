@@ -1,9 +1,21 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { getSessionById } from "@/data/programme";
 import { ChevronLeft, ChevronRight, Pause, Play, X, Check } from "lucide-react";
 import { formatClock } from "@/lib/programmeUtils";
-import { store } from "@/lib/store";
+import { store, subscribeStore } from "@/lib/store";
+import { LogDrawer } from "@/components/workout/LogDrawer";
+import { summariseResult } from "@/components/workout/logKind";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/workout/$sessionId")({
   component: WorkoutPage,
@@ -16,8 +28,17 @@ function WorkoutPage() {
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [paused, setPaused] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [logOpen, setLogOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const startedAt = useRef<string>(new Date().toISOString());
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Subscribe to store so newly-saved results re-render the summary line.
+  const resultsTick = useSyncExternalStore(
+    subscribeStore,
+    () => store.getResults().length,
+    () => store.getResults().length,
+  );
 
   useEffect(() => {
     if (paused) return;
@@ -33,8 +54,37 @@ function WorkoutPage() {
   const total = s.blocks.length;
   const doneCount = Object.values(done).filter(Boolean).length;
 
+  // Latest result for this block (any session) and today's saved result (if any).
+  const lastResult = store.getLastResultByBlockId(block.id);
+  const todaysResult = (() => {
+    const todayISO = new Date().toISOString().slice(0, 10);
+    const list = store
+      .getResultsForBlock(s.id, block.id)
+      .filter((r) => r.dateISO === todayISO);
+    return list[list.length - 1];
+  })();
+  // Use the underscored var to silence unused-warnings if any
+  void resultsTick;
+
   const next = () => setIdx((i) => Math.min(total - 1, i + 1));
   const prev = () => setIdx((i) => Math.max(0, i - 1));
+
+  const completeBlock = () => {
+    setDone((d) => ({ ...d, [block.id]: true }));
+    setConfirmOpen(false);
+  };
+
+  const requestComplete = () => {
+    if (done[block.id]) {
+      setDone((d) => ({ ...d, [block.id]: false }));
+      return;
+    }
+    if (!todaysResult) {
+      setConfirmOpen(true);
+      return;
+    }
+    completeBlock();
+  };
 
   const finish = () => {
     store.saveLog({
@@ -94,6 +144,29 @@ function WorkoutPage() {
             ))}
           </ul>
 
+          {/* Previous / Today result line — muted, single-line */}
+          {(todaysResult || lastResult) && (
+            <div className="mt-6 border-t border-border pt-4 text-xs">
+              {todaysResult ? (
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="eyebrow text-foreground-muted">Logged</span>
+                  <span className="text-bone tabular">{summariseResult(todaysResult)}</span>
+                  {todaysResult.note && (
+                    <span className="text-foreground-muted italic">· {todaysResult.note}</span>
+                  )}
+                </div>
+              ) : lastResult ? (
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="eyebrow text-foreground-muted">Last time</span>
+                  <span className="text-foreground-muted tabular">
+                    {summariseResult(lastResult)}
+                  </span>
+                  <span className="text-foreground-muted/70">· {lastResult.dateISO}</span>
+                </div>
+              ) : null}
+            </div>
+          )}
+
           {block.timer && (
             <div className="mt-10 border border-border p-5 text-sm text-foreground-muted">
               <p className="eyebrow mb-2">Timer</p>
@@ -107,17 +180,26 @@ function WorkoutPage() {
             <p className="mt-8 text-xs text-foreground-muted italic">{block.note}</p>
           )}
 
-          <button
-            onClick={() => setDone({ ...done, [block.id]: !done[block.id] })}
-            className={`mt-10 w-full h-14 inline-flex items-center justify-center gap-2 text-sm font-display uppercase tracking-wide rounded-[4px] transition-colors ${
-              done[block.id]
-                ? "bg-signal text-bone"
-                : "bg-surface-raised text-bone hover:bg-surface-raised/80"
-            }`}
-          >
-            <Check className="h-4 w-4" />
-            {done[block.id] ? "Block complete" : "Mark block complete"}
-          </button>
+          {/* Actions: subtle Log work + primary Mark block complete */}
+          <div className="mt-10 space-y-3">
+            <button
+              onClick={() => setLogOpen(true)}
+              className="w-full h-11 inline-flex items-center justify-center gap-2 text-[11px] font-display uppercase tracking-widest border border-border text-foreground-muted hover:text-bone hover:border-bone transition-colors rounded-[4px]"
+            >
+              {todaysResult ? "Edit logged result" : "Log work"}
+            </button>
+            <button
+              onClick={requestComplete}
+              className={`w-full h-14 inline-flex items-center justify-center gap-2 text-sm font-display uppercase tracking-wide rounded-[4px] transition-colors ${
+                done[block.id]
+                  ? "bg-signal text-bone"
+                  : "bg-surface-raised text-bone hover:bg-surface-raised/80"
+              }`}
+            >
+              <Check className="h-4 w-4" />
+              {done[block.id] ? "Block complete" : "Mark block complete"}
+            </button>
+          </div>
         </div>
       </main>
 
@@ -163,6 +245,45 @@ function WorkoutPage() {
           )}
         </div>
       </footer>
+
+      {/* Logging drawer */}
+      <LogDrawer
+        open={logOpen}
+        onOpenChange={setLogOpen}
+        session={s}
+        block={block}
+      />
+
+      {/* Confirm complete without logging */}
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent className="bg-background border border-border text-bone rounded-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="font-display text-bone">
+              Complete without logging a result?
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-foreground-muted text-sm">
+              You can still mark this block done, but nothing will be saved to your history.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-2">
+            <AlertDialogCancel
+              onClick={() => {
+                setConfirmOpen(false);
+                setLogOpen(true);
+              }}
+              className="bg-transparent border border-border text-bone hover:bg-surface-raised rounded-none text-[11px] uppercase tracking-widest"
+            >
+              Log result
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={completeBlock}
+              className="bg-signal text-bone hover:bg-signal/90 rounded-none text-[11px] uppercase tracking-widest"
+            >
+              Complete without result
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
