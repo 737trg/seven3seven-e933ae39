@@ -10,7 +10,6 @@ import {
   today,
 } from "@/lib/programmeUtils";
 import { store, subscribeStore } from "@/lib/store";
-import { Button } from "@/components/ui-prim/Button";
 import { CategoryLabel, Tag } from "@/components/ui-prim/Tag";
 import { ArrowRight, ChevronRight, Flame, Clock } from "lucide-react";
 
