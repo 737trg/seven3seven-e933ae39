@@ -14,16 +14,442 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      audit_logs: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          id: string
+          payload: Json
+          target_id: string | null
+          target_type: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          payload?: Json
+          target_id?: string | null
+          target_type?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          payload?: Json
+          target_id?: string | null
+          target_type?: string | null
+        }
+        Relationships: []
+      }
+      entitlements: {
+        Row: {
+          created_at: string
+          granted_at: string
+          granted_by: string | null
+          id: string
+          metadata: Json
+          product_id: string
+          revoked_at: string | null
+          source: Database["public"]["Enums"]["entitlement_source"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted_at?: string
+          granted_by?: string | null
+          id?: string
+          metadata?: Json
+          product_id: string
+          revoked_at?: string | null
+          source?: Database["public"]["Enums"]["entitlement_source"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted_at?: string
+          granted_by?: string | null
+          id?: string
+          metadata?: Json
+          product_id?: string
+          revoked_at?: string | null
+          source?: Database["public"]["Enums"]["entitlement_source"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entitlements_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          base_path: string | null
+          collection: Database["public"]["Enums"]["product_collection"]
+          cover_image_url: string | null
+          created_at: string
+          currency: string
+          description: string | null
+          difficulty: string | null
+          duration_weeks: number | null
+          hero_image_url: string | null
+          id: string
+          metadata: Json
+          name: string
+          price_cents: number | null
+          sessions_per_week: string | null
+          slug: string
+          status: Database["public"]["Enums"]["product_status"]
+          subtitle: string | null
+          updated_at: string
+        }
+        Insert: {
+          base_path?: string | null
+          collection: Database["public"]["Enums"]["product_collection"]
+          cover_image_url?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          difficulty?: string | null
+          duration_weeks?: number | null
+          hero_image_url?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          price_cents?: number | null
+          sessions_per_week?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["product_status"]
+          subtitle?: string | null
+          updated_at?: string
+        }
+        Update: {
+          base_path?: string | null
+          collection?: Database["public"]["Enums"]["product_collection"]
+          cover_image_url?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          difficulty?: string | null
+          duration_weeks?: number | null
+          hero_image_url?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          price_cents?: number | null
+          sessions_per_week?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["product_status"]
+          subtitle?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      programme_enrolments: {
+        Row: {
+          completion_pct: number | null
+          created_at: string
+          current_week: number | null
+          id: string
+          product_id: string
+          started_at: string
+          state: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completion_pct?: number | null
+          created_at?: string
+          current_week?: number | null
+          id?: string
+          product_id: string
+          started_at?: string
+          state?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completion_pct?: number | null
+          created_at?: string
+          current_week?: number | null
+          id?: string
+          product_id?: string
+          started_at?: string
+          state?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programme_enrolments_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      programme_versions: {
+        Row: {
+          created_at: string
+          id: string
+          is_current: boolean
+          manifest: Json
+          notes: string | null
+          pdf_path: string | null
+          product_id: string
+          released_at: string
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_current?: boolean
+          manifest?: Json
+          notes?: string | null
+          pdf_path?: string | null
+          product_id: string
+          released_at?: string
+          updated_at?: string
+          version: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_current?: boolean
+          manifest?: Json
+          notes?: string | null
+          pdf_path?: string | null
+          product_id?: string
+          released_at?: string
+          updated_at?: string
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programme_versions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      readiness_logs: {
+        Row: {
+          created_at: string
+          energy: number | null
+          id: string
+          log_date: string
+          notes: string | null
+          sleep_hours: number | null
+          soreness: number | null
+          stress: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          energy?: number | null
+          id?: string
+          log_date?: string
+          notes?: string | null
+          sleep_hours?: number | null
+          soreness?: number | null
+          stress?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          energy?: number | null
+          id?: string
+          log_date?: string
+          notes?: string | null
+          sleep_hours?: number | null
+          soreness?: number | null
+          stress?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      session_completions: {
+        Row: {
+          completed_at: string
+          created_at: string
+          day: number | null
+          duration_seconds: number | null
+          id: string
+          notes: string | null
+          product_id: string
+          session_id: string
+          user_id: string
+          week: number | null
+        }
+        Insert: {
+          completed_at?: string
+          created_at?: string
+          day?: number | null
+          duration_seconds?: number | null
+          id?: string
+          notes?: string | null
+          product_id: string
+          session_id: string
+          user_id: string
+          week?: number | null
+        }
+        Update: {
+          completed_at?: string
+          created_at?: string
+          day?: number | null
+          duration_seconds?: number | null
+          id?: string
+          notes?: string | null
+          product_id?: string
+          session_id?: string
+          user_id?: string
+          week?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_completions_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          granted_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          granted_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      workout_results: {
+        Row: {
+          block_id: string | null
+          created_at: string
+          exercise_id: string | null
+          id: string
+          kind: string | null
+          logged_at: string
+          payload: Json
+          product_id: string
+          session_id: string
+          user_id: string
+        }
+        Insert: {
+          block_id?: string | null
+          created_at?: string
+          exercise_id?: string | null
+          id?: string
+          kind?: string | null
+          logged_at?: string
+          payload?: Json
+          product_id: string
+          session_id: string
+          user_id: string
+        }
+        Update: {
+          block_id?: string | null
+          created_at?: string
+          exercise_id?: string | null
+          id?: string
+          kind?: string | null
+          logged_at?: string
+          payload?: Json
+          product_id?: string
+          session_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workout_results_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "owner" | "admin" | "athlete"
+      entitlement_source:
+        | "development"
+        | "purchase"
+        | "gift"
+        | "admin"
+        | "owner"
+      product_collection: "compete" | "build" | "blueprint"
+      product_status: "draft" | "published" | "archived"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +576,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["owner", "admin", "athlete"],
+      entitlement_source: ["development", "purchase", "gift", "admin", "owner"],
+      product_collection: ["compete", "build", "blueprint"],
+      product_status: ["draft", "published", "archived"],
+    },
   },
 } as const
