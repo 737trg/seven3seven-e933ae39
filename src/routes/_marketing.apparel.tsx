@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Layers, Wrench, Box, Sparkles } from "lucide-react";
 
 const SITE = "https://seven3seven.lovable.app";
 
@@ -28,47 +27,54 @@ export const Route = createFileRoute("/_marketing/apparel")({
 function ApparelPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border">
-        <div
-          aria-hidden
-          className="absolute inset-0 grain"
-          style={{
-            background:
-              "radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.05), transparent 55%), linear-gradient(180deg, #080808 0%, #0a0a0a 100%)",
-          }}
-        />
-        <div className="relative max-w-[1280px] mx-auto px-5 lg:px-10 pt-16 pb-20 lg:pt-24 lg:pb-28">
-          <p className="eyebrow mb-6 text-signal">Apparel</p>
-          <h1 className="font-display font-bold text-bone leading-[0.95] tracking-tight text-[clamp(2.5rem,7vw,5.5rem)]">
-            BUILT TO TRAIN.
-            <br />
-            <span className="text-foreground-muted">DESIGNED TO LIVE IN.</span>
-          </h1>
-          <p className="text-foreground-muted text-base md:text-lg mt-8 max-w-[58ch] leading-relaxed">
-            Performance-led apparel shaped by the same principles as the training: purposeful, minimal and built to work.
-          </p>
-          <p className="eyebrow mt-8 text-signal">First drop coming soon</p>
+      {/* HERO */}
+      <section>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-36 pb-16 lg:pb-24 grid lg:grid-cols-12 gap-10">
+          <p className="eyebrow lg:col-span-2">Apparel</p>
+          <div className="lg:col-span-10">
+            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.75rem,8vw,7rem)] max-w-[14ch]">
+              Built to train.
+              <br />
+              <span className="text-foreground-muted">Designed to live in.</span>
+            </h1>
+            <p className="text-foreground-muted text-base md:text-lg mt-10 max-w-[48ch] leading-relaxed">
+              Performance-led apparel shaped by the same principles as the training. Purposeful. Minimal. Made to work.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-border">
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 py-20 grid md:grid-cols-2 gap-6">
-          <EditorialBlock title="Performance" copy="Engineered for training. Fabrics, fits and details that move with you under load." accent />
-          <EditorialBlock title="Essentials" copy="Everyday SEVEN3SEVEN pieces. Worn in. Worn out. Worn again." />
+      {/* CAMPAIGN PLATE — single large quiet panel */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20">
+          <div
+            aria-hidden
+            className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 60%, rgba(255,255,255,0.04), transparent 60%), linear-gradient(180deg, #0a0a0a 0%, #131313 100%)",
+            }}
+          >
+            <div className="absolute inset-0 grain" />
+            <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-14">
+              <p className="eyebrow text-bone/70">Campaign 01 — In preparation</p>
+              <p className="font-display text-bone text-2xl md:text-4xl tracking-[-0.02em] mt-3 max-w-[24ch]">
+                The first drop is being made.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-border">
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 py-20">
-          <p className="eyebrow mb-6">Design principles</p>
-          <h2 className="font-display font-bold text-bone text-3xl md:text-5xl tracking-tight mb-12 max-w-[20ch]">
-            FOUR PRINCIPLES. NO EXCEPTIONS.
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <Principle icon={<Layers className="h-5 w-5" />} title="Minimal" body="Quiet detailing. No unnecessary noise." />
-            <Principle icon={<Wrench className="h-5 w-5" />} title="Functional" body="Designed for the work it's worn for." />
-            <Principle icon={<Box className="h-5 w-5" />} title="Durable" body="Materials selected to last." />
-            <Principle icon={<Sparkles className="h-5 w-5" />} title="Purposeful" body="Every piece earns its place." />
+      {/* PRINCIPLES — typographic, no boxes */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10">
+          <p className="eyebrow lg:col-span-2">Principles</p>
+          <div className="lg:col-span-10 grid sm:grid-cols-2 gap-x-12 gap-y-12">
+            <Principle k="Minimal" v="Quiet detailing. No unnecessary noise." />
+            <Principle k="Functional" v="Designed for the work it's worn for." />
+            <Principle k="Durable" v="Materials selected to last." />
+            <Principle k="Purposeful" v="Every piece earns its place." />
           </div>
         </div>
       </section>
@@ -76,33 +82,11 @@ function ApparelPage() {
   );
 }
 
-function EditorialBlock({ title, copy, accent }: { title: string; copy: string; accent?: boolean }) {
+function Principle({ k, v }: { k: string; v: string }) {
   return (
-    <div className={`border border-border rounded-[2px] overflow-hidden min-h-[320px] grid grid-rows-[1fr_auto] ${accent ? "bg-surface/40" : ""}`}>
-      <div
-        aria-hidden
-        className="grain"
-        style={{
-          background: accent
-            ? "radial-gradient(ellipse at 50% 50%, rgba(216,41,50,0.16), transparent 55%), linear-gradient(135deg, #0e0e0e 0%, #161616 100%)"
-            : "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.05), transparent 55%), linear-gradient(135deg, #0c0c0c 0%, #141414 100%)",
-        }}
-      />
-      <div className="p-8">
-        <p className="eyebrow text-signal mb-3">{title}</p>
-        <p className="text-bone text-sm max-w-[40ch] leading-relaxed">{copy}</p>
-        <p className="eyebrow mt-4">Coming soon</p>
-      </div>
-    </div>
-  );
-}
-
-function Principle({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
-  return (
-    <div className="border border-border p-6 rounded-[2px]">
-      <div className="text-signal mb-4">{icon}</div>
-      <p className="font-display text-bone uppercase tracking-[0.12em] text-sm">{title}</p>
-      <p className="text-foreground-muted text-xs mt-2 leading-relaxed">{body}</p>
+    <div className="border-t border-border/60 pt-5">
+      <p className="font-display text-bone text-xl md:text-2xl tracking-[-0.02em]">{k}</p>
+      <p className="text-foreground-muted text-sm mt-2 max-w-[34ch]">{v}</p>
     </div>
   );
 }

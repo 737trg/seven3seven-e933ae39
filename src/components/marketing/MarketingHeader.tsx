@@ -14,9 +14,9 @@ export function MarketingHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
-      <div className="max-w-[1280px] mx-auto flex items-center justify-between px-5 lg:px-10 h-16 lg:h-20">
-        <Seven3SevenLogo height={32} />
+    <header className="sticky top-0 z-40 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/50">
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between px-6 lg:px-12 h-16 lg:h-20">
+        <Seven3SevenLogo height={26} />
 
         <nav className="hidden lg:flex items-center gap-10" aria-label="Primary">
           {NAV.map((n) => {
