@@ -9,6 +9,9 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { claimOwner } from "@/lib/owner.functions";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
+import { semStore, useSemStarted } from "@/lib/sem/store";
+import { useSemProgress } from "@/lib/sem/progress";
+import { validationCounts as semCounts } from "@/lib/sem/manifest";
 
 const OWNER_EMAIL = "jamesnichol9@gmail.com";
 
@@ -32,6 +35,8 @@ function MyProgrammesPage() {
   const results = useStore(store.getResults);
   const { user, loading: authLoading } = useAuth();
   const { items: entitled, loading: entLoading } = useEntitlements(user?.id);
+  const semStarted = useSemStarted();
+  const semProg = useSemProgress(user?.id);
   const navigate = useNavigate();
   const claim = useServerFn(claimOwner);
   const [claiming, setClaiming] = useState(false);
@@ -54,6 +59,7 @@ function MyProgrammesPage() {
   }
 
   const owns = entitled.some((e) => e.slug === "athx-2026");
+  const ownsSem = entitled.some((e) => e.slug === "sem-8");
   const isOwnerEmail = (user?.email ?? "").toLowerCase() === OWNER_EMAIL;
   const needsClaim = isOwnerEmail && !entLoading && entitled.length === 0;
 
@@ -181,7 +187,26 @@ function MyProgrammesPage() {
             ) : (
               <Empty text="No active programmes" />
             )}
+
+            {/* S.E.M. 8 — Ready to start OR Active (when started) */}
+            {ownsSem && semStarted.started && (
+              <div className="mt-10">
+                <SemActiveCard
+                  coreCompleted={semProg.coreCompleted}
+                  coreTotal={semCounts().core}
+                  optionalCompleted={semProg.optionalCompleted}
+                  optionalTotal={semCounts().optional}
+                />
+              </div>
+            )}
           </div>
+
+          {ownsSem && !semStarted.started && (
+            <div>
+              <p className="eyebrow mb-4">Ready to start</p>
+              <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-8/today" }); }} />
+            </div>
+          )}
 
           {/* UPCOMING */}
           <div>
