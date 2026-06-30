@@ -1,7 +1,16 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { getSessionById } from "@/data/programme";
 import { CategoryLabel, Tag } from "@/components/ui-prim/Tag";
-import { Flame, ArrowLeft } from "lucide-react";
+import { Flame, ArrowLeft, History } from "lucide-react";
+import { store, subscribeStore } from "@/lib/store";
+import { summariseResult } from "@/components/workout/logKind";
+import { useState, useSyncExternalStore } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 export const Route = createFileRoute("/_app/programme/s/$sessionId")({
   component: SessionDetailPage,
@@ -10,6 +19,12 @@ export const Route = createFileRoute("/_app/programme/s/$sessionId")({
 function SessionDetailPage() {
   const { sessionId } = useParams({ from: "/_app/programme/s/$sessionId" });
   const s = getSessionById(sessionId);
+  const [historyBlockId, setHistoryBlockId] = useState<string | null>(null);
+  const results = useSyncExternalStore(
+    subscribeStore,
+    store.getResults,
+    store.getResults,
+  );
   if (!s) return <div className="p-10 text-foreground-muted">Session not found.</div>;
 
   const kindLabel: Record<string, string> = {
@@ -84,6 +99,14 @@ function SessionDetailPage() {
                 {blk.note}
               </p>
             )}
+            {results.some((r) => r.blockId === blk.id) && (
+              <button
+                onClick={() => setHistoryBlockId(blk.id)}
+                className="ml-12 mt-4 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-foreground-muted hover:text-bone"
+              >
+                <History className="h-3 w-3" /> History
+              </button>
+            )}
           </section>
         ))}
       </div>
@@ -110,6 +133,43 @@ function SessionDetailPage() {
           </Link>
         </div>
       </div>
+
+      <Sheet open={historyBlockId !== null} onOpenChange={(o) => !o && setHistoryBlockId(null)}>
+        <SheetContent
+          side="right"
+          className="border-l border-border bg-background text-bone sm:max-w-md p-0 flex flex-col rounded-none"
+        >
+          <SheetHeader className="px-6 py-5 border-b border-border">
+            <SheetTitle className="font-display text-bone text-xl">History</SheetTitle>
+          </SheetHeader>
+          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
+            {results
+              .filter((r) => r.blockId === historyBlockId)
+              .slice()
+              .reverse()
+              .map((r) => (
+                <div key={r.id} className="border-b border-border pb-4">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-[10px] uppercase tracking-widest text-foreground-muted">
+                      {r.dateISO} · W{r.weekNumber}
+                    </span>
+                    {r.rpe != null && (
+                      <span className="text-[10px] uppercase tracking-widest text-foreground-muted">
+                        RPE {r.rpe}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-bone tabular text-base mt-1">
+                    {summariseResult(r)}
+                  </p>
+                  {r.note && (
+                    <p className="text-foreground-muted text-xs mt-1 italic">{r.note}</p>
+                  )}
+                </div>
+              ))}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
