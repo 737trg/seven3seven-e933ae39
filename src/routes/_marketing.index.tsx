@@ -59,16 +59,13 @@ function HomePage() {
       <section className="relative">
         {/* Mobile: image first, then text block */}
         <div className="md:hidden">
-          <div className="relative w-full aspect-[3/4] overflow-hidden">
-            <img
-              src={heroAsset.url}
-              alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
-              className="absolute inset-0 w-full h-full object-cover object-[62%_center]"
-              draggable={false}
-            />
-            <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 scrim-bottom" />
-          </div>
-          <div className="px-6 pt-10 pb-16">
+          <img
+            src={heroAsset.url}
+            alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
+            className="block w-full h-auto object-contain bg-background"
+            draggable={false}
+          />
+          <div className="px-10 pt-14 pb-16">
             <h1 className="font-display font-bold text-bone leading-[0.9] tracking-[-0.025em] text-[clamp(2.75rem,12vw,4.5rem)]">
               TRAIN FOR<br />WHAT'S NEXT.
             </h1>
