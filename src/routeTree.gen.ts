@@ -18,6 +18,7 @@ import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionI
 import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes.athx-2026'
 import { Route as MarketingSignUpRouteImport } from './routes/_marketing.sign-up'
 import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in'
+import { Route as MarketingResetPasswordRouteImport } from './routes/_marketing.reset-password'
 import { Route as MarketingProgrammesRouteImport } from './routes/_marketing.programmes'
 import { Route as MarketingMyProgrammesRouteImport } from './routes/_marketing.my-programmes'
 import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing.forgot-password'
@@ -84,6 +85,11 @@ const MarketingSignUpRoute = MarketingSignUpRouteImport.update({
 const MarketingSignInRoute = MarketingSignInRouteImport.update({
   id: '/sign-in',
   path: '/sign-in',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingResetPasswordRoute = MarketingResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => MarketingRoute,
 } as any)
 const MarketingProgrammesRoute = MarketingProgrammesRouteImport.update({
@@ -231,6 +237,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
   '/programmes': typeof MarketingProgrammesRouteWithChildren
+  '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
@@ -264,6 +271,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
   '/programmes': typeof MarketingProgrammesRouteWithChildren
+  '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
@@ -299,6 +307,7 @@ export interface FileRoutesById {
   '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
   '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
   '/_marketing/programmes': typeof MarketingProgrammesRouteWithChildren
+  '/_marketing/reset-password': typeof MarketingResetPasswordRoute
   '/_marketing/sign-in': typeof MarketingSignInRoute
   '/_marketing/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/my-programmes'
     | '/programmes'
+    | '/reset-password'
     | '/sign-in'
     | '/sign-up'
     | '/my-programmes/athx-2026'
@@ -368,6 +378,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/my-programmes'
     | '/programmes'
+    | '/reset-password'
     | '/sign-in'
     | '/sign-up'
     | '/my-programmes/athx-2026'
@@ -402,6 +413,7 @@ export interface FileRouteTypes {
     | '/_marketing/forgot-password'
     | '/_marketing/my-programmes'
     | '/_marketing/programmes'
+    | '/_marketing/reset-password'
     | '/_marketing/sign-in'
     | '/_marketing/sign-up'
     | '/my-programmes/athx-2026'
@@ -492,6 +504,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-in'
       fullPath: '/sign-in'
       preLoaderRoute: typeof MarketingSignInRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/reset-password': {
+      id: '/_marketing/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof MarketingResetPasswordRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_marketing/programmes': {
@@ -719,6 +738,7 @@ interface MarketingRouteChildren {
   MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
   MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
   MarketingProgrammesRoute: typeof MarketingProgrammesRouteWithChildren
+  MarketingResetPasswordRoute: typeof MarketingResetPasswordRoute
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
@@ -731,6 +751,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
   MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
   MarketingProgrammesRoute: MarketingProgrammesRouteWithChildren,
+  MarketingResetPasswordRoute: MarketingResetPasswordRoute,
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,

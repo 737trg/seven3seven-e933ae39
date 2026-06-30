@@ -1,11 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useSyncExternalStore } from "react";
-import { ArrowRight, CalendarDays, Trophy, Activity, FileText } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useSyncExternalStore, useState } from "react";
+import { ArrowRight, CalendarDays, Trophy, Activity } from "lucide-react";
 import { store, subscribeStore } from "@/lib/store";
 import { PROGRAMME, allSessions } from "@/data/programme";
 import { currentWeek, todaySession, nextSession, ukShortDate, today } from "@/lib/programmeUtils";
-import { developmentUser, getOwnedManifests, hasAccess } from "@/lib/devUser";
+import { useAuth } from "@/lib/useAuth";
+import { useEntitlements } from "@/lib/useEntitlements";
+import { claimOwner } from "@/lib/owner.functions";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
+
+const OWNER_EMAIL = "jamesnichol9@gmail.com";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -25,8 +30,32 @@ function useStore<T>(read: () => T): T {
 function MyProgrammesPage() {
   const logs = useStore(store.getLogs);
   const results = useStore(store.getResults);
-  const manifests = getOwnedManifests();
-  const owns = hasAccess("athx-2026");
+  const { user, loading: authLoading } = useAuth();
+  const { items: entitled, loading: entLoading } = useEntitlements(user?.id);
+  const navigate = useNavigate();
+  const claim = useServerFn(claimOwner);
+  const [claiming, setClaiming] = useState(false);
+  const [claimError, setClaimError] = useState<string | null>(null);
+
+  if (!authLoading && !user) {
+    return (
+      <section className="min-h-[60vh] grid place-items-center px-5 py-20">
+        <div className="max-w-md text-center">
+          <p className="eyebrow text-signal mb-3">Members only</p>
+          <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">Sign in to access your programmes</h1>
+          <p className="text-foreground-muted text-sm mt-4">Your library, progress and downloads live behind your account.</p>
+          <div className="mt-8 flex justify-center gap-4">
+            <Link to="/sign-in" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Sign in</Link>
+            <Link to="/sign-up" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">Create account</Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const owns = entitled.some((e) => e.slug === "athx-2026");
+  const isOwnerEmail = (user?.email ?? "").toLowerCase() === OWNER_EMAIL;
+  const needsClaim = isOwnerEmail && !entLoading && entitled.length === 0;
 
   // Real ATHX data only — no invented metrics.
   const totalSessions = allSessions().length;
@@ -61,6 +90,37 @@ function MyProgrammesPage() {
 
   return (
     <>
+      {needsClaim && (
+        <div className="bg-signal/10 border-b border-signal/40">
+          <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-bone text-sm">
+              Owner account detected. Claim your programmes to activate ATHX 2026, Basic Training Blueprint+ and S.E.M. 8.
+            </p>
+            <button
+              disabled={claiming}
+              onClick={async () => {
+                setClaimError(null); setClaiming(true);
+                try {
+                  await claim();
+                  // simple refresh
+                  navigate({ to: "/my-programmes" });
+                  if (typeof window !== "undefined") window.location.reload();
+                } catch (e: any) {
+                  setClaimError(e?.message ?? "Could not claim ownership.");
+                  setClaiming(false);
+                }
+              }}
+              className="h-10 px-5 bg-bone text-obsidian text-[11px] uppercase tracking-[0.22em] font-display disabled:opacity-50"
+            >
+              {claiming ? "Claiming…" : "Claim ownership"}
+            </button>
+          </div>
+          {claimError && (
+            <p className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-3 text-signal text-xs">{claimError}</p>
+          )}
+        </div>
+      )}
+
       {/* MASTHEAD — image first, text block below */}
       <section className="relative">
         <img
@@ -72,7 +132,9 @@ function MyProgrammesPage() {
         />
         <div className="bg-background">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
-            <p className="eyebrow text-foreground-muted mb-6 md:mb-8">{developmentUser.name} — Library</p>
+            <p className="eyebrow text-foreground-muted mb-6 md:mb-8">
+              {(user?.user_metadata?.display_name as string) ?? user?.email?.split("@")[0] ?? "Athlete"} — Library
+            </p>
             <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.9] text-[clamp(2.5rem,6.5vw,5rem)]">
               My programmes.
             </h1>
@@ -85,7 +147,7 @@ function MyProgrammesPage() {
         {/* stat strip — no boxes */}
         <div className="border-y border-border/60">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 divide-x divide-border/60">
-            <StatStrip label="Active" value={String(manifests.length)} />
+            <StatStrip label="Active" value={String(entitled.length)} />
             <StatStrip label="Current week" value={String(week.number === 8 ? "RW" : week.number)} />
             <StatStrip label="Sessions completed" value={String(completedSessions)} />
             <StatStrip label="Results logged" value={String(results.length)} />
