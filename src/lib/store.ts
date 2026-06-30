@@ -117,7 +117,10 @@ export const store = {
 
 export const subscribeStore = (cb: () => void) => {
   if (!isBrowser()) return () => {};
-  const handler = () => cb();
+  const handler = () => {
+    cache = null;
+    cb();
+  };
   window.addEventListener("trg737:change", handler);
   window.addEventListener("storage", handler);
   return () => {
