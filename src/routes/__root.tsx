@@ -77,13 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "737 TRG — ATHX 2026 Hybrid Performance" },
-      { name: "description", content: "Seven-week hybrid performance programme for ATHX Birmingham 2026. Strong enough to lift heavy. Fit enough to keep moving." },
-      { property: "og:title", content: "737 TRG — ATHX 2026" },
-      { property: "og:description", content: "Hybrid performance programme. Strength, endurance, conditioning." },
+      { title: "737 TRG Hybrid Performance" },
+      { name: "description", content: "Fitness programmes to help people maximise their potential for their fitness and racing goals" },
+      { property: "og:title", content: "737 TRG Hybrid Performance" },
+      { property: "og:description", content: "Fitness programmes to help people maximise their potential for their fitness and racing goals" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#090909" },
+      { name: "twitter:title", content: "737 TRG Hybrid Performance" },
+      { name: "twitter:description", content: "Fitness programmes to help people maximise their potential for their fitness and racing goals" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/AJGFz7v2PrZzuIPuMtE3S6hmPcy2/social-images/social-1782817904520-ChatGPT_Image_Jun_30,_2026,_12_11_17_PM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/AJGFz7v2PrZzuIPuMtE3S6hmPcy2/social-images/social-1782817904520-ChatGPT_Image_Jun_30,_2026,_12_11_17_PM.webp" },
     ],
     links: [
       {
