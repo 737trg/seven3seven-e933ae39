@@ -90,7 +90,7 @@ function MyProgrammesPage() {
         </div>
       </section>
 
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-12 lg:gap-x-12 xl:lg:gap-x-16">
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-12 lg:gap-x-12 xl:gap-x-16">
         {/* LEFT — programmes lists */}
         <div className="space-y-14 lg:space-y-16 lg:pr-4 xl:pr-8">
           {/* ACTIVE */}
