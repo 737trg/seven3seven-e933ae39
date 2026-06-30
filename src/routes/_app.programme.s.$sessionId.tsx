@@ -120,7 +120,7 @@ function SessionDetailPage() {
 
       {/* Sticky CTA */}
       <div
-        className="fixed bottom-0 lg:bottom-auto lg:relative inset-x-0 lg:inset-auto z-20 lg:z-auto bg-background/95 lg:bg-transparent backdrop-blur lg:backdrop-blur-0 border-t border-border lg:border-0 p-4 lg:p-0 lg:mt-12"
+        className="fixed bottom-16 lg:bottom-auto lg:relative inset-x-0 lg:inset-auto z-50 lg:z-auto bg-background/95 lg:bg-transparent backdrop-blur lg:backdrop-blur-0 border-t border-border lg:border-0 p-4 lg:p-0 lg:mt-12"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}
       >
         <div className="max-w-[920px] mx-auto flex gap-3">
