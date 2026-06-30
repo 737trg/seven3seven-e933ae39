@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
+import todayShot from "@/assets/athx-today.png.asset.json";
+import progShot from "@/assets/athx-programme.png.asset.json";
+import progressShot from "@/assets/athx-progress.png.asset.json";
 
 const SITE = "https://seven3seven.lovable.app";
 
@@ -52,101 +55,137 @@ export const Route = createFileRoute("/_marketing/")({
 function HomePage() {
   return (
     <>
-      {/* HERO — cinematic, image-led */}
-      <section className="relative overflow-hidden">
-        <div className="relative w-full h-[88svh] min-h-[560px] max-h-[920px]">
-          <img
-            src={heroAsset.url}
-            alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
-            className="absolute inset-0 w-full h-full object-cover object-[78%_center]"
-            draggable={false}
-          />
-          {/* readability scrim — strong on left to clear the baked logo in the source image */}
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(7,7,7,0.98) 0%, rgba(7,7,7,0.92) 30%, rgba(7,7,7,0.55) 50%, rgba(7,7,7,0.1) 72%, rgba(7,7,7,0) 88%)",
-            }}
-          />
-          <div
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 h-40"
-            style={{
-              background: "linear-gradient(180deg, rgba(7,7,7,0) 0%, rgba(7,7,7,0.9) 100%)",
-            }}
-          />
-
-          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col">
-            <div className="flex-1" />
-            <div className="pb-14 lg:pb-20 max-w-[36ch]">
-              <p className="eyebrow text-bone/70 mb-5">Hybrid Fitness · Performance</p>
-              <h1 className="font-display font-bold text-bone leading-[0.88] tracking-[-0.025em] text-[clamp(3rem,10vw,8rem)]">
-                TRAIN FOR
-                <br />
-                WHAT'S NEXT.
-              </h1>
-            </div>
-            <div className="pb-10 lg:pb-14 flex items-end justify-between gap-6">
+      {/* HERO — desktop/tablet: full image with text below baked logo; mobile: image then text */}
+      <section className="relative">
+        {/* Mobile: image first, then text block */}
+        <div className="md:hidden">
+          <div className="relative w-full aspect-[3/4] overflow-hidden">
+            <img
+              src={heroAsset.url}
+              alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
+              className="absolute inset-0 w-full h-full object-cover object-[62%_center]"
+              draggable={false}
+            />
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 scrim-bottom" />
+          </div>
+          <div className="px-6 pt-10 pb-16">
+            <p className="eyebrow text-bone/70 mb-4">Hybrid Fitness · Performance</p>
+            <h1 className="font-display font-bold text-bone leading-[0.9] tracking-[-0.025em] text-[clamp(2.75rem,12vw,4.5rem)]">
+              TRAIN FOR<br />WHAT'S NEXT.
+            </h1>
+            <div className="mt-8 flex items-center justify-between">
               <Link
                 to="/programmes"
-                className="group inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone/40 hover:border-bone transition-colors"
+                className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone"
               >
-                Explore programmes
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                Explore programmes <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-              <p className="hidden md:block text-bone/50 font-display uppercase text-[10px] tracking-[0.28em] text-right">
-                Strength · Endurance · Performance
-              </p>
+            </div>
+            <p className="mt-10 text-bone/50 font-display uppercase text-[10px] tracking-[0.28em]">
+              Strength · Endurance · Performance
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop / tablet: cinematic image, text positioned in lower-left dark area below baked logo */}
+        <div className="hidden md:block relative overflow-hidden">
+          <div className="relative w-full h-[92svh] min-h-[620px] max-h-[960px]">
+            <img
+              src={heroAsset.url}
+              alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
+              className="absolute inset-0 w-full h-full object-cover object-[58%_center]"
+              draggable={false}
+            />
+            {/* subtle left scrim only — leaves baked SEVEN3SEVEN logo legible and image dominant */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(7,7,7,0.55) 0%, rgba(7,7,7,0.25) 30%, rgba(7,7,7,0) 60%)",
+              }}
+            />
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-48 scrim-bottom" />
+
+            <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-12">
+              <div className="col-span-8 lg:col-span-7 flex flex-col h-full justify-end pb-12 lg:pb-16">
+                <p className="eyebrow text-bone/70 mb-4">Hybrid Fitness · Performance</p>
+                <h1 className="font-display font-bold text-bone leading-[0.88] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6rem)] max-w-[11ch]">
+                  TRAIN FOR<br />WHAT'S NEXT.
+                </h1>
+                <div className="mt-8 flex items-end justify-between gap-6 max-w-[36rem]">
+                  <Link
+                    to="/programmes"
+                    className="group inline-flex items-center gap-3 text-bone font-display uppercase text-[12px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
+                  >
+                    Explore programmes
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <p className="hidden lg:block text-bone/55 font-display uppercase text-[10px] tracking-[0.32em]">
+                    Strength · Endurance · Performance
+                  </p>
+                </div>
+              </div>
+              <div className="col-span-4 lg:col-span-5" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* MANIFESTO — typography only, no boxes */}
+      {/* PROPOSITION — split: typography + layered app screens */}
       <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-28 lg:py-40">
-          <div className="grid lg:grid-cols-12 gap-10">
-            <p className="eyebrow lg:col-span-2">01 — Approach</p>
-            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(2.25rem,5.5vw,4.75rem)] max-w-[18ch]">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-5">
+            <p className="eyebrow mb-6">01 — Approach</p>
+            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(2rem,4.5vw,3.75rem)]">
               Programmes built to be followed.
-              <span className="text-foreground-muted"> Not filed away.</span>
+              <br />
+              <span className="text-foreground-muted">Not filed away.</span>
             </h2>
+            <p className="text-bone/80 text-base md:text-lg mt-8 max-w-[42ch] leading-[1.55]">
+              Guided sessions. Integrated timers. Performance recorded as you train.
+            </p>
+            <p className="text-foreground-muted text-sm mt-5 max-w-[42ch]">
+              Buy once. Follow interactively. Keep the PDF.
+            </p>
           </div>
-          <div className="mt-16 lg:mt-24 grid lg:grid-cols-12 gap-10 lg:gap-16">
-            <div className="lg:col-span-6 lg:col-start-3">
-              <p className="text-bone text-lg md:text-xl leading-[1.5] max-w-[52ch]">
-                Most training programmes are downloaded, skimmed and forgotten.
-                Ours are delivered through a focused interactive experience —
-                guided sessions, integrated timers, performance recorded as you train.
-              </p>
-              <p className="text-foreground-muted text-sm mt-8 max-w-[44ch]">
-                Buy once. Follow interactively. Keep the PDF.
-              </p>
+
+          {/* Layered app screens */}
+          <div className="lg:col-span-7 relative">
+            <div className="relative aspect-[5/4] w-full panel-dark grain overflow-hidden">
+              {/* back card */}
+              <div className="absolute right-[6%] top-[8%] w-[46%] aspect-[9/19] rotate-[4deg] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-border/60 overflow-hidden bg-black">
+                <img src={progressShot.url} alt="ATHX progress" className="w-full h-full object-cover object-top" loading="lazy" />
+              </div>
+              {/* front card */}
+              <div className="absolute left-[8%] bottom-[6%] w-[52%] aspect-[9/19] -rotate-[3deg] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.9)] ring-1 ring-border overflow-hidden bg-black">
+                <img src={todayShot.url} alt="ATHX today screen" className="w-full h-full object-cover object-top" loading="lazy" />
+              </div>
+              <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 scrim-bottom" />
+              <p className="absolute bottom-4 right-5 eyebrow text-bone/60">ATHX 2026 — live app</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* COLLECTIONS — editorial list, not cards */}
+      {/* COLLECTIONS — image-led editorial rail */}
       <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-12 gap-10 mb-16">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-32 pb-10 lg:pb-12">
+          <div className="grid lg:grid-cols-12 gap-10">
             <p className="eyebrow lg:col-span-2">02 — Collections</p>
-            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(2.25rem,5.5vw,4.75rem)]">
+            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[20ch]">
               Built for a clear objective.
             </h2>
           </div>
-
-          <div className="border-t border-border/60">
-            <CollectionRow num="01" title="Compete" tagline="Event-focused preparation." />
-            <CollectionRow num="02" title="Build" tagline="Strength, endurance and hybrid development." />
-            <CollectionRow num="03" title="Blueprint" tagline="Foundations and return-to-training." />
+        </div>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            <CollectionPanel num="01" tag="Compete" copy="Event-focused preparation." focal="58% 35%" />
+            <CollectionPanel num="02" tag="Build" copy="Strength, endurance and hybrid development." focal="50% 50%" tone />
+            <CollectionPanel num="03" tag="Blueprint" copy="Foundations and return-to-training." focal="42% 65%" />
           </div>
-
-          <div className="mt-10 flex items-center justify-between">
-            <p className="eyebrow text-foreground-muted">First programmes — releasing soon</p>
+          <div className="mt-8 flex items-center justify-between">
+            <p className="eyebrow text-foreground-muted">First programmes — in development</p>
             <Link to="/programmes" className="eyebrow text-bone inline-flex items-center gap-2 hover:text-signal transition-colors">
               All programmes <ArrowRight className="h-3 w-3" />
             </Link>
@@ -154,41 +193,117 @@ function HomePage() {
         </div>
       </section>
 
-      {/* APPAREL */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-end">
-          <div className="lg:col-span-2">
-            <p className="eyebrow">03 — Apparel</p>
-          </div>
-          <div className="lg:col-span-7">
-            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(2.25rem,5.5vw,4.75rem)]">
-              Designed for training.
+      {/* PRODUCT STORY — know today / record the result */}
+      <section className="border-t border-border/60 panel-dark">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-12 gap-10 mb-16">
+            <p className="eyebrow lg:col-span-2">03 — Product</p>
+            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[18ch]">
+              The programme.
               <br />
-              <span className="text-foreground-muted">Built to live in.</span>
+              <span className="text-foreground-muted">Built to be used.</span>
             </h2>
           </div>
-          <div className="lg:col-span-3 lg:text-right">
-            <Link to="/apparel" className="eyebrow text-bone inline-flex items-center gap-2 hover:text-signal transition-colors">
-              First drop — soon <ArrowRight className="h-3 w-3" />
-            </Link>
+
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+            <ProductPanel
+              eyebrow="Today"
+              title="Know today's work."
+              copy="Every session. Every block. Clearly laid out."
+              img={todayShot.url}
+              alt="ATHX today session interface"
+            />
+            <ProductPanel
+              eyebrow="Logging"
+              title="Record the result."
+              copy="Track weights, times and scores. Return knowing exactly what you did."
+              img={progressShot.url}
+              alt="ATHX progress and logging interface"
+            />
+          </div>
+
+          <div className="mt-10 grid lg:grid-cols-12 gap-10 items-end">
+            <div className="lg:col-span-8">
+              <p className="eyebrow mb-3 text-signal">Keep the PDF</p>
+              <p className="font-display text-bone text-2xl md:text-3xl tracking-[-0.02em] max-w-[28ch]">
+                The complete programme remains yours.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* PHILOSOPHY / ABOUT */}
+      {/* RTB — why */}
       <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10">
-          <p className="eyebrow lg:col-span-2">04 — Philosophy</p>
-          <div className="lg:col-span-10">
-            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(2.25rem,5.5vw,4.75rem)] max-w-[20ch]">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-12 gap-10 mb-14">
+            <p className="eyebrow lg:col-span-2">04 — Why</p>
+            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)]">
+              Why SEVEN3SEVEN?
+            </h2>
+          </div>
+          <ol className="grid md:grid-cols-2 gap-x-16 gap-y-12">
+            <Rtb k="Structure" t="No guessing." />
+            <Rtb k="Progression" t="Every week has a purpose." />
+            <Rtb k="Measurement" t="Track what matters." />
+            <Rtb k="Clarity" t="Know exactly what to do." />
+            <Rtb k="Ownership" t="Buy once. Keep the programme." />
+          </ol>
+        </div>
+      </section>
+
+      {/* APPAREL TEASER — image panel */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+          <div className="relative overflow-hidden aspect-[21/9] panel-dark grain">
+            <img
+              src={heroAsset.url}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 w-full h-full object-cover object-[10%_30%] opacity-50 grayscale"
+            />
+            <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(90deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.5) 50%, rgba(8,8,8,0.9) 100%)"}} />
+            <div className="relative z-10 h-full flex flex-col justify-between p-8 lg:p-14">
+              <p className="eyebrow text-bone/70">05 — Apparel · Drop 01 in preparation</p>
+              <div className="grid lg:grid-cols-12 items-end gap-6">
+                <h2 className="lg:col-span-8 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.5rem)] max-w-[14ch]">
+                  Built to train.
+                  <br />
+                  <span className="text-foreground-muted">Designed to live in.</span>
+                </h2>
+                <div className="lg:col-span-4 lg:text-right">
+                  <Link to="/apparel" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+                    See the campaign <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOUNDER / PHILOSOPHY */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-5">
+            <img
+              src={heroAsset.url}
+              alt="Nico, founder of SEVEN3SEVEN"
+              className="w-full aspect-[4/5] object-cover object-[70%_center]"
+              loading="lazy"
+            />
+          </div>
+          <div className="lg:col-span-7">
+            <p className="eyebrow mb-6">06 — Philosophy</p>
+            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[16ch]">
               Capability over specialisation.
             </h2>
-            <p className="text-foreground-muted text-base md:text-lg mt-10 max-w-[52ch] leading-relaxed">
+            <p className="text-bone/85 text-base md:text-lg mt-8 max-w-[46ch] leading-[1.55]">
               Strength. Endurance. Conditioning. One complete approach — balanced, measurable, repeatable.
             </p>
             <Link
               to="/about"
-              className="mt-10 inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone/40 hover:border-bone transition-colors"
+              className="mt-10 inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
             >
               Our approach <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -199,17 +314,60 @@ function HomePage() {
   );
 }
 
-function CollectionRow({ num, title, tagline }: { num: string; title: string; tagline: string }) {
+function CollectionPanel({ num, tag, copy, focal, tone }: { num: string; tag: string; copy: string; focal: string; tone?: boolean }) {
   return (
-    <div className="grid grid-cols-12 gap-4 lg:gap-10 items-baseline border-b border-border/60 py-8 lg:py-10 group">
-      <span className="col-span-2 lg:col-span-1 eyebrow text-foreground-muted tabular">{num}</span>
-      <h3 className="col-span-10 lg:col-span-4 font-display font-bold text-bone tracking-[-0.02em] text-3xl md:text-5xl lg:text-6xl group-hover:text-signal transition-colors">
-        {title}
-      </h3>
-      <p className="col-start-3 lg:col-start-auto col-span-10 lg:col-span-5 text-foreground-muted text-sm md:text-base lg:text-lg max-w-[42ch]">
-        {tagline}
-      </p>
-      <span className="hidden lg:block col-span-2 eyebrow text-right text-foreground-muted">Coming soon</span>
-    </div>
+    <Link
+      to="/programmes"
+      className="group relative block overflow-hidden aspect-[4/5] panel-dark ring-1 ring-border hover:ring-bone/40 transition-all"
+    >
+      <img
+        src={heroAsset.url}
+        alt=""
+        aria-hidden
+        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04] ${tone ? "grayscale opacity-55" : "opacity-70"}`}
+        style={{ objectPosition: focal }}
+        loading="lazy"
+      />
+      <div aria-hidden className="absolute inset-0 scrim-bottom" />
+      <div className="relative z-10 h-full p-6 lg:p-7 flex flex-col">
+        <div className="flex items-start justify-between">
+          <p className="eyebrow text-bone/80 tabular">{num}</p>
+          <p className="eyebrow text-bone/55">Coming soon</p>
+        </div>
+        <div className="flex-1" />
+        <div>
+          <h3 className="font-display font-bold text-bone tracking-[-0.025em] text-4xl lg:text-5xl group-hover:text-signal transition-colors">
+            {tag}
+          </h3>
+          <p className="text-bone/75 text-sm mt-3 max-w-[28ch]">{copy}</p>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function ProductPanel({ eyebrow, title, copy, img, alt }: { eyebrow: string; title: string; copy: string; img: string; alt: string }) {
+  return (
+    <article className="relative overflow-hidden ring-1 ring-border bg-[#0a0a0a]">
+      <div className="p-7 lg:p-9 pb-0">
+        <p className="eyebrow text-signal mb-4">{eyebrow}</p>
+        <h3 className="font-display font-bold text-bone tracking-[-0.025em] text-3xl lg:text-4xl leading-[0.95]">{title}</h3>
+        <p className="text-foreground-muted text-sm mt-3 max-w-[36ch]">{copy}</p>
+      </div>
+      <div className="relative mt-8 mx-7 lg:mx-9 aspect-[5/4] overflow-hidden ring-1 ring-border bg-black">
+        <img src={img} alt={alt} className="absolute inset-0 w-full h-full object-cover object-top" loading="lazy" />
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-16 scrim-bottom" />
+      </div>
+      <div className="h-7 lg:h-9" />
+    </article>
+  );
+}
+
+function Rtb({ k, t }: { k: string; t: string }) {
+  return (
+    <li className="border-t border-border/60 pt-5">
+      <p className="eyebrow text-signal mb-3">[ {k} ]</p>
+      <p className="font-display text-bone text-2xl md:text-3xl tracking-[-0.025em] leading-[1.05]">{t}</p>
+    </li>
   );
 }

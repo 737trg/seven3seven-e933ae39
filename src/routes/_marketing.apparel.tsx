@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 
 const SITE = "https://seven3seven.lovable.app";
 
@@ -27,66 +28,82 @@ export const Route = createFileRoute("/_marketing/apparel")({
 function ApparelPage() {
   return (
     <>
-      {/* HERO */}
-      <section>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-36 pb-16 lg:pb-24 grid lg:grid-cols-12 gap-10">
-          <p className="eyebrow lg:col-span-2">Apparel</p>
-          <div className="lg:col-span-10">
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.75rem,8vw,7rem)] max-w-[14ch]">
+      {/* HERO — cinematic */}
+      <section className="relative">
+        <div className="relative w-full h-[78svh] min-h-[520px] max-h-[820px] overflow-hidden">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover object-[15%_30%] grayscale"
+          />
+          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.4) 50%, rgba(8,8,8,0.95) 100%)"}} />
+          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-14 lg:pb-20">
+            <p className="eyebrow text-bone/70 mb-5">Apparel · Drop 01 in preparation</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.75rem,8vw,7rem)] max-w-[12ch]">
               Built to train.
               <br />
               <span className="text-foreground-muted">Designed to live in.</span>
             </h1>
-            <p className="text-foreground-muted text-base md:text-lg mt-10 max-w-[48ch] leading-relaxed">
-              Performance-led apparel shaped by the same principles as the training. Purposeful. Minimal. Made to work.
+          </div>
+        </div>
+      </section>
+
+      {/* CAMPAIGN SPLIT */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-6">
+            <p className="eyebrow mb-5 text-signal">Performance</p>
+            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,4vw,3.25rem)]">
+              Made to move,<br />train and repeat.
+            </h2>
+            <p className="text-foreground-muted text-sm md:text-base mt-6 max-w-[42ch]">
+              Technical fabrics. Considered cuts. Built for the work it's worn for.
+            </p>
+          </div>
+          <div className="lg:col-span-6">
+            <p className="eyebrow mb-5">Essentials</p>
+            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,4vw,3.25rem)]">
+              Minimal pieces<br />for training and life.
+            </h2>
+            <p className="text-foreground-muted text-sm md:text-base mt-6 max-w-[42ch]">
+              Pieces that earn their place — in the gym, on the road, and after.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CAMPAIGN PLATE — single large quiet panel */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20">
-          <div
-            aria-hidden
-            className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 60%, rgba(255,255,255,0.04), transparent 60%), linear-gradient(180deg, #0a0a0a 0%, #131313 100%)",
-            }}
-          >
-            <div className="absolute inset-0 grain" />
-            <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-14">
-              <p className="eyebrow text-bone/70">Campaign 01 — In preparation</p>
-              <p className="font-display text-bone text-2xl md:text-4xl tracking-[-0.02em] mt-3 max-w-[24ch]">
-                The first drop is being made.
-              </p>
-            </div>
+      {/* EDITORIAL STRIP */}
+      <section className="border-t border-border/60 panel-dark">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-12">
+            <Tile k="Material" v="Selected to last." />
+            <Tile k="Fit" v="Considered, athletic." />
+            <Tile k="Function" v="Built for the work." />
+            <Tile k="Restraint" v="Nothing unnecessary." />
           </div>
         </div>
       </section>
 
-      {/* PRINCIPLES — typographic, no boxes */}
+      {/* STATUS */}
       <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10">
-          <p className="eyebrow lg:col-span-2">Principles</p>
-          <div className="lg:col-span-10 grid sm:grid-cols-2 gap-x-12 gap-y-12">
-            <Principle k="Minimal" v="Quiet detailing. No unnecessary noise." />
-            <Principle k="Functional" v="Designed for the work it's worn for." />
-            <Principle k="Durable" v="Materials selected to last." />
-            <Principle k="Purposeful" v="Every piece earns its place." />
-          </div>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+          <p className="eyebrow mb-5 text-signal">Status</p>
+          <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[14ch]">
+            Drop 01<br />in development.
+          </h2>
         </div>
       </section>
+
     </>
   );
 }
 
-function Principle({ k, v }: { k: string; v: string }) {
+function Tile({ k, v }: { k: string; v: string }) {
   return (
     <div className="border-t border-border/60 pt-5">
-      <p className="font-display text-bone text-xl md:text-2xl tracking-[-0.02em]">{k}</p>
-      <p className="text-foreground-muted text-sm mt-2 max-w-[34ch]">{v}</p>
+      <p className="eyebrow text-bone mb-3">{k}</p>
+      <p className="font-display text-bone text-xl md:text-2xl tracking-[-0.02em] leading-snug">{v}</p>
     </div>
   );
 }

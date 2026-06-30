@@ -5,6 +5,7 @@ import { store, subscribeStore } from "@/lib/store";
 import { PROGRAMME, allSessions } from "@/data/programme";
 import { currentWeek, todaySession, nextSession, ukShortDate, today } from "@/lib/programmeUtils";
 import { developmentUser, getOwnedManifests, hasAccess } from "@/lib/devUser";
+import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -60,12 +61,19 @@ function MyProgrammesPage() {
 
   return (
     <>
-      {/* HEADER — editorial */}
-      <section>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-20 lg:pt-28 pb-10 lg:pb-14 grid lg:grid-cols-12 gap-10">
-          <p className="eyebrow lg:col-span-2">{developmentUser.name}</p>
-          <div className="lg:col-span-10">
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.5rem,7vw,6rem)]">
+      {/* MASTHEAD — cinematic strip */}
+      <section className="relative">
+        <div className="relative w-full h-[44svh] min-h-[300px] max-h-[520px] overflow-hidden">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover object-[40%_28%]"
+          />
+          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.98) 100%)"}} />
+          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-10 lg:pb-14">
+            <p className="eyebrow text-bone/70 mb-4">{developmentUser.name} — Library</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.5rem,7vw,5.5rem)]">
               My programmes.
             </h1>
           </div>
