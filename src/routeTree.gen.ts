@@ -35,6 +35,7 @@ import { Route as AppLearnRouteImport } from './routes/_app.learn'
 import { Route as AppCalculatorRouteImport } from './routes/_app.calculator'
 import { Route as WorkoutSessionIdDoneRouteImport } from './routes/workout.$sessionId.done'
 import { Route as MyProgrammesSem8TodayRouteImport } from './routes/my-programmes.sem-8.today'
+import { Route as MyProgrammesSem8ProgressRouteImport } from './routes/my-programmes.sem-8.progress'
 import { Route as MyProgrammesSem8ProgrammeRouteImport } from './routes/my-programmes.sem-8.programme'
 import { Route as MyProgrammesAthx2026TodayRouteImport } from './routes/my-programmes.athx-2026.today'
 import { Route as MyProgrammesAthx2026RaceRouteImport } from './routes/my-programmes.athx-2026.race'
@@ -176,6 +177,12 @@ const MyProgrammesSem8TodayRoute = MyProgrammesSem8TodayRouteImport.update({
   path: '/today',
   getParentRoute: () => MyProgrammesSem8Route,
 } as any)
+const MyProgrammesSem8ProgressRoute =
+  MyProgrammesSem8ProgressRouteImport.update({
+    id: '/progress',
+    path: '/progress',
+    getParentRoute: () => MyProgrammesSem8Route,
+  } as any)
 const MyProgrammesSem8ProgrammeRoute =
   MyProgrammesSem8ProgrammeRouteImport.update({
     id: '/programme',
@@ -278,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
   '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
   '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRouteWithChildren
+  '/my-programmes/sem-8/progress': typeof MyProgrammesSem8ProgressRoute
   '/my-programmes/sem-8/today': typeof MyProgrammesSem8TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -316,6 +324,7 @@ export interface FileRoutesByTo {
   '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
   '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
   '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRouteWithChildren
+  '/my-programmes/sem-8/progress': typeof MyProgrammesSem8ProgressRoute
   '/my-programmes/sem-8/today': typeof MyProgrammesSem8TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -357,6 +366,7 @@ export interface FileRoutesById {
   '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
   '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
   '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRouteWithChildren
+  '/my-programmes/sem-8/progress': typeof MyProgrammesSem8ProgressRoute
   '/my-programmes/sem-8/today': typeof MyProgrammesSem8TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -397,6 +407,7 @@ export interface FileRouteTypes {
     | '/my-programmes/athx-2026/race'
     | '/my-programmes/athx-2026/today'
     | '/my-programmes/sem-8/programme'
+    | '/my-programmes/sem-8/progress'
     | '/my-programmes/sem-8/today'
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
@@ -435,6 +446,7 @@ export interface FileRouteTypes {
     | '/my-programmes/athx-2026/race'
     | '/my-programmes/athx-2026/today'
     | '/my-programmes/sem-8/programme'
+    | '/my-programmes/sem-8/progress'
     | '/my-programmes/sem-8/today'
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
@@ -475,6 +487,7 @@ export interface FileRouteTypes {
     | '/my-programmes/athx-2026/race'
     | '/my-programmes/athx-2026/today'
     | '/my-programmes/sem-8/programme'
+    | '/my-programmes/sem-8/progress'
     | '/my-programmes/sem-8/today'
     | '/workout/$sessionId/done'
     | '/_app/programme/s/$sessionId'
@@ -674,6 +687,13 @@ declare module '@tanstack/react-router' {
       path: '/today'
       fullPath: '/my-programmes/sem-8/today'
       preLoaderRoute: typeof MyProgrammesSem8TodayRouteImport
+      parentRoute: typeof MyProgrammesSem8Route
+    }
+    '/my-programmes/sem-8/progress': {
+      id: '/my-programmes/sem-8/progress'
+      path: '/progress'
+      fullPath: '/my-programmes/sem-8/progress'
+      preLoaderRoute: typeof MyProgrammesSem8ProgressRouteImport
       parentRoute: typeof MyProgrammesSem8Route
     }
     '/my-programmes/sem-8/programme': {
@@ -880,11 +900,13 @@ const MyProgrammesSem8ProgrammeRouteWithChildren =
 
 interface MyProgrammesSem8RouteChildren {
   MyProgrammesSem8ProgrammeRoute: typeof MyProgrammesSem8ProgrammeRouteWithChildren
+  MyProgrammesSem8ProgressRoute: typeof MyProgrammesSem8ProgressRoute
   MyProgrammesSem8TodayRoute: typeof MyProgrammesSem8TodayRoute
 }
 
 const MyProgrammesSem8RouteChildren: MyProgrammesSem8RouteChildren = {
   MyProgrammesSem8ProgrammeRoute: MyProgrammesSem8ProgrammeRouteWithChildren,
+  MyProgrammesSem8ProgressRoute: MyProgrammesSem8ProgressRoute,
   MyProgrammesSem8TodayRoute: MyProgrammesSem8TodayRoute,
 }
 
