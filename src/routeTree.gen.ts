@@ -46,6 +46,7 @@ import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
+import { Route as MyProgrammesSem8ProgrammeSSessionIdRouteImport } from './routes/my-programmes.sem-8.programme.s.$sessionId'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -238,6 +239,12 @@ const AppProgrammeSSessionIdRoute = AppProgrammeSSessionIdRouteImport.update({
   path: '/s/$sessionId',
   getParentRoute: () => AppProgrammeRoute,
 } as any)
+const MyProgrammesSem8ProgrammeSSessionIdRoute =
+  MyProgrammesSem8ProgrammeSSessionIdRouteImport.update({
+    id: '/s/$sessionId',
+    path: '/s/$sessionId',
+    getParentRoute: () => MyProgrammesSem8ProgrammeRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
@@ -270,11 +277,12 @@ export interface FileRoutesByFullPath {
   '/my-programmes/athx-2026/progress': typeof MyProgrammesAthx2026ProgressRoute
   '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
   '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
-  '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRoute
+  '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRouteWithChildren
   '/my-programmes/sem-8/today': typeof MyProgrammesSem8TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/my-programmes/sem-8/programme/s/$sessionId': typeof MyProgrammesSem8ProgrammeSSessionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
@@ -307,11 +315,12 @@ export interface FileRoutesByTo {
   '/my-programmes/athx-2026/progress': typeof MyProgrammesAthx2026ProgressRoute
   '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
   '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
-  '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRoute
+  '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRouteWithChildren
   '/my-programmes/sem-8/today': typeof MyProgrammesSem8TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/my-programmes/sem-8/programme/s/$sessionId': typeof MyProgrammesSem8ProgrammeSSessionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -347,11 +356,12 @@ export interface FileRoutesById {
   '/my-programmes/athx-2026/progress': typeof MyProgrammesAthx2026ProgressRoute
   '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
   '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
-  '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRoute
+  '/my-programmes/sem-8/programme': typeof MyProgrammesSem8ProgrammeRouteWithChildren
   '/my-programmes/sem-8/today': typeof MyProgrammesSem8TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/my-programmes/sem-8/programme/s/$sessionId': typeof MyProgrammesSem8ProgrammeSSessionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -391,6 +401,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/my-programmes/sem-8/programme/s/$sessionId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -428,6 +439,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/my-programmes/sem-8/programme/s/$sessionId'
   id:
     | '__root__'
     | '/_app'
@@ -467,6 +479,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId/done'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
+    | '/my-programmes/sem-8/programme/s/$sessionId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -740,6 +753,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProgrammeSSessionIdRouteImport
       parentRoute: typeof AppProgrammeRoute
     }
+    '/my-programmes/sem-8/programme/s/$sessionId': {
+      id: '/my-programmes/sem-8/programme/s/$sessionId'
+      path: '/s/$sessionId'
+      fullPath: '/my-programmes/sem-8/programme/s/$sessionId'
+      preLoaderRoute: typeof MyProgrammesSem8ProgrammeSSessionIdRouteImport
+      parentRoute: typeof MyProgrammesSem8ProgrammeRoute
+    }
   }
 }
 
@@ -843,13 +863,28 @@ const MyProgrammesAthx2026RouteChildren: MyProgrammesAthx2026RouteChildren = {
 const MyProgrammesAthx2026RouteWithChildren =
   MyProgrammesAthx2026Route._addFileChildren(MyProgrammesAthx2026RouteChildren)
 
+interface MyProgrammesSem8ProgrammeRouteChildren {
+  MyProgrammesSem8ProgrammeSSessionIdRoute: typeof MyProgrammesSem8ProgrammeSSessionIdRoute
+}
+
+const MyProgrammesSem8ProgrammeRouteChildren: MyProgrammesSem8ProgrammeRouteChildren =
+  {
+    MyProgrammesSem8ProgrammeSSessionIdRoute:
+      MyProgrammesSem8ProgrammeSSessionIdRoute,
+  }
+
+const MyProgrammesSem8ProgrammeRouteWithChildren =
+  MyProgrammesSem8ProgrammeRoute._addFileChildren(
+    MyProgrammesSem8ProgrammeRouteChildren,
+  )
+
 interface MyProgrammesSem8RouteChildren {
-  MyProgrammesSem8ProgrammeRoute: typeof MyProgrammesSem8ProgrammeRoute
+  MyProgrammesSem8ProgrammeRoute: typeof MyProgrammesSem8ProgrammeRouteWithChildren
   MyProgrammesSem8TodayRoute: typeof MyProgrammesSem8TodayRoute
 }
 
 const MyProgrammesSem8RouteChildren: MyProgrammesSem8RouteChildren = {
-  MyProgrammesSem8ProgrammeRoute: MyProgrammesSem8ProgrammeRoute,
+  MyProgrammesSem8ProgrammeRoute: MyProgrammesSem8ProgrammeRouteWithChildren,
   MyProgrammesSem8TodayRoute: MyProgrammesSem8TodayRoute,
 }
 
