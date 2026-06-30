@@ -748,7 +748,9 @@ export function LogDrawer({
 
   const save = () => {
     const now = new Date();
+    // Spread state first so explicit fields below take precedence.
     const result: BlockResult = {
+      ...state,
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       programmeId: PROGRAMME.id,
       weekNumber: session.weekNumber,
@@ -759,7 +761,6 @@ export function LogDrawer({
       createdAt: now.toISOString(),
       kind,
       prescribed: block.lines[0],
-      ...state,
     };
     store.appendResult(result);
     onSaved?.(result);
