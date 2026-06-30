@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
 import { Route as AppTodayRouteImport } from './routes/_app.today'
 import { Route as AppRaceRouteImport } from './routes/_app.race'
@@ -25,11 +24,6 @@ import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.progra
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkoutSessionIdRoute = WorkoutSessionIdRouteImport.update({
@@ -89,7 +83,7 @@ const AppProgrammeSSessionIdRoute = AppProgrammeSSessionIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AppRouteWithChildren
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -103,7 +97,7 @@ export interface FileRoutesByFullPath {
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof AppRouteWithChildren
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -118,7 +112,6 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/calculator': typeof AppCalculatorRoute
   '/_app/learn': typeof AppLearnRoute
@@ -163,7 +156,6 @@ export interface FileRouteTypes {
     | '/programme/w/$week'
   id:
     | '__root__'
-    | '/'
     | '/_app'
     | '/_app/calculator'
     | '/_app/learn'
@@ -179,7 +171,6 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
 }
@@ -191,13 +182,6 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/workout/$sessionId': {
@@ -328,7 +312,6 @@ const WorkoutSessionIdRouteWithChildren =
   WorkoutSessionIdRoute._addFileChildren(WorkoutSessionIdRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
 }
