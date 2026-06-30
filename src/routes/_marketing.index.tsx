@@ -61,13 +61,13 @@ function HomePage() {
             className="absolute inset-0 w-full h-full object-cover object-[72%_center] md:object-[center]"
             draggable={false}
           />
-          {/* readability scrim — left-weighted, very subtle */}
+          {/* readability scrim — strong on left to clear the baked logo in the source image */}
           <div
             aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(7,7,7,0.85) 0%, rgba(7,7,7,0.55) 32%, rgba(7,7,7,0.15) 55%, rgba(7,7,7,0) 75%)",
+                "linear-gradient(90deg, rgba(7,7,7,0.98) 0%, rgba(7,7,7,0.92) 30%, rgba(7,7,7,0.55) 50%, rgba(7,7,7,0.1) 72%, rgba(7,7,7,0) 88%)",
             }}
           />
           <div
