@@ -1,0 +1,3173 @@
+{
+  "id": "sem8-athx",
+  "slug": "sem",
+  "title": "S.E.M. 8",
+  "subtitle": "Strength. Endurance. MetCon.",
+  "product_line": "COMPETE",
+  "version": "2.0",
+  "duration_weeks": 8,
+  "core_sessions_per_week": 5,
+  "optional_sessions_per_week": 1,
+  "core_session_total": 40,
+  "optional_session_total": 8,
+  "level": "Intermediate to advanced",
+  "purpose": "Eight-week preparation for ATHX individual or pairs competition. The athlete completes the training as an individual; pair entrants share work only where the competition format allows.",
+  "tagline": "STRONG ENOUGH TO LIFT HEAVY. FIT ENOUGH TO KEEP MOVING. PREPARED ENOUGH TO DO BOTH WHEN IT COUNTS.",
+  "format_options": [
+    "Individual",
+    "Pairs"
+  ],
+  "category_options": [
+    "ATHX",
+    "ATHX Pro"
+  ],
+  "sex_options": [
+    "Male",
+    "Female"
+  ],
+  "independent_disclaimer": "Produced independently by SEVEN3SEVEN. Not produced, approved or endorsed by ATHX.",
+  "enabled_pages": {
+    "today": true,
+    "programme": true,
+    "progress": true,
+    "race": true,
+    "calculator": true,
+    "learn": true,
+    "profile": true
+  },
+  "nav_labels": {
+    "race": "Race Day",
+    "learn": "Learn",
+    "calculator": "Calculator",
+    "profile": "Profile"
+  },
+  "profile_fields": [
+    "name",
+    "race_date",
+    "format",
+    "category",
+    "sex",
+    "strict_press_1rm",
+    "back_squat_1rm",
+    "deadlift_1rm",
+    "recent_5k",
+    "recent_500m_row",
+    "working_dumbbell",
+    "units",
+    "sound_cues",
+    "vibration"
+  ],
+  "competition_profiles": {
+    "ATHX_MALE": {
+      "run_row_swap_m": 750,
+      "individual_ski_cal": 45,
+      "individual_gtoh_reps": 30,
+      "gtoh": "Single-arm alternating",
+      "gtoh_load_kg": 20,
+      "sandbag_kg": 50,
+      "box_in": 24,
+      "lunge": "Dual suitcase",
+      "lunge_db_kg_each": 20,
+      "individual_distance_m": 30
+    },
+    "ATHX_FEMALE": {
+      "run_row_swap_m": 750,
+      "individual_ski_cal": 30,
+      "individual_gtoh_reps": 30,
+      "gtoh": "Single-arm alternating",
+      "gtoh_load_kg": 12.5,
+      "sandbag_kg": 30,
+      "box_in": 20,
+      "lunge": "Dual suitcase",
+      "lunge_db_kg_each": 12.5,
+      "individual_distance_m": 30
+    },
+    "PRO_MALE": {
+      "run_row_swap_m": 1000,
+      "individual_ski_cal": 45,
+      "individual_gtoh_reps": 30,
+      "gtoh": "Dual dumbbell",
+      "gtoh_load_kg_each": 22.5,
+      "sandbag_kg": 70,
+      "box_in": 30,
+      "lunge": "Dual front rack",
+      "lunge_db_kg_each": 22.5,
+      "individual_distance_m": 30
+    },
+    "PRO_FEMALE": {
+      "run_row_swap_m": 1000,
+      "individual_ski_cal": 30,
+      "individual_gtoh_reps": 30,
+      "gtoh": "Dual dumbbell",
+      "gtoh_load_kg_each": 15,
+      "sandbag_kg": 40,
+      "box_in": 24,
+      "lunge": "Dual front rack",
+      "lunge_db_kg_each": 15,
+      "individual_distance_m": 30
+    }
+  },
+  "progress_metrics": {
+    "strength": [
+      "strict_press_best_single",
+      "back_squat_best_triple",
+      "deadlift_best_five",
+      "strength_sequence_total"
+    ],
+    "endurance": [
+      "run_row_total_metres",
+      "run_splits",
+      "row_splits",
+      "segment_dropoff"
+    ],
+    "metcon": [
+      "rehearsal_time",
+      "station_splits",
+      "movement_breaks",
+      "category_load_completion"
+    ],
+    "adherence": [
+      "core_sessions_completed",
+      "optional_sessions_completed",
+      "weekly_consistency",
+      "readiness_trend"
+    ]
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "phase": "FOUNDATION",
+      "title": "Establish the standard",
+      "load": "Moderate",
+      "checkpoint": "Record honest baselines, choose safe training loads and make every repetition legal.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strict press baseline + upper-body balance",
+          "duration": "55-65 min",
+          "purpose": "Establish a strong press marker and build the upper-back support needed for a better 1RM.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy SkiErg or row, band pull-aparts, shoulder circles and progressive empty-bar presses.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press baseline",
+              "instruction": "Work to 1 x 3 at RPE 8. Then complete 3 x 5 at 70-72% of current 1RM or RPE 7. Rest 2-3 min.",
+              "timer": "rest_180",
+              "log": [
+                "top_load",
+                "backoff_load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Upper pull",
+              "instruction": "4 x 8-10 ring rows, pull-ups or chest-supported rows at RPE 7.",
+              "timer": "rest_75",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Shoulder support",
+              "instruction": "3 x 12-15 lateral raises and 3 x 15-20 band pull-aparts.",
+              "timer": "rest_60",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy SkiErg",
+              "instruction": "8 min conversational pace.",
+              "timer": "countdown",
+              "log": [
+                "distance",
+                "average_pace"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "The top triple is a training marker, not a 3RM test. Stop if the bar path, lockout or body position changes.",
+          "log_fields": [
+            "top_triple_load",
+            "top_triple_RPE",
+            "backoff_load",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Run-row repeatability baseline",
+          "duration": "50-65 min",
+          "purpose": "Establish category-specific run and row splits without turning the first endurance session into a time trial.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy run and row, including three 20 sec relaxed pickups on each modality.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Main set",
+              "instruction": "Complete 3 rounds of your category distance on the run, immediately followed by the same distance on the rower. ATHX: 750m + 750m. Pro: 1km + 1km. Rest 2 min after each row. Work at RPE 7.5-8.",
+              "timer": "interval_custom",
+              "log": [
+                "run_splits",
+                "row_splits",
+                "transition_time",
+                "RPE"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8-10 min easy walk and row until breathing is controlled.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Review",
+              "instruction": "Record every split, fastest-to-slowest drop-off and the time needed to settle after each transition.",
+              "timer": "none",
+              "log": [
+                "notes"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "The three rounds should look alike. If Round 3 falls apart, Round 1 was too fast.",
+          "log_fields": [
+            "run_splits",
+            "row_splits",
+            "dropoff",
+            "transition_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Back squat baseline + posterior-chain support",
+          "duration": "55-65 min",
+          "purpose": "Establish a strong legal triple and build the positions that support a higher 3RM.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy row, ankles, hips, adductors and progressive squat sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Back squat baseline",
+              "instruction": "Work to 1 x 3 at RPE 8. Then complete 3 x 3 at about 90% of that top set. Rest 3 min.",
+              "timer": "rest_180",
+              "log": [
+                "top_load",
+                "backoff_load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Romanian deadlift",
+              "instruction": "3 x 6 at RPE 7. Lower under control and keep a strong back position.",
+              "timer": "rest_120",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Single-leg support",
+              "instruction": "2 x 8 each leg reverse lunge or split squat at RPE 7.",
+              "timer": "rest_75",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Trunk",
+              "instruction": "3 x 30-40 sec heavy suitcase hold each side.",
+              "timer": "rest_60",
+              "log": [
+                "load",
+                "time"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Depth and full extension matter more than adding another plate. Leave two good reps available.",
+          "log_fields": [
+            "top_triple_load",
+            "top_triple_RPE",
+            "backoff_load",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "MetCon repeatability EMOM",
+          "duration": "50-60 min",
+          "purpose": "Build clean station work with enough rest to protect standards and repeatability.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy SkiErg plus light practice of ground-to-overhead, box, sandbag and lunge positions.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "24-min EMOM",
+              "instruction": "Min 1: 10-12 cal SkiErg. Min 2: 6 ground-to-overhead at 60-70% of competition load. Min 3: 6-8 box jump overs at a safe training height. Min 4: 20m sandbag carry at 70-80% of competition load. Complete 6 rounds.",
+              "timer": "emom_1440",
+              "log": [
+                "completed_minutes",
+                "lowest_rest",
+                "loads",
+                "RPE"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8-10 min easy row or bike.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Trunk",
+              "instruction": "3 rounds: 30 sec side plank each side and 10 controlled dead bugs.",
+              "timer": "rest_45",
+              "log": [
+                "reps"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Each minute should leave at least 12-15 seconds. Reduce work before movement quality drops.",
+          "log_fields": [
+            "completed_minutes",
+            "lowest_rest",
+            "training_loads",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Deadlift baseline + controlled work capacity",
+          "duration": "55-65 min",
+          "purpose": "Establish repeatable five-rep strength and introduce fatigue-resistant race movement.",
+          "pillar": "Strength + MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy machine, hamstrings, bracing and progressive deadlift sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 5 at RPE 7-7.5. Use a competition-legal stance and grip; no straps.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Upper-back support",
+              "instruction": "3 x 8 chest-supported row plus 3 x 30 sec dead hang.",
+              "timer": "rest_75",
+              "log": [
+                "load",
+                "reps",
+                "time"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "12-min AMRAP",
+              "instruction": "8 cal SkiErg, 10m walking lunge at 60-70% of competition load, 6 burpee broad jumps. Hold RPE 7.",
+              "timer": "amrap_720",
+              "log": [
+                "rounds",
+                "reps",
+                "load",
+                "RPE"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "Easy spin or walk and record the score.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Finish knowing you could have continued for several minutes. Week 1 rewards information, not exhaustion.",
+          "log_fields": [
+            "deadlift_load",
+            "set_RPEs",
+            "AMRAP_score",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional Zone 2 + movement standards",
+          "duration": "40-55 min",
+          "purpose": "Add aerobic work and practise event standards without interfering with the five core sessions.",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "30-40 min easy bike, row, SkiErg or run at RPE 4-5.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "average_HR"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Standards practice",
+              "instruction": "Two easy rounds: 4 ground-to-overhead, 4 box jump overs, 10m carry, 6m lunge and 6m burpee broad jump. Use light loads and stop well before fatigue.",
+              "timer": "rounds",
+              "log": [
+                "movement_notes"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Mobility",
+              "instruction": "8-10 min shoulders, front rack, hips, calves and ankles.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "This session should improve how you feel. It is optional and does not count against programme completion.",
+          "log_fields": [
+            "zone2_result",
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "phase": "BUILD",
+      "title": "Add useful volume",
+      "load": "Moderate-high",
+      "checkpoint": "Increase total quality work without turning volume into grinding or sloppy standards.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strict press volume",
+          "duration": "55-65 min",
+          "purpose": "Increase useful pressing volume while keeping one controlled heavy exposure.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy SkiErg, bands and progressive press sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Heavy exposure",
+              "instruction": "1 smooth single at RPE 8, around 85-88% of current 1RM.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Volume work",
+              "instruction": "4 x 4 at RPE 7-7.5. Rest 2-3 min.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Upper pull",
+              "instruction": "4 x 10 ring rows or chest-supported rows.",
+              "timer": "rest_75",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Shoulder control",
+              "instruction": "3 x 12-15 lateral raises and 3 x 15-20 band pull-aparts.",
+              "timer": "rest_60",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy SkiErg",
+              "instruction": "8-10 min conversational pace.",
+              "timer": "countdown",
+              "log": [
+                "distance"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "The single should move cleanly. It is not a daily maximum.",
+          "log_fields": [
+            "single_load",
+            "volume_load",
+            "set_RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "500m row intervals",
+          "duration": "55-65 min",
+          "purpose": "Build repeatable rowing power and comfort at a hard sustainable split.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy row including 3 x 10 hard strokes.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Main set",
+              "instruction": "8 x 500m at RPE 8 with 75 sec very easy rowing or complete rest.",
+              "timer": "interval_custom",
+              "log": [
+                "all_splits",
+                "average_split",
+                "dropoff",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy row",
+              "instruction": "10 min gradually reducing effort.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Hips, lats and thoracic rotation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Aim to keep the fastest and slowest repetitions within 2-3 seconds.",
+          "log_fields": [
+            "all_500m_splits",
+            "average_split",
+            "fastest",
+            "slowest",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Back squat volume",
+          "duration": "55-65 min",
+          "purpose": "Build squat volume that supports a stronger triple later in the programme.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min row, hips, ankles and progressive squat sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Back squat",
+              "instruction": "4 x 4 at RPE 7.5. Rest 3 min.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Paused back squat",
+              "instruction": "2 x 3 at RPE 7 with a clear 2 sec pause.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Bulgarian split squat",
+              "instruction": "3 x 8 each leg at a controlled load.",
+              "timer": "rest_90",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Core",
+              "instruction": "2 x 40 sec heavy suitcase hold each side.",
+              "timer": "rest_60",
+              "log": [
+                "load",
+                "time"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Do not turn the paused squats into a grind. The pause is for position and control.",
+          "log_fields": [
+            "working_load",
+            "set_RPEs",
+            "paused_load",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "18-minute mixed AMRAP",
+          "duration": "50-60 min",
+          "purpose": "Practise self-pacing and smooth transitions across the event movement patterns.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min jog, row and movement rehearsal at light load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "18-min AMRAP",
+              "instruction": "400m run, 8 ground-to-overhead at 75-85% of competition load, 12 box jump overs at a safe race-relevant height, 20m sandbag carry at 75-85% load and 10m burpee broad jumps.",
+              "timer": "amrap_1080",
+              "log": [
+                "rounds",
+                "reps",
+                "loads",
+                "RPE"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy recovery",
+              "instruction": "8-10 min walk or spin.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Shoulder care",
+              "instruction": "3 x 15 band pull-aparts and 3 x 12 face pulls.",
+              "timer": "rest_60",
+              "log": [
+                "reps"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Choose a first-round pace you could hold for 25 minutes. The final three minutes may be hard; the first three should not be.",
+          "log_fields": [
+            "rounds",
+            "extra_reps",
+            "loads",
+            "where_pace_changed"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Deadlift build + repeatable rounds",
+          "duration": "55-65 min",
+          "purpose": "Increase five-rep strength and practise short repeatable MetCon efforts.",
+          "pillar": "Strength + MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy row and progressive deadlift sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "4 x 5 at RPE 7.5-8. Rest 3 min and reset the brace before every rep.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Repeatable rounds",
+              "instruction": "5 rounds, not for time: 12 cal SkiErg, 10m lunge at 70-80% of competition load, 10m burpee broad jumps, then rest 60 sec.",
+              "timer": "rounds",
+              "log": [
+                "round_splits",
+                "load",
+                "RPE"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "Easy walk and breathing.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Keep every round within roughly five seconds of the others. This is repeatability, not a race.",
+          "log_fields": [
+            "deadlift_load",
+            "round_splits",
+            "load",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional Zone 2 + GTOH efficiency",
+          "duration": "40-55 min",
+          "purpose": "Build aerobic volume and make the ground-to-overhead movement cheaper.",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Ground-to-overhead skill",
+              "instruction": "Every 90 sec x 8: 4-6 technically clean reps. Begin at 60% of competition load and progress only if lockout and control remain perfect.",
+              "timer": "interval_custom",
+              "log": [
+                "load",
+                "reps",
+                "quality"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Zone 2",
+              "instruction": "30-35 min easy bike, row or SkiErg.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "average_HR"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Shoulders, lats, hips and ankles.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "The skill work should never become a hidden MetCon.",
+          "log_fields": [
+            "load",
+            "quality",
+            "zone2_result",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "phase": "OVERLOAD",
+      "title": "Heavier work and first rehearsal",
+      "load": "High",
+      "checkpoint": "The full strength sequence is rehearsed below maximum. Learn the clock, order and standards without chasing failure.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Heavy strict press + pull strength",
+          "duration": "55-65 min",
+          "purpose": "Move a heavier single, then build force with quality triples.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy SkiErg, bands and progressive press sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press single",
+              "instruction": "1 single at RPE 8.5, approximately 90-92%.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press triples",
+              "instruction": "5 x 3 at RPE 8. Rest 2-3 min.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Weighted pull-up",
+              "instruction": "4 x 5, or strict ring rows if needed.",
+              "timer": "rest_90",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Ski intervals",
+              "instruction": "8 rounds of 30 sec strong / 30 sec easy.",
+              "timer": "interval_30",
+              "log": [
+                "distance",
+                "calories"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Shoulder care",
+              "instruction": "2 x 15 face pulls and 2 x 20 band pull-aparts.",
+              "timer": "rest_45",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Only take the planned single if warm-ups are crisp. A slightly lighter clean rep wins.",
+          "log_fields": [
+            "single_load",
+            "triples_load",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "1km run repeats",
+          "duration": "55-65 min",
+          "purpose": "Improve running pace and control near 5-10km intensity.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy jog plus 3 x 20 sec strides.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Main set",
+              "instruction": "5 x 1km at current 5km pace to 10 sec/km slower, with 90 sec easy jog after each. Cap at RPE 8.5.",
+              "timer": "interval_custom",
+              "log": [
+                "splits",
+                "average_pace",
+                "dropoff",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10-12 min easy jog.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Calves, hips and hamstrings.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Hold the same pace across all five. Do not chase a heroic first kilometre.",
+          "log_fields": [
+            "all_splits",
+            "average_pace",
+            "dropoff",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Heavy back squat triple",
+          "duration": "55-65 min",
+          "purpose": "Move toward a stronger 3RM without taking a true maximum.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min row, lower-body mobility and progressive squat sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Top triple",
+              "instruction": "Work to 1 x 3 at RPE 8.5.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Back-off squat",
+              "instruction": "3 x 3 at approximately 90% of the top set.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Lower support",
+              "instruction": "Hamstring curl 3 x 10 and calf raise 3 x 15.",
+              "timer": "rest_75",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "7-10 min bike or walk.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Depth and full extension are non-negotiable. A shallow PR is still a poor rep.",
+          "log_fields": [
+            "top_triple",
+            "RPE",
+            "backoff_load",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "Four rounds for time",
+          "duration": "50-60 min",
+          "purpose": "Practise transitions and hold movement standards as fatigue rises.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min row and movement rehearsal.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "4 rounds for time",
+              "instruction": "500m row, 10 ground-to-overhead at 80-90% of competition load, 10 box jump overs at race height where safe, 20m sandbag carry at competition load. 24-min cap.",
+              "timer": "for_time_1440",
+              "log": [
+                "finish_time",
+                "completed_work",
+                "round_splits",
+                "loads"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy recovery",
+              "instruction": "10 min walk or cycle.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Trunk",
+              "instruction": "3 x 10 hanging knee raises and 3 x 30 sec side plank.",
+              "timer": "rest_60",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Use race height only when every rep is safe and clean. Step down to protect the Achilles and calves.",
+          "log_fields": [
+            "time_or_work",
+            "round_splits",
+            "loads",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Sub-maximal 20-minute strength sequence",
+          "duration": "55-65 min",
+          "purpose": "Rehearse the exact lift order, time windows and loading decisions without maximal attempts.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Full warm-up",
+              "instruction": "20-22 min. Prepare strict press, back squat and deadlift. Set out plates before the clock starts.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "0-6 min strict press",
+              "instruction": "Complete up to three successful singles around 70%, 82% and 88-90% of current 1RM.",
+              "timer": "countdown_360",
+              "log": [
+                "attempts",
+                "success"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "6-12 min back squat",
+              "instruction": "Complete up to three successful triples around 70%, 82% and 88-90%.",
+              "timer": "countdown_360",
+              "log": [
+                "attempts",
+                "success"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "12-20 min deadlift",
+              "instruction": "Complete up to three successful fives around 70%, 80% and 85-87%.",
+              "timer": "countdown_480",
+              "log": [
+                "attempts",
+                "success"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy row",
+              "instruction": "15 min conversational pace.",
+              "timer": "countdown",
+              "log": [
+                "distance"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Review",
+              "instruction": "Record successful loads, loading time and any movement-standard risks.",
+              "timer": "none",
+              "log": [
+                "notes"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Leave weight in reserve. This session exists to expose poor decisions before race week.",
+          "log_fields": [
+            "attempts",
+            "successful_loads",
+            "loading_notes",
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional Zone 2 + lunge and burpee skill",
+          "duration": "40-55 min",
+          "purpose": "Maintain aerobic volume and improve lower-body station efficiency at low fatigue.",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "30-35 min easy bike or SkiErg at RPE 4-5.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "average_HR"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Lunge skill",
+              "instruction": "4 x 10m at 50-60% competition load. Practise legal knee contact and full extension.",
+              "timer": "rest_60",
+              "log": [
+                "load",
+                "quality"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Burpee broad jump skill",
+              "instruction": "4 x 6-8m at easy rhythm. Practise legal hand and foot positions.",
+              "timer": "rest_75",
+              "log": [
+                "time",
+                "quality"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Calves, hips and front rack.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "This is technique and rhythm, not another hard conditioning day.",
+          "log_fields": [
+            "zone2_result",
+            "lunge_notes",
+            "burpee_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "phase": "DELOAD",
+      "title": "Reduce fatigue and absorb the work",
+      "load": "Low",
+      "checkpoint": "Finish this week feeling better than you started it. Freshness is the target, not a bonus workout.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Light strict press + easy upper body",
+          "duration": "45-55 min",
+          "purpose": "Keep the press familiar while allowing fatigue to fall.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy SkiErg and bands.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press",
+              "instruction": "3 x 5 at RPE 6.",
+              "timer": "rest_120",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy upper pull",
+              "instruction": "3 x 12 ring rows and 2 x 15 lateral raises.",
+              "timer": "rest_60",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Zone 2 SkiErg",
+              "instruction": "15 min easy.",
+              "timer": "countdown",
+              "log": [
+                "distance"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Shoulders and upper back.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Every rep should be smooth. Do not add sets because you feel fresh.",
+          "log_fields": [
+            "load",
+            "RPE",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Easy mixed aerobic",
+          "duration": "40-50 min",
+          "purpose": "Maintain the run and row patterns without adding meaningful fatigue.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "Alternate 10 min easy run and 10 min easy row for 40 min total. Keep conversation possible.",
+              "timer": "interval_600",
+              "log": [
+                "run_distance",
+                "row_distance",
+                "average_HR"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-8 min calves, hips and lats.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Use the easiest available pace. The aim is circulation, not a score.",
+          "log_fields": [
+            "run_distance",
+            "row_distance",
+            "average_HR",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Light squat + lower-body restoration",
+          "duration": "45-55 min",
+          "purpose": "Maintain squat skill and lower-body capacity with low stress.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy row and mobility.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Back squat",
+              "instruction": "3 x 5 at RPE 6.",
+              "timer": "rest_120",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Romanian deadlift",
+              "instruction": "2 x 6 at RPE 6.",
+              "timer": "rest_90",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Step-up",
+              "instruction": "2 x 8 each leg, easy-moderate.",
+              "timer": "rest_60",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy bike",
+              "instruction": "10 min conversational.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Nothing should grind and nothing should create soreness lasting more than a day.",
+          "log_fields": [
+            "loads",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "Low-fatigue movement EMOM",
+          "duration": "40-50 min",
+          "purpose": "Keep station rhythm and standards while reducing total stress.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy machine and movement rehearsal.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "16-min EMOM",
+              "instruction": "Min 1: 8 cal machine. Min 2: 5 light ground-to-overhead. Min 3: 6 step overs. Min 4: 20m light carry. Complete 4 rounds.",
+              "timer": "emom_960",
+              "log": [
+                "completed_minutes",
+                "lowest_rest",
+                "loads"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility and breathing",
+              "instruction": "10-15 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Every minute should leave at least 20 seconds. There is no score to chase.",
+          "log_fields": [
+            "completed_minutes",
+            "lowest_rest",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Light deadlift + easy station flow",
+          "duration": "45-55 min",
+          "purpose": "Maintain pulling skill and competition movement familiarity at low cost.",
+          "pillar": "Strength + MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine and progressive deadlift sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 4 at RPE 6.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Three easy rounds",
+              "instruction": "5 ground-to-overhead, 5 box step overs, 10m sandbag carry, 6m lunge and 6m burpee broad jump. Rest as needed.",
+              "timer": "rounds",
+              "log": [
+                "round_splits",
+                "loads"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "Easy walk and mobility.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Every movement should meet the competition standard. Finish fresher than you started.",
+          "log_fields": [
+            "deadlift_load",
+            "round_notes",
+            "body_feedback"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional recovery + mobility",
+          "duration": "30-45 min",
+          "purpose": "Support recovery without adding training stress.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "20-30 min very easy bike, swim, walk or row.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10-15 min hips, ankles, lats, shoulders and thoracic rotation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Skip this session when complete rest is the better choice.",
+          "log_fields": [
+            "option",
+            "duration",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "phase": "SPECIFIC BUILD",
+      "title": "Competition loads and longer efforts",
+      "load": "High",
+      "checkpoint": "Competition loads become more common, but full race volume remains reserved for the rehearsal week.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Heavy strict press doubles",
+          "duration": "55-65 min",
+          "purpose": "Increase confidence near competition intensity while keeping enough back-off volume.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy SkiErg, bands and progressive press sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Heavy doubles",
+              "instruction": "3 x 2 at RPE 8.5, roughly 87-90%.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Back-off triples",
+              "instruction": "3 x 3 at RPE 8.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Upper pull",
+              "instruction": "4 x 6 strict pull-ups or a heavy row.",
+              "timer": "rest_90",
+              "log": [
+                "load",
+                "reps"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Shoulder control",
+              "instruction": "3 x 20 band pull-aparts and 3 x 20-35 sec handstand or pike hold.",
+              "timer": "rest_60",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Easy SkiErg",
+              "instruction": "8 min relaxed pace.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "If the second rep becomes a grind, reduce the final set.",
+          "log_fields": [
+            "double_load",
+            "backoff_load",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Category-distance run-row intervals",
+          "duration": "55-70 min",
+          "purpose": "Build the ability to change modality and settle immediately into a strong event pace.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy run and row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Main set",
+              "instruction": "3 rounds: category run distance immediately followed by category row distance, then 2 min easy rest. ATHX: 750m + 750m. Pro: 1km + 1km. Work at RPE 8 and keep all rounds even.",
+              "timer": "interval_custom",
+              "log": [
+                "run_splits",
+                "row_splits",
+                "transitions",
+                "RPE"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy recovery",
+              "instruction": "8-10 min walk and light row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Calves, hips and lats.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "This is not the full 22-minute rehearsal. Use a hard but repeatable pace.",
+          "log_fields": [
+            "run_splits",
+            "row_splits",
+            "dropoff",
+            "transition_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Competition-style squat triple",
+          "duration": "55-65 min",
+          "purpose": "Move a near-target legal triple and confirm likely race-day loading.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-15 min full squat preparation and progressive sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Top triple",
+              "instruction": "1 x 3 at RPE 8.5-9.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Back-off squat",
+              "instruction": "2 x 3 at approximately 90% of the top set.",
+              "timer": "rest_180",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Paused squat",
+              "instruction": "2 x 3 at RPE 7 with a 2 sec pause.",
+              "timer": "rest_150",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Lower support",
+              "instruction": "2 x 10 hamstring curl and 2 x 15 calf raise.",
+              "timer": "rest_60",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "The top triple must be legal and repeatable. Save a true 3RM for rehearsal or competition.",
+          "log_fields": [
+            "top_triple",
+            "RPE",
+            "backoff_load",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "Three mixed seven-minute intervals",
+          "duration": "50-60 min",
+          "purpose": "Produce strong repeated blocks with full control of pace and movement standards.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min and rehearse each movement.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Block 1 - 7 min",
+              "instruction": "Repeat: 10-12 cal SkiErg, 5-6 ground-to-overhead at 85-100% competition load and 8 box jump overs.",
+              "timer": "amrap_420",
+              "log": [
+                "work_completed",
+                "load"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Recovery",
+              "instruction": "3 min walk and breathe.",
+              "timer": "countdown_180",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Block 2 - 7 min",
+              "instruction": "Repeat: 12 cal row, 10m competition-style lunge and 6-8m burpee broad jump.",
+              "timer": "amrap_420",
+              "log": [
+                "work_completed",
+                "load"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Recovery",
+              "instruction": "3 min walk and breathe.",
+              "timer": "countdown_180",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Block 3 - 7 min",
+              "instruction": "Repeat: 200m run, 20m sandbag carry at competition load and 6 burpees.",
+              "timer": "amrap_420",
+              "log": [
+                "work_completed",
+                "load"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8-10 min bike or row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Use full competition load only where clean movement can be maintained for the entire block.",
+          "log_fields": [
+            "block_scores",
+            "loads",
+            "RPE",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Heavy deadlift five + partial race work",
+          "duration": "55-65 min",
+          "purpose": "Confirm a strong five-rep set, then practise competition movements at limited volume.",
+          "pillar": "Strength + MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-14 min easy row and progressive deadlift sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Top five",
+              "instruction": "1 x 5 at RPE 8.5, then 2 x 4 at approximately 90% of the top set.",
+              "timer": "rest_180",
+              "log": [
+                "top_load",
+                "backoff_load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Partial MetCon - 2 rounds for time",
+              "instruction": "15 cal SkiErg, 8 ground-to-overhead at competition load, 10 box jump overs at race height and 10m competition-style lunge. 18-min cap.",
+              "timer": "for_time_1080",
+              "log": [
+                "finish_time",
+                "round_splits",
+                "loads"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy recovery",
+              "instruction": "8-10 min walk or spin.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "The heavy five must remain legal. No hitching contest, no straps and no emotional loading.",
+          "log_fields": [
+            "top_five",
+            "RPE",
+            "metcon_time",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional Zone 2 + carry skill",
+          "duration": "40-55 min",
+          "purpose": "Build aerobic capacity and improve sandbag efficiency without compromising Saturday.",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "30-35 min easy bike, row or SkiErg.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "average_HR"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Sandbag skill",
+              "instruction": "4 x 20m at 70-80% competition load. Practise the pickup, turn and finish line. Full recovery.",
+              "timer": "rest_90",
+              "log": [
+                "load",
+                "time",
+                "quality"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Box skill",
+              "instruction": "3 x 6 easy race-height reps if safe, stepping down every rep.",
+              "timer": "rest_75",
+              "log": [
+                "height",
+                "quality"
+              ],
+              "category_specific": true
+            }
+          ],
+          "coach_note": "This is a skill session. Stop before grip, back or landing quality falls.",
+          "log_fields": [
+            "zone2_result",
+            "carry_notes",
+            "box_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "phase": "PEAK SPECIFICITY",
+      "title": "Rehearse what will be scored",
+      "load": "High but controlled",
+      "checkpoint": "This is the most race-specific week. The goal is information and confidence, not fatigue that survives into Week 7.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strict press maintenance",
+          "duration": "45-55 min",
+          "purpose": "Keep pressing strength while saving freshness for the rehearsals.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy SkiErg, bands and progressive sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press",
+              "instruction": "3 x 2 at RPE 8, then 2 x 3 at RPE 7.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Upper pull",
+              "instruction": "3 x 8-10 ring rows and 2 x 15 face pulls.",
+              "timer": "rest_75",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Easy SkiErg",
+              "instruction": "10-12 min conversational.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "No grind. The work is deliberately low volume.",
+          "log_fields": [
+            "loads",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Full 22-minute run-row rehearsal",
+          "duration": "50-65 min",
+          "purpose": "Rehearse the exact individual endurance format and set race pacing.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-15 min easy run and row with brief race-pace pickups.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "22-min rehearsal",
+              "instruction": "Start on the run. Complete your category distance, then the same distance on the rower, repeating until 22 min expires. ATHX: 750m swaps. Pro: 1km swaps. Record total run and row metres.",
+              "timer": "countdown_1320",
+              "log": [
+                "total_metres",
+                "run_metres",
+                "row_metres",
+                "all_splits",
+                "transitions"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy walk and row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Review",
+              "instruction": "Set target opening pace, row split and transition routine.",
+              "timer": "none",
+              "log": [
+                "race_targets"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Run this as an individual. Pair entrants can share the competition workload later, but each athlete still needs their own engine.",
+          "log_fields": [
+            "total_metres",
+            "run_metres",
+            "row_metres",
+            "splits",
+            "race_targets"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Low-volume back squat",
+          "duration": "45-55 min",
+          "purpose": "Keep heavy squat exposure without adding soreness before the final strength rehearsal.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-14 min full squat preparation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Back squat",
+              "instruction": "3 x 2 at RPE 8.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Back-off squat",
+              "instruction": "2 x 3 at RPE 7.",
+              "timer": "rest_150",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy single-leg work",
+              "instruction": "2 x 8 reverse lunges each leg.",
+              "timer": "rest_60",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy bike and mobility",
+              "instruction": "8-10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "No leg finisher this week.",
+          "log_fields": [
+            "loads",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "70% MetCon X rehearsal",
+          "duration": "50-65 min",
+          "purpose": "Rehearse every station at competition load while limiting total volume.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy machine and all movement standards.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Rehearsal",
+              "instruction": "Men: 30 cal SkiErg, 20 ground-to-overhead, 20m sandbag carry, 20 box jump overs, 20m walking lunge, 20m burpee broad jumps, 30 cal SkiErg. Women: use 20 cal SkiErg at each end. Use exact category loads and standards. 22-min cap.",
+              "timer": "for_time_1320",
+              "log": [
+                "finish_time",
+                "station_splits",
+                "loads",
+                "breaks"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Recovery",
+              "instruction": "10 min easy walk or bike.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Review",
+              "instruction": "Record every station split, planned breaks and the limiting station.",
+              "timer": "none",
+              "log": [
+                "notes"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Do not extend the volume to prove a point. This rehearsal exists to set pacing and expose standards.",
+          "log_fields": [
+            "time_or_work",
+            "station_splits",
+            "loads",
+            "limiting_station"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Final full strength rehearsal",
+          "duration": "55-65 min",
+          "purpose": "Use the exact 20-minute format to set race-day attempts and loading strategy.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Full warm-up",
+              "instruction": "20-25 min. Prepare all three lifts and set the rack and plates exactly as planned.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "0-6 min strict press",
+              "instruction": "Up to three successful singles. Suggested pattern: safe opener, highly likely second, earned third.",
+              "timer": "countdown_360",
+              "log": [
+                "attempts",
+                "success"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "6-12 min back squat",
+              "instruction": "Up to three successful triples using the same attempt logic.",
+              "timer": "countdown_360",
+              "log": [
+                "attempts",
+                "success"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "12-20 min deadlift",
+              "instruction": "Up to three successful sets of five. Stop if legal reps or speed deteriorate.",
+              "timer": "countdown_480",
+              "log": [
+                "attempts",
+                "success"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy row",
+              "instruction": "10 min conversational.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Decision sheet",
+              "instruction": "Lock opening attempts, likely second attempts and third-attempt rules.",
+              "timer": "none",
+              "log": [
+                "race_plan"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "No fourth attempts and no emotional loading. The best plan is the one you can execute under pressure.",
+          "log_fields": [
+            "attempts",
+            "best_successful_loads",
+            "total",
+            "race_plan"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional aerobic recovery + mobility",
+          "duration": "35-50 min",
+          "purpose": "Reduce fatigue before the final strength rehearsal.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "25-30 min easy bike, row or swim at RPE 4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10-15 min hips, ankles, lats, front rack and thoracic rotation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Preparation",
+              "instruction": "Write Saturday's exact rack, plate and attempt plan.",
+              "timer": "none",
+              "log": [
+                "notes"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "This session should improve how you feel, not test fitness.",
+          "log_fields": [
+            "duration",
+            "mobility_notes",
+            "attempt_plan"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "phase": "SHARPEN",
+      "title": "Keep speed, lose fatigue",
+      "load": "Moderate-low",
+      "checkpoint": "Keep the nervous system sharp while reducing total work. Nothing should create soreness lasting more than 24 hours.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Sharp strict press singles",
+          "duration": "45-55 min",
+          "purpose": "Retain confidence near heavy weight with very low volume.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy SkiErg, bands and progressive press sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press",
+              "instruction": "3 x 1 at RPE 8-8.5, then 2 x 3 at RPE 6-7.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Upper pull",
+              "instruction": "3 x 8 ring rows and 2 x 15 band pull-aparts.",
+              "timer": "rest_60",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Easy SkiErg",
+              "instruction": "10-12 min conversational.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Shoulders and upper back.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "All singles should look like successful opening attempts.",
+          "log_fields": [
+            "single_loads",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Short run-row sharpening",
+          "duration": "50-60 min",
+          "purpose": "Keep high-end aerobic speed without a large volume of work.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy run and row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Main set",
+              "instruction": "5 rounds: 2 min run around current 5km pace, 1 min easy; 2 min hard row, 1 min easy.",
+              "timer": "interval_custom",
+              "log": [
+                "run_metres",
+                "row_metres",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy movement.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Calves, hips and lats.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Finish fast but controlled. The fifth round should be the best, not the first.",
+          "log_fields": [
+            "round_outputs",
+            "dropoff",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Sharp squat doubles",
+          "duration": "45-55 min",
+          "purpose": "Keep heavy squat familiarity with minimal fatigue.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-14 min full squat preparation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Back squat",
+              "instruction": "3 x 2 at RPE 7.5-8.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Back-off squat",
+              "instruction": "2 x 3 at RPE 6-7.",
+              "timer": "rest_150",
+              "log": [
+                "load"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Easy bike",
+              "instruction": "10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Hips and ankles.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "No accessory leg work is required.",
+          "log_fields": [
+            "loads",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "16-minute competition-load EMOM",
+          "duration": "40-55 min",
+          "purpose": "Touch key race movements at full load with plenty of rest and perfect standards.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min and rehearse each movement.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "16-min EMOM",
+              "instruction": "Min 1: 8-10 cal SkiErg. Min 2: 4-6 ground-to-overhead at competition load. Min 3: 6 box jump overs at race height. Min 4: 15-20m sandbag carry at competition load. Complete 4 rounds.",
+              "timer": "emom_960",
+              "log": [
+                "completed_minutes",
+                "lowest_rest",
+                "loads"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy recovery",
+              "instruction": "10-12 min walk or bike.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Shoulders, hips and calves.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Reduce reps immediately if a minute overruns. This is a primer, not a test.",
+          "log_fields": [
+            "completed_minutes",
+            "lowest_rest",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Deadlift sharpener + movement flow",
+          "duration": "45-55 min",
+          "purpose": "Retain deadlift confidence and rehearse smooth transitions at low volume.",
+          "pillar": "Strength + MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy row and progressive deadlift sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 3 at RPE 7-7.5.",
+              "timer": "rest_180",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "10-min easy flow",
+              "instruction": "5 light ground-to-overhead, 5 box jump overs, 10m lunge and 10m burpee broad jump. Move smoothly and rest as needed.",
+              "timer": "countdown_600",
+              "log": [
+                "rounds",
+                "loads"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Easy walk or bike",
+              "instruction": "10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility and log",
+              "instruction": "Finish relaxed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Finish with energy. There is no benefit in proving fitness eight days out.",
+          "log_fields": [
+            "deadlift_load",
+            "flow_rounds",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Friday or Sunday",
+          "title": "Optional easy aerobic + strides",
+          "duration": "35-50 min",
+          "purpose": "Maintain aerobic feel and leave the body fresh.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "20-25 min easy run or bike.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Strides",
+              "instruction": "4 x 10 sec relaxed fast strides with full walking recovery.",
+              "timer": "interval_custom",
+              "log": [
+                "quality"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Calves, hips, shoulders and front rack.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Strides are smooth accelerations, not sprints.",
+          "log_fields": [
+            "zone2_result",
+            "stride_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "phase": "RACE WEEK",
+      "title": "Fresh, sharp and ready",
+      "load": "Low",
+      "checkpoint": "Fitness is built. Keep movement familiar, remove fatigue and arrive with every decision already made.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Six days before race",
+          "title": "Strength primer",
+          "duration": "40-50 min",
+          "purpose": "Touch all three strength movements without soreness.",
+          "pillar": "Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy SkiErg or row and progressive empty-bar work.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Strict press",
+              "instruction": "3 x 3 at RPE 5-6, then 1 smooth single at RPE 7.",
+              "timer": "rest_120",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Back squat",
+              "instruction": "3 x 3 at RPE 5-6.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "2 x 3 at RPE 5-6.",
+              "timer": "rest_150",
+              "log": [
+                "load",
+                "RPE"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Shoulders, hips and ankles.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Nothing should feel heavier than 7/10.",
+          "log_fields": [
+            "loads",
+            "RPEs",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Five days before race",
+          "title": "Easy run-row touch",
+          "duration": "35-45 min",
+          "purpose": "Keep endurance movements familiar without carrying fatigue.",
+          "pillar": "Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Easy mixed aerobic",
+              "instruction": "Alternate 5 min easy run and 5 min easy row for 20-25 min.",
+              "timer": "interval_300",
+              "log": [
+                "run_distance",
+                "row_distance"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Pickups",
+              "instruction": "4 x 20 sec controlled race-pace pickups with 70 sec easy recovery. Alternate run and row.",
+              "timer": "interval_custom",
+              "log": [
+                "quality"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Cool-down and mobility",
+              "instruction": "8-10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Finish wanting to do more.",
+          "log_fields": [
+            "run_distance",
+            "row_distance",
+            "pickup_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Four days before race",
+          "title": "Movement standards primer",
+          "duration": "35-45 min",
+          "purpose": "Touch every MetCon movement once more at easy volume.",
+          "pillar": "MetCon",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8 min easy machine and mobility.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Three easy rounds",
+              "instruction": "5 cal SkiErg, 3 light ground-to-overhead, 4 box jump overs, 10m sandbag carry, 6m walking lunge and 6m burpee broad jump. Rest 90 sec.",
+              "timer": "rounds",
+              "log": [
+                "round_splits",
+                "loads"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy walking and breathing.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Move quickly but never strain. The primer should increase confidence.",
+          "log_fields": [
+            "round_splits",
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Two days before race",
+          "title": "Competition primer + equipment check",
+          "duration": "25-35 min",
+          "purpose": "Leave the body switched on and remove race-day uncertainty.",
+          "pillar": "Primer",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "6-8 min easy machine.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Two easy rounds",
+              "instruction": "4 cal SkiErg, 2 ground-to-overhead, 3 box jump overs, 10m carry, 4m lunge and 4m burpee broad jump. Rest 2 min.",
+              "timer": "rounds",
+              "log": [
+                "quality"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Equipment check",
+              "instruction": "Confirm shoes, belt, sleeves, wraps, chalk, travel, food and opening attempts.",
+              "timer": "none",
+              "log": [
+                "checklist"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "Walk and breathe until fully relaxed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "No added work. The primer is finished as soon as you feel sharp.",
+          "log_fields": [
+            "quality",
+            "checklist",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Race day",
+          "title": "ATHX performance",
+          "duration": "Competition",
+          "purpose": "Produce three high-quality performances: strength, endurance and MetCon X.",
+          "pillar": "Performance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up zone",
+              "instruction": "Raise body temperature, prepare all three lifts and rehearse only enough race movement to feel ready.",
+              "timer": "none",
+              "log": [
+                "warmup_notes"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Strength zone",
+              "instruction": "Execute the pre-selected opener, likely second and earned third attempts for strict press, back squat and deadlift.",
+              "timer": "countdown_1200",
+              "log": [
+                "attempts",
+                "best_press",
+                "best_squat3",
+                "best_deadlift5",
+                "total"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Endurance zone",
+              "instruction": "Start on the run and alternate category distance between run and row for 22 minutes. Follow the pacing plan.",
+              "timer": "countdown_1320",
+              "log": [
+                "total_metres",
+                "run_metres",
+                "row_metres",
+                "splits"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "MetCon X zone",
+              "instruction": "Execute the official category workout and planned station strategy.",
+              "timer": "for_time_1500",
+              "log": [
+                "finish_time",
+                "station_splits",
+                "penalties",
+                "notes"
+              ],
+              "category_specific": true
+            },
+            {
+              "name": "Post-event review",
+              "instruction": "Record results while details are fresh and identify the next training priority.",
+              "timer": "none",
+              "log": [
+                "review"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Race the plan, not the adrenaline. Legal reps and controlled openings create the chance to finish hard.",
+          "log_fields": [
+            "strength_total",
+            "endurance_metres",
+            "metcon_time",
+            "overall_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Execute the locked race plan.",
+            "average": "Use conservative opening attempts and controlled first station pace.",
+            "heavy": "Do not improvise. Keep the safest successful strength plan and prioritise legal movement."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Three or one days before race",
+          "title": "Optional walk + mobility",
+          "duration": "20-40 min",
+          "purpose": "Allow fatigue to fall while maintaining normal movement.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy walk",
+              "instruction": "20-30 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration"
+              ],
+              "category_specific": false
+            },
+            {
+              "name": "Mobility",
+              "instruction": "8-10 min hips, calves, lats and front rack. Do not force range.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": false
+            },
+            {
+              "name": "Recovery",
+              "instruction": "Normal meals, fluids and sleep routine.",
+              "timer": "none",
+              "log": [
+                "notes"
+              ],
+              "category_specific": false
+            }
+          ],
+          "coach_note": "Rest is training this week. Skip this session when complete rest is better.",
+          "log_fields": [
+            "duration",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete as written.",
+            "average": "Use the lower end of the load or pace range. Remove one accessory set if needed.",
+            "heavy": "Reduce the main strength load by 5-7.5%, remove one back-off set, and reduce conditioning volume by about 20%."
+          }
+        }
+      ]
+    }
+  ],
+  "learn": {
+    "tabs": {
+      "training_terms": [
+        "1RM / 3RM / 5RM",
+        "AMRAP",
+        "EMOM",
+        "Rounds for time",
+        "Time cap",
+        "RPE",
+        "Top set",
+        "Back-off set",
+        "Zone 2",
+        "Threshold",
+        "Interval",
+        "Deload",
+        "Taper",
+        "Primer"
+      ],
+      "movement_standards": [
+        "Strict press",
+        "Back squat",
+        "Deadlift",
+        "Run",
+        "Row",
+        "SkiErg",
+        "Ground to overhead",
+        "Sandbag carry",
+        "Box jump over",
+        "Walking lunge",
+        "Burpee broad jump"
+      ],
+      "competition_rules": [
+        "Strength time windows",
+        "Allowed and prohibited equipment",
+        "Category distances and loads",
+        "Individual and pairs differences",
+        "Scoring and time caps"
+      ]
+    }
+  },
+  "calculator": {
+    "lifts": [
+      "strict_press",
+      "back_squat",
+      "deadlift"
+    ],
+    "percentages": [
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80,
+      82.5,
+      85,
+      87.5,
+      90,
+      92.5,
+      95
+    ],
+    "rounding_kg": 2.5,
+    "rpe_guide": {
+      "6": "4 reps available",
+      "7": "3 reps available",
+      "8": "2 reps available",
+      "9": "1 rep available",
+      "10": "maximum"
+    }
+  },
+  "race_tools": {
+    "strength_attempt_planner": true,
+    "endurance_pacing_plan": true,
+    "metcon_station_plan": true,
+    "equipment_checklist": true,
+    "nutrition_hydration_checklist": true,
+    "pair_notes_optional": true
+  }
+}
