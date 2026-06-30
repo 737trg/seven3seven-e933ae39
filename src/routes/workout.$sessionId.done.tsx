@@ -1,8 +1,8 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { getSessionById } from "@/data/programme";
-import { store } from "@/lib/store";
+import { store, subscribeStore } from "@/lib/store";
 import { formatClock } from "@/lib/programmeUtils";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 export const Route = createFileRoute("/workout/$sessionId/done")({
   component: DonePage,
@@ -11,15 +11,21 @@ export const Route = createFileRoute("/workout/$sessionId/done")({
 function DonePage() {
   const { sessionId } = useParams({ from: "/workout/$sessionId/done" });
   const s = getSessionById(sessionId);
-  const log = store.getLog(sessionId);
+  const log = useSyncExternalStore(
+    subscribeStore,
+    () => store.getLog(sessionId),
+    () => store.getLog(sessionId),
+  );
   const [reflection, setReflection] = useState(log?.reflection ?? "");
   const [rpe, setRpe] = useState<number>(log?.sessionRpe ?? 7);
+  const [saved, setSaved] = useState(false);
 
   if (!s) return null;
 
   const save = () => {
     if (!log) return;
     store.saveLog({ ...log, sessionRpe: rpe, reflection });
+    setSaved(true);
   };
 
   return (
@@ -79,7 +85,7 @@ function DonePage() {
             onClick={save}
             className="flex-1 h-12 bg-bone text-obsidian font-display text-xs uppercase tracking-wide"
           >
-            Save reflection
+            {saved ? "Saved" : "Save reflection"}
           </button>
           <Link
             to="/today"

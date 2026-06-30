@@ -150,6 +150,15 @@ export interface SessionLog {
   completed: boolean;
 }
 
+export interface ActiveWorkoutState {
+  sessionId: string;
+  startedAt: string;
+  updatedAt: string;
+  currentBlockIndex: number;
+  elapsedSec: number;
+  done: Record<string, boolean>;
+}
+
 export interface GlossaryTerm {
   term: string;
   short: string;

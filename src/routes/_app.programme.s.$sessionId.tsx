@@ -99,7 +99,7 @@ function SessionDetailPage() {
                 {blk.note}
               </p>
             )}
-            {results.some((r) => r.blockId === blk.id) && (
+            {results.some((r) => r.sessionId === s.id && r.blockId === blk.id) && (
               <button
                 onClick={() => setHistoryBlockId(blk.id)}
                 className="ml-12 mt-4 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-foreground-muted hover:text-bone"
@@ -144,7 +144,7 @@ function SessionDetailPage() {
           </SheetHeader>
           <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
             {results
-              .filter((r) => r.blockId === historyBlockId)
+              .filter((r) => r.sessionId === s.id && r.blockId === historyBlockId)
               .slice()
               .reverse()
               .map((r) => (
