@@ -191,3 +191,84 @@ export interface PartnerSplit {
   ski2B?: number;
   notes?: string;
 }
+
+/* --- Block-level result history (separate from session completion) --- */
+
+export type LogKind =
+  | "strength"
+  | "olympic"
+  | "amrap"
+  | "emom"
+  | "rft"
+  | "timecap"
+  | "intervals"
+  | "zone2"
+  | "carry"
+  | "hold"
+  | "generic";
+
+export type StrengthSetGroup = "warmup" | "top" | "backoff" | "assistance";
+
+export interface StrengthSetEntry {
+  group: StrengthSetGroup;
+  weightKg?: number;
+  reps?: number;
+  rpe?: number;
+  missed?: boolean;
+  note?: string;
+}
+
+export interface IntervalEntry {
+  timeSec?: number;
+  distanceM?: number;
+  paceSecPer500?: number;
+}
+
+export interface HoldEntry {
+  durationSec?: number;
+}
+
+/** Append-only history record. One per block attempt. */
+export interface BlockResult {
+  id: string;
+  programmeId: string;
+  weekNumber: number;
+  sessionId: string;
+  blockId: string;
+  exercise: string;
+  dateISO: string; // yyyy-mm-dd
+  createdAt: string; // full ISO
+  kind: LogKind;
+  prescribed?: string;
+  rpe?: number;
+  rxOrScaled?: "rx" | "scaled";
+  note?: string;
+  // Adaptive fields — only populated for the relevant kind
+  sets?: StrengthSetEntry[];
+  rounds?: number;
+  extraReps?: number;
+  extraDistanceM?: number;
+  weightKg?: number;
+  minutesCompleted?: number;
+  failedMinutes?: number;
+  lowestRestSec?: number;
+  timeSec?: number;
+  capped?: boolean;
+  stoppedAt?: string;
+  splits?: number[];
+  intervals?: IntervalEntry[];
+  durationSec?: number;
+  distanceM?: number;
+  paceSecPerKm?: number;
+  avgHr?: number;
+  feel?: number;
+  holds?: HoldEntry[];
+}
+
+/** Draft state for a block result mid-workout. */
+export type BlockResultDraft = Omit<
+  BlockResult,
+  "id" | "createdAt" | "dateISO" | "programmeId" | "weekNumber"
+> & {
+  updatedAt?: string;
+};

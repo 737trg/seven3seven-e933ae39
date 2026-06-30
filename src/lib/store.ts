@@ -1,5 +1,7 @@
 import type {
   Athlete,
+  BlockResult,
+  BlockResultDraft,
   PartnerSplit,
   RaceStrategy,
   Readiness,
@@ -8,7 +10,7 @@ import type {
 import { PROGRAMME } from "@/data/programme";
 
 const KEY = "trg737.v1";
-const STORAGE_VERSION = 1;
+const STORAGE_VERSION = 2;
 
 interface Store {
   version: number;
@@ -18,6 +20,8 @@ interface Store {
   raceStrategy: RaceStrategy;
   partnerSplit: PartnerSplit;
   settings: { sound: boolean; vibration: boolean };
+  results: BlockResult[];
+  drafts: Record<string, BlockResultDraft>; // key = `${sessionId}:${blockId}`
 }
 
 const defaultStore = (): Store => ({
@@ -32,6 +36,8 @@ const defaultStore = (): Store => ({
   },
   partnerSplit: {},
   settings: { sound: true, vibration: true },
+  results: [],
+  drafts: {},
 });
 
 const isBrowser = () => typeof window !== "undefined";
@@ -113,6 +119,49 @@ export const store = {
     write(s);
   },
   reset: () => write(defaultStore()),
+
+  // --- Block results (append-only history) ---
+  getResults: () => read().results,
+  getResultsForBlock: (sessionId: string, blockId: string) =>
+    read().results.filter((r) => r.sessionId === sessionId && r.blockId === blockId),
+  getLastResultForBlock: (sessionId: string, blockId: string) => {
+    const list = read().results.filter(
+      (r) => r.sessionId === sessionId && r.blockId === blockId,
+    );
+    return list[list.length - 1];
+  },
+  /** Latest result for this blockId across any session (e.g. recurring lifts) */
+  getLastResultByBlockId: (blockId: string) => {
+    const list = read().results.filter((r) => r.blockId === blockId);
+    return list[list.length - 1];
+  },
+  appendResult: (result: BlockResult) => {
+    const s = read();
+    s.results = [...s.results, result];
+    // Clear matching draft
+    const dkey = `${result.sessionId}:${result.blockId}`;
+    const { [dkey]: _omit, ...rest } = s.drafts;
+    s.drafts = rest;
+    write(s);
+  },
+  getDraft: (sessionId: string, blockId: string) =>
+    read().drafts[`${sessionId}:${blockId}`],
+  saveDraft: (sessionId: string, blockId: string, draft: BlockResultDraft) => {
+    const s = read();
+    s.drafts = {
+      ...s.drafts,
+      [`${sessionId}:${blockId}`]: { ...draft, updatedAt: new Date().toISOString() },
+    };
+    write(s);
+  },
+  clearDraft: (sessionId: string, blockId: string) => {
+    const s = read();
+    const k = `${sessionId}:${blockId}`;
+    if (!s.drafts[k]) return;
+    const { [k]: _o, ...rest } = s.drafts;
+    s.drafts = rest;
+    write(s);
+  },
 };
 
 export const subscribeStore = (cb: () => void) => {
