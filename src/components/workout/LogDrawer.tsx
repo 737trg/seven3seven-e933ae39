@@ -36,14 +36,12 @@ function Field({
     <label className="block">
       <span className="block text-[10px] uppercase tracking-widest text-foreground-muted mb-1.5">
         {label}
+        {suffix && (
+          <span className="ml-1 text-foreground-muted/60">({suffix})</span>
+        )}
       </span>
       <span className="flex items-baseline gap-2 border-b border-border focus-within:border-bone transition-colors">
         {children}
-        {suffix && (
-          <span className="text-[10px] uppercase tracking-widest text-foreground-muted pb-1.5">
-            {suffix}
-          </span>
-        )}
       </span>
     </label>
   );
