@@ -9,10 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Athx2026RouteImport } from './routes/athx-2026'
 import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
 import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
+import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes.athx-2026'
 import { Route as MarketingProgrammesRouteImport } from './routes/_marketing.programmes'
 import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
 import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
@@ -24,9 +26,21 @@ import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppLearnRouteImport } from './routes/_app.learn'
 import { Route as AppCalculatorRouteImport } from './routes/_app.calculator'
 import { Route as WorkoutSessionIdDoneRouteImport } from './routes/workout.$sessionId.done'
+import { Route as MyProgrammesAthx2026TodayRouteImport } from './routes/my-programmes.athx-2026.today'
+import { Route as MyProgrammesAthx2026RaceRouteImport } from './routes/my-programmes.athx-2026.race'
+import { Route as MyProgrammesAthx2026ProgressRouteImport } from './routes/my-programmes.athx-2026.progress'
+import { Route as MyProgrammesAthx2026ProgrammeRouteImport } from './routes/my-programmes.athx-2026.programme'
+import { Route as MyProgrammesAthx2026ProfileRouteImport } from './routes/my-programmes.athx-2026.profile'
+import { Route as MyProgrammesAthx2026LearnRouteImport } from './routes/my-programmes.athx-2026.learn'
+import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-programmes.athx-2026.calculator'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 
+const Athx2026Route = Athx2026RouteImport.update({
+  id: '/athx-2026',
+  path: '/athx-2026',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketingRoute = MarketingRouteImport.update({
   id: '/_marketing',
   getParentRoute: () => rootRouteImport,
@@ -43,6 +57,11 @@ const MarketingIndexRoute = MarketingIndexRouteImport.update({
 const WorkoutSessionIdRoute = WorkoutSessionIdRouteImport.update({
   id: '/workout/$sessionId',
   path: '/workout/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyProgrammesAthx2026Route = MyProgrammesAthx2026RouteImport.update({
+  id: '/my-programmes/athx-2026',
+  path: '/my-programmes/athx-2026',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingProgrammesRoute = MarketingProgrammesRouteImport.update({
@@ -100,6 +119,48 @@ const WorkoutSessionIdDoneRoute = WorkoutSessionIdDoneRouteImport.update({
   path: '/done',
   getParentRoute: () => WorkoutSessionIdRoute,
 } as any)
+const MyProgrammesAthx2026TodayRoute =
+  MyProgrammesAthx2026TodayRouteImport.update({
+    id: '/today',
+    path: '/today',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
+const MyProgrammesAthx2026RaceRoute =
+  MyProgrammesAthx2026RaceRouteImport.update({
+    id: '/race',
+    path: '/race',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
+const MyProgrammesAthx2026ProgressRoute =
+  MyProgrammesAthx2026ProgressRouteImport.update({
+    id: '/progress',
+    path: '/progress',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
+const MyProgrammesAthx2026ProgrammeRoute =
+  MyProgrammesAthx2026ProgrammeRouteImport.update({
+    id: '/programme',
+    path: '/programme',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
+const MyProgrammesAthx2026ProfileRoute =
+  MyProgrammesAthx2026ProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
+const MyProgrammesAthx2026LearnRoute =
+  MyProgrammesAthx2026LearnRouteImport.update({
+    id: '/learn',
+    path: '/learn',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
+const MyProgrammesAthx2026CalculatorRoute =
+  MyProgrammesAthx2026CalculatorRouteImport.update({
+    id: '/calculator',
+    path: '/calculator',
+    getParentRoute: () => MyProgrammesAthx2026Route,
+  } as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
   id: '/w/$week',
   path: '/w/$week',
@@ -113,6 +174,7 @@ const AppProgrammeSSessionIdRoute = AppProgrammeSSessionIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
+  '/athx-2026': typeof Athx2026Route
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -123,13 +185,22 @@ export interface FileRoutesByFullPath {
   '/about': typeof MarketingAboutRoute
   '/apparel': typeof MarketingApparelRoute
   '/programmes': typeof MarketingProgrammesRoute
+  '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
+  '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
+  '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
+  '/my-programmes/athx-2026/programme': typeof MyProgrammesAthx2026ProgrammeRoute
+  '/my-programmes/athx-2026/progress': typeof MyProgrammesAthx2026ProgressRoute
+  '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
+  '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
 }
 export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
+  '/athx-2026': typeof Athx2026Route
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -140,7 +211,15 @@ export interface FileRoutesByTo {
   '/about': typeof MarketingAboutRoute
   '/apparel': typeof MarketingApparelRoute
   '/programmes': typeof MarketingProgrammesRoute
+  '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
+  '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
+  '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
+  '/my-programmes/athx-2026/programme': typeof MyProgrammesAthx2026ProgrammeRoute
+  '/my-programmes/athx-2026/progress': typeof MyProgrammesAthx2026ProgressRoute
+  '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
+  '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
@@ -149,6 +228,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
   '/_marketing': typeof MarketingRouteWithChildren
+  '/athx-2026': typeof Athx2026Route
   '/_app/calculator': typeof AppCalculatorRoute
   '/_app/learn': typeof AppLearnRoute
   '/_app/profile': typeof AppProfileRoute
@@ -159,8 +239,16 @@ export interface FileRoutesById {
   '/_marketing/about': typeof MarketingAboutRoute
   '/_marketing/apparel': typeof MarketingApparelRoute
   '/_marketing/programmes': typeof MarketingProgrammesRoute
+  '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
+  '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
+  '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
+  '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
+  '/my-programmes/athx-2026/programme': typeof MyProgrammesAthx2026ProgrammeRoute
+  '/my-programmes/athx-2026/progress': typeof MyProgrammesAthx2026ProgressRoute
+  '/my-programmes/athx-2026/race': typeof MyProgrammesAthx2026RaceRoute
+  '/my-programmes/athx-2026/today': typeof MyProgrammesAthx2026TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
@@ -169,6 +257,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/athx-2026'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -179,13 +268,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/apparel'
     | '/programmes'
+    | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/my-programmes/athx-2026/calculator'
+    | '/my-programmes/athx-2026/learn'
+    | '/my-programmes/athx-2026/profile'
+    | '/my-programmes/athx-2026/programme'
+    | '/my-programmes/athx-2026/progress'
+    | '/my-programmes/athx-2026/race'
+    | '/my-programmes/athx-2026/today'
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/athx-2026'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -196,7 +294,15 @@ export interface FileRouteTypes {
     | '/about'
     | '/apparel'
     | '/programmes'
+    | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/my-programmes/athx-2026/calculator'
+    | '/my-programmes/athx-2026/learn'
+    | '/my-programmes/athx-2026/profile'
+    | '/my-programmes/athx-2026/programme'
+    | '/my-programmes/athx-2026/progress'
+    | '/my-programmes/athx-2026/race'
+    | '/my-programmes/athx-2026/today'
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
@@ -204,6 +310,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_app'
     | '/_marketing'
+    | '/athx-2026'
     | '/_app/calculator'
     | '/_app/learn'
     | '/_app/profile'
@@ -214,8 +321,16 @@ export interface FileRouteTypes {
     | '/_marketing/about'
     | '/_marketing/apparel'
     | '/_marketing/programmes'
+    | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
+    | '/my-programmes/athx-2026/calculator'
+    | '/my-programmes/athx-2026/learn'
+    | '/my-programmes/athx-2026/profile'
+    | '/my-programmes/athx-2026/programme'
+    | '/my-programmes/athx-2026/progress'
+    | '/my-programmes/athx-2026/race'
+    | '/my-programmes/athx-2026/today'
     | '/workout/$sessionId/done'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
@@ -224,11 +339,20 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   MarketingRoute: typeof MarketingRouteWithChildren
+  Athx2026Route: typeof Athx2026Route
+  MyProgrammesAthx2026Route: typeof MyProgrammesAthx2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/athx-2026': {
+      id: '/athx-2026'
+      path: '/athx-2026'
+      fullPath: '/athx-2026'
+      preLoaderRoute: typeof Athx2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_marketing': {
       id: '/_marketing'
       path: ''
@@ -255,6 +379,13 @@ declare module '@tanstack/react-router' {
       path: '/workout/$sessionId'
       fullPath: '/workout/$sessionId'
       preLoaderRoute: typeof WorkoutSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/athx-2026': {
+      id: '/my-programmes/athx-2026'
+      path: '/my-programmes/athx-2026'
+      fullPath: '/my-programmes/athx-2026'
+      preLoaderRoute: typeof MyProgrammesAthx2026RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_marketing/programmes': {
@@ -334,6 +465,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkoutSessionIdDoneRouteImport
       parentRoute: typeof WorkoutSessionIdRoute
     }
+    '/my-programmes/athx-2026/today': {
+      id: '/my-programmes/athx-2026/today'
+      path: '/today'
+      fullPath: '/my-programmes/athx-2026/today'
+      preLoaderRoute: typeof MyProgrammesAthx2026TodayRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
+    '/my-programmes/athx-2026/race': {
+      id: '/my-programmes/athx-2026/race'
+      path: '/race'
+      fullPath: '/my-programmes/athx-2026/race'
+      preLoaderRoute: typeof MyProgrammesAthx2026RaceRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
+    '/my-programmes/athx-2026/progress': {
+      id: '/my-programmes/athx-2026/progress'
+      path: '/progress'
+      fullPath: '/my-programmes/athx-2026/progress'
+      preLoaderRoute: typeof MyProgrammesAthx2026ProgressRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
+    '/my-programmes/athx-2026/programme': {
+      id: '/my-programmes/athx-2026/programme'
+      path: '/programme'
+      fullPath: '/my-programmes/athx-2026/programme'
+      preLoaderRoute: typeof MyProgrammesAthx2026ProgrammeRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
+    '/my-programmes/athx-2026/profile': {
+      id: '/my-programmes/athx-2026/profile'
+      path: '/profile'
+      fullPath: '/my-programmes/athx-2026/profile'
+      preLoaderRoute: typeof MyProgrammesAthx2026ProfileRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
+    '/my-programmes/athx-2026/learn': {
+      id: '/my-programmes/athx-2026/learn'
+      path: '/learn'
+      fullPath: '/my-programmes/athx-2026/learn'
+      preLoaderRoute: typeof MyProgrammesAthx2026LearnRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
+    '/my-programmes/athx-2026/calculator': {
+      id: '/my-programmes/athx-2026/calculator'
+      path: '/calculator'
+      fullPath: '/my-programmes/athx-2026/calculator'
+      preLoaderRoute: typeof MyProgrammesAthx2026CalculatorRouteImport
+      parentRoute: typeof MyProgrammesAthx2026Route
+    }
     '/_app/programme/w/$week': {
       id: '/_app/programme/w/$week'
       path: '/w/$week'
@@ -405,6 +585,29 @@ const MarketingRouteWithChildren = MarketingRoute._addFileChildren(
   MarketingRouteChildren,
 )
 
+interface MyProgrammesAthx2026RouteChildren {
+  MyProgrammesAthx2026CalculatorRoute: typeof MyProgrammesAthx2026CalculatorRoute
+  MyProgrammesAthx2026LearnRoute: typeof MyProgrammesAthx2026LearnRoute
+  MyProgrammesAthx2026ProfileRoute: typeof MyProgrammesAthx2026ProfileRoute
+  MyProgrammesAthx2026ProgrammeRoute: typeof MyProgrammesAthx2026ProgrammeRoute
+  MyProgrammesAthx2026ProgressRoute: typeof MyProgrammesAthx2026ProgressRoute
+  MyProgrammesAthx2026RaceRoute: typeof MyProgrammesAthx2026RaceRoute
+  MyProgrammesAthx2026TodayRoute: typeof MyProgrammesAthx2026TodayRoute
+}
+
+const MyProgrammesAthx2026RouteChildren: MyProgrammesAthx2026RouteChildren = {
+  MyProgrammesAthx2026CalculatorRoute: MyProgrammesAthx2026CalculatorRoute,
+  MyProgrammesAthx2026LearnRoute: MyProgrammesAthx2026LearnRoute,
+  MyProgrammesAthx2026ProfileRoute: MyProgrammesAthx2026ProfileRoute,
+  MyProgrammesAthx2026ProgrammeRoute: MyProgrammesAthx2026ProgrammeRoute,
+  MyProgrammesAthx2026ProgressRoute: MyProgrammesAthx2026ProgressRoute,
+  MyProgrammesAthx2026RaceRoute: MyProgrammesAthx2026RaceRoute,
+  MyProgrammesAthx2026TodayRoute: MyProgrammesAthx2026TodayRoute,
+}
+
+const MyProgrammesAthx2026RouteWithChildren =
+  MyProgrammesAthx2026Route._addFileChildren(MyProgrammesAthx2026RouteChildren)
+
 interface WorkoutSessionIdRouteChildren {
   WorkoutSessionIdDoneRoute: typeof WorkoutSessionIdDoneRoute
 }
@@ -419,6 +622,8 @@ const WorkoutSessionIdRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   MarketingRoute: MarketingRouteWithChildren,
+  Athx2026Route: Athx2026Route,
+  MyProgrammesAthx2026Route: MyProgrammesAthx2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
