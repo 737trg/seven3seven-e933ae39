@@ -726,11 +726,11 @@ export function LogDrawer({
   const isMobile = useIsMobile();
   const side = isMobile ? "bottom" : "right";
   const kind = inferLogKind(block);
-  const todayISO = new Date().toISOString().slice(0, 10);
+  const sessionDateISO = session.date ?? new Date().toISOString().slice(0, 10);
   const last = store.getLastResultForExercise(block.title, {
     sessionId: session.id,
     blockId: block.id,
-    dateISO: todayISO,
+    dateISO: sessionDateISO,
   });
 
   const [state, setState] = useState<BlockResultDraft>(() => {
@@ -762,7 +762,7 @@ export function LogDrawer({
       sessionId: session.id,
       blockId: block.id,
       exercise: block.title,
-      dateISO: now.toISOString().slice(0, 10),
+      dateISO: sessionDateISO,
       createdAt: now.toISOString(),
       kind,
       prescribed: block.lines[0],
