@@ -29,12 +29,19 @@ export const Route = createFileRoute("/_marketing/about")({
 function AboutPage() {
   return (
     <>
-      {/* HERO */}
-      <section>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-36 pb-16 lg:pb-24 grid lg:grid-cols-12 gap-10">
-          <p className="eyebrow lg:col-span-2">About</p>
-          <div className="lg:col-span-10">
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.75rem,8vw,7rem)] max-w-[14ch]">
+      {/* HERO — cinematic */}
+      <section className="relative">
+        <div className="relative w-full h-[72svh] min-h-[480px] max-h-[780px] overflow-hidden">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover object-right"
+          />
+          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.35) 0%, rgba(8,8,8,0.4) 55%, rgba(8,8,8,0.95) 100%)"}} />
+          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-14 lg:pb-20">
+            <p className="eyebrow text-bone/70 mb-5">About</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.75rem,8vw,7rem)] max-w-[12ch]">
               Built for performance.
               <br />
               <span className="text-foreground-muted">Designed for life.</span>
