@@ -97,12 +97,15 @@ export type Database = {
           collection: Database["public"]["Enums"]["product_collection"]
           cover_image_url: string | null
           created_at: string
+          cta_label: string | null
           currency: string
           description: string | null
           difficulty: string | null
           duration_weeks: number | null
+          founding_price_cents: number | null
           hero_image_url: string | null
           id: string
+          meaning: string | null
           metadata: Json
           name: string
           price_cents: number | null
@@ -110,6 +113,7 @@ export type Database = {
           slug: string
           status: Database["public"]["Enums"]["product_status"]
           subtitle: string | null
+          tagline: string | null
           updated_at: string
         }
         Insert: {
@@ -117,12 +121,15 @@ export type Database = {
           collection: Database["public"]["Enums"]["product_collection"]
           cover_image_url?: string | null
           created_at?: string
+          cta_label?: string | null
           currency?: string
           description?: string | null
           difficulty?: string | null
           duration_weeks?: number | null
+          founding_price_cents?: number | null
           hero_image_url?: string | null
           id?: string
+          meaning?: string | null
           metadata?: Json
           name: string
           price_cents?: number | null
@@ -130,6 +137,7 @@ export type Database = {
           slug: string
           status?: Database["public"]["Enums"]["product_status"]
           subtitle?: string | null
+          tagline?: string | null
           updated_at?: string
         }
         Update: {
@@ -137,12 +145,15 @@ export type Database = {
           collection?: Database["public"]["Enums"]["product_collection"]
           cover_image_url?: string | null
           created_at?: string
+          cta_label?: string | null
           currency?: string
           description?: string | null
           difficulty?: string | null
           duration_weeks?: number | null
+          founding_price_cents?: number | null
           hero_image_url?: string | null
           id?: string
+          meaning?: string | null
           metadata?: Json
           name?: string
           price_cents?: number | null
@@ -150,6 +161,7 @@ export type Database = {
           slug?: string
           status?: Database["public"]["Enums"]["product_status"]
           subtitle?: string | null
+          tagline?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -230,10 +242,12 @@ export type Database = {
           created_at: string
           id: string
           is_current: boolean
+          is_published: boolean
           manifest: Json
           notes: string | null
           pdf_path: string | null
           product_id: string
+          published_at: string | null
           released_at: string
           updated_at: string
           version: string
@@ -242,10 +256,12 @@ export type Database = {
           created_at?: string
           id?: string
           is_current?: boolean
+          is_published?: boolean
           manifest?: Json
           notes?: string | null
           pdf_path?: string | null
           product_id: string
+          published_at?: string | null
           released_at?: string
           updated_at?: string
           version: string
@@ -254,10 +270,12 @@ export type Database = {
           created_at?: string
           id?: string
           is_current?: boolean
+          is_published?: boolean
           manifest?: Json
           notes?: string | null
           pdf_path?: string | null
           product_id?: string
+          published_at?: string | null
           released_at?: string
           updated_at?: string
           version?: string
