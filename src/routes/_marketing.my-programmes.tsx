@@ -1,4 +1,5 @@
-import { createFileRoute, Link, useNavigate, useServerFn } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useSyncExternalStore, useState } from "react";
 import { ArrowRight, CalendarDays, Trophy, Activity } from "lucide-react";
 import { store, subscribeStore } from "@/lib/store";
