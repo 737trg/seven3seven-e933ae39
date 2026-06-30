@@ -4,6 +4,7 @@ import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import todayShot from "@/assets/athx-today.png.asset.json";
 import progShot from "@/assets/athx-programme.png.asset.json";
 import progressShot from "@/assets/athx-progress.png.asset.json";
+import { PUBLIC_PROGRAMMES, statusLabel } from "@/data/publicProgrammes";
 
 const SITE = "https://seven3seven.lovable.app";
 
@@ -126,11 +127,11 @@ function HomePage() {
         </div>
       </section>
 
-      {/* COLLECTIONS — image-led editorial rail */}
+      {/* PROGRAMMES — actual product cards */}
       <section className="border-t border-border/60">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-32 pb-10 lg:pb-12">
           <div className="grid lg:grid-cols-12 gap-10">
-            <p className="eyebrow lg:col-span-2">02 — Collections</p>
+            <p className="eyebrow lg:col-span-2">02 — Programmes</p>
             <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[20ch]">
               Built for a clear objective.
             </h2>
@@ -138,9 +139,9 @@ function HomePage() {
         </div>
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-            <CollectionPanel num="01" tag="Compete" copy="Event-focused preparation." focal="58% 35%" />
-            <CollectionPanel num="02" tag="Build" copy="Strength, endurance and hybrid development." focal="50% 50%" tone />
-            <CollectionPanel num="03" tag="Blueprint" copy="Foundations and return-to-training." focal="42% 65%" />
+            {PUBLIC_PROGRAMMES.slice(0, 3).map((p) => (
+              <ProgrammeCard key={p.slug} programme={p} />
+            ))}
           </div>
           <div className="mt-8 flex items-center justify-between">
             <p className="eyebrow text-foreground-muted">First programmes — in development</p>
@@ -272,37 +273,38 @@ function HomePage() {
   );
 }
 
-function CollectionPanel({ num, tag, copy, focal, tone }: { num: string; tag: string; copy: string; focal: string; tone?: boolean }) {
+function ProgrammeCard({ programme }: { programme: (typeof PUBLIC_PROGRAMMES)[number] }) {
   return (
     <Link
-      to="/programmes"
+      to="/programmes/$slug"
+      params={{ slug: programme.slug }}
       className="group relative block overflow-hidden aspect-[4/5] panel-dark ring-1 ring-border hover:ring-bone/40 transition-all"
     >
       <img
-        src={heroAsset.url}
-        alt=""
-        aria-hidden
-        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04] ${tone ? "grayscale opacity-55" : "opacity-70"}`}
-        style={{ objectPosition: focal }}
+        src={programme.image}
+        alt={programme.title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
         loading="lazy"
       />
       <div aria-hidden className="absolute inset-0 scrim-bottom" />
       <div className="relative z-10 h-full p-6 lg:p-7 flex flex-col">
         <div className="flex items-start justify-between">
-          <p className="eyebrow text-bone/80 tabular">{num}</p>
-          <p className="eyebrow text-bone/55">Coming soon</p>
+          <p className="eyebrow text-bone/80 tabular">{programme.num}</p>
+          <p className="eyebrow text-bone/55">{statusLabel(programme.status)}</p>
         </div>
         <div className="flex-1" />
         <div>
-          <h3 className="font-display font-bold text-bone tracking-[-0.025em] text-4xl lg:text-5xl group-hover:text-signal transition-colors">
-            {tag}
+          <p className="eyebrow text-bone/70 mb-3">{programme.collection}</p>
+          <h3 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-3xl lg:text-4xl group-hover:text-signal transition-colors">
+            {programme.title}
           </h3>
-          <p className="text-bone/75 text-sm mt-3 max-w-[28ch]">{copy}</p>
+          <p className="text-bone/75 text-sm mt-3 max-w-[28ch]">{programme.shortLine}</p>
         </div>
       </div>
     </Link>
   );
 }
+
 
 function ProductPanel({ eyebrow, title, copy, img, alt }: { eyebrow: string; title: string; copy: string; img: string; alt: string }) {
   return (
