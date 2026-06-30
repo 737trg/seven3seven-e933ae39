@@ -39,6 +39,7 @@ import { Route as MyProgrammesAthx2026ProgrammeRouteImport } from './routes/my-p
 import { Route as MyProgrammesAthx2026ProfileRouteImport } from './routes/my-programmes.athx-2026.profile'
 import { Route as MyProgrammesAthx2026LearnRouteImport } from './routes/my-programmes.athx-2026.learn'
 import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-programmes.athx-2026.calculator'
+import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 
@@ -197,6 +198,11 @@ const MyProgrammesAthx2026CalculatorRoute =
     path: '/calculator',
     getParentRoute: () => MyProgrammesAthx2026Route,
   } as any)
+const MarketingProgrammesSlugRoute = MarketingProgrammesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => MarketingProgrammesRoute,
+} as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
   id: '/w/$week',
   path: '/w/$week',
@@ -224,11 +230,12 @@ export interface FileRoutesByFullPath {
   '/apparel': typeof MarketingApparelRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
-  '/programmes': typeof MarketingProgrammesRoute
+  '/programmes': typeof MarketingProgrammesRouteWithChildren
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -256,11 +263,12 @@ export interface FileRoutesByTo {
   '/apparel': typeof MarketingApparelRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
-  '/programmes': typeof MarketingProgrammesRoute
+  '/programmes': typeof MarketingProgrammesRouteWithChildren
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -290,12 +298,13 @@ export interface FileRoutesById {
   '/_marketing/apparel': typeof MarketingApparelRoute
   '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
   '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
-  '/_marketing/programmes': typeof MarketingProgrammesRoute
+  '/_marketing/programmes': typeof MarketingProgrammesRouteWithChildren
   '/_marketing/sign-in': typeof MarketingSignInRoute
   '/_marketing/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
+  '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -330,6 +339,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/programmes/$slug'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -362,6 +372,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/programmes/$slug'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -396,6 +407,7 @@ export interface FileRouteTypes {
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
+    | '/_marketing/programmes/$slug'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -629,6 +641,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesAthx2026CalculatorRouteImport
       parentRoute: typeof MyProgrammesAthx2026Route
     }
+    '/_marketing/programmes/$slug': {
+      id: '/_marketing/programmes/$slug'
+      path: '/$slug'
+      fullPath: '/programmes/$slug'
+      preLoaderRoute: typeof MarketingProgrammesSlugRouteImport
+      parentRoute: typeof MarketingProgrammesRoute
+    }
     '/_app/programme/w/$week': {
       id: '/_app/programme/w/$week'
       path: '/w/$week'
@@ -682,13 +701,24 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface MarketingProgrammesRouteChildren {
+  MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
+}
+
+const MarketingProgrammesRouteChildren: MarketingProgrammesRouteChildren = {
+  MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
+}
+
+const MarketingProgrammesRouteWithChildren =
+  MarketingProgrammesRoute._addFileChildren(MarketingProgrammesRouteChildren)
+
 interface MarketingRouteChildren {
   MarketingAboutRoute: typeof MarketingAboutRoute
   MarketingAccountRoute: typeof MarketingAccountRoute
   MarketingApparelRoute: typeof MarketingApparelRoute
   MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
   MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
-  MarketingProgrammesRoute: typeof MarketingProgrammesRoute
+  MarketingProgrammesRoute: typeof MarketingProgrammesRouteWithChildren
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
@@ -700,7 +730,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingApparelRoute: MarketingApparelRoute,
   MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
   MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
-  MarketingProgrammesRoute: MarketingProgrammesRoute,
+  MarketingProgrammesRoute: MarketingProgrammesRouteWithChildren,
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
