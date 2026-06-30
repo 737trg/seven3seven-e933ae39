@@ -13,6 +13,9 @@ import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
 import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
+import { Route as MarketingProgrammesRouteImport } from './routes/_marketing.programmes'
+import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
+import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
 import { Route as AppTodayRouteImport } from './routes/_app.today'
 import { Route as AppRaceRouteImport } from './routes/_app.race'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
@@ -41,6 +44,21 @@ const WorkoutSessionIdRoute = WorkoutSessionIdRouteImport.update({
   id: '/workout/$sessionId',
   path: '/workout/$sessionId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingProgrammesRoute = MarketingProgrammesRouteImport.update({
+  id: '/programmes',
+  path: '/programmes',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingApparelRoute = MarketingApparelRouteImport.update({
+  id: '/apparel',
+  path: '/apparel',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingAboutRoute = MarketingAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => MarketingRoute,
 } as any)
 const AppTodayRoute = AppTodayRouteImport.update({
   id: '/today',
@@ -102,6 +120,9 @@ export interface FileRoutesByFullPath {
   '/progress': typeof AppProgressRoute
   '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
+  '/about': typeof MarketingAboutRoute
+  '/apparel': typeof MarketingApparelRoute
+  '/programmes': typeof MarketingProgrammesRoute
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -116,6 +137,9 @@ export interface FileRoutesByTo {
   '/progress': typeof AppProgressRoute
   '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
+  '/about': typeof MarketingAboutRoute
+  '/apparel': typeof MarketingApparelRoute
+  '/programmes': typeof MarketingProgrammesRoute
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -132,6 +156,9 @@ export interface FileRoutesById {
   '/_app/progress': typeof AppProgressRoute
   '/_app/race': typeof AppRaceRoute
   '/_app/today': typeof AppTodayRoute
+  '/_marketing/about': typeof MarketingAboutRoute
+  '/_marketing/apparel': typeof MarketingApparelRoute
+  '/_marketing/programmes': typeof MarketingProgrammesRoute
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
@@ -149,6 +176,9 @@ export interface FileRouteTypes {
     | '/progress'
     | '/race'
     | '/today'
+    | '/about'
+    | '/apparel'
+    | '/programmes'
     | '/workout/$sessionId'
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
@@ -163,6 +193,9 @@ export interface FileRouteTypes {
     | '/progress'
     | '/race'
     | '/today'
+    | '/about'
+    | '/apparel'
+    | '/programmes'
     | '/workout/$sessionId'
     | '/workout/$sessionId/done'
     | '/programme/s/$sessionId'
@@ -178,6 +211,9 @@ export interface FileRouteTypes {
     | '/_app/progress'
     | '/_app/race'
     | '/_app/today'
+    | '/_marketing/about'
+    | '/_marketing/apparel'
+    | '/_marketing/programmes'
     | '/workout/$sessionId'
     | '/_marketing/'
     | '/workout/$sessionId/done'
@@ -220,6 +256,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/workout/$sessionId'
       preLoaderRoute: typeof WorkoutSessionIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_marketing/programmes': {
+      id: '/_marketing/programmes'
+      path: '/programmes'
+      fullPath: '/programmes'
+      preLoaderRoute: typeof MarketingProgrammesRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/apparel': {
+      id: '/_marketing/apparel'
+      path: '/apparel'
+      fullPath: '/apparel'
+      preLoaderRoute: typeof MarketingApparelRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/about': {
+      id: '/_marketing/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof MarketingAboutRouteImport
+      parentRoute: typeof MarketingRoute
     }
     '/_app/today': {
       id: '/_app/today'
@@ -331,10 +388,16 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface MarketingRouteChildren {
+  MarketingAboutRoute: typeof MarketingAboutRoute
+  MarketingApparelRoute: typeof MarketingApparelRoute
+  MarketingProgrammesRoute: typeof MarketingProgrammesRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
 }
 
 const MarketingRouteChildren: MarketingRouteChildren = {
+  MarketingAboutRoute: MarketingAboutRoute,
+  MarketingApparelRoute: MarketingApparelRoute,
+  MarketingProgrammesRoute: MarketingProgrammesRoute,
   MarketingIndexRoute: MarketingIndexRoute,
 }
 
