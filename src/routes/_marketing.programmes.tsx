@@ -41,85 +41,71 @@ export const Route = createFileRoute("/_marketing/programmes")({
 function ProgrammesPage() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div
-          aria-hidden
-          className="absolute inset-0 grain"
-          style={{
-            background:
-              "radial-gradient(ellipse at 80% 30%, rgba(216,41,50,0.16), transparent 55%), linear-gradient(180deg, #080808 0%, #0c0c0c 100%)",
-          }}
-        />
-        <div className="relative max-w-[1280px] mx-auto px-5 lg:px-10 pt-16 pb-20 lg:pt-24 lg:pb-28">
-          <p className="eyebrow mb-6 text-signal">Programmes</p>
-          <h1 className="font-display font-bold text-bone leading-[0.95] tracking-tight text-[clamp(2.5rem,7vw,5.5rem)]">
-            BUILT FOR
-            <br />
-            A CLEAR OBJECTIVE.
-          </h1>
-          <p className="text-foreground-muted text-base md:text-lg mt-8 max-w-[58ch] leading-relaxed">
-            Structured training designed to develop strength, endurance and the ability to perform when it matters.
-            Buy once. Follow interactively. Keep the PDF.
-          </p>
-        </div>
-      </section>
-
-      {/* COLLECTIONS */}
-      <section className="border-b border-border">
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
-          <div className="grid md:grid-cols-3 gap-5">
-            <CollectionCard
-              tag="Compete"
-              title="Event-focused preparation"
-              copy="Training built around a specific event, date or target."
-            />
-            <CollectionCard
-              tag="Build"
-              title="Structured strength + engine"
-              copy="Progressive strength, endurance and hybrid development."
-            />
-            <CollectionCard
-              tag="Blueprint"
-              title="Foundations + return-to-training"
-              copy="Clear foundations for athletes beginning, rebuilding or returning to structured training."
-            />
+      {/* HERO — editorial */}
+      <section>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-36 pb-16 lg:pb-24 grid lg:grid-cols-12 gap-10">
+          <p className="eyebrow lg:col-span-2">Programmes</p>
+          <div className="lg:col-span-10">
+            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.75rem,8vw,7rem)] max-w-[14ch]">
+              Built for a clear objective.
+            </h1>
+            <p className="text-foreground-muted text-base md:text-lg mt-10 max-w-[52ch] leading-relaxed">
+              Structured training to develop strength, endurance and the ability to perform when it matters.
+              Buy once. Follow interactively. Keep the PDF.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* COMING SOON */}
-      <section className="border-b border-border">
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 py-20 text-center">
-          <p className="eyebrow text-signal mb-4">Catalogue status</p>
-          <h2 className="font-display font-bold text-bone text-3xl md:text-5xl tracking-tight">
-            PROGRAMMES COMING SOON.
-          </h2>
-          <p className="text-foreground-muted text-sm mt-6 max-w-[52ch] mx-auto leading-relaxed">
-            The first SEVEN3SEVEN programmes are currently being built and tested.
-            Every programme will be released when it is ready to be followed properly.
-          </p>
-          <Link
-            to="/about"
-            className="mt-10 inline-flex items-center gap-2 h-12 px-6 border border-border text-bone font-display uppercase text-xs tracking-[0.18em] hover:border-bone transition-colors rounded-[2px]"
-          >
-            Read our approach <ArrowRight className="h-4 w-4" />
-          </Link>
+      {/* COLLECTIONS — editorial rows */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
+          <CollectionRow num="01" tag="Compete" title="Event-focused preparation." copy="Training built around a specific event, date or target." />
+          <CollectionRow num="02" tag="Build" title="Strength + engine." copy="Progressive strength, endurance and hybrid development." />
+          <CollectionRow num="03" tag="Blueprint" title="Foundations + return." copy="For athletes beginning, rebuilding or returning to structured training." />
+        </div>
+      </section>
+
+      {/* RELEASE — minimal */}
+      <section className="border-t border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-end">
+          <div className="lg:col-span-8">
+            <p className="eyebrow mb-6">Release</p>
+            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[18ch]">
+              The first programmes are coming.
+            </h2>
+            <p className="text-foreground-muted text-sm md:text-base mt-6 max-w-[52ch]">
+              Released when ready to be followed properly. No filler.
+            </p>
+          </div>
+          <div className="lg:col-span-4 lg:text-right">
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone/40 hover:border-bone transition-colors"
+            >
+              Our approach <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
       </section>
     </>
   );
 }
 
-function CollectionCard({ tag, title, copy }: { tag: string; title: string; copy: string }) {
+function CollectionRow({ num, tag, title, copy }: { num: string; tag: string; title: string; copy: string }) {
   return (
-    <article className="border border-border bg-surface/30 p-7 lg:p-9 rounded-[2px] min-h-[260px] flex flex-col">
-      <p className="eyebrow text-signal mb-5">{tag}</p>
-      <h3 className="font-display font-bold text-bone text-2xl lg:text-3xl tracking-tight leading-[1.05]">
+    <div className="grid grid-cols-12 gap-4 lg:gap-10 items-baseline border-b border-border/60 py-10 lg:py-14 group">
+      <span className="col-span-2 lg:col-span-1 eyebrow text-foreground-muted tabular">{num}</span>
+      <div className="col-span-10 lg:col-span-2">
+        <p className="eyebrow text-bone">{tag}</p>
+      </div>
+      <h3 className="col-start-3 lg:col-start-auto col-span-10 lg:col-span-5 font-display font-bold text-bone tracking-[-0.02em] text-3xl md:text-5xl lg:text-6xl group-hover:text-signal transition-colors">
         {title}
       </h3>
-      <p className="text-foreground-muted text-sm mt-4 leading-relaxed">{copy}</p>
-      <p className="eyebrow mt-auto pt-6">Coming soon</p>
-    </article>
+      <p className="col-start-3 lg:col-start-auto col-span-10 lg:col-span-3 text-foreground-muted text-sm md:text-base max-w-[40ch]">
+        {copy}
+      </p>
+      <span className="hidden lg:block col-span-1 eyebrow text-right text-foreground-muted">Soon</span>
+    </div>
   );
 }

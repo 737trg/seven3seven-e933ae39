@@ -4,15 +4,15 @@ import { Seven3SevenLogo } from "./Seven3SevenLogo";
 
 export function MarketingFooter() {
   return (
-    <footer className="border-t border-border bg-background mt-24">
-      <div className="max-w-[1280px] mx-auto px-5 lg:px-10 py-14">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 lg:gap-10">
-          <div className="col-span-2 md:col-span-2">
-            <Seven3SevenLogo height={28} />
-            <p className="text-foreground-muted text-xs mt-5 max-w-[24ch]">
+    <footer className="border-t border-border/60 bg-background mt-24">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-10">
+          <div className="col-span-2 md:col-span-5">
+            <Seven3SevenLogo height={24} />
+            <p className="text-foreground-muted text-sm mt-6 max-w-[34ch] leading-relaxed">
               Hybrid fitness and performance programmes. Built to be followed.
             </p>
-            <div className="mt-6 flex items-center gap-3 text-foreground-muted">
+            <div className="mt-8 flex items-center gap-4 text-foreground-muted">
               <span aria-label="Instagram (coming soon)" title="Coming soon">
                 <Instagram className="h-4 w-4" strokeWidth={1.5} />
               </span>
@@ -37,21 +37,14 @@ export function MarketingFooter() {
 
           <FooterCol title="Support">
             <FooterLink to="/about">Contact</FooterLink>
-            <span className="text-foreground-muted text-xs">Terms — coming soon</span>
-            <span className="text-foreground-muted text-xs">Privacy — coming soon</span>
-          </FooterCol>
-
-          <FooterCol title="Train with purpose.">
-            <p className="text-foreground-muted text-xs">
-              Early access notifications launch with the first programmes.
-            </p>
-            <p className="eyebrow mt-2 text-signal">Early access coming soon</p>
+            <span className="text-foreground-muted text-xs">Terms — soon</span>
+            <span className="text-foreground-muted text-xs">Privacy — soon</span>
           </FooterCol>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-border flex flex-col md:flex-row justify-between gap-2 text-[10px] uppercase tracking-widest text-foreground-muted">
+        <div className="mt-16 pt-6 border-t border-border/60 flex flex-col md:flex-row justify-between gap-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
           <span>© {new Date().getFullYear()} SEVEN3SEVEN. All rights reserved.</span>
-          <span>Built for performance. Designed for life.</span>
+          <span>Built for performance.</span>
         </div>
       </div>
     </footer>
