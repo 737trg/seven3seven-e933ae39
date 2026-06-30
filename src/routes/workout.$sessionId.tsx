@@ -46,6 +46,7 @@ function WorkoutPage() {
   const [elapsed, setElapsed] = useState(0);
   const [logOpen, setLogOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const startedAt = useRef<string>(new Date().toISOString());
   const restored = useRef(false);
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -54,8 +55,12 @@ function WorkoutPage() {
   const resultsTick = useSyncExternalStore(
     subscribeStore,
     () => store.getResults().length,
-    () => store.getResults().length,
+    () => 0,
   );
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (paused) return;
@@ -97,12 +102,15 @@ function WorkoutPage() {
 
   // Latest result for this block (any session) and today's saved result (if any).
   const todayISO = new Date().toISOString().slice(0, 10);
-  const lastResult = store.getLastResultForExercise(block.title, {
-    sessionId: s.id,
-    blockId: block.id,
-    dateISO: todayISO,
-  });
+  const lastResult = hydrated
+    ? store.getLastResultForExercise(block.title, {
+        sessionId: s.id,
+        blockId: block.id,
+        dateISO: todayISO,
+      })
+    : undefined;
   const todaysResult = (() => {
+    if (!hydrated) return undefined;
     const list = store
       .getResultsForBlock(s.id, block.id)
       .filter((r) => r.dateISO === todayISO);
