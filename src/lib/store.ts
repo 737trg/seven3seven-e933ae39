@@ -36,20 +36,35 @@ const defaultStore = (): Store => ({
 
 const isBrowser = () => typeof window !== "undefined";
 
+let cache: Store | null = null;
+
 const read = (): Store => {
-  if (!isBrowser()) return defaultStore();
+  if (cache) return cache;
+  if (!isBrowser()) {
+    cache = defaultStore();
+    return cache;
+  }
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (!raw) return defaultStore();
+    if (!raw) {
+      cache = defaultStore();
+      return cache;
+    }
     const parsed = JSON.parse(raw) as Store;
-    if (parsed.version !== STORAGE_VERSION) return defaultStore();
-    return { ...defaultStore(), ...parsed };
+    if (parsed.version !== STORAGE_VERSION) {
+      cache = defaultStore();
+      return cache;
+    }
+    cache = { ...defaultStore(), ...parsed };
+    return cache;
   } catch {
-    return defaultStore();
+    cache = defaultStore();
+    return cache;
   }
 };
 
 const write = (s: Store) => {
+  cache = s;
   if (!isBrowser()) return;
   window.localStorage.setItem(KEY, JSON.stringify(s));
   window.dispatchEvent(new CustomEvent("trg737:change"));
