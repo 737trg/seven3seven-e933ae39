@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
 import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
 import { Route as AppTodayRouteImport } from './routes/_app.today'
 import { Route as AppRaceRouteImport } from './routes/_app.race'
@@ -22,9 +24,18 @@ import { Route as WorkoutSessionIdDoneRouteImport } from './routes/workout.$sess
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 
+const MarketingRoute = MarketingRouteImport.update({
+  id: '/_marketing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingIndexRoute = MarketingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MarketingRoute,
 } as any)
 const WorkoutSessionIdRoute = WorkoutSessionIdRouteImport.update({
   id: '/workout/$sessionId',
@@ -83,7 +94,7 @@ const AppProgrammeSSessionIdRoute = AppProgrammeSSessionIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AppRouteWithChildren
+  '/': typeof MarketingIndexRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -97,7 +108,7 @@ export interface FileRoutesByFullPath {
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof AppRouteWithChildren
+  '/': typeof MarketingIndexRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -113,6 +124,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
+  '/_marketing': typeof MarketingRouteWithChildren
   '/_app/calculator': typeof AppCalculatorRoute
   '/_app/learn': typeof AppLearnRoute
   '/_app/profile': typeof AppProfileRoute
@@ -121,6 +133,7 @@ export interface FileRoutesById {
   '/_app/race': typeof AppRaceRoute
   '/_app/today': typeof AppTodayRoute
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/_marketing/': typeof MarketingIndexRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
@@ -157,6 +170,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_app'
+    | '/_marketing'
     | '/_app/calculator'
     | '/_app/learn'
     | '/_app/profile'
@@ -165,6 +179,7 @@ export interface FileRouteTypes {
     | '/_app/race'
     | '/_app/today'
     | '/workout/$sessionId'
+    | '/_marketing/'
     | '/workout/$sessionId/done'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
@@ -172,17 +187,32 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
+  MarketingRoute: typeof MarketingRouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_marketing': {
+      id: '/_marketing'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof MarketingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_marketing/': {
+      id: '/_marketing/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof MarketingIndexRouteImport
+      parentRoute: typeof MarketingRoute
     }
     '/workout/$sessionId': {
       id: '/workout/$sessionId'
@@ -300,6 +330,18 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface MarketingRouteChildren {
+  MarketingIndexRoute: typeof MarketingIndexRoute
+}
+
+const MarketingRouteChildren: MarketingRouteChildren = {
+  MarketingIndexRoute: MarketingIndexRoute,
+}
+
+const MarketingRouteWithChildren = MarketingRoute._addFileChildren(
+  MarketingRouteChildren,
+)
+
 interface WorkoutSessionIdRouteChildren {
   WorkoutSessionIdDoneRoute: typeof WorkoutSessionIdDoneRoute
 }
@@ -313,6 +355,7 @@ const WorkoutSessionIdRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
+  MarketingRoute: MarketingRouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
