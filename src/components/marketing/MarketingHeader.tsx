@@ -1,7 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, ShoppingBag, X, User } from "lucide-react";
+import { Menu, ShoppingBag, X, User, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Seven3SevenLogo } from "./Seven3SevenLogo";
+import { useAuth } from "@/lib/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { to: "/programmes", label: "Programmes" },
@@ -12,6 +14,7 @@ const NAV = [
 export function MarketingHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const { user, loading } = useAuth();
 
   return (
     <header className="sticky top-0 z-40 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/50">
@@ -43,19 +46,32 @@ export function MarketingHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-6 lg:justify-self-end">
-          <Link
-            to="/my-programmes"
-            className={`font-display uppercase text-[12px] tracking-[0.22em] transition-colors ${
-              pathname.startsWith("/my-programmes") ? "text-bone" : "text-foreground-muted hover:text-bone"
-            }`}
-          >
-            <span className="relative inline-block py-1">
-              My programmes
-              {pathname.startsWith("/my-programmes") && (
-                <span className="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-signal" />
-              )}
-            </span>
-          </Link>
+          {!loading && user ? (
+            <>
+              <Link
+                to="/my-programmes"
+                className={`font-display uppercase text-[12px] tracking-[0.22em] transition-colors ${
+                  pathname.startsWith("/my-programmes") ? "text-bone" : "text-foreground-muted hover:text-bone"
+                }`}
+              >
+                <span className="relative inline-block py-1">My programmes</span>
+              </Link>
+              <button
+                onClick={() => supabase.auth.signOut()}
+                aria-label="Sign out"
+                className="text-foreground-muted hover:text-bone"
+              >
+                <LogOut className="h-4 w-4" strokeWidth={1.5} />
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/sign-in"
+              className="font-display uppercase text-[12px] tracking-[0.22em] text-foreground-muted hover:text-bone"
+            >
+              Sign in
+            </Link>
+          )}
           <button
             type="button"
             aria-label="Bag (no products available yet)"
@@ -69,8 +85,8 @@ export function MarketingHeader() {
 
         <div className="lg:hidden flex items-center gap-2">
           <Link
-            to="/my-programmes"
-            aria-label="My programmes"
+            to={user ? "/my-programmes" : "/sign-in"}
+            aria-label={user ? "My programmes" : "Sign in"}
             className="h-10 w-10 inline-flex items-center justify-center text-bone"
           >
             <User className="h-5 w-5" strokeWidth={1.5} />
@@ -107,13 +123,17 @@ export function MarketingHeader() {
                 {n.label}
               </Link>
             ))}
-            <Link
-              to="/my-programmes"
-              onClick={() => setOpen(false)}
-              className="py-3 font-display uppercase text-sm tracking-[0.18em] text-bone"
-            >
-              My programmes
-            </Link>
+            {user ? (
+              <>
+                <Link to="/my-programmes" onClick={() => setOpen(false)} className="py-3 font-display uppercase text-sm tracking-[0.18em] text-bone border-b border-border">My programmes</Link>
+                <button onClick={() => { setOpen(false); supabase.auth.signOut(); }} className="py-3 text-left font-display uppercase text-sm tracking-[0.18em] text-foreground-muted">Sign out</button>
+              </>
+            ) : (
+              <>
+                <Link to="/sign-in" onClick={() => setOpen(false)} className="py-3 font-display uppercase text-sm tracking-[0.18em] text-bone border-b border-border">Sign in</Link>
+                <Link to="/sign-up" onClick={() => setOpen(false)} className="py-3 font-display uppercase text-sm tracking-[0.18em] text-bone">Create account</Link>
+              </>
+            )}
           </nav>
         </div>
       )}
