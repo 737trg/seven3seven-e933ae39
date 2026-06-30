@@ -3,19 +3,23 @@ import { Button } from "@/components/ui-prim/Button";
 import { Wordmark } from "@/components/shell/Wordmark";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/")({
+/**
+ * Preserved ATHX 2026 programme cover.
+ * This is the exact landing component that previously lived at "/".
+ * Behaviour, copy and layout are intentionally unchanged.
+ */
+export const Route = createFileRoute("/my-programmes/athx-2026")({
   head: () => ({
     meta: [
-      { title: "737 TRG — ATHX 2026 Hybrid Performance" },
-      { name: "description", content: "Seven-week hybrid performance programme built for ATHX Birmingham 2026. Strong. Fast. Capable." },
-      { property: "og:title", content: "737 TRG — ATHX 2026 Hybrid Performance" },
-      { property: "og:description", content: "Seven-week build. Race-week taper. Strength, endurance and conditioning." },
+      { title: "ATHX 2026 — 737 TRG" },
+      { name: "description", content: "ATHX 2026 — Nico's personalised programme cover." },
+      { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  component: Index,
+  component: AthxCover,
 });
 
-function Index() {
+function AthxCover() {
   return (
     <main className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* nav */}

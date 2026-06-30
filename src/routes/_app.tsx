@@ -4,6 +4,9 @@ import { BottomNav } from "@/components/shell/BottomNav";
 import { MobileHeader } from "@/components/shell/MobileHeader";
 
 export const Route = createFileRoute("/_app")({
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex, nofollow" }],
+  }),
   component: AppLayout,
 });
 

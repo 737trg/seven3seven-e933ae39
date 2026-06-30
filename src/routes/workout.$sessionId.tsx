@@ -25,6 +25,9 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/workout/$sessionId")({
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex, nofollow" }],
+  }),
   component: WorkoutRoute,
 });
 

@@ -5,6 +5,9 @@ import { formatClock } from "@/lib/programmeUtils";
 import { useState, useSyncExternalStore } from "react";
 
 export const Route = createFileRoute("/workout/$sessionId/done")({
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex, nofollow" }],
+  }),
   component: DonePage,
 });
 
