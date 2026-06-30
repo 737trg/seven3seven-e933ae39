@@ -102,19 +102,19 @@ function WorkoutPage() {
   const doneCount = Object.values(done).filter(Boolean).length;
 
   // Latest result for this block (any session) and today's saved result (if any).
-  const todayISO = new Date().toISOString().slice(0, 10);
+  const sessionDateISO = s.date ?? new Date().toISOString().slice(0, 10);
   const lastResult = hydrated
     ? store.getLastResultForExercise(block.title, {
         sessionId: s.id,
         blockId: block.id,
-        dateISO: todayISO,
+        dateISO: sessionDateISO,
       })
     : undefined;
   const todaysResult = (() => {
     if (!hydrated) return undefined;
     const list = store
       .getResultsForBlock(s.id, block.id)
-      .filter((r) => r.dateISO === todayISO);
+      .filter((r) => r.dateISO === sessionDateISO);
     return list[list.length - 1];
   })();
   // Use the underscored var to silence unused-warnings if any
