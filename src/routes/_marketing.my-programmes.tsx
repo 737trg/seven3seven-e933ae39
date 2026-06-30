@@ -68,7 +68,7 @@ function MyProgrammesPage() {
             src={heroAsset.url}
             alt=""
             aria-hidden
-            className="absolute inset-0 w-full h-full object-cover object-[40%_28%]"
+            className="absolute inset-0 w-full h-full object-cover object-[72%_28%]"
           />
           <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.98) 100%)"}} />
           <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-10 lg:pb-14">
