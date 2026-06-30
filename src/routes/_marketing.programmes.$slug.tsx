@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
-import { getPublicProgramme, PUBLIC_PROGRAMMES, statusLabel } from "@/data/publicProgrammes";
+import { getPublicProgramme, PUBLIC_PROGRAMMES, statusLabel, type PublicProgramme } from "@/data/publicProgrammes";
 
 const SITE = "https://seven3seven.lovable.app";
 
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/_marketing/programmes/$slug")({
 });
 
 function ProductPage() {
-  const { programme: p } = Route.useLoaderData();
+  const { programme: p } = Route.useLoaderData() as { programme: PublicProgramme };
   const [track, setTrack] = useState(p.tracks?.[0]?.id ?? "");
 
   const otherProgrammes = PUBLIC_PROGRAMMES.filter((x) => x.slug !== p.slug).slice(0, 3);
@@ -106,7 +106,7 @@ function ProductPage() {
           <div>
             <p className="eyebrow mb-6">What you'll do</p>
             <ul className="space-y-4">
-              {p.whatYoullDo.map((w) => (
+              {p.whatYoullDo.map((w: string) => (
                 <li key={w} className="flex items-start gap-4 border-b border-border/60 pb-4 font-display text-bone text-lg md:text-xl tracking-[-0.01em]">
                   <span className="tabular text-foreground-muted text-xs pt-1.5 w-6 shrink-0">{String(p.whatYoullDo.indexOf(w) + 1).padStart(2, "0")}</span>
                   <span>{w}</span>
@@ -117,7 +117,7 @@ function ProductPage() {
           <div>
             <p className="eyebrow mb-6">Best for</p>
             <ul className="space-y-5">
-              {p.bestFor.map((b) => (
+              {p.bestFor.map((b: string) => (
                 <li key={b} className="flex items-start gap-4 font-display text-bone text-lg md:text-xl tracking-[-0.01em] leading-snug">
                   <Check className="h-4 w-4 text-signal mt-1.5 shrink-0" />
                   <span>{b}</span>
@@ -134,7 +134,7 @@ function ProductPage() {
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
             <p className="eyebrow mb-6">Choose your track</p>
             <div className="grid md:grid-cols-2 gap-4 lg:gap-5">
-              {p.tracks.map((t) => {
+              {p.tracks.map((t: { id: string; label: string; description: string }) => {
                 const active = track === t.id;
                 return (
                   <button
