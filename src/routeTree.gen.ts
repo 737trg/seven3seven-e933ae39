@@ -15,6 +15,7 @@ import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
 import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
+import { Route as MyProgrammesSem8RouteImport } from './routes/my-programmes.sem-8'
 import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes.athx-2026'
 import { Route as MarketingSignUpRouteImport } from './routes/_marketing.sign-up'
 import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in'
@@ -70,6 +71,11 @@ const MarketingIndexRoute = MarketingIndexRouteImport.update({
 const WorkoutSessionIdRoute = WorkoutSessionIdRouteImport.update({
   id: '/workout/$sessionId',
   path: '/workout/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyProgrammesSem8Route = MyProgrammesSem8RouteImport.update({
+  id: '/my-programmes/sem-8',
+  path: '/my-programmes/sem-8',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MyProgrammesAthx2026Route = MyProgrammesAthx2026RouteImport.update({
@@ -241,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
+  '/my-programmes/sem-8': typeof MyProgrammesSem8Route
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
@@ -275,6 +282,7 @@ export interface FileRoutesByTo {
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
+  '/my-programmes/sem-8': typeof MyProgrammesSem8Route
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
@@ -311,6 +319,7 @@ export interface FileRoutesById {
   '/_marketing/sign-in': typeof MarketingSignInRoute
   '/_marketing/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
+  '/my-programmes/sem-8': typeof MyProgrammesSem8Route
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/my-programmes/athx-2026'
+    | '/my-programmes/sem-8'
     | '/workout/$sessionId'
     | '/programmes/$slug'
     | '/my-programmes/athx-2026/calculator'
@@ -382,6 +392,7 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/my-programmes/athx-2026'
+    | '/my-programmes/sem-8'
     | '/workout/$sessionId'
     | '/programmes/$slug'
     | '/my-programmes/athx-2026/calculator'
@@ -417,6 +428,7 @@ export interface FileRouteTypes {
     | '/_marketing/sign-in'
     | '/_marketing/sign-up'
     | '/my-programmes/athx-2026'
+    | '/my-programmes/sem-8'
     | '/workout/$sessionId'
     | '/_marketing/'
     | '/_marketing/programmes/$slug'
@@ -438,6 +450,7 @@ export interface RootRouteChildren {
   Athx2026Route: typeof Athx2026Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   MyProgrammesAthx2026Route: typeof MyProgrammesAthx2026RouteWithChildren
+  MyProgrammesSem8Route: typeof MyProgrammesSem8Route
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
 }
 
@@ -483,6 +496,13 @@ declare module '@tanstack/react-router' {
       path: '/workout/$sessionId'
       fullPath: '/workout/$sessionId'
       preLoaderRoute: typeof WorkoutSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/sem-8': {
+      id: '/my-programmes/sem-8'
+      path: '/my-programmes/sem-8'
+      fullPath: '/my-programmes/sem-8'
+      preLoaderRoute: typeof MyProgrammesSem8RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/my-programmes/athx-2026': {
@@ -801,6 +821,7 @@ const rootRouteChildren: RootRouteChildren = {
   Athx2026Route: Athx2026Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   MyProgrammesAthx2026Route: MyProgrammesAthx2026RouteWithChildren,
+  MyProgrammesSem8Route: MyProgrammesSem8Route,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
