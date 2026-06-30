@@ -63,7 +63,22 @@ function MyProgrammesPage() {
     <>
       {/* MASTHEAD — cinematic strip */}
       <section className="relative">
-        <div className="relative w-full h-[44svh] min-h-[300px] max-h-[520px] overflow-hidden">
+        {/* Mobile: full image + stacked text */}
+        <div className="md:hidden">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="block w-full h-auto object-contain bg-background"
+          />
+          <div className="px-10 pt-12 pb-10">
+            <p className="eyebrow text-bone/70 mb-4">{developmentUser.name} — Library</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.5rem,11vw,4rem)]">
+              My programmes.
+            </h1>
+          </div>
+        </div>
+        <div className="hidden md:block relative w-full h-[44svh] min-h-[300px] max-h-[520px] overflow-hidden">
           <img
             src={heroAsset.url}
             alt=""
