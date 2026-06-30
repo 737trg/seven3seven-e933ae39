@@ -138,3 +138,9 @@
     radial-gradient(ellipse at 30% 0%, rgba(227,45,59,0.06), transparent 55%),
     linear-gradient(180deg, #0d0d0d 0%, #0a0a0a 100%);
 }
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
