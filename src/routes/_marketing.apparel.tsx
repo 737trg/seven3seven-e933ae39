@@ -30,7 +30,22 @@ function ApparelPage() {
     <>
       {/* HERO — cinematic */}
       <section className="relative">
-        <div className="relative w-full h-[68svh] min-h-[460px] max-h-[720px] overflow-hidden">
+        {/* Mobile: full image + stacked text */}
+        <div className="md:hidden">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="block w-full h-auto object-contain bg-background"
+          />
+          <div className="px-10 pt-14 pb-16">
+            <p className="eyebrow text-bone/70 mb-4">Apparel · Drop 01 in preparation</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.9] text-[clamp(2.25rem,10vw,3.75rem)] max-w-[18ch]">
+              Built to train. <span className="text-foreground-muted">Designed to live in.</span>
+            </h1>
+          </div>
+        </div>
+        <div className="hidden md:block relative w-full h-[68svh] min-h-[460px] max-h-[720px] overflow-hidden">
           <img
             src={heroAsset.url}
             alt=""
