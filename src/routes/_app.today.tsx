@@ -209,20 +209,20 @@ function SessionHero({
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button
+          <Link
             to="/workout/$sessionId"
-            // @ts-expect-error params handled by Link wrapper not yet wired
             params={{ sessionId: session.id }}
-            variant="accent"
-            size="lg"
+            className="inline-flex items-center justify-center gap-2 h-14 px-7 text-sm font-display font-medium uppercase tracking-wide bg-signal text-bone hover:bg-signal/90 rounded-[4px]"
           >
             <Flame className="h-4 w-4" /> Start session
-          </Button>
-          <Button to="/programme/s/$sessionId" variant="outline" size="lg">
-            {/* @ts-expect-error */}
-            <span data-params={JSON.stringify({ sessionId: session.id })} />
+          </Link>
+          <Link
+            to="/programme/s/$sessionId"
+            params={{ sessionId: session.id }}
+            className="inline-flex items-center justify-center gap-2 h-14 px-7 text-sm font-display font-medium uppercase tracking-wide border border-bone/80 text-bone hover:bg-bone hover:text-obsidian rounded-[4px]"
+          >
             View detail <ArrowRight className="h-4 w-4" />
-          </Button>
+          </Link>
         </div>
       </div>
     </article>
