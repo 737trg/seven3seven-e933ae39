@@ -46,7 +46,25 @@ function ProgrammesPage() {
     <>
       {/* HERO — cinematic */}
       <section className="relative">
-        <div className="relative w-full h-[68svh] min-h-[460px] max-h-[760px] overflow-hidden">
+        {/* Mobile: full image + stacked text */}
+        <div className="md:hidden">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="block w-full h-auto object-contain bg-background"
+          />
+          <div className="px-10 pt-14 pb-16">
+            <p className="eyebrow text-bone/70 mb-5">Programmes</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.5rem,11vw,4rem)]">
+              Built for<br />a clear objective.
+            </h1>
+            <p className="text-bone/80 text-base mt-6 max-w-[42ch]">
+              Structured training for strength, endurance and performance.
+            </p>
+          </div>
+        </div>
+        <div className="hidden md:block relative w-full h-[68svh] min-h-[460px] max-h-[760px] overflow-hidden">
           <img
             src={heroAsset.url}
             alt=""
