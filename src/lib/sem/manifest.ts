@@ -90,11 +90,15 @@ export function findSession(id: string): { week: SemWeek; session: SemSession } 
 }
 
 export function coreSessions(): { week: SemWeek; session: SemSession; id: string }[] {
-  return allSessions().filter((x) => x.session.priority === "core");
+  return allSessions().filter((x) => String(x.session.priority).toLowerCase() === "core");
 }
 
 export function optionalSessions(): { week: SemWeek; session: SemSession; id: string }[] {
-  return allSessions().filter((x) => x.session.priority === "optional");
+  return allSessions().filter((x) => String(x.session.priority).toLowerCase() === "optional");
+}
+
+export function isCore(s: SemSession): boolean {
+  return String(s.priority).toLowerCase() === "core";
 }
 
 /** Counts as a defensive validation snapshot. */
