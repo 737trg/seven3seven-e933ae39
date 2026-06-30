@@ -5,15 +5,17 @@ import { Seven3SevenLogo } from "./Seven3SevenLogo";
 export function MarketingFooter() {
   return (
     <footer className="border-t border-border/60 bg-background mt-24">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-        {/* Brand row — wordmark scale */}
-        <div className="pb-12 lg:pb-16 border-b border-border/60">
-          <p className="font-display font-bold text-bone tracking-[-0.04em] leading-none text-[clamp(3rem,12vw,9rem)]">
+      {/* Centred closing wordmark band */}
+      <div className="border-b border-border/60">
+        <div className="max-w-[1600px] mx-auto px-8 lg:px-16 py-14 lg:py-20 flex justify-center">
+          <p className="font-display font-bold text-bone tracking-[-0.04em] leading-none text-center text-[clamp(2.5rem,11vw,8.5rem)]">
             SEVEN3SEVEN
           </p>
         </div>
+      </div>
 
-        <div className="pt-12 lg:pt-16 grid grid-cols-2 md:grid-cols-12 gap-y-12 gap-x-8 lg:gap-x-10">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-y-12 gap-x-8 lg:gap-x-10">
           {/* Brand statement */}
           <div className="col-span-2 md:col-span-4">
             <Seven3SevenLogo height={22} asLink={false} />
