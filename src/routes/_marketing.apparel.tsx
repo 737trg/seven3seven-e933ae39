@@ -30,20 +30,19 @@ function ApparelPage() {
     <>
       {/* HERO — cinematic */}
       <section className="relative">
-        <div className="relative w-full h-[78svh] min-h-[520px] max-h-[820px] overflow-hidden">
+        <div className="relative w-full h-[68svh] min-h-[460px] max-h-[720px] overflow-hidden">
           <img
             src={heroAsset.url}
             alt=""
             aria-hidden
-            className="absolute inset-0 w-full h-full object-cover object-[80%_30%] grayscale"
+            className="absolute inset-0 w-full h-full object-cover object-right grayscale"
           />
-          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.4) 50%, rgba(8,8,8,0.95) 100%)"}} />
-          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-14 lg:pb-20">
-            <p className="eyebrow text-bone/70 mb-5">Apparel · Drop 01 in preparation</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.75rem,8vw,7rem)] max-w-[12ch]">
-              Built to train.
-              <br />
-              <span className="text-foreground-muted">Designed to live in.</span>
+          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.5) 40%, rgba(8,8,8,0.92) 85%, #080808 100%)"}} />
+          <div aria-hidden className="absolute inset-y-0 left-0 w-1/2" style={{background:"linear-gradient(90deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.2) 100%)"}} />
+          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-12 lg:pb-16">
+            <p className="eyebrow text-bone/70 mb-4">Apparel · Drop 01 in preparation</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.9] text-[clamp(2.5rem,6vw,5.5rem)] max-w-[20ch]">
+              Built to train. <span className="text-foreground-muted">Designed to live in.</span>
             </h1>
           </div>
         </div>
