@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Athx2026RouteImport } from './routes/athx-2026'
 import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AppRouteImport } from './routes/_app'
@@ -41,6 +42,11 @@ import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Athx2026Route = Athx2026RouteImport.update({
   id: '/athx-2026',
   path: '/athx-2026',
@@ -205,6 +211,7 @@ const AppProgrammeSSessionIdRoute = AppProgrammeSSessionIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -236,6 +243,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -269,6 +277,7 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_marketing': typeof MarketingRouteWithChildren
   '/athx-2026': typeof Athx2026Route
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_app/calculator': typeof AppCalculatorRoute
   '/_app/learn': typeof AppLearnRoute
   '/_app/profile': typeof AppProfileRoute
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/athx-2026'
+    | '/sitemap.xml'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -334,6 +344,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/athx-2026'
+    | '/sitemap.xml'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -366,6 +377,7 @@ export interface FileRouteTypes {
     | '/_app'
     | '/_marketing'
     | '/athx-2026'
+    | '/sitemap.xml'
     | '/_app/calculator'
     | '/_app/learn'
     | '/_app/profile'
@@ -400,12 +412,20 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   MarketingRoute: typeof MarketingRouteWithChildren
   Athx2026Route: typeof Athx2026Route
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   MyProgrammesAthx2026Route: typeof MyProgrammesAthx2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/athx-2026': {
       id: '/athx-2026'
       path: '/athx-2026'
@@ -728,6 +748,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   MarketingRoute: MarketingRouteWithChildren,
   Athx2026Route: Athx2026Route,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   MyProgrammesAthx2026Route: MyProgrammesAthx2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
 }
