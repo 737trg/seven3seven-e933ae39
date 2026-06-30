@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { store } from "@/lib/store";
 import { PROGRAMME } from "@/data/programme";
@@ -726,7 +726,12 @@ export function LogDrawer({
   const isMobile = useIsMobile();
   const side = isMobile ? "bottom" : "right";
   const kind = inferLogKind(block);
-  const last = store.getLastResultByBlockId(block.id);
+  const sessionDateISO = session.date ?? new Date().toISOString().slice(0, 10);
+  const last = store.getLastResultForExercise(block.title, {
+    sessionId: session.id,
+    blockId: block.id,
+    dateISO: sessionDateISO,
+  });
 
   const [state, setState] = useState<BlockResultDraft>(() => {
     const draft = store.getDraft(session.id, block.id);
@@ -757,7 +762,7 @@ export function LogDrawer({
       sessionId: session.id,
       blockId: block.id,
       exercise: block.title,
-      dateISO: now.toISOString().slice(0, 10),
+      dateISO: sessionDateISO,
       createdAt: now.toISOString(),
       kind,
       prescribed: block.lines[0],
@@ -776,9 +781,12 @@ export function LogDrawer({
       <SheetContent side={side} className={sheetClass}>
         <header className="px-6 py-5 border-b border-border shrink-0">
           <p className="eyebrow text-foreground-muted">{kindLabel[kind]}</p>
-          <h3 className="font-display text-bone text-xl mt-1 leading-tight">
+          <SheetTitle className="font-display text-bone text-xl mt-1 leading-tight">
             {block.title}
-          </h3>
+          </SheetTitle>
+          <SheetDescription className="sr-only">
+            Log performance data for this workout block without leaving the active workout.
+          </SheetDescription>
           {last && (
             <p className="text-[11px] text-foreground-muted mt-3">
               <span className="uppercase tracking-widest">Last</span>{" "}

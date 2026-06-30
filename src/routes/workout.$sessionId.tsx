@@ -1,4 +1,11 @@
-import { createFileRoute, Link, useParams } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  useNavigate,
+  useParams,
+  useRouterState,
+} from "@tanstack/react-router";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { getSessionById } from "@/data/programme";
 import { ChevronLeft, ChevronRight, Pause, Play, X, Check } from "lucide-react";
@@ -18,11 +25,20 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/workout/$sessionId")({
-  component: WorkoutPage,
+  component: WorkoutRoute,
 });
+
+function WorkoutRoute() {
+  const isDoneRoute = useRouterState({
+    select: (state) => state.location.pathname.endsWith("/done"),
+  });
+
+  return isDoneRoute ? <Outlet /> : <WorkoutPage />;
+}
 
 function WorkoutPage() {
   const { sessionId } = useParams({ from: "/workout/$sessionId" });
+  const navigate = useNavigate();
   const s = getSessionById(sessionId);
   const [idx, setIdx] = useState(0);
   const [done, setDone] = useState<Record<string, boolean>>({});
@@ -30,21 +46,52 @@ function WorkoutPage() {
   const [elapsed, setElapsed] = useState(0);
   const [logOpen, setLogOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const startedAt = useRef<string>(new Date().toISOString());
+  const restored = useRef(false);
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Subscribe to store so newly-saved results re-render the summary line.
   const resultsTick = useSyncExternalStore(
     subscribeStore,
     () => store.getResults().length,
-    () => store.getResults().length,
+    () => 0,
   );
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setHydrated(true), 50);
+    return () => window.clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     if (paused) return;
     tick.current = setInterval(() => setElapsed((e) => e + 1), 1000);
     return () => { if (tick.current) clearInterval(tick.current); };
   }, [paused]);
+
+  useEffect(() => {
+    if (!s) return;
+    const savedWorkout = store.getWorkoutState(s.id);
+    if (savedWorkout) {
+      startedAt.current = savedWorkout.startedAt;
+      setIdx(Math.min(savedWorkout.currentBlockIndex, s.blocks.length - 1));
+      setDone(savedWorkout.done);
+      setElapsed(savedWorkout.elapsedSec);
+    }
+    restored.current = true;
+  }, [s]);
+
+  useEffect(() => {
+    if (!s || !restored.current) return;
+    store.saveWorkoutState({
+      sessionId: s.id,
+      startedAt: startedAt.current,
+      updatedAt: new Date().toISOString(),
+      currentBlockIndex: idx,
+      elapsedSec: elapsed,
+      done,
+    });
+  }, [s, idx, elapsed, done]);
 
   if (!s) {
     return <div className="min-h-screen flex items-center justify-center text-foreground-muted">Session not found.</div>;
@@ -55,12 +102,19 @@ function WorkoutPage() {
   const doneCount = Object.values(done).filter(Boolean).length;
 
   // Latest result for this block (any session) and today's saved result (if any).
-  const lastResult = store.getLastResultByBlockId(block.id);
+  const sessionDateISO = s.date ?? new Date().toISOString().slice(0, 10);
+  const lastResult = hydrated
+    ? store.getLastResultForExercise(block.title, {
+        sessionId: s.id,
+        blockId: block.id,
+        dateISO: sessionDateISO,
+      })
+    : undefined;
   const todaysResult = (() => {
-    const todayISO = new Date().toISOString().slice(0, 10);
+    if (!hydrated) return undefined;
     const list = store
       .getResultsForBlock(s.id, block.id)
-      .filter((r) => r.dateISO === todayISO);
+      .filter((r) => r.dateISO === sessionDateISO);
     return list[list.length - 1];
   })();
   // Use the underscored var to silence unused-warnings if any
@@ -95,6 +149,11 @@ function WorkoutPage() {
       completed: true,
       blocks: s.blocks.map((b) => ({ blockId: b.id, completed: !!done[b.id] })),
     });
+    store.clearWorkoutState(s.id);
+    void navigate({
+      to: "/workout/$sessionId/done",
+      params: { sessionId: s.id },
+    });
   };
 
   return (
@@ -113,7 +172,10 @@ function WorkoutPage() {
             <p className="eyebrow">{s.day} · Week {s.weekNumber === 8 ? "RW" : s.weekNumber}</p>
             <p className="font-display text-bone text-sm">{s.title}</p>
           </div>
-          <span className="tabular text-bone font-display text-lg w-20 text-right">
+          <span
+            suppressHydrationWarning
+            className="tabular text-bone font-display text-lg w-20 text-right"
+          >
             {formatClock(elapsed)}
           </span>
         </div>
@@ -234,14 +296,12 @@ function WorkoutPage() {
               Next <ChevronRight className="h-4 w-4" />
             </button>
           ) : (
-            <Link
-              to="/workout/$sessionId/done"
-              params={{ sessionId: s.id }}
+            <button
               onClick={finish}
               className="h-12 px-5 bg-signal text-bone font-display text-xs uppercase tracking-wide inline-flex items-center gap-2"
             >
               Finish
-            </Link>
+            </button>
           )}
         </div>
       </footer>

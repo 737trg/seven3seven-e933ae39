@@ -2,6 +2,7 @@ import type {
   Athlete,
   BlockResult,
   BlockResultDraft,
+  ActiveWorkoutState,
   PartnerSplit,
   RaceStrategy,
   Readiness,
@@ -22,6 +23,7 @@ interface Store {
   settings: { sound: boolean; vibration: boolean };
   results: BlockResult[];
   drafts: Record<string, BlockResultDraft>; // key = `${sessionId}:${blockId}`
+  workouts: Record<string, ActiveWorkoutState>;
 }
 
 const defaultStore = (): Store => ({
@@ -38,6 +40,7 @@ const defaultStore = (): Store => ({
   settings: { sound: true, vibration: true },
   results: [],
   drafts: {},
+  workouts: {},
 });
 
 const isBrowser = () => typeof window !== "undefined";
@@ -45,11 +48,8 @@ const isBrowser = () => typeof window !== "undefined";
 let cache: Store | null = null;
 
 const read = (): Store => {
+  if (!isBrowser()) return defaultStore();
   if (cache) return cache;
-  if (!isBrowser()) {
-    cache = defaultStore();
-    return cache;
-  }
   try {
     const raw = window.localStorage.getItem(KEY);
     if (!raw) {
@@ -135,6 +135,23 @@ export const store = {
     const list = read().results.filter((r) => r.blockId === blockId);
     return list[list.length - 1];
   },
+  getResultsForExercise: (exercise: string) =>
+    read().results.filter((r) => r.exercise.toLowerCase() === exercise.toLowerCase()),
+  getLastResultForExercise: (
+    exercise: string,
+    exclude?: { sessionId?: string; blockId?: string; dateISO?: string },
+  ) => {
+    const list = read().results.filter((r) => {
+      const sameExercise = r.exercise.toLowerCase() === exercise.toLowerCase();
+      const excluded =
+        exclude &&
+        r.sessionId === exclude.sessionId &&
+        r.blockId === exclude.blockId &&
+        (!exclude.dateISO || r.dateISO === exclude.dateISO);
+      return sameExercise && !excluded;
+    });
+    return list[list.length - 1];
+  },
   appendResult: (result: BlockResult) => {
     const s = read();
     s.results = [...s.results, result];
@@ -160,6 +177,21 @@ export const store = {
     if (!s.drafts[k]) return;
     const { [k]: _o, ...rest } = s.drafts;
     s.drafts = rest;
+    write(s);
+  },
+
+  // --- Active workout state (resume after refresh) ---
+  getWorkoutState: (sessionId: string) => read().workouts[sessionId],
+  saveWorkoutState: (state: ActiveWorkoutState) => {
+    const s = read();
+    s.workouts = { ...s.workouts, [state.sessionId]: state };
+    write(s);
+  },
+  clearWorkoutState: (sessionId: string) => {
+    const s = read();
+    if (!s.workouts[sessionId]) return;
+    const { [sessionId]: _omit, ...rest } = s.workouts;
+    s.workouts = rest;
     write(s);
   },
 };
