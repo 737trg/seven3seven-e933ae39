@@ -48,11 +48,8 @@ const isBrowser = () => typeof window !== "undefined";
 let cache: Store | null = null;
 
 const read = (): Store => {
+  if (!isBrowser()) return defaultStore();
   if (cache) return cache;
-  if (!isBrowser()) {
-    cache = defaultStore();
-    return cache;
-  }
   try {
     const raw = window.localStorage.getItem(KEY);
     if (!raw) {
