@@ -352,6 +352,59 @@ function StatStrip({ label, value }: { label: string; value: string }) {
   );
 }
 
+function SemReadyCard({ onStart }: { onStart: () => void }) {
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Compete · 02</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 8</h3>
+      <p className="text-foreground-muted text-sm mt-3 max-w-[44ch]">Strength. Endurance. MetCon. — eight-week competition preparation.</p>
+      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
+        <li>Status · <span className="text-bone">Ready to start</span></li>
+        <li>Format · <span className="text-bone">Individual / pairs</span></li>
+      </ul>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <button onClick={onStart} className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Start programme <ArrowRight className="h-3.5 w-3.5" />
+        </button>
+        <Link to="/my-programmes/sem-8" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+          View cover
+        </Link>
+      </div>
+    </article>
+  );
+}
+
+function SemActiveCard({ coreCompleted, coreTotal, optionalCompleted, optionalTotal }: { coreCompleted: number; coreTotal: number; optionalCompleted: number; optionalTotal: number }) {
+  const pct = Math.round((coreCompleted / Math.max(1, coreTotal)) * 100);
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Compete · 02</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 8</h3>
+      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
+        <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
+        <li>Optional <span className="text-bone tabular">{optionalCompleted}/{optionalTotal}</span></li>
+      </ul>
+      <div className="mt-8 max-w-md">
+        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
+          <span>Progress (core)</span>
+          <span className="text-bone tabular">{pct}%</span>
+        </div>
+        <div className="h-[2px] bg-surface-raised overflow-hidden">
+          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <Link to="/my-programmes/sem-8/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Continue training <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link to="/my-programmes/sem-8" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+          View cover
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 function Empty({ text }: { text: string }) {
   return (
     <div className="border-t border-border/60 pt-5">
