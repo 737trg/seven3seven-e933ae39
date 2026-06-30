@@ -69,7 +69,6 @@ function HomePage() {
             <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 scrim-bottom" />
           </div>
           <div className="px-6 pt-10 pb-16">
-            <p className="eyebrow text-bone/70 mb-4">Hybrid Fitness · Performance</p>
             <h1 className="font-display font-bold text-bone leading-[0.9] tracking-[-0.025em] text-[clamp(2.75rem,12vw,4.5rem)]">
               TRAIN FOR<br />WHAT'S NEXT.
             </h1>
@@ -81,9 +80,6 @@ function HomePage() {
                 Explore programmes <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-            <p className="mt-10 text-bone/50 font-display uppercase text-[10px] tracking-[0.28em]">
-              Strength · Endurance · Performance
-            </p>
           </div>
         </div>
 
@@ -107,13 +103,12 @@ function HomePage() {
             />
             <div aria-hidden className="absolute inset-x-0 bottom-0 h-48 scrim-bottom" />
 
-            <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-12">
+            <div className="relative z-10 h-full max-w-[1600px] mx-auto px-8 lg:px-12 grid grid-cols-12">
               <div className="col-span-8 lg:col-span-7 flex flex-col h-full justify-end pb-12 lg:pb-16">
-                <p className="eyebrow text-bone/70 mb-4">Hybrid Fitness · Performance</p>
                 <h1 className="font-display font-bold text-bone leading-[0.88] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6rem)] max-w-[11ch]">
                   TRAIN FOR<br />WHAT'S NEXT.
                 </h1>
-                <div className="mt-8 flex items-end justify-between gap-6 max-w-[36rem]">
+                <div className="mt-10 lg:mt-14 flex items-end gap-6 max-w-[36rem]">
                   <Link
                     to="/programmes"
                     className="group inline-flex items-center gap-3 text-bone font-display uppercase text-[12px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
@@ -121,14 +116,20 @@ function HomePage() {
                     Explore programmes
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </Link>
-                  <p className="hidden lg:block text-bone/55 font-display uppercase text-[10px] tracking-[0.32em]">
-                    Strength · Endurance · Performance
-                  </p>
                 </div>
               </div>
               <div className="col-span-4 lg:col-span-5" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* PILLAR STRIP */}
+      <section aria-label="Pillars" className="border-y border-border/60 bg-background">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-[60px] md:h-[72px] lg:h-[84px] grid grid-cols-3 items-center text-center">
+          <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.32em] text-bone/75">Strength</span>
+          <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.32em] text-bone/75">Endurance</span>
+          <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.32em] text-bone/75">Performance</span>
         </div>
       </section>
 
