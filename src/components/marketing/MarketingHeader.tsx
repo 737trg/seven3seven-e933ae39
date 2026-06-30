@@ -15,10 +15,12 @@ export function MarketingHeader() {
 
   return (
     <header className="sticky top-0 z-40 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/50">
-      <div className="max-w-[1440px] mx-auto flex items-center justify-between px-6 lg:px-12 h-16 lg:h-20">
-        <Seven3SevenLogo height={26} />
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-16 lg:h-20 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+        <div className="lg:justify-self-start">
+          <Seven3SevenLogo height={26} />
+        </div>
 
-        <nav className="hidden lg:flex items-center gap-10" aria-label="Primary">
+        <nav className="hidden lg:flex items-center gap-10 lg:justify-self-center" aria-label="Primary">
           {NAV.map((n) => {
             const active = pathname === n.to || pathname.startsWith(n.to + "/");
             return (
@@ -40,7 +42,7 @@ export function MarketingHeader() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6 lg:justify-self-end">
           <Link
             to="/my-programmes"
             className={`font-display uppercase text-[12px] tracking-[0.22em] transition-colors ${
