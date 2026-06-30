@@ -28,37 +28,26 @@ export const Route = createFileRoute("/_marketing/apparel")({
 function ApparelPage() {
   return (
     <>
-      {/* HERO — cinematic */}
+      {/* HERO — image first, text block below */}
       <section className="relative">
-        {/* Mobile: full image + stacked text */}
-        <div className="md:hidden">
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            className="block w-full h-auto object-contain bg-background"
-          />
-          <div className="px-10 pt-14 pb-16">
-            <p className="eyebrow text-bone/70 mb-4">Apparel · Drop 01 in preparation</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.9] text-[clamp(2.25rem,10vw,3.75rem)] max-w-[18ch]">
-              Built to train. <span className="text-foreground-muted">Designed to live in.</span>
+        <img
+          src={heroAsset.url}
+          alt=""
+          aria-hidden
+          className="block w-full h-auto bg-background select-none"
+          draggable={false}
+        />
+        <div className="bg-background">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-28 pb-14 md:pb-20 lg:pb-24">
+            <p className="eyebrow text-foreground-muted mb-6 md:mb-8">Apparel</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.9] text-[clamp(2.5rem,6.5vw,5.5rem)] max-w-[16ch]">
+              Built to train.<br />
+              <span className="text-foreground-muted">Designed to live in.</span>
             </h1>
-          </div>
-        </div>
-        <div className="hidden md:block relative w-full h-[68svh] min-h-[460px] max-h-[720px] overflow-hidden">
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 w-full h-full object-cover object-right grayscale"
-          />
-          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.5) 40%, rgba(8,8,8,0.92) 85%, #080808 100%)"}} />
-          <div aria-hidden className="absolute inset-y-0 left-0 w-1/2" style={{background:"linear-gradient(90deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.2) 100%)"}} />
-          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-12 lg:pb-16">
-            <p className="eyebrow text-bone/70 mb-4">Apparel · Drop 01 in preparation</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.9] text-[clamp(2.5rem,6vw,5.5rem)] max-w-[20ch]">
-              Built to train. <span className="text-foreground-muted">Designed to live in.</span>
-            </h1>
+            <p className="text-bone/80 text-base md:text-lg mt-6 md:mt-7 max-w-[52ch] leading-relaxed">
+              Performance-led apparel shaped by the same principles as the training.
+            </p>
+            <p className="eyebrow text-signal mt-8">Drop 01 — in preparation</p>
           </div>
         </div>
       </section>

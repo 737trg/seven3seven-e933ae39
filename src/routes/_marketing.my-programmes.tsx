@@ -61,36 +61,24 @@ function MyProgrammesPage() {
 
   return (
     <>
-      {/* MASTHEAD — cinematic strip */}
+      {/* MASTHEAD — image first, text block below */}
       <section className="relative">
-        {/* Mobile: full image + stacked text */}
-        <div className="md:hidden">
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            className="block w-full h-auto object-contain bg-background"
-          />
-          <div className="px-10 pt-12 pb-10">
-            <p className="eyebrow text-bone/70 mb-4">{developmentUser.name} — Library</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.5rem,11vw,4rem)]">
+        <img
+          src={heroAsset.url}
+          alt=""
+          aria-hidden
+          className="block w-full h-auto bg-background select-none"
+          draggable={false}
+        />
+        <div className="bg-background">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
+            <p className="eyebrow text-foreground-muted mb-6 md:mb-8">{developmentUser.name} — Library</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.9] text-[clamp(2.5rem,6.5vw,5rem)]">
               My programmes.
             </h1>
-          </div>
-        </div>
-        <div className="hidden md:block relative w-full h-[44svh] min-h-[300px] max-h-[520px] overflow-hidden">
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 w-full h-full object-cover object-right"
-          />
-          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.45) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.98) 100%)"}} />
-          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-10 lg:pb-14">
-            <p className="eyebrow text-bone/70 mb-4">{developmentUser.name} — Library</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.92] text-[clamp(2.5rem,7vw,5.5rem)]">
-              My programmes.
-            </h1>
+            <p className="text-bone/80 text-base md:text-lg mt-6 max-w-[52ch] leading-relaxed">
+              Your training. Your progress. All in one place.
+            </p>
           </div>
         </div>
 
