@@ -11,7 +11,17 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
 import { Route as AppTodayRouteImport } from './routes/_app.today'
+import { Route as AppRaceRouteImport } from './routes/_app.race'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppProgrammeRouteImport } from './routes/_app.programme'
+import { Route as AppProfileRouteImport } from './routes/_app.profile'
+import { Route as AppLearnRouteImport } from './routes/_app.learn'
+import { Route as AppCalculatorRouteImport } from './routes/_app.calculator'
+import { Route as WorkoutSessionIdDoneRouteImport } from './routes/workout.$sessionId.done'
+import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
+import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -22,37 +32,156 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkoutSessionIdRoute = WorkoutSessionIdRouteImport.update({
+  id: '/workout/$sessionId',
+  path: '/workout/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppTodayRoute = AppTodayRouteImport.update({
   id: '/today',
   path: '/today',
   getParentRoute: () => AppRoute,
 } as any)
+const AppRaceRoute = AppRaceRouteImport.update({
+  id: '/race',
+  path: '/race',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProgrammeRoute = AppProgrammeRouteImport.update({
+  id: '/programme',
+  path: '/programme',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearnRoute = AppLearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCalculatorRoute = AppCalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
+  getParentRoute: () => AppRoute,
+} as any)
+const WorkoutSessionIdDoneRoute = WorkoutSessionIdDoneRouteImport.update({
+  id: '/done',
+  path: '/done',
+  getParentRoute: () => WorkoutSessionIdRoute,
+} as any)
+const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
+  id: '/w/$week',
+  path: '/w/$week',
+  getParentRoute: () => AppProgrammeRoute,
+} as any)
+const AppProgrammeSSessionIdRoute = AppProgrammeSSessionIdRouteImport.update({
+  id: '/s/$sessionId',
+  path: '/s/$sessionId',
+  getParentRoute: () => AppProgrammeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/calculator': typeof AppCalculatorRoute
+  '/learn': typeof AppLearnRoute
+  '/profile': typeof AppProfileRoute
+  '/programme': typeof AppProgrammeRouteWithChildren
+  '/progress': typeof AppProgressRoute
+  '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
+  '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
+  '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
+  '/programme/w/$week': typeof AppProgrammeWWeekRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/calculator': typeof AppCalculatorRoute
+  '/learn': typeof AppLearnRoute
+  '/profile': typeof AppProfileRoute
+  '/programme': typeof AppProgrammeRouteWithChildren
+  '/progress': typeof AppProgressRoute
+  '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
+  '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
+  '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
+  '/programme/w/$week': typeof AppProgrammeWWeekRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/calculator': typeof AppCalculatorRoute
+  '/_app/learn': typeof AppLearnRoute
+  '/_app/profile': typeof AppProfileRoute
+  '/_app/programme': typeof AppProgrammeRouteWithChildren
+  '/_app/progress': typeof AppProgressRoute
+  '/_app/race': typeof AppRaceRoute
   '/_app/today': typeof AppTodayRoute
+  '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
+  '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
+  '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/today'
+  fullPaths:
+    | '/'
+    | '/calculator'
+    | '/learn'
+    | '/profile'
+    | '/programme'
+    | '/progress'
+    | '/race'
+    | '/today'
+    | '/workout/$sessionId'
+    | '/workout/$sessionId/done'
+    | '/programme/s/$sessionId'
+    | '/programme/w/$week'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/today'
-  id: '__root__' | '/' | '/_app' | '/_app/today'
+  to:
+    | '/'
+    | '/calculator'
+    | '/learn'
+    | '/profile'
+    | '/programme'
+    | '/progress'
+    | '/race'
+    | '/today'
+    | '/workout/$sessionId'
+    | '/workout/$sessionId/done'
+    | '/programme/s/$sessionId'
+    | '/programme/w/$week'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/calculator'
+    | '/_app/learn'
+    | '/_app/profile'
+    | '/_app/programme'
+    | '/_app/progress'
+    | '/_app/race'
+    | '/_app/today'
+    | '/workout/$sessionId'
+    | '/workout/$sessionId/done'
+    | '/_app/programme/s/$sessionId'
+    | '/_app/programme/w/$week'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -71,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/workout/$sessionId': {
+      id: '/workout/$sessionId'
+      path: '/workout/$sessionId'
+      fullPath: '/workout/$sessionId'
+      preLoaderRoute: typeof WorkoutSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app/today': {
       id: '/_app/today'
       path: '/today'
@@ -78,22 +214,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppTodayRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/race': {
+      id: '/_app/race'
+      path: '/race'
+      fullPath: '/race'
+      preLoaderRoute: typeof AppRaceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/programme': {
+      id: '/_app/programme'
+      path: '/programme'
+      fullPath: '/programme'
+      preLoaderRoute: typeof AppProgrammeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/learn': {
+      id: '/_app/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof AppLearnRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/calculator': {
+      id: '/_app/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof AppCalculatorRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/workout/$sessionId/done': {
+      id: '/workout/$sessionId/done'
+      path: '/done'
+      fullPath: '/workout/$sessionId/done'
+      preLoaderRoute: typeof WorkoutSessionIdDoneRouteImport
+      parentRoute: typeof WorkoutSessionIdRoute
+    }
+    '/_app/programme/w/$week': {
+      id: '/_app/programme/w/$week'
+      path: '/w/$week'
+      fullPath: '/programme/w/$week'
+      preLoaderRoute: typeof AppProgrammeWWeekRouteImport
+      parentRoute: typeof AppProgrammeRoute
+    }
+    '/_app/programme/s/$sessionId': {
+      id: '/_app/programme/s/$sessionId'
+      path: '/s/$sessionId'
+      fullPath: '/programme/s/$sessionId'
+      preLoaderRoute: typeof AppProgrammeSSessionIdRouteImport
+      parentRoute: typeof AppProgrammeRoute
+    }
   }
 }
 
+interface AppProgrammeRouteChildren {
+  AppProgrammeSSessionIdRoute: typeof AppProgrammeSSessionIdRoute
+  AppProgrammeWWeekRoute: typeof AppProgrammeWWeekRoute
+}
+
+const AppProgrammeRouteChildren: AppProgrammeRouteChildren = {
+  AppProgrammeSSessionIdRoute: AppProgrammeSSessionIdRoute,
+  AppProgrammeWWeekRoute: AppProgrammeWWeekRoute,
+}
+
+const AppProgrammeRouteWithChildren = AppProgrammeRoute._addFileChildren(
+  AppProgrammeRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppCalculatorRoute: typeof AppCalculatorRoute
+  AppLearnRoute: typeof AppLearnRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppProgrammeRoute: typeof AppProgrammeRouteWithChildren
+  AppProgressRoute: typeof AppProgressRoute
+  AppRaceRoute: typeof AppRaceRoute
   AppTodayRoute: typeof AppTodayRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCalculatorRoute: AppCalculatorRoute,
+  AppLearnRoute: AppLearnRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppProgrammeRoute: AppProgrammeRouteWithChildren,
+  AppProgressRoute: AppProgressRoute,
+  AppRaceRoute: AppRaceRoute,
   AppTodayRoute: AppTodayRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface WorkoutSessionIdRouteChildren {
+  WorkoutSessionIdDoneRoute: typeof WorkoutSessionIdDoneRoute
+}
+
+const WorkoutSessionIdRouteChildren: WorkoutSessionIdRouteChildren = {
+  WorkoutSessionIdDoneRoute: WorkoutSessionIdDoneRoute,
+}
+
+const WorkoutSessionIdRouteWithChildren =
+  WorkoutSessionIdRoute._addFileChildren(WorkoutSessionIdRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
