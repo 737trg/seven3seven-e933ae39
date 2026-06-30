@@ -44,40 +44,22 @@ export const Route = createFileRoute("/_marketing/programmes")({
 function ProgrammesPage() {
   return (
     <>
-      {/* HERO — cinematic */}
+      {/* HERO — image first, text block below */}
       <section className="relative">
-        {/* Mobile: full image + stacked text */}
-        <div className="md:hidden">
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            className="block w-full h-auto object-contain bg-background"
-          />
-          <div className="px-10 pt-14 pb-16">
-            <p className="eyebrow text-bone/70 mb-5">Programmes</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.5rem,11vw,4rem)]">
+        <img
+          src={heroAsset.url}
+          alt=""
+          aria-hidden
+          className="block w-full h-auto bg-background select-none"
+          draggable={false}
+        />
+        <div className="bg-background">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-28 pb-14 md:pb-20 lg:pb-24">
+            <p className="eyebrow text-foreground-muted mb-6 md:mb-8">Programmes</p>
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.5rem,7vw,5.5rem)] max-w-[14ch]">
               Built for<br />a clear objective.
             </h1>
-            <p className="text-bone/80 text-base mt-6 max-w-[42ch]">
-              Structured training for strength, endurance and performance.
-            </p>
-          </div>
-        </div>
-        <div className="hidden md:block relative w-full h-[68svh] min-h-[460px] max-h-[760px] overflow-hidden">
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 w-full h-full object-cover object-right"
-          />
-          <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(180deg, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.95) 100%)"}} />
-          <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col justify-end pb-14 lg:pb-20">
-            <p className="eyebrow text-bone/70 mb-5">Programmes</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.75rem,8vw,7rem)] max-w-[14ch]">
-              Built for<br />a clear objective.
-            </h1>
-            <p className="text-bone/80 text-base md:text-lg mt-8 max-w-[52ch] leading-relaxed">
+            <p className="text-bone/80 text-base md:text-lg mt-6 md:mt-7 max-w-[52ch] leading-relaxed">
               Structured training for strength, endurance and performance.
             </p>
           </div>
