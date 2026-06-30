@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Disallow: /my-programmes
+Disallow: /my-programmes/
+Disallow: /today
+Disallow: /programme
+Disallow: /programme/
+Disallow: /progress
+Disallow: /race
+Disallow: /calculator
+Disallow: /learn
+Disallow: /profile
+Disallow: /workout/
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /forgot-password
+Disallow: /account
+Disallow: /athx-2026
+
+Sitemap: https://seven3seven.lovable.app/sitemap.xml

@@ -15,8 +15,13 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing.index'
 import { Route as WorkoutSessionIdRouteImport } from './routes/workout.$sessionId'
 import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes.athx-2026'
+import { Route as MarketingSignUpRouteImport } from './routes/_marketing.sign-up'
+import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in'
 import { Route as MarketingProgrammesRouteImport } from './routes/_marketing.programmes'
+import { Route as MarketingMyProgrammesRouteImport } from './routes/_marketing.my-programmes'
+import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing.forgot-password'
 import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
+import { Route as MarketingAccountRouteImport } from './routes/_marketing.account'
 import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
 import { Route as AppTodayRouteImport } from './routes/_app.today'
 import { Route as AppRaceRouteImport } from './routes/_app.race'
@@ -64,14 +69,39 @@ const MyProgrammesAthx2026Route = MyProgrammesAthx2026RouteImport.update({
   path: '/my-programmes/athx-2026',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingSignUpRoute = MarketingSignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingSignInRoute = MarketingSignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const MarketingProgrammesRoute = MarketingProgrammesRouteImport.update({
   id: '/programmes',
   path: '/programmes',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingMyProgrammesRoute = MarketingMyProgrammesRouteImport.update({
+  id: '/my-programmes',
+  path: '/my-programmes',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingForgotPasswordRoute = MarketingForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const MarketingApparelRoute = MarketingApparelRouteImport.update({
   id: '/apparel',
   path: '/apparel',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingAccountRoute = MarketingAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => MarketingRoute,
 } as any)
 const MarketingAboutRoute = MarketingAboutRouteImport.update({
@@ -183,8 +213,13 @@ export interface FileRoutesByFullPath {
   '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
   '/about': typeof MarketingAboutRoute
+  '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
+  '/forgot-password': typeof MarketingForgotPasswordRoute
+  '/my-programmes': typeof MarketingMyProgrammesRoute
   '/programmes': typeof MarketingProgrammesRoute
+  '/sign-in': typeof MarketingSignInRoute
+  '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
@@ -209,8 +244,13 @@ export interface FileRoutesByTo {
   '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
   '/about': typeof MarketingAboutRoute
+  '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
+  '/forgot-password': typeof MarketingForgotPasswordRoute
+  '/my-programmes': typeof MarketingMyProgrammesRoute
   '/programmes': typeof MarketingProgrammesRoute
+  '/sign-in': typeof MarketingSignInRoute
+  '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
@@ -237,8 +277,13 @@ export interface FileRoutesById {
   '/_app/race': typeof AppRaceRoute
   '/_app/today': typeof AppTodayRoute
   '/_marketing/about': typeof MarketingAboutRoute
+  '/_marketing/account': typeof MarketingAccountRoute
   '/_marketing/apparel': typeof MarketingApparelRoute
+  '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
+  '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
   '/_marketing/programmes': typeof MarketingProgrammesRoute
+  '/_marketing/sign-in': typeof MarketingSignInRoute
+  '/_marketing/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
@@ -266,8 +311,13 @@ export interface FileRouteTypes {
     | '/race'
     | '/today'
     | '/about'
+    | '/account'
     | '/apparel'
+    | '/forgot-password'
+    | '/my-programmes'
     | '/programmes'
+    | '/sign-in'
+    | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/my-programmes/athx-2026/calculator'
@@ -292,8 +342,13 @@ export interface FileRouteTypes {
     | '/race'
     | '/today'
     | '/about'
+    | '/account'
     | '/apparel'
+    | '/forgot-password'
+    | '/my-programmes'
     | '/programmes'
+    | '/sign-in'
+    | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/my-programmes/athx-2026/calculator'
@@ -319,8 +374,13 @@ export interface FileRouteTypes {
     | '/_app/race'
     | '/_app/today'
     | '/_marketing/about'
+    | '/_marketing/account'
     | '/_marketing/apparel'
+    | '/_marketing/forgot-password'
+    | '/_marketing/my-programmes'
     | '/_marketing/programmes'
+    | '/_marketing/sign-in'
+    | '/_marketing/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
@@ -388,6 +448,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesAthx2026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_marketing/sign-up': {
+      id: '/_marketing/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof MarketingSignUpRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/sign-in': {
+      id: '/_marketing/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof MarketingSignInRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/programmes': {
       id: '/_marketing/programmes'
       path: '/programmes'
@@ -395,11 +469,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingProgrammesRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/my-programmes': {
+      id: '/_marketing/my-programmes'
+      path: '/my-programmes'
+      fullPath: '/my-programmes'
+      preLoaderRoute: typeof MarketingMyProgrammesRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/forgot-password': {
+      id: '/_marketing/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof MarketingForgotPasswordRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/apparel': {
       id: '/_marketing/apparel'
       path: '/apparel'
       fullPath: '/apparel'
       preLoaderRoute: typeof MarketingApparelRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/account': {
+      id: '/_marketing/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof MarketingAccountRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_marketing/about': {
@@ -569,15 +664,25 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface MarketingRouteChildren {
   MarketingAboutRoute: typeof MarketingAboutRoute
+  MarketingAccountRoute: typeof MarketingAccountRoute
   MarketingApparelRoute: typeof MarketingApparelRoute
+  MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
+  MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
   MarketingProgrammesRoute: typeof MarketingProgrammesRoute
+  MarketingSignInRoute: typeof MarketingSignInRoute
+  MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
 }
 
 const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingAboutRoute: MarketingAboutRoute,
+  MarketingAccountRoute: MarketingAccountRoute,
   MarketingApparelRoute: MarketingApparelRoute,
+  MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
+  MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
   MarketingProgrammesRoute: MarketingProgrammesRoute,
+  MarketingSignInRoute: MarketingSignInRoute,
+  MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
 }
 
