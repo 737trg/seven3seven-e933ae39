@@ -59,7 +59,8 @@ function WorkoutPage() {
   );
 
   useEffect(() => {
-    setHydrated(true);
+    const id = window.setTimeout(() => setHydrated(true), 50);
+    return () => window.clearTimeout(id);
   }, []);
 
   useEffect(() => {
