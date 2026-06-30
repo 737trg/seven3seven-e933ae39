@@ -128,8 +128,28 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AuthSync />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );
+}
+
+function AuthSync() {
+  const router = useRouter();
+  const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    // Lazy import to avoid SSR touching localStorage
+    let unsub: (() => void) | undefined;
+    import("@/integrations/supabase/client").then(({ supabase }) => {
+      const { data } = supabase.auth.onAuthStateChange((event) => {
+        if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+        router.invalidate();
+        if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+      });
+      unsub = () => data.subscription.unsubscribe();
+    });
+    return () => { unsub?.(); };
+  }, [router, queryClient]);
+  return null;
 }
