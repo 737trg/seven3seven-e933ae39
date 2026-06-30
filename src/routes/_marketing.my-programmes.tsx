@@ -9,6 +9,9 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { claimOwner } from "@/lib/owner.functions";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
+import { semStore, useSemStarted } from "@/lib/sem/store";
+import { useSemProgress } from "@/lib/sem/progress";
+import { validationCounts as semCounts } from "@/lib/sem/manifest";
 
 const OWNER_EMAIL = "jamesnichol9@gmail.com";
 
@@ -32,6 +35,8 @@ function MyProgrammesPage() {
   const results = useStore(store.getResults);
   const { user, loading: authLoading } = useAuth();
   const { items: entitled, loading: entLoading } = useEntitlements(user?.id);
+  const semStarted = useSemStarted();
+  const semProg = useSemProgress(user?.id);
   const navigate = useNavigate();
   const claim = useServerFn(claimOwner);
   const [claiming, setClaiming] = useState(false);
@@ -54,6 +59,7 @@ function MyProgrammesPage() {
   }
 
   const owns = entitled.some((e) => e.slug === "athx-2026");
+  const ownsSem = entitled.some((e) => e.slug === "sem-8");
   const isOwnerEmail = (user?.email ?? "").toLowerCase() === OWNER_EMAIL;
   const needsClaim = isOwnerEmail && !entLoading && entitled.length === 0;
 
@@ -181,7 +187,26 @@ function MyProgrammesPage() {
             ) : (
               <Empty text="No active programmes" />
             )}
+
+            {/* S.E.M. 8 — Ready to start OR Active (when started) */}
+            {ownsSem && semStarted.started && (
+              <div className="mt-10">
+                <SemActiveCard
+                  coreCompleted={semProg.coreCompleted}
+                  coreTotal={semCounts().core}
+                  optionalCompleted={semProg.optionalCompleted}
+                  optionalTotal={semCounts().optional}
+                />
+              </div>
+            )}
           </div>
+
+          {ownsSem && !semStarted.started && (
+            <div>
+              <p className="eyebrow mb-4">Ready to start</p>
+              <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-8/today" }); }} />
+            </div>
+          )}
 
           {/* UPCOMING */}
           <div>
@@ -324,6 +349,59 @@ function StatStrip({ label, value }: { label: string; value: string }) {
       <p className="eyebrow text-foreground-muted">{label}</p>
       <p className="font-display text-bone text-3xl md:text-4xl tracking-[-0.02em] tabular mt-3">{value}</p>
     </div>
+  );
+}
+
+function SemReadyCard({ onStart }: { onStart: () => void }) {
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Compete · 02</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 8</h3>
+      <p className="text-foreground-muted text-sm mt-3 max-w-[44ch]">Strength. Endurance. MetCon. — eight-week competition preparation.</p>
+      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
+        <li>Status · <span className="text-bone">Ready to start</span></li>
+        <li>Format · <span className="text-bone">Individual / pairs</span></li>
+      </ul>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <button onClick={onStart} className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Start programme <ArrowRight className="h-3.5 w-3.5" />
+        </button>
+        <Link to="/my-programmes/sem-8" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+          View cover
+        </Link>
+      </div>
+    </article>
+  );
+}
+
+function SemActiveCard({ coreCompleted, coreTotal, optionalCompleted, optionalTotal }: { coreCompleted: number; coreTotal: number; optionalCompleted: number; optionalTotal: number }) {
+  const pct = Math.round((coreCompleted / Math.max(1, coreTotal)) * 100);
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Compete · 02</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 8</h3>
+      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
+        <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
+        <li>Optional <span className="text-bone tabular">{optionalCompleted}/{optionalTotal}</span></li>
+      </ul>
+      <div className="mt-8 max-w-md">
+        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
+          <span>Progress (core)</span>
+          <span className="text-bone tabular">{pct}%</span>
+        </div>
+        <div className="h-[2px] bg-surface-raised overflow-hidden">
+          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <Link to="/my-programmes/sem-8/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Continue training <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link to="/my-programmes/sem-8" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+          View cover
+        </Link>
+      </div>
+    </article>
   );
 }
 

@@ -201,7 +201,7 @@ function ProductPage() {
                 <p className="font-display text-foreground-muted tabular leading-none text-[clamp(2rem,4vw,3rem)] tracking-[-0.03em]">£29.99</p>
               </div>
             </div>
-            <p className="text-foreground-muted text-sm mt-8 max-w-[42ch]">First 50 sales only.</p>
+            <p className="text-foreground-muted text-sm mt-8 max-w-[42ch]">Founding pricing applies to early supporters of the programme.</p>
           </div>
           <div className="lg:col-span-5 lg:text-right">
             <button
