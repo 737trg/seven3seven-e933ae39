@@ -93,7 +93,7 @@ function HomePage() {
             <img
               src={heroAsset.url}
               alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
-              className="absolute inset-0 w-full h-full object-cover object-[32%_center]"
+              className="absolute inset-0 w-full h-full object-cover object-left"
               draggable={false}
             />
             {/* subtle left scrim only — leaves baked SEVEN3SEVEN logo legible and image dominant */}
