@@ -69,7 +69,7 @@ function ProgrammesPage() {
       </section>
 
       {/* CATALOGUE — horizontal carousel */}
-      <section className="border-t border-border/60">
+      <section id="catalogue" className="border-t border-border/60">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
           <div className="grid lg:grid-cols-12 gap-6 mb-10 lg:mb-14">
             <p className="eyebrow lg:col-span-2">Catalogue</p>
@@ -87,19 +87,19 @@ function ProgrammesPage() {
           <div className="lg:col-span-8">
             <p className="eyebrow mb-5 text-signal">Status</p>
             <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[18ch]">
-              First programmes<br />in development.
+              Three programmes.<br />Built to perform.
             </h2>
             <p className="text-foreground-muted text-sm md:text-base mt-6 max-w-[52ch]">
-              Released when ready to be followed properly. No filler.
+              Structured training for service preparation, competition and hybrid racing.
             </p>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <Link
-              to="/about"
+            <button
+              onClick={() => document.getElementById("catalogue")?.scrollIntoView({ behavior: "smooth", block: "start" })}
               className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
             >
-              Our approach <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+              CHOOSE YOUR PROGRAMME <ArrowDown className="h-3.5 w-3.5" />
+            </button>
           </div>
         </div>
       </section>
