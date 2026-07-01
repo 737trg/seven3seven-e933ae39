@@ -261,7 +261,7 @@ function SemProductPage() {
   const semStarted = useSemStarted();
   const navigate = useNavigate();
   const startEnrolment = useServerFn(ensureEnrolment);
-  const cart = useCart();
+  const cart = useSemCart();
 
   useEffect(() => {
     semStore.configureUser(user?.id ?? null);
