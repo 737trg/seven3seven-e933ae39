@@ -51,8 +51,8 @@ function TodayPage() {
           <div className="mt-10">
             <p className="eyebrow mb-3">Readiness</p>
             <div className="flex gap-2">
-              {(["ready", "average", "heavy"] as HrpReadiness[]).map((r) => (
-                <button key={r} onClick={() => hrpStore.setReadiness(currentId, r)}
+              {(["ready", "average", "heavy", "pain"] as HrpReadiness[]).map((r) => (
+                <button key={r} onClick={() => hrpStore.setReadiness(currentId, r)} title={r === "pain" ? "Pain changes movement — stop or substitute" : undefined}
                   className={`h-10 px-5 text-[10px] uppercase tracking-[0.22em] font-display border ${readinessValue === r ? "bg-bone text-obsidian border-bone" : "border-border text-bone"}`}>
                   {r}
                 </button>
@@ -62,6 +62,7 @@ function TodayPage() {
               {readinessValue === "ready" && (adj.ready ?? "Follow the session as written.")}
               {readinessValue === "average" && (adj.average ?? "Use the standard session and stay at the lower end of the prescribed effort.")}
               {readinessValue === "heavy" && (adj.heavy ?? "Apply the coach-written reduction in the programme manifest.")}
+              {readinessValue === "pain" && "Stop the painful exercise. Use a pain-free alternative that preserves the training purpose, or end the session."}
             </p>
           </div>
         </section>

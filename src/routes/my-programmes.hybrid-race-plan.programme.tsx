@@ -41,7 +41,7 @@ function ProgrammePage() {
                 const id = sessionId(w.week, s.session);
                 const done = prog.perSession[id]?.completed;
                 const optional = !isCore(s);
-                const hideOptional = optional && profile.mode === "five";
+                const hideOptional = false;
                 return (
                   <li key={id} className={`py-4 flex items-center justify-between gap-4 ${hideOptional ? "opacity-60" : ""}`}>
                     <div className="min-w-0">

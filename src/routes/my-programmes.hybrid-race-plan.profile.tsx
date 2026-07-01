@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HrpShell } from "@/components/hrp/HrpShell";
-import { hrpStore, useHrpProfile, type HrpUnits, type HrpFormat, type HrpCategory, type HrpSex, type HrpTrack } from "@/lib/hrp/store";
+import { hrpStore, useHrpProfile, type HrpUnits, type HrpFormat, type HrpEvent, type HrpCategory, type HrpSex, type HrpTrack } from "@/lib/hrp/store";
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
 
@@ -29,31 +29,26 @@ function ProfilePage() {
 
   function field<K extends keyof typeof profile>(k: K, label: string, type: "text" | "date" | "number" = "text", placeholder?: string) {
     return (
-      <label className="grid grid-cols-[180px_1fr] items-center gap-3 text-sm">
+      <label className="grid grid-cols-[200px_1fr] items-center gap-3 text-sm">
         <span className="text-foreground-muted uppercase tracking-widest text-[10px]">{label}</span>
         <input
           type={type}
           value={(profile[k] as any) ?? ""}
           placeholder={placeholder}
-          maxLength={80}
+          maxLength={120}
           onChange={(e) => {
             const v = e.target.value;
-            if (type === "number") {
-              const n = safeNum(v);
-              hrpStore.saveProfile({ [k]: n } as any);
-            } else {
-              hrpStore.saveProfile({ [k]: v.slice(0, 80) } as any);
-            }
+            if (type === "number") hrpStore.saveProfile({ [k]: safeNum(v) } as any);
+            else hrpStore.saveProfile({ [k]: v.slice(0, 120) } as any);
           }}
           className="h-10 bg-transparent border border-border px-3 text-bone tabular"
         />
       </label>
     );
   }
-
   function select<K extends keyof typeof profile>(k: K, label: string, options: string[]) {
     return (
-      <label className="grid grid-cols-[180px_1fr] items-center gap-3 text-sm">
+      <label className="grid grid-cols-[200px_1fr] items-center gap-3 text-sm">
         <span className="text-foreground-muted uppercase tracking-widest text-[10px]">{label}</span>
         <select value={(profile[k] as any) ?? ""} onChange={(e) => hrpStore.saveProfile({ [k]: e.target.value } as any)}
           className="h-10 bg-transparent border border-border px-3 text-bone">
@@ -63,24 +58,28 @@ function ProfilePage() {
     );
   }
 
+  const showCategory = profile.event === "HYROX";
+
   return (
     <HrpShell eyebrow="Your profile" title="Profile">
       <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 max-w-4xl">
         {field("displayName", "Display name")}
         {select<"units">("units", "Units", ["kg", "lb"] satisfies HrpUnits[])}
         {field("startDate", "Programme start", "date")}
-        {field("competitionDate", "Competition date", "date")}
-        {select<"format">("format", "Format", ["Individual", "Pairs"] satisfies HrpFormat[])}
-        {select<"category">("category", "Category", ["", "ATHX", "ATHX Pro"] satisfies HrpCategory[])}
+        {field("raceDate", "Race date", "date")}
+        {select<"event">("event", "Event", ["HYROX", "The Hybrid Games"] satisfies HrpEvent[])}
+        {select<"format">("format", "Format", ["Solo", "Doubles"] satisfies HrpFormat[])}
         {select<"sex">("sex", "Sex", ["", "Male", "Female"] satisfies HrpSex[])}
-        {select<"mode">("mode", "Training mode", ["five", "six"] satisfies HrpTrack[])}
-        {field("strictPress", "Strict press 1RM", "number", "0")}
-        {field("backSquat", "Back squat 1RM", "number", "0")}
-        {field("deadlift", "Deadlift 1RM", "number", "0")}
-        {field("fiveK", "5km time", "text", "mm:ss")}
-        {field("tenK", "10km time", "text", "mm:ss")}
-        {field("row500", "500m row", "text", "mm:ss")}
-        {field("workingDb", "Working dumbbell", "number", "0")}
+        {showCategory && select<"category">("category", "HYROX category", ["", "Open", "Pro"] satisfies HrpCategory[])}
+        {select<"track">("track", "Training track", ["BUILD", "STANDARD", "PERFORMANCE"] satisfies HrpTrack[])}
+        {field("recent5k", "Recent 5 km time", "text", "mm:ss")}
+        {field("twentyMinDistance", "20-min distance (m)", "number", "0")}
+        {field("backSquat", "Back-squat marker", "number", "0")}
+        {field("deadlift", "Deadlift marker", "number", "0")}
+        {field("wallBallSet", "Wall-ball set size", "number", "0")}
+        {field("machineBenchmark", "Machine benchmark", "text", "e.g. 500m row 1:55")}
+        {field("equipment", "Equipment access", "text", "Sled, DBs, rower…")}
+        {field("limitations", "Movement limitations", "text", "Anything to note")}
       </div>
       <div className="mt-8 flex flex-wrap gap-3">
         <button
@@ -92,7 +91,7 @@ function ProfilePage() {
         {saved && <span className="self-center text-foreground-muted text-xs">Saved.</span>}
       </div>
       <p className="text-foreground-muted text-xs mt-8 max-w-[60ch]">
-        HYBRID RACE PLAN does not collect Olympic-lifting benchmarks. Pairs mode only changes the Race day tools — it does not alter the training programme.
+        Doubles format only changes Race Day tools — every athlete completes the training individually.
       </p>
     </HrpShell>
   );

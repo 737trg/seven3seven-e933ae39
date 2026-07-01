@@ -22,7 +22,7 @@ function SessionPage() {
     );
   }
   const { week, session } = ref;
-  const categoryKey = `${profile.category === "ATHX Pro" ? "PRO" : "ATHX"}_${profile.sex === "Female" ? "FEMALE" : "MALE"}`;
+  const categoryKey = profile.event === "HYROX" ? "HYROX" : "HYBRID_GAMES";
 
   return (
     <HrpShell eyebrow={`Week ${week.week} · ${week.phase}`} title={session.title}>
