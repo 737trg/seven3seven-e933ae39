@@ -61,6 +61,7 @@ import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-
 import { Route as MarketingProgrammesSem2026RouteImport } from './routes/_marketing.programmes.sem-2026'
 import { Route as MarketingProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/_marketing.programmes.basic-training-blueprint-plus'
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
+import { Route as MarketingLegalTermsRouteImport } from './routes/_marketing.legal.terms'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
@@ -352,6 +353,11 @@ const MarketingProgrammesSlugRoute = MarketingProgrammesSlugRouteImport.update({
   path: '/programmes/$slug',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingLegalTermsRoute = MarketingLegalTermsRouteImport.update({
+  id: '/legal/terms',
+  path: '/legal/terms',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -404,6 +410,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/legal/terms': typeof MarketingLegalTermsRoute
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
@@ -459,6 +466,7 @@ export interface FileRoutesByTo {
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/legal/terms': typeof MarketingLegalTermsRoute
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
@@ -519,6 +527,7 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
+  '/_marketing/legal/terms': typeof MarketingLegalTermsRoute
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/_marketing/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/_marketing/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
@@ -578,6 +587,7 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
+    | '/legal/terms'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
     | '/programmes/sem-2026'
@@ -633,6 +643,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/legal/terms'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
     | '/programmes/sem-2026'
@@ -692,6 +703,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
+    | '/_marketing/legal/terms'
     | '/_marketing/programmes/$slug'
     | '/_marketing/programmes/basic-training-blueprint-plus'
     | '/_marketing/programmes/sem-2026'
@@ -1105,6 +1117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingProgrammesSlugRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/legal/terms': {
+      id: '/_marketing/legal/terms'
+      path: '/legal/terms'
+      fullPath: '/legal/terms'
+      preLoaderRoute: typeof MarketingLegalTermsRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -1189,6 +1208,7 @@ interface MarketingRouteChildren {
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
+  MarketingLegalTermsRoute: typeof MarketingLegalTermsRoute
   MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
   MarketingProgrammesBasicTrainingBlueprintPlusRoute: typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   MarketingProgrammesSem2026Route: typeof MarketingProgrammesSem2026Route
@@ -1205,6 +1225,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
+  MarketingLegalTermsRoute: MarketingLegalTermsRoute,
   MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
   MarketingProgrammesBasicTrainingBlueprintPlusRoute:
     MarketingProgrammesBasicTrainingBlueprintPlusRoute,
