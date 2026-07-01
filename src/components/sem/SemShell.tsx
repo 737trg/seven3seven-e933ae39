@@ -72,7 +72,7 @@ export function SemShell({ children, eyebrow, title }: { children: ReactNode; ey
         </div>
       </aside>
 
-      <main className="flex-1 min-w-0 pb-24 lg:pb-0">
+      <main className="flex-1 min-w-0 pb-32 lg:pb-0">
         {(eyebrow || title) && (
           <header className="border-b border-border px-5 lg:px-10 py-8 lg:py-10">
             {eyebrow && <p className="eyebrow text-signal">{eyebrow}</p>}
@@ -84,6 +84,22 @@ export function SemShell({ children, eyebrow, title }: { children: ReactNode; ey
 
       {/* Mobile bottom nav */}
       <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-background/95 backdrop-blur" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <div className="flex items-center justify-center gap-6 px-5 py-2 border-b border-border/60">
+          {secondary.map((it) => {
+            const active = pathname === it.to;
+            const Icon = it.icon;
+            return (
+              <Link
+                key={it.to}
+                to={it.to}
+                className={`flex items-center gap-1.5 text-[10px] uppercase tracking-widest ${active ? "text-bone" : "text-foreground-muted"}`}
+              >
+                <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
+                <span>{it.label}</span>
+              </Link>
+            );
+          })}
+        </div>
         <ul className="grid grid-cols-5">
           {primary.map((it) => {
             const active = pathname === it.to || pathname.startsWith(it.to + "/");

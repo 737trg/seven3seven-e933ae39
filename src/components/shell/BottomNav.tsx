@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, LineChart, BookOpen, User, Flame } from "lucide-react";
+import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator } from "lucide-react";
 
 const items = [
   { to: "/today", label: "Today", icon: Flame },
@@ -9,6 +9,11 @@ const items = [
   { to: "/profile", label: "Profile", icon: User },
 ];
 
+const tools = [
+  { to: "/race", label: "Race day", icon: Trophy },
+  { to: "/calculator", label: "Calculator", icon: Calculator },
+];
+
 export function BottomNav() {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   return (
@@ -16,6 +21,24 @@ export function BottomNav() {
       className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-background/95 backdrop-blur"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
+      <div className="flex items-center justify-center gap-6 px-5 py-2 border-b border-border/60">
+        {tools.map((it) => {
+          const active = pathname === it.to;
+          const Icon = it.icon;
+          return (
+            <Link
+              key={it.to}
+              to={it.to}
+              className={`flex items-center gap-1.5 text-[10px] uppercase tracking-widest ${
+                active ? "text-bone" : "text-foreground-muted"
+              }`}
+            >
+              <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
+              <span>{it.label}</span>
+            </Link>
+          );
+        })}
+      </div>
       <ul className="grid grid-cols-5">
         {items.map((it) => {
           const active = pathname === it.to || pathname.startsWith(it.to + "/");

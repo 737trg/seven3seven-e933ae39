@@ -18,7 +18,7 @@ function AppLayout() {
         <Sidebar />
         <div className="flex-1 min-w-0 flex flex-col">
           <MobileHeader />
-          <main className="flex-1 pb-24 lg:pb-0">
+          <main className="flex-1 pb-32 lg:pb-0">
             <Outlet />
           </main>
           <BottomNav />
