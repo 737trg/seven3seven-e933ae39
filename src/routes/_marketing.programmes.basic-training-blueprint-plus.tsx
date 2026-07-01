@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { useBtbStarted, btbStore } from "@/lib/btb/store";
 import { ensureEnrolment } from "@/lib/enrolment.functions";
+import { cart as cartApi, useCart } from "@/lib/cart";
 import {
   Sheet,
   SheetContent,
@@ -44,42 +45,12 @@ export const Route = createFileRoute("/_marketing/programmes/basic-training-blue
   component: BtbProductPage,
 });
 
-const CART_KEY = "s3s.cart.v1";
-
-type CartState = { hasBtb: boolean };
-
-function readCart(): CartState {
-  if (typeof window === "undefined") return { hasBtb: false };
-  try {
-    const raw = window.localStorage.getItem(CART_KEY);
-    return raw ? (JSON.parse(raw) as CartState) : { hasBtb: false };
-  } catch {
-    return { hasBtb: false };
-  }
-}
-function writeCart(c: CartState) {
-  try {
-    window.localStorage.setItem(CART_KEY, JSON.stringify(c));
-    window.dispatchEvent(new Event("s3s-cart"));
-  } catch {}
-}
-
-function useCart() {
-  const [state, setState] = useState<CartState>({ hasBtb: false });
-  useEffect(() => {
-    setState(readCart());
-    const h = () => setState(readCart());
-    window.addEventListener("s3s-cart", h);
-    window.addEventListener("storage", h);
-    return () => {
-      window.removeEventListener("s3s-cart", h);
-      window.removeEventListener("storage", h);
-    };
-  }, []);
+function useBtbCart() {
+  const state = useCart();
   return {
-    ...state,
-    addBtb: () => writeCart({ hasBtb: true }),
-    removeBtb: () => writeCart({ hasBtb: false }),
+    hasBtb: !!state.hasBtb,
+    addBtb: () => cartApi.add("basic-training-blueprint-plus"),
+    removeBtb: () => cartApi.remove("basic-training-blueprint-plus"),
   };
 }
 
