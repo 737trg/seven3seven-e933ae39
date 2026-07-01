@@ -1,0 +1,2117 @@
+{
+  "id": "btb-plus",
+  "slug": "basic-training-blueprint-plus",
+  "title": "Basic Training Blueprint+",
+  "short_title": "BTB+",
+  "subtitle": "British Army assessment + basic training preparation",
+  "product_line": "BLUEPRINT",
+  "version": "1.0.0",
+  "duration_weeks": 12,
+  "sessions_per_week": 5,
+  "core_session_total": 60,
+  "level": "All levels",
+  "tagline": "Pass assessment. Arrive ready. Leave nothing on the table.",
+  "purpose": "Build the fitness, strength and durability required for British Army assessment and the physical demands of Basic Training.",
+  "independent_disclaimer": "The Basic Training Blueprint is produced independently by SEVEN3SEVEN. It is not produced, approved or endorsed by the British Army or the Ministry of Defence.",
+  "profile_fields": [
+    "startDate",
+    "unitPreference",
+    "assessmentDate",
+    "role",
+    "currentTwoKm",
+    "medicineBallBaseline",
+    "deadliftBaseline",
+    "runningExperience",
+    "availableDays",
+    "equipmentLevel"
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "phase": "Baseline",
+      "title": "Establish the baseline",
+      "load": "Moderate",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Lower-body strength + pull position",
+          "duration": "60-65 min",
+          "purpose": "Build a safe strength baseline and learn the position used for the Mid-Thigh Pull.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy bike or row, then ankle rocks, hip hinges, glute bridges and 3 progressive deadlift warm-up sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar deadlift or conventional deadlift: 3 x 5 at RPE 6-7. Rest 2-3 min. Every rep should look the same."
+            },
+            {
+              "name": "Assessment preparation",
+              "instruction": "Secure rack isometric pull at mid-thigh: 4 x 3 sec at RPE 7, 90 sec rest. If no safe rack is available, complete 3 x 5 heavy kettlebell deadlifts instead."
+            },
+            {
+              "name": "Support",
+              "instruction": "Rear-foot elevated split squat 3 x 8 each leg; standing calf raise 3 x 12; tibialis raise 3 x 15."
+            },
+            {
+              "name": "Finish",
+              "instruction": "5 min easy movement. Log the deadlift load, RPE and any pain or asymmetry."
+            }
+          ],
+          "coach_note": "Do not chase a maximum. A useful baseline is repeatable and technically clean."
+        },
+        {
+          "session": 2,
+          "title": "Aerobic baseline",
+          "duration": "35-45 min",
+          "purpose": "Build continuous aerobic work without turning every run into a test.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min brisk walk, then begin with a very easy jog."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "Complete 25-35 min at RPE 4-5. You should be able to speak in full sentences. Use run/walk intervals if needed: 3 min run / 1 min walk."
+            },
+            {
+              "name": "Strides",
+              "instruction": "4 x 15 sec relaxed accelerations with 60-75 sec walking recovery."
+            },
+            {
+              "name": "Lower-leg capacity",
+              "instruction": "2 rounds: 12 bent-knee calf raises, 12 straight-knee calf raises, 20 sec single-leg balance each side."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Walk until breathing is normal. Record total time and whether you ran continuously."
+            }
+          ],
+          "coach_note": "Easy training is not wasted training. The goal is to finish with more in the tank."
+        },
+        {
+          "session": 3,
+          "title": "Upper-body strength + medicine-ball baseline",
+          "duration": "55-65 min",
+          "purpose": "Measure the seated throw and begin building the pressing and pulling strength behind it.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min easy machine, shoulder circles, band pull-aparts, wall slides and 2 light sets of press-ups."
+            },
+            {
+              "name": "Test",
+              "instruction": "Official-style seated 4 kg medicine-ball throw: 3 attempts after 2-3 practice throws. Rest 60-90 sec. Record the longest valid distance."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Bench press or dumbbell bench press: 3 x 8 at RPE 6-7. Rest 2 min."
+            },
+            {
+              "name": "Pull + press",
+              "instruction": "Chest-supported row 3 x 10; half-kneeling dumbbell press 3 x 8 each side; press-ups 2 sets stopping 3 reps before failure."
+            },
+            {
+              "name": "Trunk",
+              "instruction": "Dead bug 3 x 8 each side and side plank 2 x 25 sec each side."
+            }
+          ],
+          "coach_note": "Throw for distance, not fatigue. Stop a set when speed or technique drops."
+        },
+        {
+          "session": 4,
+          "title": "2 km baseline assessment",
+          "duration": "45-55 min",
+          "purpose": "Establish the running performance that will guide the next training block.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy running, drills and 3 x 20 sec strides. Then complete the Army-style 800 m progressive warm-up."
+            },
+            {
+              "name": "Test",
+              "instruction": "Run 2 km continuously on a flat measured course or track at best sustainable effort. Record total time and 400 m or 1 km splits where possible."
+            },
+            {
+              "name": "Recovery",
+              "instruction": "Walk for 5 min, then jog easily for 8-10 min."
+            },
+            {
+              "name": "Review",
+              "instruction": "Record where the pace changed, how the first kilometre felt and whether you finished faster or slower."
+            },
+            {
+              "name": "Optional",
+              "instruction": "If you cannot yet run 2 km continuously, record the total time including short walks. That is still your baseline."
+            }
+          ],
+          "coach_note": "Do not sprint the first 400 m. The best baseline is paced hard, not paced stupidly."
+        },
+        {
+          "session": 5,
+          "title": "General military work capacity",
+          "duration": "50-60 min",
+          "purpose": "Introduce carries, step-ups and bodyweight work without unnecessary impact.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8 min easy cardio, then rehearse every movement."
+            },
+            {
+              "name": "Main circuit",
+              "instruction": "4 quality rounds: 300 m easy-moderate run, 10 step-ups each leg, 8-15 press-ups, 20 m backpack or dumbbell front carry, and 30 sec front plank. Rest 90 sec between rounds."
+            },
+            {
+              "name": "Grip",
+              "instruction": "Dead hang or farmer hold: 3 x 20-40 sec."
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-8 min calves, ankles, hips and thoracic rotation."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record the version of each movement and whether round four matched round one."
+            }
+          ],
+          "coach_note": "This is controlled capacity work, not a punishment circuit. Movement quality wins."
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "phase": "Consistency",
+      "title": "Build volume without overreaching",
+      "load": "Moderate",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Deadlift volume + isometric pull",
+          "duration": "60-65 min",
+          "purpose": "Increase useful lower-body strength volume while reinforcing the assessment pull position.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Easy machine, hinge drills, split squats and progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 4 x 5 at RPE 7. Rest 2-3 min."
+            },
+            {
+              "name": "Pull position",
+              "instruction": "Mid-thigh rack isometric: 5 x 3 sec at RPE 7-8, 90 sec rest. Only use a properly secured bar and rack."
+            },
+            {
+              "name": "Support",
+              "instruction": "Goblet squat 3 x 10; walking lunge 3 x 8 each leg; calf raise 3 x 15; tibialis raise 3 x 15."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Suitcase carry 3 x 25 m each side at a controlled heavy load."
+            }
+          ],
+          "coach_note": "Add load only if the final deadlift set still matches the first."
+        },
+        {
+          "session": 2,
+          "title": "Aerobic base + strides",
+          "duration": "40-50 min",
+          "purpose": "Extend the amount of work you can complete at a low physiological cost.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min brisk walk into an easy jog."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "30-40 min at RPE 4-5. Foundation option: alternate 5 min run / 1 min walk."
+            },
+            {
+              "name": "Strides",
+              "instruction": "5 x 15 sec relaxed-fast with 60 sec walk or jog recovery."
+            },
+            {
+              "name": "Foot strength",
+              "instruction": "2 x 12 short-foot holds, 2 x 12 single-leg calf raises and 2 x 20 sec single-leg balance each side."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Log duration, distance and average heart rate if available."
+            }
+          ],
+          "coach_note": "Do not increase both pace and duration. This week, duration is the progression."
+        },
+        {
+          "session": 3,
+          "title": "Throw quality + upper volume",
+          "duration": "55-65 min",
+          "purpose": "Improve explosive throwing mechanics and build balanced upper-body strength.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Band pull-aparts, wall slides, light chest passes and two easy press-up sets."
+            },
+            {
+              "name": "Power",
+              "instruction": "Seated 4 kg medicine-ball throw: 5 x 3, full reset and 60-90 sec rest. Record the best throw of the day."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Bench press or dumbbell bench: 4 x 8 at RPE 7."
+            },
+            {
+              "name": "Pull + overhead",
+              "instruction": "Assisted pull-up or lat pulldown 4 x 8; overhead press 3 x 8 at RPE 7; face pull 3 x 12."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Press-ups: 2 quality sets, stopping 2-3 reps before failure."
+            }
+          ],
+          "coach_note": "Explosive work belongs at the start, while you are fresh."
+        },
+        {
+          "session": 4,
+          "title": "Short intervals",
+          "duration": "45-55 min",
+          "purpose": "Improve speed and running mechanics without excessive total volume.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy run, drills and 3 x 15 sec strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "8 x 1 min at RPE 8 with 90 sec easy jog or walk. Keep every hard rep within a similar distance."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "8-10 min very easy running."
+            },
+            {
+              "name": "Lower-leg work",
+              "instruction": "2 x 15 calf raises and 2 x 12 tibialis raises."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record the distance or pace for each hard minute."
+            }
+          ],
+          "coach_note": "The last interval may be hard. It should not be dramatically slower than the first."
+        },
+        {
+          "session": 5,
+          "title": "Carry and bodyweight repeatability",
+          "duration": "50-60 min",
+          "purpose": "Build the ability to work, recover and repeat with simple military-relevant patterns.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy cardio and movement rehearsal."
+            },
+            {
+              "name": "Main set",
+              "instruction": "5 rounds, not for time: 250 m run, 10 goblet squats, 8-15 press-ups, 8 inverted rows or 20 sec rope/towel pull hold, 30 m farmer carry. Rest 60-90 sec."
+            },
+            {
+              "name": "Step-up density",
+              "instruction": "5 min continuous alternating step-ups at RPE 5-6."
+            },
+            {
+              "name": "Trunk",
+              "instruction": "3 x 30 sec front plank and 2 x 25 sec side plank each side."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Easy walk and log round consistency."
+            }
+          ],
+          "coach_note": "Choose reps that leave one or two clean reps available in every round."
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "phase": "Foundation build",
+      "title": "Build the engine and the frame",
+      "load": "Moderate-high",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Strength build + pull intent",
+          "duration": "60-70 min",
+          "purpose": "Develop more force through the hips and legs while practising aggressive, controlled pulling.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy machine, ankle and hip mobility, then progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 5 x 4 at RPE 7-7.5. Rest 2-3 min."
+            },
+            {
+              "name": "Pull position",
+              "instruction": "Mid-thigh rack isometric: 4 x 4 sec at RPE 8, 2 min rest."
+            },
+            {
+              "name": "Support",
+              "instruction": "Front-foot elevated split squat 3 x 8 each leg; Romanian deadlift 3 x 8 at RPE 7; calf raise 4 x 12."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Heavy farmer carry 4 x 25 m. Walk with control and tall posture."
+            }
+          ],
+          "coach_note": "High intent does not mean losing position. Brace, pull hard and stop cleanly."
+        },
+        {
+          "session": 2,
+          "title": "Long aerobic run",
+          "duration": "45-55 min",
+          "purpose": "Increase aerobic capacity and durability through steady continuous running.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min brisk walk and easy jog."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "35-45 min at RPE 4-5. Foundation option: 4 min run / 1 min walk for the full duration."
+            },
+            {
+              "name": "Strides",
+              "instruction": "4 x 20 sec relaxed-fast with 75 sec easy recovery."
+            },
+            {
+              "name": "Finish",
+              "instruction": "5 min walk and gentle calf mobility."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record duration, distance and whether the final 10 min felt controlled."
+            }
+          ],
+          "coach_note": "This should be your easiest-feeling session of the week, despite being longer."
+        },
+        {
+          "session": 3,
+          "title": "Upper power + push-pull strength",
+          "duration": "55-65 min",
+          "purpose": "Connect explosive throwing with stronger pressing and pulling.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder mobility, light chest passes, band rows and progressive press sets."
+            },
+            {
+              "name": "Power",
+              "instruction": "Seated medicine-ball throw: 5 x 3. Then standing overhead throw or scoop throw: 3 x 3 if space is safe."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Push press: 5 x 3 at RPE 7. Rest 2 min."
+            },
+            {
+              "name": "Pull",
+              "instruction": "Pull-up, assisted pull-up or pulldown: 4 x 6-8; one-arm dumbbell row 3 x 10 each side."
+            },
+            {
+              "name": "Press-up capacity",
+              "instruction": "3 sets at a repeatable number, stopping 2 reps before failure."
+            },
+            {
+              "name": "Trunk",
+              "instruction": "Pallof press 3 x 10 each side."
+            }
+          ],
+          "coach_note": "Do not turn the push press into a slow grind. Power disappears when the bar slows."
+        },
+        {
+          "session": 4,
+          "title": "Two-minute intervals",
+          "duration": "50-60 min",
+          "purpose": "Build speed endurance close to 2 km effort while preserving repeatability.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy running, drills and 3 strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "6 x 2 min at RPE 8 with 2 min easy jog. Performance option: complete 7-8 reps only if pace remains within 3%."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Finish",
+              "instruction": "2 x 12 bent-knee calf raises and 2 x 12 tibialis raises."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record pace or distance for each repetition."
+            }
+          ],
+          "coach_note": "Earn extra repetitions through consistency. Do not add them because the session looks short on paper."
+        },
+        {
+          "session": 5,
+          "title": "Introductory loaded walk",
+          "duration": "45-55 min",
+          "purpose": "Begin adapting feet, calves, trunk and posture to controlled load carriage.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Preparation",
+              "instruction": "Use a comfortable, secure backpack. Load: approximately 5% bodyweight, capped at 6 kg. Wear normal training clothing and suitable footwear."
+            },
+            {
+              "name": "Main walk",
+              "instruction": "30 min brisk walk at RPE 4-5 on mostly flat ground. Do not run."
+            },
+            {
+              "name": "After walk",
+              "instruction": "3 rounds: 10 step-ups each leg, 12 glute bridges, 10 press-ups and 20 sec dead hang or farmer hold."
+            },
+            {
+              "name": "Foot care",
+              "instruction": "Check for rubbing or hotspots. Dry feet, change socks and record any problem areas."
+            },
+            {
+              "name": "Finish",
+              "instruction": "5 min gentle mobility for calves, hips and upper back."
+            }
+          ],
+          "coach_note": "Load carriage is a skill exposure. Running with a backpack is not part of this programme."
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "phase": "Deload",
+      "title": "Absorb the first block",
+      "load": "Low",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Light lower-body strength",
+          "duration": "50-55 min",
+          "purpose": "Retain strength patterns while allowing fatigue to fall.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8 min easy bike or row and movement preparation."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 3 x 5 at RPE 6."
+            },
+            {
+              "name": "Technique pull",
+              "instruction": "Mid-thigh rack isometric: 3 x 3 sec at RPE 6-7, or skip if the setup is not completely safe."
+            },
+            {
+              "name": "Support",
+              "instruction": "Goblet squat 2 x 10; split squat 2 x 8 each leg; calf raise 2 x 12; tibialis raise 2 x 12."
+            },
+            {
+              "name": "Finish",
+              "instruction": "10 min easy bike or walk."
+            }
+          ],
+          "coach_note": "Everything should feel crisp. Deloading is training, not laziness."
+        },
+        {
+          "session": 2,
+          "title": "Easy aerobic reset",
+          "duration": "35-40 min",
+          "purpose": "Maintain aerobic consistency with very low fatigue.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Begin with 5 min walking."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "25-30 min at RPE 3-4. Use run/walk freely."
+            },
+            {
+              "name": "Strides",
+              "instruction": "3 x 12 sec smooth accelerations, not sprints."
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-8 min ankles, calves, hips and thoracic rotation."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record general energy and lower-leg comfort."
+            }
+          ],
+          "coach_note": "You should finish fresher than you began."
+        },
+        {
+          "session": 3,
+          "title": "Light upper-body technique",
+          "duration": "45-55 min",
+          "purpose": "Keep throwing and strength patterns familiar without creating soreness.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Easy machine, shoulder mobility and light medicine-ball practice."
+            },
+            {
+              "name": "Power",
+              "instruction": "Seated medicine-ball throw: 3 x 3 at approximately 80-90% effort."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Bench press or dumbbell bench: 3 x 6 at RPE 6."
+            },
+            {
+              "name": "Pull + shoulder",
+              "instruction": "Chest-supported row 3 x 8; half-kneeling press 2 x 8 each side; face pull 2 x 15."
+            },
+            {
+              "name": "Finish",
+              "instruction": "2 easy sets of press-ups and 5 min mobility."
+            }
+          ],
+          "coach_note": "Leave the gym wanting to do more. That is the correct outcome this week."
+        },
+        {
+          "session": 4,
+          "title": "Technique fartlek",
+          "duration": "40-45 min",
+          "purpose": "Keep some faster running while avoiding a heavy interval session.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy run."
+            },
+            {
+              "name": "Main set",
+              "instruction": "6 x 30 sec at RPE 7 with 90 sec easy jog."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "12-15 min easy running."
+            },
+            {
+              "name": "Drills",
+              "instruction": "2 rounds of A-march, ankling and 2 x 15 sec relaxed strides."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Walk until breathing is fully controlled."
+            }
+          ],
+          "coach_note": "Fast enough to feel smooth, not fast enough to create a hangover."
+        },
+        {
+          "session": 5,
+          "title": "Movement quality circuit",
+          "duration": "40-50 min",
+          "purpose": "Maintain general capacity while reducing impact and total work.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8 min easy cardio."
+            },
+            {
+              "name": "Main circuit",
+              "instruction": "3 easy rounds: 8 step-ups each leg, 10 incline or floor press-ups, 10 ring rows, 20 m light carry and 30 sec plank. Rest as needed."
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "10-15 min bike, row or brisk walk at RPE 3-4."
+            },
+            {
+              "name": "Mobility",
+              "instruction": "Longer calf, hip and shoulder mobility."
+            },
+            {
+              "name": "Review",
+              "instruction": "Check the Week 1-3 log and identify one area improving and one requiring attention."
+            }
+          ],
+          "coach_note": "No score. No race. Move well and recover."
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "phase": "Strength + threshold",
+      "title": "Build strength and threshold",
+      "load": "High but controlled",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Heavy triples + pull force",
+          "duration": "60-70 min",
+          "purpose": "Increase maximal-force capacity while keeping every rep technically sound.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine, hinge patterning and progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 5 x 3 at RPE 8. Rest 3 min."
+            },
+            {
+              "name": "Pull position",
+              "instruction": "Mid-thigh rack isometric: 5 x 4 sec at RPE 8-9, 2 min rest."
+            },
+            {
+              "name": "Support",
+              "instruction": "Bulgarian split squat 3 x 6 each leg at RPE 8; hamstring curl 3 x 10; calf raise 4 x 10."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Farmer carry 4 x 30 m at RPE 7-8."
+            }
+          ],
+          "coach_note": "RPE 8 means two clean reps remain. It does not mean an ugly near-max."
+        },
+        {
+          "session": 2,
+          "title": "Threshold intervals",
+          "duration": "50-60 min",
+          "purpose": "Raise the pace you can sustain before fatigue sharply accelerates.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy run and 3 strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "4 x 4 min at RPE 7-8 with 2 min easy jog. Keep the pace stable."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Lower-leg work",
+              "instruction": "3 x 12 calf raises and 2 x 15 tibialis raises."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record pace and RPE for each interval."
+            }
+          ],
+          "coach_note": "Threshold is controlled discomfort. If you are sprinting, you have missed the point."
+        },
+        {
+          "session": 3,
+          "title": "Bench strength + throw contrast",
+          "duration": "60-65 min",
+          "purpose": "Use heavy pressing followed by explosive throws to develop upper-body force and speed.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder prep, light throws and progressive bench sets."
+            },
+            {
+              "name": "Contrast block",
+              "instruction": "5 rounds: bench press 5 reps at RPE 8, rest 60 sec, then 3 seated 4 kg medicine-ball throws. Rest 2 min before the next round."
+            },
+            {
+              "name": "Pull",
+              "instruction": "Pull-up or pulldown 4 x 6-8; one-arm row 3 x 8 each side."
+            },
+            {
+              "name": "Overhead",
+              "instruction": "Dumbbell overhead press 3 x 8 at RPE 7."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Press-ups 2 quality sets, stopping 2 reps before failure."
+            }
+          ],
+          "coach_note": "The throw after the bench should still be fast. Reduce the bench load if it is not."
+        },
+        {
+          "session": 4,
+          "title": "400 m repeatability",
+          "duration": "50-60 min",
+          "purpose": "Develop 2 km-specific rhythm and pacing using your current performance.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy running, drills and 3 strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "5-6 x 400 m at current 2 km average pace with 2 min walk/jog recovery. Foundation option: 6 x 90 sec at RPE 8."
+            },
+            {
+              "name": "Fast finish",
+              "instruction": "2 x 200 m relaxed-fast, full walk-back recovery."
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Log",
+              "instruction": "Keep 400 m repetitions within 3 sec where possible."
+            }
+          ],
+          "coach_note": "Do not use a fantasy goal pace. Train from the performance you actually produced."
+        },
+        {
+          "session": 5,
+          "title": "Loaded walk + step-up strength",
+          "duration": "50-60 min",
+          "purpose": "Progress load carriage gradually while strengthening the legs through repeated stepping.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Preparation",
+              "instruction": "Backpack load: approximately 7.5% bodyweight, capped at 8 kg. Check straps and footwear."
+            },
+            {
+              "name": "Main walk",
+              "instruction": "35 min brisk walk at RPE 4-5 on mostly flat ground. Do not run."
+            },
+            {
+              "name": "After walk",
+              "instruction": "3 x 10 step-ups each leg holding a light load; 3 x 12 glute bridges; 3 x 30 sec front plank."
+            },
+            {
+              "name": "Foot care",
+              "instruction": "Record hotspots, numbness or rubbing. Adjust the setup before the next loaded week."
+            },
+            {
+              "name": "Finish",
+              "instruction": "5 min gentle mobility."
+            }
+          ],
+          "coach_note": "If the load changes your gait, it is too heavy for this stage."
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "phase": "Repeatability",
+      "title": "Build repeatable output",
+      "load": "High",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Strength volume + unilateral control",
+          "duration": "65-70 min",
+          "purpose": "Add quality strength volume and improve single-leg control for running and stepping.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Easy row or bike, hinge drills, split squats and progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 4 x 4 at RPE 7.5-8."
+            },
+            {
+              "name": "Pull position",
+              "instruction": "Mid-thigh isometric: 4 x 5 sec at RPE 8, 2 min rest."
+            },
+            {
+              "name": "Support",
+              "instruction": "Front squat or heavy goblet squat 4 x 6 at RPE 7; single-leg Romanian deadlift 3 x 8 each side; calf raise 4 x 12."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Suitcase carry 3 x 35 m each side."
+            }
+          ],
+          "coach_note": "This week adds volume, not a new maximum. Keep rep speed consistent."
+        },
+        {
+          "session": 2,
+          "title": "Extended aerobic run",
+          "duration": "50-60 min",
+          "purpose": "Expand the aerobic base that supports faster running and recovery between hard efforts.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min brisk walk into an easy jog."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "40-50 min at RPE 4-5. Foundation option: 8 min run / 1 min walk."
+            },
+            {
+              "name": "Strides",
+              "instruction": "5 x 20 sec relaxed-fast with 75 sec easy recovery."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Walk 5 min and complete 2 x 12 calf raises plus 2 x 12 tibialis raises."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record whether pace stayed stable at the same effort."
+            }
+          ],
+          "coach_note": "More aerobic fitness means you recover faster from everything else in this plan."
+        },
+        {
+          "session": 3,
+          "title": "Push press power + throw quality",
+          "duration": "55-65 min",
+          "purpose": "Develop whole-body pressing power while keeping the assessment throw highly specific.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder and thoracic mobility, light throws and progressive push press sets."
+            },
+            {
+              "name": "Power",
+              "instruction": "Push press: 5 x 3 at RPE 7.5. Rest 2 min."
+            },
+            {
+              "name": "Throw",
+              "instruction": "Seated 4 kg medicine-ball throw: 5 x 3 with full rest."
+            },
+            {
+              "name": "Pull + press",
+              "instruction": "Weighted or assisted pull-up 4 x 5-8; dumbbell bench 3 x 8 at RPE 7; face pull 3 x 15."
+            },
+            {
+              "name": "Trunk",
+              "instruction": "Hollow hold 3 x 20-30 sec and side plank 2 x 30 sec each side."
+            }
+          ],
+          "coach_note": "Separate strength from conditioning. Every power repetition should look aggressive and clean."
+        },
+        {
+          "session": 4,
+          "title": "500 m intervals",
+          "duration": "55-65 min",
+          "purpose": "Improve the ability to hold hard running pace for repeated 2 km-specific efforts.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-15 min easy running, drills and strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "6 x 500 m at current 2 km pace with 2 min easy recovery. Performance option: reduce recovery to 90 sec only if all reps are controlled."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Gentle calf and hip mobility."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record each split and the difference between fastest and slowest."
+            }
+          ],
+          "coach_note": "The goal is six strong repetitions, not one hero rep and five survival reps."
+        },
+        {
+          "session": 5,
+          "title": "Military capacity circuit",
+          "duration": "55-65 min",
+          "purpose": "Build general work capacity across running, carrying, stepping, pushing and pulling.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy cardio and movement rehearsal."
+            },
+            {
+              "name": "Main circuit",
+              "instruction": "5 rounds: 300 m run at RPE 6, 12 alternating step-ups, 10-20 press-ups, 8 pull-ups/assisted pull-ups or 12 rows, 40 m farmer carry and 8 burpees. Rest 90 sec."
+            },
+            {
+              "name": "Grip",
+              "instruction": "3 x 30-45 sec dead hang or towel hold."
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy walk or bike."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record round times and chosen movement versions."
+            }
+          ],
+          "coach_note": "Scale the repetitions so round five remains recognisable as the same workout."
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "phase": "Overload",
+      "title": "Highest broad workload",
+      "load": "High",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Heavy doubles + maximum intent",
+          "duration": "60-70 min",
+          "purpose": "Develop high force without accumulating the fatigue of repeated maximal attempts.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine, mobility and progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 5 x 2 at RPE 8-8.5. Rest 3 min."
+            },
+            {
+              "name": "Pull position",
+              "instruction": "Mid-thigh rack isometric: 5 x 3 sec at RPE 9, 2-3 min rest."
+            },
+            {
+              "name": "Support",
+              "instruction": "Rear-foot elevated split squat 4 x 6 each leg; hamstring curl 3 x 8; calf raise 4 x 10; tibialis raise 3 x 15."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Heavy farmer carry 5 x 25 m."
+            }
+          ],
+          "coach_note": "No missed lifts. The benefit comes from force and quality, not grinding."
+        },
+        {
+          "session": 2,
+          "title": "Long threshold intervals",
+          "duration": "55-65 min",
+          "purpose": "Improve sustained hard running and resistance to pace fade.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy running and 3 strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "3 x 8 min at RPE 7-8 with 3 min easy jog. Foundation option: 4 x 5 min."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "8-10 min easy running."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Lower-leg mobility and 2 x 12 calf raises."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record average pace for each interval."
+            }
+          ],
+          "coach_note": "The final interval should be the hardest, not the slowest by default."
+        },
+        {
+          "session": 3,
+          "title": "Heavy press + explosive throw",
+          "duration": "60-65 min",
+          "purpose": "Push upper-body force higher while preserving throwing speed.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder prep, light throws and progressive bench sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Bench press: 5 x 3 at RPE 8-8.5. Rest 2-3 min."
+            },
+            {
+              "name": "Power",
+              "instruction": "Seated 4 kg medicine-ball throw: 6 x 2, full effort and full reset."
+            },
+            {
+              "name": "Pull",
+              "instruction": "Pull-up or pulldown 5 x 5-8; chest-supported row 3 x 8."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Strict overhead press 3 x 6 at RPE 7 and press-ups 2 controlled sets."
+            }
+          ],
+          "coach_note": "Low-repetition throws stay explosive. Do not add reps until they become slow."
+        },
+        {
+          "session": 4,
+          "title": "800 m repeats",
+          "duration": "55-65 min",
+          "purpose": "Develop the ability to hold 2 km pace for longer continuous sections.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "15 min easy running, drills and 3 strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "4 x 800 m at current 2 km pace with 2.5-3 min easy recovery. Foundation option: 4 x 3 min at RPE 8."
+            },
+            {
+              "name": "Fast finish",
+              "instruction": "2 x 200 m relaxed-fast with full recovery."
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8-10 min easy run."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record all 800 m splits and the final 200 m quality."
+            }
+          ],
+          "coach_note": "If you cannot hold the target after rep two, adjust immediately rather than forcing poor mechanics."
+        },
+        {
+          "session": 5,
+          "title": "Progressive loaded walk",
+          "duration": "55-65 min",
+          "purpose": "Increase time under load while keeping posture, gait and feet under control.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Preparation",
+              "instruction": "Backpack load: approximately 10% bodyweight, capped at 10 kg. Use a secure pack and flat-to-rolling terrain."
+            },
+            {
+              "name": "Main walk",
+              "instruction": "40 min brisk walk at RPE 5. Do not run. Aim for consistent pace."
+            },
+            {
+              "name": "After walk",
+              "instruction": "3 rounds: 12 step-ups each leg, 12 walking lunges each leg and 30 sec side plank each side."
+            },
+            {
+              "name": "Foot care",
+              "instruction": "Inspect feet and record hotspots immediately."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Gentle calf, hip flexor and upper-back mobility."
+            }
+          ],
+          "coach_note": "Do not increase load and duration together beyond the prescription."
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "phase": "Midpoint",
+      "title": "Midpoint test and deload",
+      "load": "Low-moderate",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Midpoint strength check",
+          "duration": "55-65 min",
+          "purpose": "Measure progress without taking a reckless maximum.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine and progressive deadlift warm-up sets."
+            },
+            {
+              "name": "Strength check",
+              "instruction": "Work to one set of 3 at RPE 8 on the trap-bar or conventional deadlift. Record load and compare with Week 1 training."
+            },
+            {
+              "name": "MTP check",
+              "instruction": "If an approved dynamometer is available, complete the official protocol. Otherwise complete 3 x 3 sec rack pulls at RPE 8 and record setup and load without calling it an official score."
+            },
+            {
+              "name": "Support",
+              "instruction": "Split squat 2 x 8 each leg; calf raise 2 x 12; tibialis raise 2 x 12."
+            },
+            {
+              "name": "Finish",
+              "instruction": "10 min easy bike or walk."
+            }
+          ],
+          "coach_note": "A deadlift number is not a Mid-Thigh Pull score. Keep the records separate."
+        },
+        {
+          "session": 2,
+          "title": "Easy aerobic recovery",
+          "duration": "35-45 min",
+          "purpose": "Maintain the aerobic base while reducing fatigue before the run test.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min walk."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "25-35 min at RPE 3-4."
+            },
+            {
+              "name": "Strides",
+              "instruction": "3 x 15 sec relaxed accelerations."
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-8 min calves, hips and ankles."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record general freshness and any recurring pain."
+            }
+          ],
+          "coach_note": "Nothing in this session should compromise Session 4."
+        },
+        {
+          "session": 3,
+          "title": "Medicine-ball midpoint test",
+          "duration": "45-55 min",
+          "purpose": "Measure throwing progress and keep upper-body strength ticking over.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder mobility and 3-4 progressive practice throws."
+            },
+            {
+              "name": "Test",
+              "instruction": "Official-style seated 4 kg medicine-ball throw: 3 scored attempts. Record the longest valid throw."
+            },
+            {
+              "name": "Strength",
+              "instruction": "Bench press or dumbbell bench: 3 x 5 at RPE 6-7; row 3 x 8; pulldown or pull-up 3 x 6-8."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Press-ups 2 easy sets and shoulder mobility."
+            },
+            {
+              "name": "Review",
+              "instruction": "Compare best distance with Week 1 and note the technical change that helped most."
+            }
+          ],
+          "coach_note": "Testing ends after three scored attempts. More fatigue will not produce a better valid result."
+        },
+        {
+          "session": 4,
+          "title": "Midpoint 2 km assessment",
+          "duration": "45-55 min",
+          "purpose": "Measure current running fitness and generate new training paces.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy running, drills, strides and an 800 m progressive warm-up."
+            },
+            {
+              "name": "Test",
+              "instruction": "Run 2 km at best sustainable effort. Record total time and intermediate splits."
+            },
+            {
+              "name": "Recovery",
+              "instruction": "Walk 5 min and jog easily for 8-10 min."
+            },
+            {
+              "name": "Recalculate",
+              "instruction": "Use the new average 400 m or kilometre pace for Weeks 9-11."
+            },
+            {
+              "name": "Review",
+              "instruction": "Compare pacing, not only finishing time."
+            }
+          ],
+          "coach_note": "A small improvement with better pacing is still meaningful progress."
+        },
+        {
+          "session": 5,
+          "title": "Easy movement and review",
+          "duration": "40-50 min",
+          "purpose": "Reduce fatigue and convert the midpoint results into a practical final-block plan.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Easy work",
+              "instruction": "25-30 min bike, row or brisk walk at RPE 3-4."
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min calves, ankles, hips, thoracic spine and shoulders."
+            },
+            {
+              "name": "Review",
+              "instruction": "Complete the midpoint worksheet: strength, throw, 2 km, session completion and pain history."
+            },
+            {
+              "name": "Decision",
+              "instruction": "Choose the low or high end of future repetition ranges based on consistency, not ambition."
+            },
+            {
+              "name": "Recovery",
+              "instruction": "Plan the next seven days of sleep, food and rest around the harder final block."
+            }
+          ],
+          "coach_note": "The goal is to leave the midpoint week motivated and recovered, not battered by testing."
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "phase": "Performance build",
+      "title": "Turn fitness into performance",
+      "load": "High",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Strength specificity + pull force",
+          "duration": "60-70 min",
+          "purpose": "Convert the strength base into higher-force, lower-repetition work.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine, mobility and progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 4 x 3 at RPE 8."
+            },
+            {
+              "name": "Pull position",
+              "instruction": "Mid-thigh rack isometric: 5 x 3 sec at RPE 9, 2-3 min rest."
+            },
+            {
+              "name": "Support",
+              "instruction": "Front squat or goblet squat 4 x 5 at RPE 8; single-leg Romanian deadlift 3 x 6 each side; calf raise 4 x 10."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Farmer carry 4 x 35 m at RPE 8."
+            }
+          ],
+          "coach_note": "Strength improves through intent and repeatability. Do not turn triples into accidental fives."
+        },
+        {
+          "session": 2,
+          "title": "Long aerobic run",
+          "duration": "55-65 min",
+          "purpose": "Maintain the aerobic foundation while the specific speed work becomes harder.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min walk into easy running."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "45-50 min at RPE 4-5. Foundation option: 9 min run / 1 min walk."
+            },
+            {
+              "name": "Strides",
+              "instruction": "5 x 20 sec relaxed-fast with 75 sec easy recovery."
+            },
+            {
+              "name": "Finish",
+              "instruction": "5 min walk and lower-leg work."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record distance and compare effort with Week 6."
+            }
+          ],
+          "coach_note": "Faster easy running is welcome only when it remains easy."
+        },
+        {
+          "session": 3,
+          "title": "Upper contrast power",
+          "duration": "55-65 min",
+          "purpose": "Develop high-force pressing and rapid force expression for the medicine-ball throw.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder mobility, light throws and progressive bench sets."
+            },
+            {
+              "name": "Contrast block",
+              "instruction": "4 rounds: bench press 4 reps at RPE 8, rest 60 sec, then 3 seated medicine-ball throws. Rest 2-3 min."
+            },
+            {
+              "name": "Pull",
+              "instruction": "Pull-up or pulldown 4 x 6; chest-supported row 4 x 8."
+            },
+            {
+              "name": "Overhead",
+              "instruction": "Push press 4 x 3 at RPE 7."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Press-ups 2 controlled sets and Pallof press 3 x 10 each side."
+            }
+          ],
+          "coach_note": "The throw is the priority. If pressing fatigue kills speed, reduce the bench load."
+        },
+        {
+          "session": 4,
+          "title": "300 m speed reserve",
+          "duration": "50-60 min",
+          "purpose": "Run slightly faster than current 2 km pace so assessment pace feels more controllable.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "15 min easy running, drills and 4 strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "8-10 x 300 m at approximately 1-2 sec per 100 m faster than current 2 km pace. Recover with 90 sec walk/jog."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Calf and hip mobility."
+            },
+            {
+              "name": "Log",
+              "instruction": "Stop at 8 if pace drops more than 3% or mechanics deteriorate."
+            }
+          ],
+          "coach_note": "Speed reserve is not sprinting. Run fast, relaxed and repeatable."
+        },
+        {
+          "session": 5,
+          "title": "Loaded walk - sustained posture",
+          "duration": "60-70 min",
+          "purpose": "Build controlled endurance under a moderate load without excessive impact.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Preparation",
+              "instruction": "Backpack load: approximately 10% bodyweight, capped at 10 kg. Use comfortable socks and a stable pack."
+            },
+            {
+              "name": "Main walk",
+              "instruction": "45 min brisk walk at RPE 5 over flat-to-rolling terrain."
+            },
+            {
+              "name": "After walk",
+              "instruction": "3 x 12 step-ups each leg, 3 x 10 press-ups and 3 x 30 sec front plank."
+            },
+            {
+              "name": "Foot care",
+              "instruction": "Inspect and document hotspots. Treat setup problems before the final loaded session."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Mobility and hydration."
+            }
+          ],
+          "coach_note": "The load stays moderate because the programme is building readiness, not simulating a selection course."
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "phase": "Peak capacity",
+      "title": "Peak work capacity",
+      "load": "High",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Heavy doubles + lower-body power",
+          "duration": "60-70 min",
+          "purpose": "Increase force while retaining speed and athletic movement.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine, mobility and progressive deadlift sets."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 5 x 2 at RPE 8.5. Rest 3 min."
+            },
+            {
+              "name": "Power",
+              "instruction": "Box jump or broad jump: 5 x 3, full reset and safe landing. Use a low box if inexperienced."
+            },
+            {
+              "name": "Support",
+              "instruction": "Walking lunge 3 x 8 each leg at RPE 8; hamstring curl 3 x 8; calf raise 4 x 10."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Heavy suitcase carry 4 x 30 m each side."
+            }
+          ],
+          "coach_note": "Power repetitions end when jump height or landing quality falls."
+        },
+        {
+          "session": 2,
+          "title": "Continuous threshold",
+          "duration": "50-60 min",
+          "purpose": "Improve the ability to hold a hard but controlled pace without recovery breaks.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-15 min easy running and strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "20 min continuous at RPE 7-8. Foundation option: 2 x 10 min with 2 min easy jog."
+            },
+            {
+              "name": "Aerobic finish",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Lower-leg work and mobility."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record average pace and whether effort rose sharply in the final five minutes."
+            }
+          ],
+          "coach_note": "Start controlled. The goal is a strong twenty minutes, not a fast first six."
+        },
+        {
+          "session": 3,
+          "title": "Explosive upper-body peak",
+          "duration": "55-65 min",
+          "purpose": "Emphasise speed and force without excessive muscle damage.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder mobility, light throws and progressive push press sets."
+            },
+            {
+              "name": "Power strength",
+              "instruction": "Push press: 6 x 2 at RPE 8, full recovery."
+            },
+            {
+              "name": "Throw",
+              "instruction": "Seated 4 kg medicine-ball throw: 6 x 2 at maximum valid intent."
+            },
+            {
+              "name": "Strength support",
+              "instruction": "Dumbbell bench 3 x 6 at RPE 7; pull-up or pulldown 4 x 5-8; row 3 x 8."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Face pull 3 x 15 and side plank 2 x 35 sec each side."
+            }
+          ],
+          "coach_note": "This session should feel powerful, not like a bodybuilding burnout."
+        },
+        {
+          "session": 4,
+          "title": "Specific mixed intervals",
+          "duration": "55-65 min",
+          "purpose": "Hold 2 km pace under controlled accumulated fatigue.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "15 min easy run, drills and strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "3 x 800 m at current 2 km pace with 2.5 min recovery, then 4 x 200 m slightly faster with 75 sec recovery."
+            },
+            {
+              "name": "Foundation option",
+              "instruction": "5 x 3 min at RPE 8 with 2 min easy recovery."
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record all splits and whether the 200 m reps stayed relaxed."
+            }
+          ],
+          "coach_note": "Specific does not mean maximal. Save the all-out effort for the assessment."
+        },
+        {
+          "session": 5,
+          "title": "Peak military capacity circuit",
+          "duration": "55-65 min",
+          "purpose": "Bring running, carrying, stepping and bodyweight endurance together.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy cardio and movement rehearsal."
+            },
+            {
+              "name": "Main circuit",
+              "instruction": "25 min quality AMRAP at RPE 7-8: 400 m run, 12 step-ups each leg, 10-20 press-ups, 8 pull-ups/assisted pull-ups or 12 rows, 50 m farmer carry and 10 burpees."
+            },
+            {
+              "name": "Recovery",
+              "instruction": "10 min easy walk or bike."
+            },
+            {
+              "name": "Grip",
+              "instruction": "2 x 45 sec dead hang or heavy hold."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record rounds, movement versions and where pace changed."
+            }
+          ],
+          "coach_note": "The first round should look almost too controlled. The last five minutes are where the work happens."
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "phase": "Sharpen",
+      "title": "Rehearse and sharpen",
+      "load": "Moderate-high",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Final pull rehearsal",
+          "duration": "55-65 min",
+          "purpose": "Rehearse high-force pulling while reducing total strength volume.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine and progressive lower-body warm-up."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 3 x 2 at RPE 8."
+            },
+            {
+              "name": "MTP rehearsal",
+              "instruction": "If a genuine dynamometer is available, complete two official-style 5 sec attempts with full recovery. Otherwise complete 3 x 3 sec rack isometrics at RPE 9."
+            },
+            {
+              "name": "Support",
+              "instruction": "Split squat 2 x 6 each leg; calf raise 3 x 10; tibialis raise 2 x 15."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Light carry 3 x 25 m and easy mobility."
+            }
+          ],
+          "coach_note": "Do not create a fake official score from a gym setup. Record exactly what was tested."
+        },
+        {
+          "session": 2,
+          "title": "Easy aerobic + strides",
+          "duration": "40-50 min",
+          "purpose": "Maintain aerobic fitness while allowing fatigue to begin falling.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min walking."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "30-35 min at RPE 4."
+            },
+            {
+              "name": "Strides",
+              "instruction": "5 x 15 sec smooth and fast with full easy recovery."
+            },
+            {
+              "name": "Finish",
+              "instruction": "5 min walk and lower-leg mobility."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record general freshness."
+            }
+          ],
+          "coach_note": "The run should finish with spring in the legs."
+        },
+        {
+          "session": 3,
+          "title": "Final medicine-ball rehearsal",
+          "duration": "45-55 min",
+          "purpose": "Rehearse the exact test skill and retain upper-body strength.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder mobility and 3 progressive practice throws."
+            },
+            {
+              "name": "Rehearsal",
+              "instruction": "Three official-style seated 4 kg medicine-ball attempts. Record the best valid distance."
+            },
+            {
+              "name": "Strength",
+              "instruction": "Bench press 3 x 3 at RPE 7; pull-up or pulldown 3 x 5-8; row 2 x 8."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Press-ups 2 easy sets and mobility."
+            },
+            {
+              "name": "Review",
+              "instruction": "Write one technical cue to use on final test day."
+            }
+          ],
+          "coach_note": "Once the scored throws are complete, stop testing."
+        },
+        {
+          "session": 4,
+          "title": "1 km rehearsal + speed",
+          "duration": "50-60 min",
+          "purpose": "Confirm 2 km rhythm and maintain speed without a full test.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "15 min easy running, drills and strides."
+            },
+            {
+              "name": "Main set",
+              "instruction": "2 x 1 km at current 2 km pace with 4 min easy recovery."
+            },
+            {
+              "name": "Speed",
+              "instruction": "4 x 200 m relaxed-fast with 90 sec recovery."
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy running."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record whether the second kilometre matched the first."
+            }
+          ],
+          "coach_note": "Finish believing you could have completed another hard kilometre."
+        },
+        {
+          "session": 5,
+          "title": "Final loaded walk",
+          "duration": "55-65 min",
+          "purpose": "Complete the final controlled load exposure before the taper.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Preparation",
+              "instruction": "Backpack load: approximately 10% bodyweight, capped at 10 kg. Do not increase it because this is the final session."
+            },
+            {
+              "name": "Main walk",
+              "instruction": "45-50 min brisk walk at RPE 5 on familiar terrain."
+            },
+            {
+              "name": "After walk",
+              "instruction": "2 easy rounds: 10 step-ups each leg, 10 press-ups, 10 rows and 30 sec plank."
+            },
+            {
+              "name": "Foot care",
+              "instruction": "Final equipment and footwear check. Resolve hotspots before assessment or training."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Mobility and full recovery meal."
+            }
+          ],
+          "coach_note": "The final loaded walk should build confidence, not produce soreness that lasts into Week 12."
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "phase": "Taper + test",
+      "title": "Taper and final assessment",
+      "load": "Low",
+      "sessions": [
+        {
+          "session": 1,
+          "title": "Lower-body primer",
+          "duration": "40-50 min",
+          "purpose": "Keep strength and pulling intent without creating fatigue.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8 min easy bike or row and mobility."
+            },
+            {
+              "name": "Main strength",
+              "instruction": "Trap-bar or conventional deadlift: 3 x 3 at RPE 6."
+            },
+            {
+              "name": "Pull primer",
+              "instruction": "Mid-thigh rack isometric: 3 x 2 sec at RPE 7, or skip if no safe setup."
+            },
+            {
+              "name": "Support",
+              "instruction": "Goblet squat 2 x 6; calf raise 2 x 10; tibialis raise 2 x 12."
+            },
+            {
+              "name": "Finish",
+              "instruction": "10 min easy movement."
+            }
+          ],
+          "coach_note": "Everything should feel fast and easy. Do not turn the primer into a test."
+        },
+        {
+          "session": 2,
+          "title": "Easy aerobic primer",
+          "duration": "30-40 min",
+          "purpose": "Maintain rhythm and reduce stress before the final assessment.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "5 min walk."
+            },
+            {
+              "name": "Main aerobic",
+              "instruction": "20-25 min at RPE 3-4."
+            },
+            {
+              "name": "Strides",
+              "instruction": "4 x 12 sec relaxed-fast with full recovery."
+            },
+            {
+              "name": "Finish",
+              "instruction": "Gentle mobility and hydration."
+            },
+            {
+              "name": "Log",
+              "instruction": "Record freshness, not pace."
+            }
+          ],
+          "coach_note": "You cannot gain fitness this week, but you can hide it under fatigue."
+        },
+        {
+          "session": 3,
+          "title": "Upper-body power primer",
+          "duration": "35-45 min",
+          "purpose": "Keep the throwing pattern explosive without soreness.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "Shoulder mobility and light medicine-ball practice."
+            },
+            {
+              "name": "Power",
+              "instruction": "Seated 4 kg medicine-ball throw: 3 x 2 at 85-90% effort."
+            },
+            {
+              "name": "Strength",
+              "instruction": "Bench press or dumbbell bench: 2 x 5 at RPE 6; row 2 x 8; pulldown 2 x 8."
+            },
+            {
+              "name": "Finish",
+              "instruction": "One easy press-up set and mobility."
+            },
+            {
+              "name": "Cue",
+              "instruction": "Write the single cue you will use for the final throw."
+            }
+          ],
+          "coach_note": "Stop while you feel powerful."
+        },
+        {
+          "session": 4,
+          "title": "2 km pace primer",
+          "duration": "35-45 min",
+          "purpose": "Touch assessment pace without accumulating fatigue.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy running and drills."
+            },
+            {
+              "name": "Main set",
+              "instruction": "4 x 200 m at current 2 km pace with 2 min full easy recovery."
+            },
+            {
+              "name": "Strides",
+              "instruction": "2 x 12 sec relaxed-fast."
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min very easy running or walking."
+            },
+            {
+              "name": "Preparation",
+              "instruction": "Confirm route, footwear, timing device and assessment plan."
+            }
+          ],
+          "coach_note": "The 200 m reps should feel controlled. This is a reminder, not a workout."
+        },
+        {
+          "session": 5,
+          "title": "Final fitness assessment",
+          "duration": "50-70 min",
+          "purpose": "Measure the complete 12-week outcome under a consistent, repeatable protocol.",
+          "priority": "core",
+          "blocks": [
+            {
+              "name": "General warm-up",
+              "instruction": "8-10 min easy cardio and dynamic movement."
+            },
+            {
+              "name": "Medicine-ball test",
+              "instruction": "After progressive practice, complete 3 official-style seated 4 kg throws. Record the longest valid result."
+            },
+            {
+              "name": "Mid-Thigh Pull",
+              "instruction": "Use a proper dynamometer where available: 2 x 5 sec attempts with full recovery. If unavailable, record your gym proxy separately."
+            },
+            {
+              "name": "Run warm-up",
+              "instruction": "Complete 10 min easy running, drills, strides and the 800 m progressive warm-up."
+            },
+            {
+              "name": "2 km test",
+              "instruction": "Run 2 km at best sustainable effort. Record total time and splits."
+            },
+            {
+              "name": "Review",
+              "instruction": "Compare Week 1, Week 8 and Week 12. Record progress, lessons and the next training objective."
+            }
+          ],
+          "coach_note": "The result matters, but so does the athlete built across the twelve weeks. Finish the test; do not finish your training journey."
+        }
+      ]
+    }
+  ],
+  "session_order_notes": [
+    "Session 1 \u2014 Lower-body strength + Mid-Thigh Pull preparation",
+    "Session 2 \u2014 Aerobic development",
+    "Session 3 \u2014 Upper-body strength + medicine-ball power",
+    "Session 4 \u2014 2 km performance running",
+    "Session 5 \u2014 Military work capacity"
+  ],
+  "learn": {
+    "training_terms": [
+      {
+        "term": "RPE",
+        "short": "Reps in reserve \u2014 how many good reps you could still do."
+      },
+      {
+        "term": "MTP",
+        "short": "Mid-Thigh Pull \u2014 isometric pull against a fixed bar."
+      },
+      {
+        "term": "Fartlek",
+        "short": "Continuous run with varied intensity."
+      },
+      {
+        "term": "Threshold",
+        "short": "Sustainable hard effort \u2014 RPE 7-8."
+      },
+      {
+        "term": "Deload",
+        "short": "A planned week of reduced volume to absorb training."
+      },
+      {
+        "term": "Taper",
+        "short": "Reduced volume before a test to arrive fresh."
+      },
+      {
+        "term": "Loaded walk",
+        "short": "Progressive backpack walking at controlled pace."
+      }
+    ]
+  },
+  "assessment": {
+    "tests": [
+      {
+        "name": "Mid-Thigh Pull",
+        "protocol": "Pull upward against a fixed bar at mid-thigh for 5 sec. Two attempts, highest score."
+      },
+      {
+        "name": "Seated Medicine-Ball Throw",
+        "protocol": "Seated against wall, 4 kg ball, three attempts, longest valid throw."
+      },
+      {
+        "name": "2 km Run",
+        "protocol": "After 800 m warm-up, continuous 2 km on a flat course."
+      }
+    ],
+    "role_examples": [
+      {
+        "role": "Infantry Soldier (Regular)",
+        "mtp": "76 kg",
+        "throw": "3.1 m",
+        "twoKm": "10:15"
+      },
+      {
+        "role": "Infantry Soldier (Reserve)",
+        "mtp": "50 kg",
+        "throw": "2.7 m",
+        "twoKm": "Check role page"
+      },
+      {
+        "role": "Paratrooper",
+        "mtp": "76 kg",
+        "throw": "3.1 m",
+        "twoKm": "8:25"
+      }
+    ]
+  },
+  "calculator": {
+    "pace_table": [
+      {
+        "twoKm": "7:30",
+        "two_hundred": "0:45",
+        "four_hundred": "1:30",
+        "eight_hundred": "3:00",
+        "one_km": "3:45"
+      },
+      {
+        "twoKm": "8:00",
+        "two_hundred": "0:48",
+        "four_hundred": "1:36",
+        "eight_hundred": "3:12",
+        "one_km": "4:00"
+      },
+      {
+        "twoKm": "8:30",
+        "two_hundred": "0:51",
+        "four_hundred": "1:42",
+        "eight_hundred": "3:24",
+        "one_km": "4:15"
+      },
+      {
+        "twoKm": "9:00",
+        "two_hundred": "0:54",
+        "four_hundred": "1:48",
+        "eight_hundred": "3:36",
+        "one_km": "4:30"
+      },
+      {
+        "twoKm": "9:30",
+        "two_hundred": "0:57",
+        "four_hundred": "1:54",
+        "eight_hundred": "3:48",
+        "one_km": "4:45"
+      },
+      {
+        "twoKm": "10:00",
+        "two_hundred": "1:00",
+        "four_hundred": "2:00",
+        "eight_hundred": "4:00",
+        "one_km": "5:00"
+      },
+      {
+        "twoKm": "10:15",
+        "two_hundred": "1:01.5",
+        "four_hundred": "2:03",
+        "eight_hundred": "4:06",
+        "one_km": "5:07.5"
+      },
+      {
+        "twoKm": "10:30",
+        "two_hundred": "1:03",
+        "four_hundred": "2:06",
+        "eight_hundred": "4:12",
+        "one_km": "5:15"
+      },
+      {
+        "twoKm": "11:00",
+        "two_hundred": "1:06",
+        "four_hundred": "2:12",
+        "eight_hundred": "4:24",
+        "one_km": "5:30"
+      },
+      {
+        "twoKm": "11:30",
+        "two_hundred": "1:09",
+        "four_hundred": "2:18",
+        "eight_hundred": "4:36",
+        "one_km": "5:45"
+      },
+      {
+        "twoKm": "12:00",
+        "two_hundred": "1:12",
+        "four_hundred": "2:24",
+        "eight_hundred": "4:48",
+        "one_km": "6:00"
+      }
+    ],
+    "strength_rpe": [
+      {
+        "rpe": 6,
+        "rir": "~4 reps left",
+        "use": "Easy-moderate; technique and recovery"
+      },
+      {
+        "rpe": 7,
+        "rir": "~3 reps left",
+        "use": "Comfortably hard; most early strength volume"
+      },
+      {
+        "rpe": 8,
+        "rir": "~2 reps left",
+        "use": "Hard but controlled; key strength development"
+      },
+      {
+        "rpe": 9,
+        "rir": "~1 rep left",
+        "use": "Very hard; short isometrics/rehearsals only"
+      },
+      {
+        "rpe": 10,
+        "rir": "No rep left",
+        "use": "Not used for normal training sets"
+      }
+    ]
+  }
+}
