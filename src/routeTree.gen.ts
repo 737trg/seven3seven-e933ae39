@@ -65,6 +65,7 @@ import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing
 import { Route as MarketingLegalTermsRouteImport } from './routes/_marketing.legal.terms'
 import { Route as MarketingLegalRefundsRouteImport } from './routes/_marketing.legal.refunds'
 import { Route as MarketingLegalPrivacyRouteImport } from './routes/_marketing.legal.privacy'
+import { Route as MarketingCheckoutSuccessRouteImport } from './routes/_marketing.checkout.success'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
@@ -376,6 +377,12 @@ const MarketingLegalPrivacyRoute = MarketingLegalPrivacyRouteImport.update({
   path: '/legal/privacy',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingCheckoutSuccessRoute =
+  MarketingCheckoutSuccessRouteImport.update({
+    id: '/checkout/success',
+    path: '/checkout/success',
+    getParentRoute: () => MarketingRoute,
+  } as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -429,6 +436,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/checkout/success': typeof MarketingCheckoutSuccessRoute
   '/legal/privacy': typeof MarketingLegalPrivacyRoute
   '/legal/refunds': typeof MarketingLegalRefundsRoute
   '/legal/terms': typeof MarketingLegalTermsRoute
@@ -488,6 +496,7 @@ export interface FileRoutesByTo {
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/checkout/success': typeof MarketingCheckoutSuccessRoute
   '/legal/privacy': typeof MarketingLegalPrivacyRoute
   '/legal/refunds': typeof MarketingLegalRefundsRoute
   '/legal/terms': typeof MarketingLegalTermsRoute
@@ -552,6 +561,7 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
+  '/_marketing/checkout/success': typeof MarketingCheckoutSuccessRoute
   '/_marketing/legal/privacy': typeof MarketingLegalPrivacyRoute
   '/_marketing/legal/refunds': typeof MarketingLegalRefundsRoute
   '/_marketing/legal/terms': typeof MarketingLegalTermsRoute
@@ -615,6 +625,7 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
+    | '/checkout/success'
     | '/legal/privacy'
     | '/legal/refunds'
     | '/legal/terms'
@@ -674,6 +685,7 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/checkout/success'
     | '/legal/privacy'
     | '/legal/refunds'
     | '/legal/terms'
@@ -737,6 +749,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
+    | '/_marketing/checkout/success'
     | '/_marketing/legal/privacy'
     | '/_marketing/legal/refunds'
     | '/_marketing/legal/terms'
@@ -1181,6 +1194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingLegalPrivacyRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/checkout/success': {
+      id: '/_marketing/checkout/success'
+      path: '/checkout/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof MarketingCheckoutSuccessRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -1266,6 +1286,7 @@ interface MarketingRouteChildren {
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
+  MarketingCheckoutSuccessRoute: typeof MarketingCheckoutSuccessRoute
   MarketingLegalPrivacyRoute: typeof MarketingLegalPrivacyRoute
   MarketingLegalRefundsRoute: typeof MarketingLegalRefundsRoute
   MarketingLegalTermsRoute: typeof MarketingLegalTermsRoute
@@ -1286,6 +1307,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
+  MarketingCheckoutSuccessRoute: MarketingCheckoutSuccessRoute,
   MarketingLegalPrivacyRoute: MarketingLegalPrivacyRoute,
   MarketingLegalRefundsRoute: MarketingLegalRefundsRoute,
   MarketingLegalTermsRoute: MarketingLegalTermsRoute,
