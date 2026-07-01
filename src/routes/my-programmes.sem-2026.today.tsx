@@ -5,7 +5,7 @@ import { semStore, useSemProfile, useSemReadiness, currentSemWeek, type SemReadi
 import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/today")({
-  head: () => ({ meta: [{ title: "S.E.M. 2026 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "S.E.M 2026 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: TodayPage,
 });
 

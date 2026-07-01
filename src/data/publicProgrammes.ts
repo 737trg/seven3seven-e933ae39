@@ -49,7 +49,7 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
   {
     num: "02",
     slug: "sem-2026",
-    title: "S.E.M. 2026",
+    title: "S.E.M 2026",
     collection: "COMPETE",
     shortLine: "Strength. Endurance. MetCon.",
     description:

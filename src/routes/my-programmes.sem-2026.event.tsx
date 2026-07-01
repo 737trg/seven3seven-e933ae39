@@ -4,7 +4,7 @@ import { useSemProfile, semStore } from "@/lib/sem/store";
 import { useState } from "react";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/event")({
-  head: () => ({ meta: [{ title: "S.E.M. 2026 — Race day" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "S.E.M 2026 — Race day" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: EventPage,
 });
 

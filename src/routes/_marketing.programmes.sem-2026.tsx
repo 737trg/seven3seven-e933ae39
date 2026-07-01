@@ -23,7 +23,7 @@ import {
 
 const SITE = "https://seven3seven.lovable.app";
 const SLUG = "sem-2026";
-const TITLE = "S.E.M. 2026 | SEVEN3SEVEN";
+const TITLE = "S.E.M 2026 | SEVEN3SEVEN";
 const DESC =
   "An eight-week ATHX and ATHX Pro preparation programme developing competition strength, run-row endurance, MetCon capacity and Race Day execution.";
 
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/_marketing/programmes/sem-2026")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: "S.E.M. 2026" },
+      { property: "og:title", content: "S.E.M 2026" },
       {
         property: "og:description",
         content:
@@ -269,14 +269,14 @@ const FEATURES = [
 ] as const;
 
 const FAQ = [
-  ["Is this an official ATHX programme?", "No. S.E.M. 2026 is produced independently by SEVEN3SEVEN. It is designed for athletes preparing for ATHX but is not produced, approved or endorsed by ATHX."],
+  ["Is this an official ATHX programme?", "No. S.E.M 2026 is produced independently by SEVEN3SEVEN. It is designed for athletes preparing for ATHX but is not produced, approved or endorsed by ATHX."],
   ["Is this for individuals or pairs?", "Both. The programme is completed as an individual because every athlete requires their own strength, engine and movement capacity. Pair competitors can then use the Race Day tools to plan how eligible work will be shared."],
   ["Does the programme support ATHX Pro?", "Yes. The athlete selects ATHX or Pro inside their profile. The app then displays the relevant run-row distance, dumbbell setup, sandbag load, box height and lunge position."],
   ["How many days per week do I train?", "The programme contains five core sessions each week. A sixth Zone 2 and movement-skills session is available but remains optional and does not reduce programme completion when skipped."],
   ["Do I need to be an experienced athlete?", "The programme is intended for intermediate or experienced athletes who can safely strict press, back squat and deadlift and can already run and row continuously."],
   ["Do I need all of the competition equipment?", "Access to competition-specific equipment provides the closest preparation, but the programme includes substitutions designed to preserve the movement pattern, work duration and intended training effect."],
   ["Why is there no Olympic lifting?", "Olympic lifting is not a scored ATHX event demand. The programme prioritises the competition lifts, running, rowing and exact MetCon movement patterns rather than replacing specific work with unrelated training."],
-  ["Will this guarantee a better result?", "No programme can guarantee a competition outcome. S.E.M. 2026 provides structured preparation, but results still depend on training consistency, recovery, movement quality, current ability and Race Day execution."],
+  ["Will this guarantee a better result?", "No programme can guarantee a competition outcome. S.E.M 2026 provides structured preparation, but results still depend on training consistency, recovery, movement quality, current ability and Race Day execution."],
 ] as const;
 
 // ─── Component ────────────────────────────────────────────────────────────
@@ -397,7 +397,7 @@ function SemProductPage() {
         <div className="mt-6 lg:mt-8">
           <img
             src={semImg.url}
-            alt="S.E.M. 2026"
+            alt="S.E.M 2026"
             className="block w-full h-auto max-h-[72vh] object-cover select-none"
             draggable={false}
           />
@@ -501,7 +501,7 @@ function SemProductPage() {
           <p>MetCon X tests movement standards, pacing, grip, efficiency and the ability to keep progressing when fatigue begins to accumulate.</p>
         </div>
         <p className="text-bone/80 text-base md:text-lg mt-8 max-w-[62ch] leading-relaxed">
-          S.E.M. 2026 develops these qualities separately — then rehearses them together when it matters.
+          S.E.M 2026 develops these qualities separately — then rehearses them together when it matters.
         </p>
         <FeatureStatement>
           Train every quality.<br />Rehearse the event.<br /><span className="text-signal">Perform when it counts.</span>
@@ -538,7 +538,7 @@ function SemProductPage() {
         </h2>
         <div className="grid lg:grid-cols-12 gap-10 mt-12">
           <div className="lg:col-span-7 space-y-5 text-bone/85 text-base md:text-lg leading-relaxed max-w-[62ch]">
-            <p>S.E.M. 2026 is not a bodybuilding split and it is not random functional-fitness punishment.</p>
+            <p>S.E.M 2026 is not a bodybuilding split and it is not random functional-fitness punishment.</p>
             <p>The programme keeps the three competition lifts as weekly priorities. Running and rowing receive dedicated quality work. MetCon sessions progressively expose the exact movement patterns, standards and category demands required on competition day.</p>
             <p>Olympic lifting is not programmed because it is not a scored event demand and would replace more specific work.</p>
           </div>
@@ -576,7 +576,7 @@ function SemProductPage() {
         </h2>
         <div className="grid lg:grid-cols-12 gap-10 mt-12">
           <div className="lg:col-span-7 space-y-5 text-bone/85 text-base md:text-lg leading-relaxed max-w-[62ch]">
-            <p>Every athlete completes S.E.M. 2026 as an individual.</p>
+            <p>Every athlete completes S.E.M 2026 as an individual.</p>
             <p>Pair competitors may share eligible work on race day — but each athlete still needs their own strength, engine, movement quality and ability to recover under fatigue.</p>
             <p>The training plan therefore remains athlete-led. Pair-specific handovers, station splits and contingency planning sit inside the Race Day tools rather than weakening the daily programme.</p>
           </div>
@@ -714,7 +714,7 @@ function SemProductPage() {
         <div className="grid lg:grid-cols-12 gap-10 mt-12">
           <div className="lg:col-span-7 space-y-5 text-bone/85 text-base md:text-lg leading-relaxed max-w-[62ch]">
             <p>The Strength zone rewards the best legal successful result across the strict press, back squat and deadlift.</p>
-            <p>S.E.M. 2026 develops each lift weekly and gradually shifts from controlled volume towards heavier competition-specific work. The programme also rehearses the full sequence under the clock so the athlete can practise:</p>
+            <p>S.E.M 2026 develops each lift weekly and gradually shifts from controlled volume towards heavier competition-specific work. The programme also rehearses the full sequence under the clock so the athlete can practise:</p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 mt-4 text-bone/80 text-base">
               {[
                 "Rack and equipment setup",
@@ -900,7 +900,7 @@ function SemProductPage() {
           No invented fitness score.
         </h2>
         <p className="text-bone/80 text-base md:text-lg mt-8 max-w-[64ch] leading-relaxed">
-          S.E.M. 2026 does not reduce performance to a meaningless universal percentage. Progress comes directly from the results the athlete logs.
+          S.E.M 2026 does not reduce performance to a meaningless universal percentage. Progress comes directly from the results the athlete logs.
         </p>
         <div className="mt-14 grid md:grid-cols-3 gap-10">
           {[
@@ -946,7 +946,7 @@ function SemProductPage() {
           No affiliation. No false certainty.
         </h2>
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-5 mt-12 max-w-[82ch] text-bone/80 text-base md:text-lg leading-relaxed">
-          <p>S.E.M. 2026 is an independent competition-preparation programme produced by SEVEN3SEVEN.</p>
+          <p>S.E.M 2026 is an independent competition-preparation programme produced by SEVEN3SEVEN.</p>
           <p>It is designed for athletes preparing for ATHX but is not produced, approved or endorsed by ATHX.</p>
           <p>Competition workouts, movement standards, category requirements and timetables may change. Athletes must always confirm the organiser's latest published information before competition.</p>
           <p className="text-foreground-muted">The programme provides educational training guidance and does not replace medical diagnosis, injury rehabilitation or qualified individual coaching. Stop any exercise that causes sharp pain, dizziness, chest pain or unusual shortness of breath and seek appropriate support.</p>
@@ -957,7 +957,7 @@ function SemProductPage() {
       <section id="final-purchase" className="border-t border-border/60 panel-dark">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-signal mb-6">S.E.M. 2026</p>
+            <p className="eyebrow text-signal mb-6">S.E.M 2026</p>
             <h2 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.92] text-[clamp(2.5rem,6vw,5rem)] max-w-[16ch]">
               Strength. Endurance. MetCon.
             </h2>
@@ -1028,7 +1028,7 @@ function SemProductPage() {
           <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-3 sm:py-4 flex items-center justify-between gap-4">
             <div className="min-w-0 flex items-baseline gap-4 sm:gap-6">
               <p className="font-display font-bold text-bone tracking-[-0.01em] text-sm sm:text-base">
-                <span className="hidden sm:inline">S.E.M. 2026</span>
+                <span className="hidden sm:inline">S.E.M 2026</span>
                 <span className="sm:hidden">S.E.M.</span>
               </p>
               <p className="hidden md:block eyebrow text-foreground-muted">8 weeks · 5 core + 1 optional</p>
@@ -1082,7 +1082,7 @@ function SemProductPage() {
                 <img src={semImg.url} alt="" className="h-24 w-20 object-cover shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="eyebrow text-foreground-muted mb-2">Compete</p>
-                  <p className="font-display font-bold text-bone text-lg tracking-[-0.02em]">S.E.M. 2026</p>
+                  <p className="font-display font-bold text-bone text-lg tracking-[-0.02em]">S.E.M 2026</p>
                   <p className="text-foreground-muted text-xs mt-1">8-week interactive competition programme</p>
                   <div className="flex items-center justify-between mt-4">
                     <span className="font-display text-bone tabular text-xl">£19.99</span>
