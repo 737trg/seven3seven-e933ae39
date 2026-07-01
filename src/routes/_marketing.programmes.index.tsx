@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowDown } from "lucide-react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { ProgrammeCarousel } from "@/components/marketing/ProgrammeCarousel";
 
