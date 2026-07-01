@@ -10,6 +10,9 @@ import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { semStore, useSemStarted } from "@/lib/sem/store";
 import { useSemProgress } from "@/lib/sem/progress";
 import { validationCounts as semCounts } from "@/lib/sem/manifest";
+import { useBtbStarted } from "@/lib/btb/store";
+import { useBtbProgress } from "@/lib/btb/progress";
+import { validationCounts as btbCounts } from "@/lib/btb/manifest";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -33,6 +36,8 @@ function MyProgrammesPage() {
   const { items: entitled } = useEntitlements(user?.id);
   const semStarted = useSemStarted();
   const semProg = useSemProgress(user?.id);
+  const btbStarted = useBtbStarted();
+  const btbProg = useBtbProgress(user?.id);
   const navigate = useNavigate();
 
   if (!authLoading && !user) {
@@ -168,14 +173,23 @@ function MyProgrammesPage() {
             )}
           </div>
 
-          {((ownsSem && !semStarted.started) || ownsBtb) && (
+          {ownsBtb && btbStarted.started && (
+            <div className="mt-10">
+              <BtbActiveCard
+                coreCompleted={btbProg.coreCompleted}
+                coreTotal={btbCounts().core}
+              />
+            </div>
+          )}
+
+          {((ownsSem && !semStarted.started) || (ownsBtb && !btbStarted.started)) && (
             <div>
               <p className="eyebrow mb-4">Ready to start</p>
               <div className="space-y-10">
                 {ownsSem && !semStarted.started && (
                   <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-2026/today" }); }} />
                 )}
-                {ownsBtb && <BtbReadyCard />}
+                {ownsBtb && !btbStarted.started && <BtbReadyCard />}
               </div>
             </div>
           )}
