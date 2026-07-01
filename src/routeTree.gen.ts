@@ -62,6 +62,8 @@ import { Route as MarketingProgrammesSem2026RouteImport } from './routes/_market
 import { Route as MarketingProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/_marketing.programmes.basic-training-blueprint-plus'
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
 import { Route as MarketingLegalTermsRouteImport } from './routes/_marketing.legal.terms'
+import { Route as MarketingLegalRefundsRouteImport } from './routes/_marketing.legal.refunds'
+import { Route as MarketingLegalPrivacyRouteImport } from './routes/_marketing.legal.privacy'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
@@ -358,6 +360,16 @@ const MarketingLegalTermsRoute = MarketingLegalTermsRouteImport.update({
   path: '/legal/terms',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingLegalRefundsRoute = MarketingLegalRefundsRouteImport.update({
+  id: '/legal/refunds',
+  path: '/legal/refunds',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingLegalPrivacyRoute = MarketingLegalPrivacyRouteImport.update({
+  id: '/legal/privacy',
+  path: '/legal/privacy',
+  getParentRoute: () => MarketingRoute,
+} as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -410,6 +422,8 @@ export interface FileRoutesByFullPath {
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/legal/privacy': typeof MarketingLegalPrivacyRoute
+  '/legal/refunds': typeof MarketingLegalRefundsRoute
   '/legal/terms': typeof MarketingLegalTermsRoute
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
@@ -466,6 +480,8 @@ export interface FileRoutesByTo {
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/legal/privacy': typeof MarketingLegalPrivacyRoute
+  '/legal/refunds': typeof MarketingLegalRefundsRoute
   '/legal/terms': typeof MarketingLegalTermsRoute
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
@@ -527,6 +543,8 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
+  '/_marketing/legal/privacy': typeof MarketingLegalPrivacyRoute
+  '/_marketing/legal/refunds': typeof MarketingLegalRefundsRoute
   '/_marketing/legal/terms': typeof MarketingLegalTermsRoute
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/_marketing/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
@@ -587,6 +605,8 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
+    | '/legal/privacy'
+    | '/legal/refunds'
     | '/legal/terms'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
@@ -643,6 +663,8 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/legal/privacy'
+    | '/legal/refunds'
     | '/legal/terms'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
@@ -703,6 +725,8 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
+    | '/_marketing/legal/privacy'
+    | '/_marketing/legal/refunds'
     | '/_marketing/legal/terms'
     | '/_marketing/programmes/$slug'
     | '/_marketing/programmes/basic-training-blueprint-plus'
@@ -1124,6 +1148,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingLegalTermsRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/legal/refunds': {
+      id: '/_marketing/legal/refunds'
+      path: '/legal/refunds'
+      fullPath: '/legal/refunds'
+      preLoaderRoute: typeof MarketingLegalRefundsRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/legal/privacy': {
+      id: '/_marketing/legal/privacy'
+      path: '/legal/privacy'
+      fullPath: '/legal/privacy'
+      preLoaderRoute: typeof MarketingLegalPrivacyRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -1208,6 +1246,8 @@ interface MarketingRouteChildren {
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
+  MarketingLegalPrivacyRoute: typeof MarketingLegalPrivacyRoute
+  MarketingLegalRefundsRoute: typeof MarketingLegalRefundsRoute
   MarketingLegalTermsRoute: typeof MarketingLegalTermsRoute
   MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
   MarketingProgrammesBasicTrainingBlueprintPlusRoute: typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
@@ -1225,6 +1265,8 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
+  MarketingLegalPrivacyRoute: MarketingLegalPrivacyRoute,
+  MarketingLegalRefundsRoute: MarketingLegalRefundsRoute,
   MarketingLegalTermsRoute: MarketingLegalTermsRoute,
   MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
   MarketingProgrammesBasicTrainingBlueprintPlusRoute:
