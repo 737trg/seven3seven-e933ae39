@@ -4,7 +4,7 @@ import { SEM, allSessions, isCore, sessionId } from "@/lib/sem/manifest";
 import { semStore, useSemProfile, useSemReadiness, currentSemWeek, type SemReadiness } from "@/lib/sem/store";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/my-programmes/sem-8/today")({
+export const Route = createFileRoute("/my-programmes/sem-2026/today")({
   head: () => ({ meta: [{ title: "S.E.M. 8 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: TodayPage,
 });

@@ -8,7 +8,7 @@ import { useEntitlements } from "@/lib/useEntitlements";
 import { semStore, useSemStarted } from "@/lib/sem/store";
 import { getProgrammeDownloadUrl } from "@/lib/pdf.functions";
 
-export const Route = createFileRoute("/my-programmes/sem-8/")({
+export const Route = createFileRoute("/my-programmes/sem-2026/")({
   head: () => ({
     meta: [
       { title: "S.E.M. 8 — SEVEN3SEVEN" },

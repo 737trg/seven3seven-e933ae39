@@ -3,7 +3,7 @@ import { SemShell } from "@/components/sem/SemShell";
 import { findSession, blockId } from "@/lib/sem/manifest";
 import { useSemProfile } from "@/lib/sem/store";
 
-export const Route = createFileRoute("/my-programmes/sem-8/programme/s/$sessionId")({
+export const Route = createFileRoute("/my-programmes/sem-2026/programme/s/$sessionId")({
   head: () => ({ meta: [{ title: "S.E.M. 8 — Session" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: SessionPage,
 });

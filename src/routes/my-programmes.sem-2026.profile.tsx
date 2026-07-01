@@ -4,7 +4,7 @@ import { semStore, useSemProfile, type SemUnits, type SemFormat, type SemCategor
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
 
-export const Route = createFileRoute("/my-programmes/sem-8/profile")({
+export const Route = createFileRoute("/my-programmes/sem-2026/profile")({
   head: () => ({ meta: [{ title: "S.E.M. 8 — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProfilePage,
 });
