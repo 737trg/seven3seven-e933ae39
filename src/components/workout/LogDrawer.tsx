@@ -725,11 +725,13 @@ export function LogDrawer({
   const side = isMobile ? "bottom" : "right";
   const kind = inferLogKind(block);
   const sessionDateISO = session.date ?? new Date().toISOString().slice(0, 10);
-  const last = store.getLastResultForExercise(block.title, {
-    sessionId: session.id,
-    blockId: block.id,
-    dateISO: sessionDateISO,
-  });
+  const last = store.isAthxLocalStateEnabled()
+    ? store.getLastResultForExercise(block.title, {
+        sessionId: session.id,
+        blockId: block.id,
+        dateISO: sessionDateISO,
+      })
+    : undefined;
 
   const [state, setState] = useState<BlockResultDraft>(() => {
     const draft = store.getDraft(session.id, block.id);
