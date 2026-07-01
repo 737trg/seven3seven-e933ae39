@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArrowRight, CalendarDays, Trophy, Activity } from "lucide-react";
 import { store, subscribeStore } from "@/lib/store";
 import { PROGRAMME, allSessions } from "@/data/programme";
@@ -32,6 +32,8 @@ function useStore<T>(read: () => T): T {
 function MyProgrammesPage() {
   const logs = useStore(store.getLogs);
   const results = useStore(store.getResults);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => { setHydrated(true); }, []);
   const { user, loading: authLoading } = useAuth();
   const { items: entitled } = useEntitlements(user?.id);
   const semStarted = useSemStarted();
@@ -127,8 +129,8 @@ function MyProgrammesPage() {
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 divide-x divide-border/60">
             <StatStrip label="Active" value={String(entitled.length)} />
             <StatStrip label="Current week" value={String(week.number === 8 ? "RW" : week.number)} />
-            <StatStrip label="Sessions completed" value={String(completedSessions)} />
-            <StatStrip label="Results logged" value={String(results.length)} />
+            <StatStrip label="Sessions completed" value={hydrated ? String(completedSessions) : "0"} />
+            <StatStrip label="Results logged" value={hydrated ? String(results.length) : "0"} />
           </div>
         </div>
       </section>
