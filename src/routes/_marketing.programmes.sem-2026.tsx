@@ -1103,14 +1103,19 @@ function SemProductPage() {
               <span className="eyebrow">Total</span>
               <span className="font-display text-bone tabular text-2xl">£{cart.hasSem ? "19.99" : "0.00"}</span>
             </div>
-            <Link
-              to="/cart"
-              onClick={() => setCartOpen(false)}
-              disabled={!cart.hasSem}
-              className={`w-full inline-flex items-center justify-center gap-2 px-6 py-4 font-display uppercase text-[12px] tracking-[0.28em] ${cart.hasSem ? "bg-bone text-obsidian hover:bg-white" : "bg-bone/10 text-bone/60 pointer-events-none"}`}
-            >
-              Checkout
-            </Link>
+            {cart.hasSem ? (
+              <Link
+                to="/cart"
+                onClick={() => setCartOpen(false)}
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-bone text-obsidian hover:bg-white font-display uppercase text-[12px] tracking-[0.28em]"
+              >
+                Checkout
+              </Link>
+            ) : (
+              <span className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-bone/10 text-bone/60 font-display uppercase text-[12px] tracking-[0.28em]">
+                Checkout
+              </span>
+            )}
             <p className="text-foreground-muted text-xs leading-relaxed">
               Secure payment by Stripe. Add promotion codes at checkout.
             </p>
