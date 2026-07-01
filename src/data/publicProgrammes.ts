@@ -23,7 +23,7 @@ export interface PublicProgramme {
 export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
   {
     num: "01",
-    slug: "basic-training-blueprint",
+    slug: "basic-training-blueprint-plus",
     title: "BASIC TRAINING BLUEPRINT+",
     collection: "BLUEPRINT",
     shortLine: "Build the fitness to handle what's ahead.",
@@ -48,8 +48,8 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
   },
   {
     num: "02",
-    slug: "sem-8",
-    title: "S.E.M. 8",
+    slug: "sem-2026",
+    title: "S.E.M. 2026",
     collection: "COMPETE",
     shortLine: "Strength. Endurance. MetCon.",
     description:

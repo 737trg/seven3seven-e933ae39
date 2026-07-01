@@ -3,8 +3,8 @@ import { SemShell } from "@/components/sem/SemShell";
 import { useSemProfile, semStore } from "@/lib/sem/store";
 import { useState } from "react";
 
-export const Route = createFileRoute("/my-programmes/sem-8/event")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Race day" }, { name: "robots", content: "noindex, nofollow" }] }),
+export const Route = createFileRoute("/my-programmes/sem-2026/event")({
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Race day" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: EventPage,
 });
 

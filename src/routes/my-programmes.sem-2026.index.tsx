@@ -8,12 +8,12 @@ import { useEntitlements } from "@/lib/useEntitlements";
 import { semStore, useSemStarted } from "@/lib/sem/store";
 import { getProgrammeDownloadUrl } from "@/lib/pdf.functions";
 
-export const Route = createFileRoute("/my-programmes/sem-8/")({
+export const Route = createFileRoute("/my-programmes/sem-2026/")({
   head: () => ({
     meta: [
-      { title: "S.E.M. 8 — SEVEN3SEVEN" },
+      { title: "S.E.M. 2026 — SEVEN3SEVEN" },
       { name: "robots", content: "noindex, nofollow" },
-      { name: "description", content: "S.E.M. 8 — programme cover." },
+      { name: "description", content: "S.E.M. 2026 — programme cover." },
     ],
   }),
   component: SemCover,
@@ -28,7 +28,7 @@ function SemCover() {
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
 
-  const entitled = !authLoading && !entLoading && items.some((i) => i.slug === "sem-8");
+  const entitled = !authLoading && !entLoading && items.some((i) => i.slug === "sem-2026");
 
   return (
     <main className="min-h-screen bg-background text-foreground relative overflow-hidden">
@@ -80,7 +80,7 @@ function SemCover() {
                 onClick={() => {
                   if (!entitled) { navigate({ to: "/my-programmes" }); return; }
                   if (!started.started) semStore.markStarted();
-                  navigate({ to: "/my-programmes/sem-8/today" });
+                  navigate({ to: "/my-programmes/sem-2026/today" });
                 }}
                 className="h-12 px-6 inline-flex items-center justify-center gap-3 bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display"
               >
@@ -91,7 +91,7 @@ function SemCover() {
                 onClick={async () => {
                   setDownloadError(null); setDownloading(true);
                   try {
-                    const r = await getUrl({ data: { slug: "sem-8" } });
+                    const r = await getUrl({ data: { slug: "sem-2026" } });
                     window.open(r.url, "_blank", "noopener,noreferrer");
                   } catch (e: any) { setDownloadError(e?.message ?? "Could not generate download."); }
                   finally { setDownloading(false); }

@@ -5,8 +5,8 @@ import { useSemProgress } from "@/lib/sem/progress";
 import { useSemProfile, currentSemWeek } from "@/lib/sem/store";
 import { validationCounts, SEM, isCore, sessionId } from "@/lib/sem/manifest";
 
-export const Route = createFileRoute("/my-programmes/sem-8/progress")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Progress" }, { name: "robots", content: "noindex, nofollow" }] }),
+export const Route = createFileRoute("/my-programmes/sem-2026/progress")({
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Progress" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProgressPage,
 });
 

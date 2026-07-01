@@ -4,8 +4,8 @@ import { SEM, allSessions, isCore, sessionId } from "@/lib/sem/manifest";
 import { semStore, useSemProfile, useSemReadiness, currentSemWeek, type SemReadiness } from "@/lib/sem/store";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/my-programmes/sem-8/today")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
+export const Route = createFileRoute("/my-programmes/sem-2026/today")({
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: TodayPage,
 });
 
@@ -27,7 +27,7 @@ function TodayPage() {
         <div className="mb-8 border border-signal/40 bg-signal/10 p-5">
           <p className="eyebrow text-signal mb-1">Setup</p>
           <p className="text-bone text-sm">Complete your profile to lock in start date, units and benchmarks.</p>
-          <Link to="/my-programmes/sem-8/profile" className="mt-3 inline-flex items-center gap-2 text-bone text-xs uppercase tracking-widest font-display">Open profile <ArrowRight className="h-3 w-3" /></Link>
+          <Link to="/my-programmes/sem-2026/profile" className="mt-3 inline-flex items-center gap-2 text-bone text-xs uppercase tracking-widest font-display">Open profile <ArrowRight className="h-3 w-3" /></Link>
         </div>
       )}
 
@@ -44,8 +44,8 @@ function TodayPage() {
           </ul>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link to="/my-programmes/sem-8/programme/s/$sessionId" params={{ sessionId: currentId }} className="h-11 px-6 inline-flex items-center bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display">Start session</Link>
-            <Link to="/my-programmes/sem-8/programme/s/$sessionId" params={{ sessionId: currentId }} className="h-11 px-6 inline-flex items-center border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display">View detail</Link>
+            <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: currentId }} className="h-11 px-6 inline-flex items-center bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display">Start session</Link>
+            <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: currentId }} className="h-11 px-6 inline-flex items-center border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display">View detail</Link>
           </div>
 
           <div className="mt-10">
@@ -77,7 +77,7 @@ function TodayPage() {
                     <p className="text-bone text-sm truncate">{s.title}</p>
                     <p className="text-foreground-muted text-[10px] uppercase tracking-widest">{s.recommended_day} · {s.pillar} · {s.duration}{!isCore(s) && " · OPTIONAL"}</p>
                   </div>
-                  <Link to="/my-programmes/sem-8/programme/s/$sessionId" params={{ sessionId: id }} className="text-foreground-muted hover:text-bone"><ArrowRight className="h-4 w-4" /></Link>
+                  <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: id }} className="text-foreground-muted hover:text-bone"><ArrowRight className="h-4 w-4" /></Link>
                 </li>
               );
             })}

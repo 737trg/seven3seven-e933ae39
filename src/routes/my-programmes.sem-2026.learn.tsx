@@ -3,8 +3,8 @@ import { useMemo, useState } from "react";
 import { SemShell } from "@/components/sem/SemShell";
 import { SEM } from "@/lib/sem/manifest";
 
-export const Route = createFileRoute("/my-programmes/sem-8/learn")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Learn" }, { name: "robots", content: "noindex, nofollow" }] }),
+export const Route = createFileRoute("/my-programmes/sem-2026/learn")({
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Learn" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: LearnPage,
 });
 

@@ -56,6 +56,14 @@ export function MarketingHeader() {
               >
                 <span className="relative inline-block py-1">My programmes</span>
               </Link>
+              <Link
+                to="/account"
+                className={`font-display uppercase text-[12px] tracking-[0.22em] transition-colors ${
+                  pathname.startsWith("/account") ? "text-bone" : "text-foreground-muted hover:text-bone"
+                }`}
+              >
+                <span className="relative inline-block py-1">Account</span>
+              </Link>
               <button
                 onClick={() => supabase.auth.signOut()}
                 aria-label="Sign out"
@@ -126,6 +134,7 @@ export function MarketingHeader() {
             {user ? (
               <>
                 <Link to="/my-programmes" onClick={() => setOpen(false)} className="py-3 font-display uppercase text-sm tracking-[0.18em] text-bone border-b border-border">My programmes</Link>
+                <Link to="/account" onClick={() => setOpen(false)} className="py-3 font-display uppercase text-sm tracking-[0.18em] text-bone border-b border-border">Account</Link>
                 <button onClick={() => { setOpen(false); supabase.auth.signOut(); }} className="py-3 text-left font-display uppercase text-sm tracking-[0.18em] text-foreground-muted">Sign out</button>
               </>
             ) : (

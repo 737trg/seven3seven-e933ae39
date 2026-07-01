@@ -3,8 +3,8 @@ import { SemShell } from "@/components/sem/SemShell";
 import { SEM } from "@/lib/sem/manifest";
 import { useSemProfile } from "@/lib/sem/store";
 
-export const Route = createFileRoute("/my-programmes/sem-8/calculator")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Calculator" }, { name: "robots", content: "noindex, nofollow" }] }),
+export const Route = createFileRoute("/my-programmes/sem-2026/calculator")({
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Calculator" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: CalcPage,
 });
 
