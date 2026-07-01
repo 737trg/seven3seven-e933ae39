@@ -416,6 +416,37 @@ function BtbReadyCard() {
   );
 }
 
+function BtbActiveCard({ coreCompleted, coreTotal }: { coreCompleted: number; coreTotal: number }) {
+  const pct = Math.round((coreCompleted / Math.max(1, coreTotal)) * 100);
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Foundation · 03</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">Basic Training Blueprint+</h3>
+      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
+        <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
+        <li>Duration <span className="text-bone">12 weeks</span></li>
+      </ul>
+      <div className="mt-8 max-w-md">
+        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
+          <span>Progress (core)</span>
+          <span className="text-bone tabular">{pct}%</span>
+        </div>
+        <div className="h-[2px] bg-surface-raised overflow-hidden">
+          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <Link to="/my-programmes/basic-training-blueprint-plus/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Continue training <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link to="/my-programmes/basic-training-blueprint-plus" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+          View cover
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 function SidebarCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
