@@ -1,5 +1,5 @@
 /**
- * Local-only profile + readiness for the S.E.M. 8 programme.
+ * Local-only profile + readiness for the S.E.M. 2026 programme.
  * Scoped under `sem8.*` so it can never collide with ATHX local storage.
  *
  * Authoritative results live in the database (session_completions, workout_results).

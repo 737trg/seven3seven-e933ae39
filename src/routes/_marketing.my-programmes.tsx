@@ -1,19 +1,15 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useSyncExternalStore, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { ArrowRight, CalendarDays, Trophy, Activity } from "lucide-react";
 import { store, subscribeStore } from "@/lib/store";
 import { PROGRAMME, allSessions } from "@/data/programme";
 import { currentWeek, todaySession, nextSession, ukShortDate, today } from "@/lib/programmeUtils";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
-import { claimOwner } from "@/lib/owner.functions";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { semStore, useSemStarted } from "@/lib/sem/store";
 import { useSemProgress } from "@/lib/sem/progress";
 import { validationCounts as semCounts } from "@/lib/sem/manifest";
-
-const OWNER_EMAIL = "jamesnichol9@gmail.com";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -34,13 +30,10 @@ function MyProgrammesPage() {
   const logs = useStore(store.getLogs);
   const results = useStore(store.getResults);
   const { user, loading: authLoading } = useAuth();
-  const { items: entitled, loading: entLoading } = useEntitlements(user?.id);
+  const { items: entitled } = useEntitlements(user?.id);
   const semStarted = useSemStarted();
   const semProg = useSemProgress(user?.id);
   const navigate = useNavigate();
-  const claim = useServerFn(claimOwner);
-  const [claiming, setClaiming] = useState(false);
-  const [claimError, setClaimError] = useState<string | null>(null);
 
   if (!authLoading && !user) {
     return (
@@ -59,9 +52,14 @@ function MyProgrammesPage() {
   }
 
   const owns = entitled.some((e) => e.slug === "athx-2026");
-  const ownsSem = entitled.some((e) => e.slug === "sem-8");
-  const isOwnerEmail = (user?.email ?? "").toLowerCase() === OWNER_EMAIL;
-  const needsClaim = isOwnerEmail && !entLoading && entitled.length === 0;
+  const ownsSem = entitled.some((e) => e.slug === "sem-2026");
+  const ownsBtb = entitled.some((e) => e.slug === "basic-training-blueprint-plus");
+
+  const displayName =
+    (user?.user_metadata?.display_name as string | undefined) ||
+    (user?.user_metadata?.first_name as string | undefined) ||
+    (user?.user_metadata?.name as string | undefined) ||
+    "";
 
   // Real ATHX data only — no invented metrics.
   const totalSessions = allSessions().length;
@@ -96,37 +94,6 @@ function MyProgrammesPage() {
 
   return (
     <>
-      {needsClaim && (
-        <div className="bg-signal/10 border-b border-signal/40">
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-bone text-sm">
-              Owner account detected. Claim your programmes to activate ATHX 2026, Basic Training Blueprint+ and S.E.M. 8.
-            </p>
-            <button
-              disabled={claiming}
-              onClick={async () => {
-                setClaimError(null); setClaiming(true);
-                try {
-                  await claim();
-                  // simple refresh
-                  navigate({ to: "/my-programmes" });
-                  if (typeof window !== "undefined") window.location.reload();
-                } catch (e: any) {
-                  setClaimError(e?.message ?? "Could not claim ownership.");
-                  setClaiming(false);
-                }
-              }}
-              className="h-10 px-5 bg-bone text-obsidian text-[11px] uppercase tracking-[0.22em] font-display disabled:opacity-50"
-            >
-              {claiming ? "Claiming…" : "Claim ownership"}
-            </button>
-          </div>
-          {claimError && (
-            <p className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-3 text-signal text-xs">{claimError}</p>
-          )}
-        </div>
-      )}
-
       {/* MASTHEAD — image first, text block below */}
       <section className="relative">
         <img
@@ -139,7 +106,7 @@ function MyProgrammesPage() {
         <div className="bg-background">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
             <p className="eyebrow text-foreground-muted mb-6 md:mb-8">
-              {(user?.user_metadata?.display_name as string) ?? user?.email?.split("@")[0] ?? "Athlete"} — Library
+              {displayName || "Complete your profile"} — Library
             </p>
             <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.9] text-[clamp(2.5rem,6.5vw,5rem)]">
               My programmes.
@@ -188,7 +155,7 @@ function MyProgrammesPage() {
               <Empty text="No active programmes" />
             )}
 
-            {/* S.E.M. 8 — Ready to start OR Active (when started) */}
+            {/* S.E.M. 2026 — Ready to start OR Active (when started) */}
             {ownsSem && semStarted.started && (
               <div className="mt-10">
                 <SemActiveCard
@@ -201,10 +168,15 @@ function MyProgrammesPage() {
             )}
           </div>
 
-          {ownsSem && !semStarted.started && (
+          {((ownsSem && !semStarted.started) || ownsBtb) && (
             <div>
               <p className="eyebrow mb-4">Ready to start</p>
-              <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-8/today" }); }} />
+              <div className="space-y-10">
+                {ownsSem && !semStarted.started && (
+                  <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-2026/today" }); }} />
+                )}
+                {ownsBtb && <BtbReadyCard />}
+              </div>
             </div>
           )}
 
@@ -356,7 +328,7 @@ function SemReadyCard({ onStart }: { onStart: () => void }) {
   return (
     <article className="border-t border-border/60 pt-8">
       <p className="eyebrow text-foreground-muted">Compete · 02</p>
-      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 8</h3>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 2026</h3>
       <p className="text-foreground-muted text-sm mt-3 max-w-[44ch]">Strength. Endurance. MetCon. — eight-week competition preparation.</p>
       <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
         <li>Status · <span className="text-bone">Ready to start</span></li>
@@ -366,7 +338,7 @@ function SemReadyCard({ onStart }: { onStart: () => void }) {
         <button onClick={onStart} className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
           Start programme <ArrowRight className="h-3.5 w-3.5" />
         </button>
-        <Link to="/my-programmes/sem-8" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+        <Link to="/my-programmes/sem-2026" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
           View cover
         </Link>
       </div>
@@ -379,7 +351,7 @@ function SemActiveCard({ coreCompleted, coreTotal, optionalCompleted, optionalTo
   return (
     <article className="border-t border-border/60 pt-8">
       <p className="eyebrow text-foreground-muted">Compete · 02</p>
-      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 8</h3>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 2026</h3>
       <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
         <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
         <li>Optional <span className="text-bone tabular">{optionalCompleted}/{optionalTotal}</span></li>
@@ -394,10 +366,10 @@ function SemActiveCard({ coreCompleted, coreTotal, optionalCompleted, optionalTo
         </div>
       </div>
       <div className="mt-8 flex flex-wrap gap-6">
-        <Link to="/my-programmes/sem-8/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+        <Link to="/my-programmes/sem-2026/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
           Continue training <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-        <Link to="/my-programmes/sem-8" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+        <Link to="/my-programmes/sem-2026" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
           View cover
         </Link>
       </div>
@@ -410,6 +382,23 @@ function Empty({ text }: { text: string }) {
     <div className="border-t border-border/60 pt-5">
       <p className="text-foreground-muted text-xs uppercase tracking-[0.22em]">{text}</p>
     </div>
+  );
+}
+
+function BtbReadyCard() {
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Foundation · 03</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">Basic Training Blueprint+</h3>
+      <p className="text-foreground-muted text-sm mt-4 max-w-[52ch] leading-relaxed">
+        Foundational hybrid training. Set your start date to unlock week 1.
+      </p>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <Link to="/my-programmes/basic-training-blueprint-plus" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Open programme <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+    </article>
   );
 }
 

@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import type { ReactNode } from "react";
 
-const BASE = "/my-programmes/sem-8";
+const BASE = "/my-programmes/sem-2026";
 const primary = [
   { to: `${BASE}/today`, label: "Today", icon: Flame },
   { to: `${BASE}/programme`, label: "Programme", icon: CalendarDays },
@@ -24,14 +24,14 @@ export function SemShell({ children, eyebrow, title }: { children: ReactNode; ey
   const { items, loading: entLoading } = useEntitlements(user?.id);
 
   if (!authLoading && !user) return <GateSignIn />;
-  if (!authLoading && !entLoading && !items.some((i) => i.slug === "sem-8")) return <GateNoEntitlement />;
+  if (!authLoading && !entLoading && !items.some((i) => i.slug === "sem-2026")) return <GateNoEntitlement />;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex">
       <aside className="hidden lg:flex flex-col w-[240px] shrink-0 border-r border-border bg-background sticky top-0 h-screen px-6 py-8">
         <div className="mb-12">
           <Wordmark size="lg" />
-          <p className="eyebrow mt-3">S.E.M. 8</p>
+          <p className="eyebrow mt-3">S.E.M. 2026</p>
         </div>
         <nav className="flex flex-col gap-1">
           {primary.map((it) => {
@@ -103,7 +103,7 @@ function GateSignIn() {
     <section className="min-h-[60vh] grid place-items-center px-5 py-20 bg-background">
       <div className="max-w-md text-center">
         <p className="eyebrow text-signal mb-3">Members only</p>
-        <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">Sign in to access S.E.M. 8</h1>
+        <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">Sign in to access S.E.M. 2026</h1>
         <div className="mt-8 flex justify-center gap-4">
           <Link to="/sign-in" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Sign in</Link>
           <Link to="/sign-up" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">Create account</Link>
@@ -117,11 +117,11 @@ function GateNoEntitlement() {
     <section className="min-h-[60vh] grid place-items-center px-5 py-20 bg-background">
       <div className="max-w-md text-center">
         <p className="eyebrow text-signal mb-3">No access</p>
-        <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">S.E.M. 8 isn't in your library</h1>
+        <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">S.E.M. 2026 isn't in your library</h1>
         <p className="text-foreground-muted text-sm mt-4">Purchases are opening soon. Once enrolled, your programme will appear in your library.</p>
         <div className="mt-8 flex justify-center gap-4">
           <Link to="/my-programmes" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">My programmes</Link>
-          <Link to="/programmes/sem-8" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">View product</Link>
+          <Link to="/programmes/sem-2026" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">View product</Link>
         </div>
       </div>
     </section>

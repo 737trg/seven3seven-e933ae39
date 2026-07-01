@@ -12,9 +12,9 @@ export type SemProgress = {
 
 /**
  * Reads real session_completions + workout_results for the current user,
- * scoped to the SEM 8 product. RLS guarantees row scoping to auth.uid().
+ * scoped to the SEM 2026 product. RLS guarantees row scoping to auth.uid().
  */
-export function useSemProgress(userId: string | undefined, productSlug = "sem-8") {
+export function useSemProgress(userId: string | undefined, productSlug = "sem-2026") {
   const [state, setState] = useState<SemProgress>({
     loading: true, coreCompleted: 0, optionalCompleted: 0, resultsLogged: 0, perSession: {},
   });
