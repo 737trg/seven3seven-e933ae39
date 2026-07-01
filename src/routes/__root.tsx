@@ -144,6 +144,12 @@ function AuthSync() {
     import("@/integrations/supabase/client").then(({ supabase }) => {
       const { data } = supabase.auth.onAuthStateChange((event) => {
         if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+        if (event === "SIGNED_OUT") {
+          queryClient.clear();
+          import("@/lib/store").then(({ store }) => store.configureAthxAccess({ userId: null, entitled: false }));
+          import("@/lib/sem/store").then(({ semStore }) => semStore.configureUser(null));
+          import("@/lib/btb/store").then(({ btbStore }) => btbStore.configureUser(null));
+        }
         router.invalidate();
         if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
       });

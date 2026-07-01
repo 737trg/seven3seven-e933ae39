@@ -10,7 +10,8 @@ import type {
 } from "@/types/programme";
 import { PROGRAMME } from "@/data/programme";
 
-const KEY = "trg737.v1";
+const LEGACY_KEY = "trg737.v1";
+const PROGRAMME_ID = "athx-2026";
 const STORAGE_VERSION = 2;
 
 interface Store {
@@ -46,12 +47,52 @@ const defaultStore = (): Store => ({
 const isBrowser = () => typeof window !== "undefined";
 
 let cache: Store | null = null;
+let activeUserId: string | null = null;
+let athxEntitled = false;
+
+const scopedKey = () => {
+  if (!activeUserId || !athxEntitled) return null;
+  return `${LEGACY_KEY}:${activeUserId}:${PROGRAMME_ID}`;
+};
+
+const migrationKey = (userId: string) => `${LEGACY_KEY}:${userId}:${PROGRAMME_ID}:legacy-migrated`;
+const backupKey = (userId: string) => `${LEGACY_KEY}:${userId}:${PROGRAMME_ID}:legacy-backup`;
+
+const canReadAthxLocalState = () => isBrowser() && !!scopedKey();
+
+const migrateLegacyIfNeeded = () => {
+  if (!isBrowser() || !activeUserId || !athxEntitled) return;
+  const key = scopedKey();
+  if (!key) return;
+  if (window.localStorage.getItem(migrationKey(activeUserId)) === "true") return;
+
+  const legacy = window.localStorage.getItem(LEGACY_KEY);
+  if (!legacy) {
+    window.localStorage.setItem(migrationKey(activeUserId), "true");
+    return;
+  }
+
+  if (!window.localStorage.getItem(backupKey(activeUserId))) {
+    window.localStorage.setItem(backupKey(activeUserId), legacy);
+  }
+  if (!window.localStorage.getItem(key)) {
+    window.localStorage.setItem(key, legacy);
+  }
+  window.localStorage.setItem(migrationKey(activeUserId), "true");
+};
 
 const read = (): Store => {
   if (!isBrowser()) return defaultStore();
+  if (!canReadAthxLocalState()) return defaultStore();
+  migrateLegacyIfNeeded();
   if (cache) return cache;
   try {
-    const raw = window.localStorage.getItem(KEY);
+    const key = scopedKey();
+    if (!key) {
+      cache = defaultStore();
+      return cache;
+    }
+    const raw = window.localStorage.getItem(key);
     if (!raw) {
       cache = defaultStore();
       return cache;
@@ -72,11 +113,22 @@ const read = (): Store => {
 const write = (s: Store) => {
   cache = s;
   if (!isBrowser()) return;
-  window.localStorage.setItem(KEY, JSON.stringify(s));
+  const key = scopedKey();
+  if (!key) return;
+  window.localStorage.setItem(key, JSON.stringify(s));
   window.dispatchEvent(new CustomEvent("trg737:change"));
 };
 
 export const store = {
+  configureAthxAccess: ({ userId, entitled }: { userId: string | null; entitled: boolean }) => {
+    const changed = activeUserId !== userId || athxEntitled !== entitled;
+    activeUserId = userId;
+    athxEntitled = entitled;
+    if (changed) cache = null;
+    if (entitled) migrateLegacyIfNeeded();
+    if (isBrowser()) window.dispatchEvent(new CustomEvent("trg737:change"));
+  },
+  isAthxLocalStateEnabled: () => !!scopedKey(),
   getAthlete: () => read().athlete,
   updateAthlete: (patch: Partial<Athlete>) => {
     const s = read();

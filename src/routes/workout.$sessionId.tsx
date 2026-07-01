@@ -13,6 +13,7 @@ import { formatClock } from "@/lib/programmeUtils";
 import { store, subscribeStore } from "@/lib/store";
 import { LogDrawer } from "@/components/workout/LogDrawer";
 import { summariseResult } from "@/components/workout/logKind";
+import { AthxAccessGate } from "@/lib/athxAccess";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,7 +37,7 @@ function WorkoutRoute() {
     select: (state) => state.location.pathname.endsWith("/done"),
   });
 
-  return isDoneRoute ? <Outlet /> : <WorkoutPage />;
+  return <AthxAccessGate>{isDoneRoute ? <Outlet /> : <WorkoutPage />}</AthxAccessGate>;
 }
 
 function WorkoutPage() {

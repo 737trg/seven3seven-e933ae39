@@ -56,9 +56,14 @@ const DEFAULT: SemProfile = {
   setupComplete: false,
 };
 
-const KEY_PROFILE = "sem8.profile.v1";
-const KEY_READINESS = "sem8.readiness.v1";
-const KEY_STARTED = "sem8.started.v1";
+const PROGRAMME_ID = "sem-2026";
+const LEGACY_PREFIX = "sem8";
+let activeUserId: string | null = null;
+
+const key = (name: string) => {
+  if (!activeUserId) return null;
+  return `${LEGACY_PREFIX}.${name}.v1:${activeUserId}:${PROGRAMME_ID}`;
+};
 
 const listeners = new Set<() => void>();
 function emit() { listeners.forEach((l) => l()); }
@@ -84,43 +89,59 @@ let _started: { started: boolean; at: string | null } | null = null;
 
 if (typeof window !== "undefined") {
   window.addEventListener("storage", (e) => {
-    if (e.key === KEY_PROFILE) _profile = null;
-    else if (e.key === KEY_READINESS) _readiness = null;
-    else if (e.key === KEY_STARTED) _started = null;
+    if (e.key?.includes(`${activeUserId}:${PROGRAMME_ID}`)) {
+      _profile = null;
+      _readiness = null;
+      _started = null;
+    }
     emit();
   });
 }
 
 export const semStore = {
+  configureUser(userId: string | null) {
+    if (activeUserId === userId) return;
+    activeUserId = userId;
+    _profile = null;
+    _readiness = null;
+    _started = null;
+    emit();
+  },
   getProfile(): SemProfile {
     if (_profile) return _profile;
-    _profile = { ...DEFAULT, ...read<Partial<SemProfile>>(KEY_PROFILE, {}) };
+    const storageKey = key("profile");
+    _profile = { ...DEFAULT, ...(storageKey ? read<Partial<SemProfile>>(storageKey, {}) : {}) };
     return _profile;
   },
   saveProfile(p: Partial<SemProfile>) {
     const next = { ...semStore.getProfile(), ...p };
     _profile = next;
-    write(KEY_PROFILE, next);
+    const storageKey = key("profile");
+    if (storageKey) write(storageKey, next);
   },
   markStarted() {
     const v = { started: true, at: new Date().toISOString() };
     _started = v;
-    write(KEY_STARTED, v);
+    const storageKey = key("started");
+    if (storageKey) write(storageKey, v);
   },
   getStarted(): { started: boolean; at: string | null } {
     if (_started) return _started;
-    _started = read(KEY_STARTED, { started: false, at: null });
+    const storageKey = key("started");
+    _started = storageKey ? read(storageKey, { started: false, at: null }) : { started: false, at: null };
     return _started;
   },
   getReadiness(): Record<string, SemReadiness> {
     if (_readiness) return _readiness;
-    _readiness = read(KEY_READINESS, {});
+    const storageKey = key("readiness");
+    _readiness = storageKey ? read(storageKey, {}) : {};
     return _readiness;
   },
   setReadiness(sessionId: string, value: SemReadiness) {
     const next = { ...semStore.getReadiness(), [sessionId]: value };
     _readiness = next;
-    write(KEY_READINESS, next);
+    const storageKey = key("readiness");
+    if (storageKey) write(storageKey, next);
   },
 };
 

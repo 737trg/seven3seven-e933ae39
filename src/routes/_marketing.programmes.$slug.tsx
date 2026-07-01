@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/lib/useAuth";
@@ -58,6 +58,10 @@ function ProductPage() {
   const startEnrolment = useServerFn(ensureEnrolment);
   const [starting, setStarting] = useState(false);
   const [startError, setStartError] = useState<string | null>(null);
+
+  useEffect(() => {
+    btbStore.configureUser(user?.id ?? null);
+  }, [user?.id]);
 
   const isBtb = p.slug === "basic-training-blueprint-plus";
   const started = isBtb ? btbStarted.started : false;

@@ -4,6 +4,8 @@ import { Wordmark } from "@/components/shell/Wordmark";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import type { ReactNode } from "react";
+import { useEffect } from "react";
+import { semStore } from "@/lib/sem/store";
 
 const BASE = "/my-programmes/sem-2026";
 const primary = [
@@ -22,6 +24,10 @@ export function SemShell({ children, eyebrow, title }: { children: ReactNode; ey
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const { user, loading: authLoading } = useAuth();
   const { items, loading: entLoading } = useEntitlements(user?.id);
+
+  useEffect(() => {
+    semStore.configureUser(user?.id ?? null);
+  }, [user?.id]);
 
   if (!authLoading && !user) return <GateSignIn />;
   if (!authLoading && !entLoading && !items.some((i) => i.slug === "sem-2026")) return <GateNoEntitlement />;

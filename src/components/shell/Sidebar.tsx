@@ -29,7 +29,7 @@ export function Sidebar() {
     <aside className="hidden lg:flex flex-col w-[240px] shrink-0 border-r border-border bg-background sticky top-0 h-screen px-6 py-8">
       <div className="mb-12">
         <Wordmark size="lg" />
-        <p className="eyebrow mt-3">ATHX 2026</p>
+        <p className="eyebrow mt-3">Private programme</p>
       </div>
       <nav className="flex flex-col gap-1">
         {items.map((it) => {
@@ -72,7 +72,7 @@ export function Sidebar() {
         </nav>
       </div>
       <div className="mt-auto pt-6 text-[10px] uppercase tracking-widest text-foreground-muted">
-        Race 23.08.2026
+        ATHX 2026
       </div>
     </aside>
   );
