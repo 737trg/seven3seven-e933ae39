@@ -81,7 +81,7 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
       "A performance plan built around running, machine work, station conditioning and sustainable pacing for hybrid fitness racing.",
     durationWeeks: 12,
     image: raceImg.url,
-    status: "releasing-soon",
+    status: "live",
     whatYoullDo: [
       "Running intervals",
       "Threshold work",
