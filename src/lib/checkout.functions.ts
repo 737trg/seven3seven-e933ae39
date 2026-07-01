@@ -220,8 +220,14 @@ export const recoverPendingPurchases = createServerFn({ method: 'POST' })
 export const ensurePromotionCodes = createServerFn({ method: 'POST' })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: { environment: StripeEnv }) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     try {
+      // Owner/admin only — this mutates live Stripe coupons & promo codes.
+      const { data: isStaff, error: staffErr } = await context.supabase.rpc('is_staff', {
+        _user_id: context.userId,
+      });
+      if (staffErr || !isStaff) return { ok: false, error: 'Forbidden: staff only' };
+
       const stripe = createStripeClient(data.environment);
 
       async function ensureCoupon(id: string, percent_off: number, name: string) {
