@@ -117,7 +117,7 @@ async function fulfilCheckoutSession(sessionId: string, env: StripeEnv) {
         user_id: userId,
         product_id: p.id,
         programme_version_id: versionByProduct.get(p.id) ?? null,
-        source: 'stripe',
+        source: 'purchase',
         order_id: order.id,
         granted_by: userId,
         metadata: { checkout_session_id: session.id, promotion_code: promotionCode },
