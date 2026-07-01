@@ -26,7 +26,6 @@ import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing
 import { Route as MarketingCartRouteImport } from './routes/_marketing.cart'
 import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
 import { Route as MarketingAccountRouteImport } from './routes/_marketing.account'
-import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
 import { Route as AppTodayRouteImport } from './routes/_app.today'
 import { Route as AppRaceRouteImport } from './routes/_app.race'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
@@ -155,11 +154,6 @@ const MarketingApparelRoute = MarketingApparelRouteImport.update({
 const MarketingAccountRoute = MarketingAccountRouteImport.update({
   id: '/account',
   path: '/account',
-  getParentRoute: () => MarketingRoute,
-} as any)
-const MarketingAboutRoute = MarketingAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
   getParentRoute: () => MarketingRoute,
 } as any)
 const AppTodayRoute = AppTodayRouteImport.update({
@@ -429,7 +423,6 @@ export interface FileRoutesByFullPath {
   '/progress': typeof AppProgressRoute
   '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
-  '/about': typeof MarketingAboutRoute
   '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
   '/cart': typeof MarketingCartRoute
@@ -492,7 +485,6 @@ export interface FileRoutesByTo {
   '/progress': typeof AppProgressRoute
   '/race': typeof AppRaceRoute
   '/today': typeof AppTodayRoute
-  '/about': typeof MarketingAboutRoute
   '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
   '/cart': typeof MarketingCartRoute
@@ -555,7 +547,6 @@ export interface FileRoutesById {
   '/_app/progress': typeof AppProgressRoute
   '/_app/race': typeof AppRaceRoute
   '/_app/today': typeof AppTodayRoute
-  '/_marketing/about': typeof MarketingAboutRoute
   '/_marketing/account': typeof MarketingAccountRoute
   '/_marketing/apparel': typeof MarketingApparelRoute
   '/_marketing/cart': typeof MarketingCartRoute
@@ -621,7 +612,6 @@ export interface FileRouteTypes {
     | '/progress'
     | '/race'
     | '/today'
-    | '/about'
     | '/account'
     | '/apparel'
     | '/cart'
@@ -684,7 +674,6 @@ export interface FileRouteTypes {
     | '/progress'
     | '/race'
     | '/today'
-    | '/about'
     | '/account'
     | '/apparel'
     | '/cart'
@@ -746,7 +735,6 @@ export interface FileRouteTypes {
     | '/_app/progress'
     | '/_app/race'
     | '/_app/today'
-    | '/_marketing/about'
     | '/_marketing/account'
     | '/_marketing/apparel'
     | '/_marketing/cart'
@@ -931,13 +919,6 @@ declare module '@tanstack/react-router' {
       path: '/account'
       fullPath: '/account'
       preLoaderRoute: typeof MarketingAccountRouteImport
-      parentRoute: typeof MarketingRoute
-    }
-    '/_marketing/about': {
-      id: '/_marketing/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof MarketingAboutRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_app/today': {
@@ -1295,7 +1276,6 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface MarketingRouteChildren {
-  MarketingAboutRoute: typeof MarketingAboutRoute
   MarketingAccountRoute: typeof MarketingAccountRoute
   MarketingApparelRoute: typeof MarketingApparelRoute
   MarketingCartRoute: typeof MarketingCartRoute
@@ -1317,7 +1297,6 @@ interface MarketingRouteChildren {
 }
 
 const MarketingRouteChildren: MarketingRouteChildren = {
-  MarketingAboutRoute: MarketingAboutRoute,
   MarketingAccountRoute: MarketingAccountRoute,
   MarketingApparelRoute: MarketingApparelRoute,
   MarketingCartRoute: MarketingCartRoute,
