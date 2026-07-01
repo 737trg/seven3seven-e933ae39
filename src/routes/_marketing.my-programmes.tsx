@@ -10,6 +10,9 @@ import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { semStore, useSemStarted } from "@/lib/sem/store";
 import { useSemProgress } from "@/lib/sem/progress";
 import { validationCounts as semCounts } from "@/lib/sem/manifest";
+import { useBtbStarted } from "@/lib/btb/store";
+import { useBtbProgress } from "@/lib/btb/progress";
+import { validationCounts as btbCounts } from "@/lib/btb/manifest";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -33,6 +36,8 @@ function MyProgrammesPage() {
   const { items: entitled } = useEntitlements(user?.id);
   const semStarted = useSemStarted();
   const semProg = useSemProgress(user?.id);
+  const btbStarted = useBtbStarted();
+  const btbProg = useBtbProgress(user?.id);
   const navigate = useNavigate();
 
   if (!authLoading && !user) {
@@ -168,14 +173,23 @@ function MyProgrammesPage() {
             )}
           </div>
 
-          {((ownsSem && !semStarted.started) || ownsBtb) && (
+          {ownsBtb && btbStarted.started && (
+            <div className="mt-10">
+              <BtbActiveCard
+                coreCompleted={btbProg.coreCompleted}
+                coreTotal={btbCounts().core}
+              />
+            </div>
+          )}
+
+          {((ownsSem && !semStarted.started) || (ownsBtb && !btbStarted.started)) && (
             <div>
               <p className="eyebrow mb-4">Ready to start</p>
               <div className="space-y-10">
                 {ownsSem && !semStarted.started && (
                   <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-2026/today" }); }} />
                 )}
-                {ownsBtb && <BtbReadyCard />}
+                {ownsBtb && !btbStarted.started && <BtbReadyCard />}
               </div>
             </div>
           )}
@@ -396,6 +410,37 @@ function BtbReadyCard() {
       <div className="mt-8 flex flex-wrap gap-6">
         <Link to="/my-programmes/basic-training-blueprint-plus" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
           Open programme <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+    </article>
+  );
+}
+
+function BtbActiveCard({ coreCompleted, coreTotal }: { coreCompleted: number; coreTotal: number }) {
+  const pct = Math.round((coreCompleted / Math.max(1, coreTotal)) * 100);
+  return (
+    <article className="border-t border-border/60 pt-8">
+      <p className="eyebrow text-foreground-muted">Foundation · 03</p>
+      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">Basic Training Blueprint+</h3>
+      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
+        <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
+        <li>Duration <span className="text-bone">12 weeks</span></li>
+      </ul>
+      <div className="mt-8 max-w-md">
+        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
+          <span>Progress (core)</span>
+          <span className="text-bone tabular">{pct}%</span>
+        </div>
+        <div className="h-[2px] bg-surface-raised overflow-hidden">
+          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      <div className="mt-8 flex flex-wrap gap-6">
+        <Link to="/my-programmes/basic-training-blueprint-plus/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+          Continue training <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link to="/my-programmes/basic-training-blueprint-plus" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+          View cover
         </Link>
       </div>
     </article>
