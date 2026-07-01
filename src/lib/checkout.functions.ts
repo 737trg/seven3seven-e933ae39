@@ -194,8 +194,7 @@ export const ensurePromotionCodes = createServerFn({ method: 'POST' })
         if (existing.data.length) return existing.data[0];
         return await stripe.promotionCodes.create({
           code,
-          coupon: couponId,
-          max_redemptions: undefined,
+          promotion: { type: 'coupon', coupon: couponId },
           restrictions: { first_time_transaction: false },
         });
       }
