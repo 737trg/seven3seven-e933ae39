@@ -1,6 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useNavigate } from "@tanstack/react-router";
+import { useAuth } from "@/lib/useAuth";
+import { useEntitlements } from "@/lib/useEntitlements";
+import { useBtbStarted, btbStore } from "@/lib/btb/store";
+import { ensureEnrolment } from "@/lib/enrolment.functions";
 import { getPublicProgramme, PUBLIC_PROGRAMMES, statusLabel, type PublicProgramme } from "@/data/publicProgrammes";
 
 const SITE = "https://seven3seven.lovable.app";
@@ -44,6 +50,33 @@ export const Route = createFileRoute("/_marketing/programmes/$slug")({
 function ProductPage() {
   const { programme: p } = Route.useLoaderData() as { programme: PublicProgramme };
   const [track, setTrack] = useState(p.tracks?.[0]?.id ?? "");
+  const { user } = useAuth();
+  const { items: entitled } = useEntitlements(user?.id);
+  const owns = entitled.some((e) => e.slug === p.slug);
+  const btbStarted = useBtbStarted();
+  const navigate = useNavigate();
+  const startEnrolment = useServerFn(ensureEnrolment);
+  const [starting, setStarting] = useState(false);
+  const [startError, setStartError] = useState<string | null>(null);
+
+  const isBtb = p.slug === "basic-training-blueprint-plus";
+  const started = isBtb ? btbStarted.started : false;
+  const showLiveCta = p.status === "live" && owns && isBtb;
+
+  const handleStart = async () => {
+    if (!isBtb) return;
+    setStartError(null);
+    setStarting(true);
+    try {
+      await startEnrolment({ data: { slug: p.slug } });
+      if (!btbStarted.started) btbStore.markStarted();
+      navigate({ to: "/my-programmes/basic-training-blueprint-plus/today" });
+    } catch (e: any) {
+      setStartError(e?.message ?? "Could not start programme.");
+    } finally {
+      setStarting(false);
+    }
+  };
 
   const otherProgrammes = PUBLIC_PROGRAMMES.filter((x) => x.slug !== p.slug).slice(0, 3);
 
@@ -204,14 +237,38 @@ function ProductPage() {
             <p className="text-foreground-muted text-sm mt-8 max-w-[42ch]">Founding pricing applies to early supporters of the programme.</p>
           </div>
           <div className="lg:col-span-5 lg:text-right">
-            <button
-              type="button"
-              disabled
-              className="inline-flex items-center gap-3 px-8 py-5 bg-bone text-obsidian font-display uppercase text-[12px] tracking-[0.24em] opacity-90 cursor-not-allowed"
-            >
-              Purchases opening soon
-            </button>
-            <p className="eyebrow text-foreground-muted mt-5">{statusLabel(p.status)}</p>
+            {showLiveCta ? (
+              <>
+                <button
+                  type="button"
+                  onClick={handleStart}
+                  disabled={starting}
+                  className="inline-flex items-center gap-3 px-8 py-5 bg-signal text-bone font-display uppercase text-[12px] tracking-[0.28em] disabled:opacity-60"
+                >
+                  {starting
+                    ? "Preparing…"
+                    : started
+                      ? "Continue programme"
+                      : "Ready to start"}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+                {startError && <p className="text-signal text-xs mt-4">{startError}</p>}
+                <p className="eyebrow text-foreground-muted mt-5">
+                  {started ? "Programme in progress" : "You own this programme"}
+                </p>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex items-center gap-3 px-8 py-5 bg-bone text-obsidian font-display uppercase text-[12px] tracking-[0.24em] opacity-90 cursor-not-allowed"
+                >
+                  Purchases opening soon
+                </button>
+                <p className="eyebrow text-foreground-muted mt-5">{statusLabel(p.status)}</p>
+              </>
+            )}
           </div>
         </div>
       </section>

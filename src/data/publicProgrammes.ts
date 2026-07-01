@@ -3,7 +3,7 @@ import semImg from "@/assets/programme-sem.jpg.asset.json";
 import raceImg from "@/assets/programme-hybrid-race.jpg.asset.json";
 import mixedImg from "@/assets/programme-mixed.jpg.asset.json";
 
-export type PublicProgrammeStatus = "in-development" | "releasing-soon";
+export type PublicProgrammeStatus = "in-development" | "releasing-soon" | "live";
 
 export interface PublicProgramme {
   num: string;
@@ -31,7 +31,7 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
       "A structured training plan built to improve running fitness, strength, conditioning and robustness for military preparation, selection and basic training.",
     durationWeeks: 12,
     image: basicImg.url,
-    status: "in-development",
+    status: "live",
     whatYoullDo: [
       "Running development",
       "Loaded conditioning",
@@ -144,5 +144,7 @@ export function getPublicProgramme(slug: string): PublicProgramme | undefined {
 }
 
 export function statusLabel(s: PublicProgrammeStatus): string {
-  return s === "in-development" ? "In development" : "Releasing soon";
+  if (s === "live") return "Live";
+  if (s === "in-development") return "In development";
+  return "Releasing soon";
 }
