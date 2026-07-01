@@ -58,6 +58,7 @@ import { Route as MyProgrammesAthx2026ProgrammeRouteImport } from './routes/my-p
 import { Route as MyProgrammesAthx2026ProfileRouteImport } from './routes/my-programmes.athx-2026.profile'
 import { Route as MyProgrammesAthx2026LearnRouteImport } from './routes/my-programmes.athx-2026.learn'
 import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-programmes.athx-2026.calculator'
+import { Route as MarketingProgrammesSem2026RouteImport } from './routes/_marketing.programmes.sem-2026'
 import { Route as MarketingProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/_marketing.programmes.basic-training-blueprint-plus'
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
@@ -333,6 +334,12 @@ const MyProgrammesAthx2026CalculatorRoute =
     path: '/calculator',
     getParentRoute: () => MyProgrammesAthx2026Route,
   } as any)
+const MarketingProgrammesSem2026Route =
+  MarketingProgrammesSem2026RouteImport.update({
+    id: '/programmes/sem-2026',
+    path: '/programmes/sem-2026',
+    getParentRoute: () => MarketingRoute,
+  } as any)
 const MarketingProgrammesBasicTrainingBlueprintPlusRoute =
   MarketingProgrammesBasicTrainingBlueprintPlusRouteImport.update({
     id: '/programmes/basic-training-blueprint-plus',
@@ -392,6 +399,7 @@ export interface FileRoutesByFullPath {
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
+  '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -445,6 +453,7 @@ export interface FileRoutesByTo {
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
+  '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -503,6 +512,7 @@ export interface FileRoutesById {
   '/_marketing/': typeof MarketingIndexRoute
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/_marketing/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
+  '/_marketing/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -560,6 +570,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
+    | '/programmes/sem-2026'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -613,6 +624,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
+    | '/programmes/sem-2026'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -670,6 +682,7 @@ export interface FileRouteTypes {
     | '/_marketing/'
     | '/_marketing/programmes/$slug'
     | '/_marketing/programmes/basic-training-blueprint-plus'
+    | '/_marketing/programmes/sem-2026'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -1057,6 +1070,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesAthx2026CalculatorRouteImport
       parentRoute: typeof MyProgrammesAthx2026Route
     }
+    '/_marketing/programmes/sem-2026': {
+      id: '/_marketing/programmes/sem-2026'
+      path: '/programmes/sem-2026'
+      fullPath: '/programmes/sem-2026'
+      preLoaderRoute: typeof MarketingProgrammesSem2026RouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/programmes/basic-training-blueprint-plus': {
       id: '/_marketing/programmes/basic-training-blueprint-plus'
       path: '/programmes/basic-training-blueprint-plus'
@@ -1150,6 +1170,7 @@ interface MarketingRouteChildren {
   MarketingIndexRoute: typeof MarketingIndexRoute
   MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
   MarketingProgrammesBasicTrainingBlueprintPlusRoute: typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
+  MarketingProgrammesSem2026Route: typeof MarketingProgrammesSem2026Route
   MarketingProgrammesIndexRoute: typeof MarketingProgrammesIndexRoute
 }
 
@@ -1166,6 +1187,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
   MarketingProgrammesBasicTrainingBlueprintPlusRoute:
     MarketingProgrammesBasicTrainingBlueprintPlusRoute,
+  MarketingProgrammesSem2026Route: MarketingProgrammesSem2026Route,
   MarketingProgrammesIndexRoute: MarketingProgrammesIndexRoute,
 }
 

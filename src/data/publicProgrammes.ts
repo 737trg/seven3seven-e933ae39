@@ -56,7 +56,7 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
       "An eight-week competition-preparation programme combining progressive strength training, structured run and row development and event-specific mixed-modal conditioning.",
     durationWeeks: 8,
     image: semImg.url,
-    status: "releasing-soon",
+    status: "live",
     whatYoullDo: [
       "Progressive heavy strength work",
       "Structured run and row development",
