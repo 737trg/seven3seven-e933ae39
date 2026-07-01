@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Activity, CalendarDays, Trophy } from "lucide-react";
+import { useEffect, useRef } from "react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { useCustomerDashboard, type CustomerProgramme, type ActivityItem } from "@/lib/useCustomerDashboard";
+import { recoverPendingPurchases } from "@/lib/checkout.functions";
+import { getStripeEnvironment } from "@/lib/stripe";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -20,6 +23,19 @@ function MyProgrammesPage() {
   const { user, loading: authLoading } = useAuth();
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
+  const recoveryRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!user?.id) return;
+    if (recoveryRef.current === user.id) return;
+    recoveryRef.current = user.id;
+    // Safety net: any complete Stripe session missing an entitlement (webhook
+    // drop, voucher redemption, closed tab) is fulfilled on library open.
+    recoverPendingPurchases({ data: { environment: getStripeEnvironment() } })
+      .then((res) => {
+        if (res.ok && res.fulfilled.length > 0) entitlements.refresh?.();
+      })
+      .catch(() => { /* non-blocking */ });
+  }, [user?.id, entitlements]);
 
   if (!authLoading && !user) {
     return (
