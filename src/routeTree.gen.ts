@@ -68,7 +68,6 @@ import { Route as MarketingLegalPrivacyRouteImport } from './routes/_marketing.l
 import { Route as MarketingCheckoutSuccessRouteImport } from './routes/_marketing.checkout.success'
 import { Route as MarketingCheckoutCancelRouteImport } from './routes/_marketing.checkout.cancel'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
-import { Route as ApiPublicAdminRecoverRouteImport } from './routes/api/public/admin.recover'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 import { Route as MyProgrammesSem2026ProgrammeSSessionIdRouteImport } from './routes/my-programmes.sem-2026.programme.s.$sessionId'
@@ -396,11 +395,6 @@ const ApiPublicPaymentsWebhookRoute =
     path: '/api/public/payments/webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicAdminRecoverRoute = ApiPublicAdminRecoverRouteImport.update({
-  id: '/api/public/admin/recover',
-  path: '/api/public/admin/recover',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
   id: '/w/$week',
   path: '/w/$week',
@@ -483,7 +477,6 @@ export interface FileRoutesByFullPath {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
-  '/api/public/admin/recover': typeof ApiPublicAdminRecoverRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
@@ -545,7 +538,6 @@ export interface FileRoutesByTo {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
-  '/api/public/admin/recover': typeof ApiPublicAdminRecoverRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
@@ -612,7 +604,6 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
-  '/api/public/admin/recover': typeof ApiPublicAdminRecoverRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
@@ -678,7 +669,6 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
-    | '/api/public/admin/recover'
     | '/api/public/payments/webhook'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
@@ -740,7 +730,6 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
-    | '/api/public/admin/recover'
     | '/api/public/payments/webhook'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
@@ -806,7 +795,6 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
-    | '/api/public/admin/recover'
     | '/api/public/payments/webhook'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
@@ -821,7 +809,6 @@ export interface RootRouteChildren {
   MyProgrammesBasicTrainingBlueprintPlusRoute: typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   MyProgrammesSem2026Route: typeof MyProgrammesSem2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
-  ApiPublicAdminRecoverRoute: typeof ApiPublicAdminRecoverRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
 
@@ -1240,13 +1227,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/admin/recover': {
-      id: '/api/public/admin/recover'
-      path: '/api/public/admin/recover'
-      fullPath: '/api/public/admin/recover'
-      preLoaderRoute: typeof ApiPublicAdminRecoverRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_app/programme/w/$week': {
       id: '/_app/programme/w/$week'
       path: '/w/$week'
@@ -1499,7 +1479,6 @@ const rootRouteChildren: RootRouteChildren = {
     MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren,
   MyProgrammesSem2026Route: MyProgrammesSem2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
-  ApiPublicAdminRecoverRoute: ApiPublicAdminRecoverRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
