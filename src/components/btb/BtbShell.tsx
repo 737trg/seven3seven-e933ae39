@@ -72,7 +72,7 @@ export function BtbShell({ children, eyebrow, title }: { children: ReactNode; ey
         </div>
       </aside>
 
-      <main className="flex-1 min-w-0 pb-24 lg:pb-0">
+      <main className="flex-1 min-w-0 pb-32 lg:pb-0">
         {(eyebrow || title) && (
           <header className="border-b border-border px-5 lg:px-10 py-8 lg:py-10">
             {eyebrow && <p className="eyebrow text-signal">{eyebrow}</p>}
