@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { useSemStarted, semStore } from "@/lib/sem/store";
 import { ensureEnrolment } from "@/lib/enrolment.functions";
+import { cart as cartApi, useCart } from "@/lib/cart";
 import {
   Sheet,
   SheetContent,
@@ -48,40 +49,12 @@ export const Route = createFileRoute("/_marketing/programmes/sem-2026")({
   component: SemProductPage,
 });
 
-// Shared cart storage (same key used by BTB product page) — additive shape.
-const CART_KEY = "s3s.cart.v1";
-type CartState = { hasBtb?: boolean; hasSem?: boolean };
-function readCart(): CartState {
-  if (typeof window === "undefined") return {};
-  try {
-    const raw = window.localStorage.getItem(CART_KEY);
-    return raw ? (JSON.parse(raw) as CartState) : {};
-  } catch {
-    return {};
-  }
-}
-function writeCart(next: CartState) {
-  try {
-    window.localStorage.setItem(CART_KEY, JSON.stringify(next));
-    window.dispatchEvent(new Event("s3s-cart"));
-  } catch {}
-}
-function useCart() {
-  const [state, setState] = useState<CartState>({});
-  useEffect(() => {
-    setState(readCart());
-    const h = () => setState(readCart());
-    window.addEventListener("s3s-cart", h);
-    window.addEventListener("storage", h);
-    return () => {
-      window.removeEventListener("s3s-cart", h);
-      window.removeEventListener("storage", h);
-    };
-  }, []);
+function useSemCart() {
+  const state = useCart();
   return {
-    ...state,
-    addSem: () => writeCart({ ...readCart(), hasSem: true }),
-    removeSem: () => writeCart({ ...readCart(), hasSem: false }),
+    hasSem: !!state.hasSem,
+    addSem: () => cartApi.add("sem-2026"),
+    removeSem: () => cartApi.remove("sem-2026"),
   };
 }
 
@@ -288,7 +261,7 @@ function SemProductPage() {
   const semStarted = useSemStarted();
   const navigate = useNavigate();
   const startEnrolment = useServerFn(ensureEnrolment);
-  const cart = useCart();
+  const cart = useSemCart();
 
   useEffect(() => {
     semStore.configureUser(user?.id ?? null);
