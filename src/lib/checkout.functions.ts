@@ -151,6 +151,29 @@ export const confirmCheckoutFulfilment = createServerFn({ method: 'POST' })
 
       const paid = session.status === 'complete' && (session.payment_status === 'paid' || session.payment_status === 'no_payment_required');
 
+      // Only the buyer can self-fulfil their own session.
+      const sessionUserId = session.metadata?.userId;
+      if (paid && sessionUserId === userId) {
+        const { data: products } = await supabase
+          .from('products')
+          .select('id, slug')
+          .in('slug', slugs);
+        let missing = false;
+        for (const p of products ?? []) {
+          const { data: hasIt } = await supabase.rpc('user_has_entitlement', {
+            _user_id: userId,
+            _product_id: p.id,
+          });
+          if (!hasIt) { missing = true; break; }
+        }
+        // Webhook hasn't landed yet (or never will). Fulfil directly — idempotent.
+        if (missing) {
+          const { fulfilCheckoutSession } = await import('@/lib/fulfilment.server');
+          try { await fulfilCheckoutSession(data.sessionId, data.environment); }
+          catch (e) { console.error('Self-heal fulfilment failed', e); }
+        }
+      }
+
       const { data: products } = await supabase
         .from('products')
         .select('id, slug')
@@ -168,6 +191,25 @@ export const confirmCheckoutFulfilment = createServerFn({ method: 'POST' })
       return { ready: paid && allOwned, slugs, paid };
     } catch (error) {
       return { ready: false, slugs: [] as string[], paid: false, error: getStripeErrorMessage(error) };
+    }
+  });
+
+/**
+ * Called from the customer's library page — scans their Stripe customer
+ * record for any complete-but-unfulfilled checkout sessions and grants
+ * entitlements. Safety net for webhook drops and voucher redemptions that
+ * closed the browser before the success page finished polling.
+ */
+export const recoverPendingPurchases = createServerFn({ method: 'POST' })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { environment: StripeEnv }) => data)
+  .handler(async ({ data, context }) => {
+    try {
+      const { recoverPendingPurchasesForUser } = await import('@/lib/fulfilment.server');
+      const fulfilled = await recoverPendingPurchasesForUser(context.userId, data.environment);
+      return { ok: true, fulfilled };
+    } catch (error) {
+      return { ok: false, fulfilled: [] as string[], error: getStripeErrorMessage(error) };
     }
   });
 

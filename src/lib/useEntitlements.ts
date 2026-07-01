@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export type EntitledProduct = {
@@ -15,6 +15,8 @@ export type EntitledProduct = {
 export function useEntitlements(userId: string | undefined) {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState<EntitledProduct[]>([]);
+  const [nonce, setNonce] = useState(0);
+  const refresh = useCallback(() => setNonce((n) => n + 1), []);
 
   useEffect(() => {
     let active = true;
@@ -53,7 +55,7 @@ export function useEntitlements(userId: string | undefined) {
       setLoading(false);
     })();
     return () => { active = false; };
-  }, [userId]);
+  }, [userId, nonce]);
 
-  return { loading, items };
+  return { loading, items, refresh };
 }
