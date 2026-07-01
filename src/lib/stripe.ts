@@ -1,20 +1,19 @@
-import { loadStripe, type Stripe } from '@stripe/stripe-js';
-
+/**
+ * Client-side payment helpers.
+ *
+ * We use Stripe Checkout in redirect mode (no Stripe.js needed on the client),
+ * so the browser never handles secret keys. The environment is a fixed
+ * build-time constant: `sandbox` today; switch to `live` once the live
+ * Stripe key is connected in Lovable Cloud.
+ */
 export type StripeEnv = 'sandbox' | 'live';
 
-const clientToken = import.meta.env.VITE_PAYMENTS_CLIENT_TOKEN as string | undefined;
+const PAYMENTS_MODE = (import.meta.env.VITE_PAYMENTS_MODE as string | undefined) ?? 'sandbox';
 
 export function getStripeEnvironment(): StripeEnv {
-  if (clientToken?.startsWith('pk_test_')) return 'sandbox';
-  if (clientToken?.startsWith('pk_live_')) return 'live';
-  throw new Error('Payments are not configured for this build.');
+  return PAYMENTS_MODE === 'live' ? 'live' : 'sandbox';
 }
 
-let stripePromise: Promise<Stripe | null> | null = null;
-export function getStripe(): Promise<Stripe | null> {
-  if (!stripePromise) {
-    getStripeEnvironment();
-    stripePromise = loadStripe(clientToken as string);
-  }
-  return stripePromise;
+export function isSandboxPayments(): boolean {
+  return getStripeEnvironment() === 'sandbox';
 }
