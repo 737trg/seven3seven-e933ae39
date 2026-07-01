@@ -3987,6 +3987,33 @@
         },
         {
           "session": 5,
+          "recommended_day": "Day Before Race",
+          "title": "Optional pre-race walk",
+          "duration": "\u2014",
+          "purpose": "Reduce stiffness and settle nerves.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Walk + mobility",
+              "instruction": "15-25 min easy. Stop if it adds fatigue.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Rest is also a valid choice.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
           "recommended_day": "Race Day",
           "title": "Race day Event duration",
           "duration": "\u2014",
@@ -4044,33 +4071,6 @@
             "splits",
             "penalties",
             "review"
-          ],
-          "readiness_adjustment": {
-            "ready": "Complete the session as written.",
-            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
-            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
-          }
-        },
-        {
-          "session": 6,
-          "recommended_day": "Day Before Race",
-          "title": "Optional pre-race walk",
-          "duration": "\u2014",
-          "purpose": "Reduce stiffness and settle nerves.",
-          "pillar": "Recovery",
-          "priority": "OPTIONAL",
-          "blocks": [
-            {
-              "name": "Walk + mobility",
-              "instruction": "15-25 min easy. Stop if it adds fatigue.",
-              "timer": "countdown",
-              "log": [],
-              "category_specific": null
-            }
-          ],
-          "coach_note": "Rest is also a valid choice.",
-          "log_fields": [
-            "feel"
           ],
           "readiness_adjustment": {
             "ready": "Complete the session as written.",
