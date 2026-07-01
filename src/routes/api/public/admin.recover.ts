@@ -17,6 +17,7 @@ export const Route = createFileRoute('/api/public/admin/recover')({
         const userId = url.searchParams.get('userId') ?? '';
         const email = url.searchParams.get('email') ?? '';
         const debug = url.searchParams.get('debug') === '1';
+        const reassignTo = url.searchParams.get('reassignTo') ?? '';
         const env = (url.searchParams.get('env') ?? 'live') as StripeEnv;
         if (env !== 'sandbox' && env !== 'live') {
           return new Response('Bad request', { status: 400 });
@@ -45,7 +46,7 @@ export const Route = createFileRoute('/api/public/admin/recover')({
                 if (s.payment_status !== 'paid' && s.payment_status !== 'no_payment_required') continue;
                 if (!s.metadata?.userId) continue;
                 try {
-                  const did = await fulfilCheckoutSession(s.id, env);
+                  const did = await fulfilCheckoutSession(s.id, env, reassignTo ? { overrideUserId: reassignTo } : undefined);
                   if (did) { fulfilled.push(s.id); seenSessions.add(s.id); }
                 } catch (e) { debugInfo.push({ sessionId: s.id, error: (e as Error).message }); }
               }
