@@ -224,7 +224,7 @@ function BtbProductPage() {
   const btbStarted = useBtbStarted();
   const navigate = useNavigate();
   const startEnrolment = useServerFn(ensureEnrolment);
-  const cart = useCart();
+  const cart = useBtbCart();
 
   useEffect(() => {
     btbStore.configureUser(user?.id ?? null);
