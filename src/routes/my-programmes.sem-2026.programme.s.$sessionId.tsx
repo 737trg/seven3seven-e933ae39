@@ -4,12 +4,12 @@ import { findSession, blockId } from "@/lib/sem/manifest";
 import { useSemProfile } from "@/lib/sem/store";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/programme/s/$sessionId")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Session" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Session" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: SessionPage,
 });
 
 function SessionPage() {
-  const { sessionId: sid } = useParams({ from: "/my-programmes/sem-8/programme/s/$sessionId" });
+  const { sessionId: sid } = useParams({ from: "/my-programmes/sem-2026/programme/s/$sessionId" });
   const ref = findSession(sid);
   const profile = useSemProfile();
 
@@ -17,7 +17,7 @@ function SessionPage() {
     return (
       <SemShell eyebrow="Session" title="Not found">
         <p className="text-foreground-muted">That session does not exist in this programme.</p>
-        <Link to="/my-programmes/sem-8/programme" className="mt-6 inline-block text-bone underline">Back to programme</Link>
+        <Link to="/my-programmes/sem-2026/programme" className="mt-6 inline-block text-bone underline">Back to programme</Link>
       </SemShell>
     );
   }

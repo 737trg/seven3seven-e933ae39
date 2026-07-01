@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/profile")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProfilePage,
 });
 
@@ -92,7 +92,7 @@ function ProfilePage() {
         {saved && <span className="self-center text-foreground-muted text-xs">Saved.</span>}
       </div>
       <p className="text-foreground-muted text-xs mt-8 max-w-[60ch]">
-        S.E.M. 8 does not collect Olympic-lifting benchmarks. Pairs mode only changes the Race day tools — it does not alter the training programme.
+        S.E.M. 2026 does not collect Olympic-lifting benchmarks. Pairs mode only changes the Race day tools — it does not alter the training programme.
       </p>
     </SemShell>
   );

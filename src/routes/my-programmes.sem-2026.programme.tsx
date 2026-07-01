@@ -7,7 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/programme")({
-  head: () => ({ meta: [{ title: "S.E.M. 8 — Programme" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "S.E.M. 2026 — Programme" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProgrammePage,
 });
 
@@ -54,7 +54,7 @@ function ProgrammePage() {
                         {s.recommended_day} · {s.pillar} · {s.duration} · {s.purpose}
                       </p>
                     </div>
-                    <Link to="/my-programmes/sem-8/programme/s/$sessionId" params={{ sessionId: id }} className="shrink-0 text-foreground-muted hover:text-bone inline-flex items-center gap-2 text-[10px] uppercase tracking-widest">
+                    <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: id }} className="shrink-0 text-foreground-muted hover:text-bone inline-flex items-center gap-2 text-[10px] uppercase tracking-widest">
                       View <ArrowRight className="h-3 w-3" />
                     </Link>
                   </li>
