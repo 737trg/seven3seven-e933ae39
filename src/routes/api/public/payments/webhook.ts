@@ -157,7 +157,7 @@ async function handleEvent(event: Stripe.Event, env: StripeEnv) {
         if (!piId) break;
         const { data: order } = await supabase
           .from('orders')
-          .select('id')
+          .select('id, user_id')
           .eq('stripe_payment_intent_id', piId)
           .maybeSingle();
         if (!order) break;
@@ -167,11 +167,33 @@ async function handleEvent(event: Stripe.Event, env: StripeEnv) {
             .from('orders')
             .update({ order_status: 'refunded', payment_status: 'refunded', refunded_at: new Date().toISOString() })
             .eq('id', order.id);
-          await supabase
+          const { data: revoked } = await supabase
             .from('entitlements')
             .update({ revoked_at: new Date().toISOString() })
             .eq('order_id', order.id)
-            .is('revoked_at', null);
+            .is('revoked_at', null)
+            .select('product_id');
+          // Wipe workout progress for the revoked programmes so a re-purchase
+          // starts fresh. Deletes are scoped to (user_id, product-linked
+          // programme_version_id) so unrelated programmes are untouched.
+          const productIds = (revoked ?? []).map((r) => r.product_id).filter(Boolean) as string[];
+          if (productIds.length > 0) {
+            const { data: versions } = await supabase
+              .from('programme_versions')
+              .select('id')
+              .in('product_id', productIds);
+            const versionIds = (versions ?? []).map((v) => v.id);
+            if (versionIds.length > 0) {
+              await supabase.from('workout_results').delete()
+                .eq('user_id', order.user_id).in('programme_version_id', versionIds);
+              await supabase.from('session_completions').delete()
+                .eq('user_id', order.user_id).in('programme_version_id', versionIds);
+              await supabase.from('readiness_logs').delete()
+                .eq('user_id', order.user_id).in('programme_version_id', versionIds);
+              await supabase.from('programme_enrolments').delete()
+                .eq('user_id', order.user_id).in('programme_version_id', versionIds);
+            }
+          }
         }
         break;
       }
