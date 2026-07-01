@@ -4,7 +4,7 @@ import { findSession, blockId } from "@/lib/sem/manifest";
 import { useSemProfile } from "@/lib/sem/store";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/programme/s/$sessionId")({
-  head: () => ({ meta: [{ title: "S.E.M. 2026 — Session" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "S.E.M 2026 — Session" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: SessionPage,
 });
 

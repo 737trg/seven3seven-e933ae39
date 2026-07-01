@@ -11,9 +11,9 @@ import { getProgrammeDownloadUrl } from "@/lib/pdf.functions";
 export const Route = createFileRoute("/my-programmes/sem-2026/")({
   head: () => ({
     meta: [
-      { title: "S.E.M. 2026 — SEVEN3SEVEN" },
+      { title: "S.E.M 2026 — SEVEN3SEVEN" },
       { name: "robots", content: "noindex, nofollow" },
-      { name: "description", content: "S.E.M. 2026 — programme cover." },
+      { name: "description", content: "S.E.M 2026 — programme cover." },
     ],
   }),
   component: SemCover,

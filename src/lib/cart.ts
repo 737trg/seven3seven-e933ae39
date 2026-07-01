@@ -123,7 +123,7 @@ export const CART_CATALOG: Record<CartItemSlug, {
   },
   'sem-2026': {
     slug: 'sem-2026',
-    title: 'S.E.M. 2026',
+    title: 'S.E.M 2026',
     durationLabel: '8-week programme',
     pricePence: 1999,
     stripePriceId: 'sem_2026_lifetime',
