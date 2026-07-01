@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { btbStore, useBtbStarted } from "@/lib/btb/store";
 import { getProgrammeDownloadUrl } from "@/lib/pdf.functions";
+import { ensureEnrolment } from "@/lib/enrolment.functions";
 
 export const Route = createFileRoute("/my-programmes/basic-training-blueprint-plus/")({
   head: () => ({
@@ -25,6 +26,8 @@ function BtbCover() {
   const started = useBtbStarted();
   const navigate = useNavigate();
   const getUrl = useServerFn(getProgrammeDownloadUrl);
+  const startEnrolment = useServerFn(ensureEnrolment);
+  const [starting, setStarting] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const entitled =
@@ -74,13 +77,18 @@ function BtbCover() {
               </ul>
               {entitled && (
                 <button
-                  onClick={() => {
-                    if (!started.started) btbStore.markStarted();
-                    navigate({ to: "/my-programmes/basic-training-blueprint-plus/today" });
+                  disabled={starting}
+                  onClick={async () => {
+                    setStarting(true);
+                    try {
+                      await startEnrolment({ data: { slug: "basic-training-blueprint-plus" } });
+                      if (!started.started) btbStore.markStarted();
+                      navigate({ to: "/my-programmes/basic-training-blueprint-plus/today" });
+                    } finally { setStarting(false); }
                   }}
-                  className="h-12 px-6 inline-flex items-center justify-center gap-3 bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display"
+                  className="h-12 px-6 inline-flex items-center justify-center gap-3 bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display disabled:opacity-60"
                 >
-                  {started.started ? "Continue programme" : "Start programme"} <ArrowRight className="h-3.5 w-3.5" />
+                  {starting ? "Preparing…" : started.started ? "Continue programme" : "Ready to start"} <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               )}
               {entitled && (
