@@ -149,6 +149,7 @@ function AuthSync() {
           import("@/lib/store").then(({ store }) => store.configureAthxAccess({ userId: null, entitled: false }));
           import("@/lib/sem/store").then(({ semStore }) => semStore.configureUser(null));
           import("@/lib/btb/store").then(({ btbStore }) => btbStore.configureUser(null));
+          import("@/lib/cart").then(({ cart }) => cart.clear());
         }
         router.invalidate();
         if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
