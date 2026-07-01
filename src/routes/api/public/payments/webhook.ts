@@ -1,18 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { createClient } from '@supabase/supabase-js';
 import type Stripe from 'stripe';
 import { type StripeEnv, verifyWebhook, createStripeClient } from '@/lib/stripe.server';
-
-let _supabase: ReturnType<typeof createClient> | null = null;
-function getSupabase() {
-  if (!_supabase) {
-    _supabase = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    );
-  }
-  return _supabase;
-}
+import { supabaseAdmin } from '@/integrations/supabase/client.server';
 
 async function fulfilCheckoutSession(sessionId: string, env: StripeEnv) {
   const stripe = createStripeClient(env);
@@ -30,7 +19,7 @@ async function fulfilCheckoutSession(sessionId: string, env: StripeEnv) {
     return;
   }
 
-  const supabase = getSupabase();
+  const supabase = supabaseAdmin;
   const { data: products, error: prodErr } = await supabase
     .from('products')
     .select('id, slug, price_cents')
@@ -40,10 +29,10 @@ async function fulfilCheckoutSession(sessionId: string, env: StripeEnv) {
   const { data: versions } = await supabase
     .from('programme_versions')
     .select('id, product_id')
-    .in('product_id', products.map((p: any) => p.id))
+    .in('product_id', products.map((p) => p.id))
     .eq('is_current', true);
   const versionByProduct = new Map<string, string>();
-  for (const v of (versions ?? [])) versionByProduct.set(v.product_id as string, v.id as string);
+  for (const v of versions ?? []) versionByProduct.set(v.product_id, v.id);
 
   const subtotal = session.amount_subtotal ?? 0;
   const total = session.amount_total ?? 0;
@@ -96,7 +85,7 @@ async function fulfilCheckoutSession(sessionId: string, env: StripeEnv) {
   if (orderErr || !order) throw new Error(`Order upsert failed: ${orderErr?.message}`);
 
   const perItemDiscount = products.length > 0 ? Math.floor(discount / products.length) : 0;
-  for (const p of products as any[]) {
+  for (const p of products) {
     const unit = (p.price_cents ?? 0) as number;
     const finalPrice = Math.max(0, unit - perItemDiscount);
     await supabase
@@ -144,7 +133,7 @@ async function fulfilCheckoutSession(sessionId: string, env: StripeEnv) {
 
 async function handleEvent(event: Stripe.Event, env: StripeEnv) {
   // Idempotency: record the event first; if it's a duplicate, skip.
-  const supabase = getSupabase();
+  const supabase = supabaseAdmin;
   const { error: dupErr } = await supabase
     .from('processed_payment_events')
     .insert({ stripe_event_id: event.id, stripe_event_type: event.type });
