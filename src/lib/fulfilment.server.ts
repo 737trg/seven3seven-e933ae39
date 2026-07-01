@@ -8,7 +8,7 @@ import { supabaseAdmin } from '@/integrations/supabase/client.server';
  * Returns true if the session was fulfilled (or already was), false if it is
  * not in a paid/complete state yet.
  */
-export async function fulfilCheckoutSession(sessionId: string, env: StripeEnv): Promise<boolean> {
+export async function fulfilCheckoutSession(sessionId: string, env: StripeEnv, opts?: { overrideUserId?: string }): Promise<boolean> {
   const stripe = createStripeClient(env);
   const session = await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ['line_items', 'total_details.breakdown', 'payment_intent'],
@@ -17,7 +17,7 @@ export async function fulfilCheckoutSession(sessionId: string, env: StripeEnv): 
   if (session.status !== 'complete') return false;
   if (session.payment_status !== 'paid' && session.payment_status !== 'no_payment_required') return false;
 
-  const userId = session.metadata?.userId;
+  const userId = opts?.overrideUserId ?? session.metadata?.userId;
   const productSlugs = (session.metadata?.product_slugs ?? '').split(',').filter(Boolean);
   if (!userId || productSlugs.length === 0) {
     console.error('Fulfilment missing metadata', { sessionId, userId, productSlugs });
