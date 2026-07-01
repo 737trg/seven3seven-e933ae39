@@ -41,15 +41,19 @@ export function ProgrammeCarousel() {
     const el = trackRef.current;
     if (!el) return;
     drag.current = { active: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false };
-    el.setPointerCapture(e.pointerId);
   };
   const onPointerMove = (e: React.PointerEvent) => {
     if (!drag.current.active) return;
     const el = trackRef.current;
     if (!el) return;
     const dx = e.clientX - drag.current.startX;
-    if (Math.abs(dx) > 30) drag.current.moved = true;
-    if (drag.current.moved) el.scrollLeft = drag.current.startScroll - dx;
+    if (Math.abs(dx) > 8) {
+      if (!drag.current.moved) {
+        drag.current.moved = true;
+        try { el.setPointerCapture(e.pointerId); } catch {}
+      }
+      el.scrollLeft = drag.current.startScroll - dx;
+    }
   };
   const onPointerUp = (e: React.PointerEvent) => {
     drag.current.active = false;
