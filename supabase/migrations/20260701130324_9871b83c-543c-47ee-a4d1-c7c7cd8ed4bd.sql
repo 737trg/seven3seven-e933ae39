@@ -1,0 +1,1 @@
+UPDATE public.products SET name = 'S.E.M 2026' WHERE slug = 'sem-2026';
