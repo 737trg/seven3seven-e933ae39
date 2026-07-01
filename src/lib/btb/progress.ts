@@ -12,7 +12,8 @@ export type BtbProgress = {
 
 /**
  * Reads real session_completions + workout_results for the current user,
- * scoped to Basic Training Blueprint+. RLS scopes rows to auth.uid().
+ * scoped to Basic Training Blueprint+. The user_id filters are deliberate
+ * defence-in-depth in addition to RLS.
  */
 export function useBtbProgress(userId: string | undefined, productSlug = "basic-training-blueprint-plus") {
   const [state, setState] = useState<BtbProgress>({
@@ -26,8 +27,8 @@ export function useBtbProgress(userId: string | undefined, productSlug = "basic-
       const { data: product } = await supabase.from("products").select("id").eq("slug", productSlug).maybeSingle();
       if (!product) { if (active) setState((s) => ({ ...s, loading: false })); return; }
       const [{ data: comps }, { data: results }] = await Promise.all([
-        supabase.from("session_completions").select("session_id").eq("product_id", product.id),
-        supabase.from("workout_results").select("session_id").eq("product_id", product.id),
+        supabase.from("session_completions").select("session_id").eq("user_id", userId).eq("product_id", product.id),
+        supabase.from("workout_results").select("session_id").eq("user_id", userId).eq("product_id", product.id),
       ]);
       if (!active) return;
       const per: Record<string, { completed: boolean; results: number }> = {};
