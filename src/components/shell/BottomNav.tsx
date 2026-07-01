@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator } from "lucide-react";
+import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator, LayoutGrid } from "lucide-react";
 
 const items = [
   { to: "/today", label: "Today", icon: Flame },
@@ -12,6 +12,7 @@ const items = [
 const tools = [
   { to: "/race", label: "Race day", icon: Trophy },
   { to: "/calculator", label: "Calculator", icon: Calculator },
+  { to: "/my-programmes", label: "My library", icon: LayoutGrid },
 ];
 
 export function BottomNav() {

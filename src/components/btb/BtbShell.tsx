@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator } from "lucide-react";
+import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator, LayoutGrid } from "lucide-react";
 import { Wordmark } from "@/components/shell/Wordmark";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
@@ -18,6 +18,7 @@ const primary = [
 const secondary = [
   { to: `${BASE}/assessment`, label: "Assessment day", icon: Trophy },
   { to: `${BASE}/calculator`, label: "Calculator", icon: Calculator },
+  { to: "/my-programmes", label: "My library", icon: LayoutGrid },
 ];
 
 export function BtbShell({ children, eyebrow, title }: { children: ReactNode; eyebrow?: string; title?: string }) {
