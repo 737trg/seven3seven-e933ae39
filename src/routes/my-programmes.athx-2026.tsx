@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui-prim/Button";
 import { Wordmark } from "@/components/shell/Wordmark";
 import { ArrowRight } from "lucide-react";
+import { AthxAccessGate } from "@/lib/athxAccess";
 
 /**
  * Preserved ATHX 2026 programme cover.
@@ -16,8 +17,16 @@ export const Route = createFileRoute("/my-programmes/athx-2026")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  component: AthxCover,
+  component: AthxCoverRoute,
 });
+
+function AthxCoverRoute() {
+  return (
+    <AthxAccessGate>
+      <AthxCover />
+    </AthxAccessGate>
+  );
+}
 
 function AthxCover() {
   return (

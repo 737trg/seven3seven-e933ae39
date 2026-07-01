@@ -42,9 +42,14 @@ const DEFAULT: BtbProfile = {
   setupComplete: false,
 };
 
-const KEY_PROFILE = "btb.profile.v1";
-const KEY_READINESS = "btb.readiness.v1";
-const KEY_STARTED = "btb.started.v1";
+const PROGRAMME_ID = "basic-training-blueprint-plus";
+const LEGACY_PREFIX = "btb";
+let activeUserId: string | null = null;
+
+const key = (name: string) => {
+  if (!activeUserId) return null;
+  return `${LEGACY_PREFIX}.${name}.v1:${activeUserId}:${PROGRAMME_ID}`;
+};
 
 const listeners = new Set<() => void>();
 function emit() { listeners.forEach((l) => l()); }
@@ -69,43 +74,59 @@ let _started: { started: boolean; at: string | null } | null = null;
 
 if (typeof window !== "undefined") {
   window.addEventListener("storage", (e) => {
-    if (e.key === KEY_PROFILE) _profile = null;
-    else if (e.key === KEY_READINESS) _readiness = null;
-    else if (e.key === KEY_STARTED) _started = null;
+    if (e.key?.includes(`${activeUserId}:${PROGRAMME_ID}`)) {
+      _profile = null;
+      _readiness = null;
+      _started = null;
+    }
     emit();
   });
 }
 
 export const btbStore = {
+  configureUser(userId: string | null) {
+    if (activeUserId === userId) return;
+    activeUserId = userId;
+    _profile = null;
+    _readiness = null;
+    _started = null;
+    emit();
+  },
   getProfile(): BtbProfile {
     if (_profile) return _profile;
-    _profile = { ...DEFAULT, ...read<Partial<BtbProfile>>(KEY_PROFILE, {}) };
+    const storageKey = key("profile");
+    _profile = { ...DEFAULT, ...(storageKey ? read<Partial<BtbProfile>>(storageKey, {}) : {}) };
     return _profile;
   },
   saveProfile(p: Partial<BtbProfile>) {
     const next = { ...btbStore.getProfile(), ...p };
     _profile = next;
-    write(KEY_PROFILE, next);
+    const storageKey = key("profile");
+    if (storageKey) write(storageKey, next);
   },
   markStarted() {
     const v = { started: true, at: new Date().toISOString() };
     _started = v;
-    write(KEY_STARTED, v);
+    const storageKey = key("started");
+    if (storageKey) write(storageKey, v);
   },
   getStarted() {
     if (_started) return _started;
-    _started = read(KEY_STARTED, { started: false, at: null });
+    const storageKey = key("started");
+    _started = storageKey ? read(storageKey, { started: false, at: null }) : { started: false, at: null };
     return _started;
   },
   getReadiness(): Record<string, BtbReadiness> {
     if (_readiness) return _readiness;
-    _readiness = read(KEY_READINESS, {});
+    const storageKey = key("readiness");
+    _readiness = storageKey ? read(storageKey, {}) : {};
     return _readiness;
   },
   setReadiness(sessionId: string, value: BtbReadiness) {
     const next = { ...btbStore.getReadiness(), [sessionId]: value };
     _readiness = next;
-    write(KEY_READINESS, next);
+    const storageKey = key("readiness");
+    if (storageKey) write(storageKey, next);
   },
 };
 

@@ -4,6 +4,8 @@ import { Wordmark } from "@/components/shell/Wordmark";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import type { ReactNode } from "react";
+import { useEffect } from "react";
+import { btbStore } from "@/lib/btb/store";
 
 const BASE = "/my-programmes/basic-training-blueprint-plus";
 const primary = [
@@ -22,6 +24,10 @@ export function BtbShell({ children, eyebrow, title }: { children: ReactNode; ey
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const { user, loading: authLoading } = useAuth();
   const { items, loading: entLoading } = useEntitlements(user?.id);
+
+  useEffect(() => {
+    btbStore.configureUser(user?.id ?? null);
+  }, [user?.id]);
 
   if (!authLoading && !user) return <GateSignIn />;
   if (!authLoading && !entLoading && !items.some((i) => i.slug === "basic-training-blueprint-plus")) return <GateNoEntitlement />;

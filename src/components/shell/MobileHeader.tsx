@@ -12,7 +12,7 @@ export function MobileHeader({ title }: { title?: string }) {
           <span className="eyebrow">{title}</span>
         )}
         <span className="text-[10px] uppercase tracking-widest text-foreground-muted">
-          ATHX 26
+          Private
         </span>
       </div>
     </header>

@@ -1,18 +1,9 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { ArrowRight, CalendarDays, Trophy, Activity } from "lucide-react";
-import { store, subscribeStore } from "@/lib/store";
-import { PROGRAMME, allSessions } from "@/data/programme";
-import { currentWeek, todaySession, nextSession, ukShortDate, today } from "@/lib/programmeUtils";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Activity, CalendarDays, Trophy } from "lucide-react";
+import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
-import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
-import { semStore, useSemStarted } from "@/lib/sem/store";
-import { useSemProgress } from "@/lib/sem/progress";
-import { validationCounts as semCounts } from "@/lib/sem/manifest";
-import { useBtbStarted } from "@/lib/btb/store";
-import { useBtbProgress } from "@/lib/btb/progress";
-import { validationCounts as btbCounts } from "@/lib/btb/manifest";
+import { useCustomerDashboard, type CustomerProgramme, type ActivityItem } from "@/lib/useCustomerDashboard";
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   head: () => ({
@@ -25,22 +16,10 @@ export const Route = createFileRoute("/_marketing/my-programmes")({
   component: MyProgrammesPage,
 });
 
-function useStore<T>(read: () => T): T {
-  return useSyncExternalStore(subscribeStore, read, read);
-}
-
 function MyProgrammesPage() {
-  const logs = useStore(store.getLogs);
-  const results = useStore(store.getResults);
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => { setHydrated(true); }, []);
   const { user, loading: authLoading } = useAuth();
-  const { items: entitled } = useEntitlements(user?.id);
-  const semStarted = useSemStarted();
-  const semProg = useSemProgress(user?.id);
-  const btbStarted = useBtbStarted();
-  const btbProg = useBtbProgress(user?.id);
-  const navigate = useNavigate();
+  const entitlements = useEntitlements(user?.id);
+  const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
 
   if (!authLoading && !user) {
     return (
@@ -58,58 +37,26 @@ function MyProgrammesPage() {
     );
   }
 
-  const owns = entitled.some((e) => e.slug === "athx-2026");
-  const ownsSem = entitled.some((e) => e.slug === "sem-2026");
-  const ownsBtb = entitled.some((e) => e.slug === "basic-training-blueprint-plus");
-
   const displayName =
     (user?.user_metadata?.display_name as string | undefined) ||
     (user?.user_metadata?.first_name as string | undefined) ||
     (user?.user_metadata?.name as string | undefined) ||
     "";
 
-  // Real ATHX data only — no invented metrics.
-  const totalSessions = allSessions().length;
-  const completedSessions = Object.values(logs).filter((l) => l.completed).length;
-  const completionPct = totalSessions > 0 ? Math.round((completedSessions / totalSessions) * 100) : 0;
-  const week = currentWeek();
-  const ts = todaySession();
-  const next = nextSession();
-  const todayISO = today().toISOString().slice(0, 10);
-
-  // Recent activity, real entries only
-  const recent = [
-    ...Object.values(logs)
-      .filter((l) => l.endedAt)
-      .map((l) => ({
-        ts: l.endedAt!,
-        kind: "session",
-        text: `Session completed`,
-        sub: PROGRAMME.weeks
-          .flatMap((w) => w.sessions)
-          .find((s) => s.id === l.sessionId)?.title ?? l.sessionId,
-      })),
-    ...results.slice(-10).map((r) => ({
-      ts: r.createdAt,
-      kind: "result",
-      text: `Logged ${r.exercise}`,
-      sub: r.prescribed ?? r.kind,
-    })),
-  ]
-    .sort((a, b) => (a.ts < b.ts ? 1 : -1))
-    .slice(0, 5);
+  const ready = dashboard.programmes.filter((p) => p.state === "ready");
+  const active = dashboard.programmes.filter((p) => p.state === "active");
+  const completed = dashboard.programmes.filter((p) => p.state === "completed");
+  const progressPct = dashboard.programmes.length
+    ? Math.round(
+        dashboard.programmes.reduce((sum, programme) => sum + (programme.enrolment?.completion_pct ?? 0), 0) /
+          dashboard.programmes.length,
+      )
+    : 0;
 
   return (
     <>
-      {/* MASTHEAD — image first, text block below */}
       <section className="relative">
-        <img
-          src={heroAsset.url}
-          alt=""
-          aria-hidden
-          className="block w-full h-auto bg-background select-none"
-          draggable={false}
-        />
+        <img src={heroAsset.url} alt="" aria-hidden className="block w-full h-auto bg-background select-none" draggable={false} />
         <div className="bg-background">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
             <p className="eyebrow text-foreground-muted mb-6 md:mb-8">
@@ -124,211 +71,197 @@ function MyProgrammesPage() {
           </div>
         </div>
 
-        {/* stat strip — no boxes */}
         <div className="border-y border-border/60">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 divide-x divide-border/60">
-            <StatStrip label="Active" value={String(entitled.length)} />
-            <StatStrip label="Current week" value={String(week.number === 8 ? "RW" : week.number)} />
-            <StatStrip label="Sessions completed" value={hydrated ? String(completedSessions) : "0"} />
-            <StatStrip label="Results logged" value={hydrated ? String(results.length) : "0"} />
+            <StatStrip label="Active" value={dashboard.loading ? "—" : String(dashboard.activeCount)} />
+            <StatStrip label="Current week" value={dashboard.loading ? "—" : dashboard.currentWeek ? String(dashboard.currentWeek) : "—"} />
+            <StatStrip label="Sessions completed" value={dashboard.loading ? "—" : String(dashboard.sessionsCompleted)} />
+            <StatStrip label="Results logged" value={dashboard.loading ? "—" : String(dashboard.resultsLogged)} />
           </div>
         </div>
       </section>
 
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-12 lg:gap-x-12 xl:gap-x-16">
-        {/* LEFT — programmes lists */}
         <div className="space-y-14 lg:space-y-16 lg:pr-4 xl:pr-8">
-          {/* ACTIVE */}
-          <div>
-            <div className="flex items-end justify-between mb-6">
-              <div>
-                <p className="eyebrow">Active</p>
-              </div>
-            </div>
-
-            {owns ? (
-              <ActiveProgrammeCard
-                completionPct={completionPct}
-                weekLabel={`Week ${week.number === 8 ? "RW" : week.number} of ${PROGRAMME.weeks.length}`}
-                nextLine={
-                  ts
-                    ? `Today · ${ts.title}`
-                    : next?.date
-                      ? `${ukShortDate(next.date)} · ${next.title}`
-                      : "Programme complete"
-                }
-              />
-            ) : (
-              <Empty text="No active programmes" />
-            )}
-
-            {/* S.E.M. 2026 — Ready to start OR Active (when started) */}
-            {ownsSem && semStarted.started && (
-              <div className="mt-10">
-                <SemActiveCard
-                  coreCompleted={semProg.coreCompleted}
-                  coreTotal={semCounts().core}
-                  optionalCompleted={semProg.optionalCompleted}
-                  optionalTotal={semCounts().optional}
-                />
-              </div>
-            )}
-          </div>
-
-          {ownsBtb && btbStarted.started && (
-            <div className="mt-10">
-              <BtbActiveCard
-                coreCompleted={btbProg.coreCompleted}
-                coreTotal={btbCounts().core}
-              />
-            </div>
-          )}
-
-          {((ownsSem && !semStarted.started) || (ownsBtb && !btbStarted.started)) && (
-            <div>
-              <p className="eyebrow mb-4">Ready to start</p>
-              <div className="space-y-10">
-                {ownsSem && !semStarted.started && (
-                  <SemReadyCard onStart={() => { semStore.markStarted(); navigate({ to: "/my-programmes/sem-2026/today" }); }} />
-                )}
-                {ownsBtb && !btbStarted.started && <BtbReadyCard />}
-              </div>
-            </div>
-          )}
-
-          {/* UPCOMING */}
+          <ProgrammeGroup title="Active" empty="No active programmes" programmes={active} />
+          <ProgrammeGroup title="Ready to start" empty="No programmes ready to start" programmes={ready} />
           <div>
             <p className="eyebrow mb-4">Upcoming</p>
             <Empty text="No upcoming programmes" />
           </div>
-
-          {/* COMPLETED */}
-          <div>
-            <p className="eyebrow mb-4">Completed</p>
-            {completionPct === 100 ? (
-              <div className="border-t border-border/60 pt-5">
-                <p className="font-display text-bone text-xl tracking-[-0.02em]">ATHX 2026</p>
-                <p className="text-foreground-muted text-xs mt-1">Completed</p>
-              </div>
-            ) : (
-              <Empty text="No completed programmes yet" />
-            )}
-          </div>
+          <ProgrammeGroup title="Completed" empty="No completed programmes yet" programmes={completed} />
         </div>
 
-        {/* vertical divider — desktop only */}
         <div aria-hidden className="hidden lg:block w-px bg-border/60" />
 
-        {/* RIGHT — sidebar */}
         <aside className="space-y-10 lg:pl-4 xl:pl-8">
           <SidebarCard title="Quick actions">
-            <SideLink to="/programmes" label="Browse programmes" />
-            <SideLink to="/my-programmes/athx-2026" label="View ATHX cover" />
-            <SideLink to="/today" label="Continue training" />
+            <QuickActions programmes={dashboard.programmes} />
           </SidebarCard>
 
           <SidebarCard title="Recent activity">
-            {recent.length === 0 ? (
-              <p className="text-foreground-muted text-xs">No activity yet.</p>
-            ) : (
-              <ul className="space-y-3">
-                {recent.map((r, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Activity className="h-3.5 w-3.5 text-signal mt-0.5 shrink-0" />
-                    <div className="min-w-0">
-                      <p className="text-bone text-xs">{r.text}</p>
-                      <p className="text-foreground-muted text-[10px] truncate">{r.sub}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <RecentActivity items={dashboard.recent} />
           </SidebarCard>
 
           <SidebarCard title="Your progress">
             <p className="text-foreground-muted text-[10px] uppercase tracking-widest">All-time overview</p>
             <div className="mt-4 flex items-center gap-5">
-              <ProgressRing pct={completionPct} />
+              <ProgressRing pct={progressPct} />
               <div className="space-y-1.5 text-xs">
-                <Row k="Sessions completed" v={String(completedSessions)} />
-                <Row k="Results logged" v={String(results.length)} />
-                <Row k="Programme weeks" v={String(PROGRAMME.weeks.length)} />
+                <Row k="Sessions completed" v={String(dashboard.sessionsCompleted)} />
+                <Row k="Results logged" v={String(dashboard.resultsLogged)} />
+                <Row k="Programmes owned" v={String(dashboard.programmes.length)} />
               </div>
             </div>
-            <Link
-              to="/progress"
-              className="mt-5 inline-flex items-center gap-2 eyebrow text-signal"
-            >
-              View detailed progress <ArrowRight className="h-3 w-3" />
-            </Link>
+            {dashboard.programmes.length === 0 ? (
+              <Link to="/programmes" className="mt-5 inline-flex items-center gap-2 eyebrow text-signal">
+                Browse programmes <ArrowRight className="h-3 w-3" />
+              </Link>
+            ) : (
+              <Link to="/my-programmes" className="mt-5 inline-flex items-center gap-2 eyebrow text-signal">
+                View all programmes <ArrowRight className="h-3 w-3" />
+              </Link>
+            )}
           </SidebarCard>
         </aside>
       </section>
 
-      {/* DOWNLOADS — only shown if real files exist */}
-      {/* No downloads exist on disk yet; section intentionally omitted per brief. */}
-
-      {/* Hidden noindex sanity note (visually present, screen-reader hidden) */}
       <p className="sr-only">This area is private and excluded from search.</p>
     </>
   );
 }
 
-function ActiveProgrammeCard({
-  completionPct,
-  weekLabel,
-  nextLine,
-}: {
-  completionPct: number;
-  weekLabel: string;
-  nextLine: string;
-}) {
+function ProgrammeGroup({ title, empty, programmes }: { title: string; empty: string; programmes: CustomerProgramme[] }) {
+  return (
+    <div>
+      <p className="eyebrow mb-4">{title}</p>
+      {programmes.length === 0 ? (
+        <Empty text={empty} />
+      ) : (
+        <div className="space-y-10">
+          {programmes.map((programme, index) => (
+            <ProgrammeCard key={programme.product_id} programme={programme} index={index + 1} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProgrammeCard({ programme, index }: { programme: CustomerProgramme; index: number }) {
+  const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
+  const href = programmePath(programme, programme.state === "active" ? "continue" : "cover");
+  const cta = programme.state === "ready" ? "Start programme" : programme.state === "completed" ? "View programme" : "Continue training";
+
   return (
     <article className="border-t border-border/60 pt-8">
       <div className="flex flex-col">
-        <p className="eyebrow text-foreground-muted">Compete · 01</p>
-        <h3 className="font-display font-bold text-bone text-4xl lg:text-6xl tracking-[-0.025em] mt-2">
-          ATHX 2026
+        <p className="eyebrow text-foreground-muted">{programme.collection} · {String(index).padStart(2, "0")}</p>
+        <h3 className="font-display font-bold text-bone text-3xl lg:text-6xl tracking-[-0.025em] mt-2">
+          {programme.name}
         </h3>
-        <p className="text-foreground-muted text-sm mt-3 max-w-[44ch]">
-          Seven-week hybrid competition preparation.
-        </p>
-
         <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
-          <li className="inline-flex items-center gap-2"><CalendarDays className="h-3 w-3" />{weekLabel}</li>
-          <li className="inline-flex items-center gap-2"><Trophy className="h-3 w-3" />Race 23.08.2026</li>
+          <li className="inline-flex items-center gap-2"><CalendarDays className="h-3 w-3" />{programme.duration_weeks ? `${programme.duration_weeks} weeks` : "Programme"}</li>
+          <li className="inline-flex items-center gap-2"><Trophy className="h-3 w-3" />{stateLabel(programme.state)}</li>
         </ul>
-
-        <div className="mt-8 max-w-md">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
-            <span>Progress</span>
-            <span className="text-bone tabular">{completionPct}%</span>
+        {programme.enrolment && (
+          <div className="mt-8 max-w-md">
+            <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
+              <span>Progress</span>
+              <span className="text-bone tabular">{pct}%</span>
+            </div>
+            <div className="h-[2px] bg-surface-raised overflow-hidden">
+              <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+            </div>
           </div>
-          <div className="h-[2px] bg-surface-raised overflow-hidden">
-            <div className="h-full bg-signal" style={{ width: `${completionPct}%` }} />
-          </div>
-        </div>
-
-        <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">Next session</p>
-        <p className="text-bone text-base font-display mt-1">{nextLine}</p>
-
+        )}
         <div className="mt-8 flex flex-wrap gap-6">
-          <Link
-            to="/today"
-            className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
-          >
-            Continue training <ArrowRight className="h-3.5 w-3.5" />
+          <Link to={href} className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
+            {cta} <ArrowRight className="h-3.5 w-3.5" />
           </Link>
-          <Link
-            to="/my-programmes/athx-2026"
-            className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors"
-          >
-            View cover
-          </Link>
+          {programme.state === "active" && (
+            <Link to={programmePath(programme, "cover")} className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
+              View programme
+            </Link>
+          )}
         </div>
       </div>
     </article>
   );
+}
+
+function QuickActions({ programmes }: { programmes: CustomerProgramme[] }) {
+  if (programmes.length === 0) {
+    return (
+      <>
+        <SideLink to="/programmes" label="Browse programmes" />
+        <SideLink to="/account" label="My account" />
+      </>
+    );
+  }
+
+  const active = programmes.filter((p) => p.state === "active");
+  const ready = programmes.filter((p) => p.state === "ready");
+  const mostRecent = [...active].sort((a, b) => ((b.enrolment?.updated_at ?? "") < (a.enrolment?.updated_at ?? "") ? -1 : 1))[0];
+
+  if (active.length > 1 && mostRecent) {
+    return (
+      <>
+        <SideLink to={programmePath(mostRecent, "continue")} label={`Continue ${mostRecent.name}`} />
+        <SideLink to="/my-programmes" label="View all programmes" />
+        <SideLink to="/account" label="My account" />
+      </>
+    );
+  }
+
+  if (active.length === 1) {
+    const programme = active[0];
+    return (
+      <>
+        <SideLink to={programmePath(programme, "continue")} label={`Continue ${programme.name}`} />
+        <SideLink to={programmePath(programme, "cover")} label="View programme" />
+        <SideLink to="/account" label="My account" />
+      </>
+    );
+  }
+
+  const next = ready[0] ?? programmes[0];
+  return (
+    <>
+      <SideLink to={programmePath(next, "cover")} label={`Start ${next.name}`} />
+      <SideLink to={programmePath(next, "cover")} label={`View ${next.name} cover`} />
+      <SideLink to="/account" label="My account" />
+    </>
+  );
+}
+
+function RecentActivity({ items }: { items: ActivityItem[] }) {
+  if (items.length === 0) return <p className="text-foreground-muted text-xs uppercase tracking-[0.2em]">No activity yet.</p>;
+  return (
+    <ul className="space-y-3">
+      {items.map((item, i) => (
+        <li key={`${item.ts}-${i}`} className="flex items-start gap-3">
+          <Activity className="h-3.5 w-3.5 text-signal mt-0.5 shrink-0" />
+          <div className="min-w-0">
+            <p className="text-bone text-xs">{item.title}</p>
+            <p className="text-foreground-muted text-[10px] truncate">{item.sub}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function programmePath(programme: CustomerProgramme, intent: "cover" | "continue") {
+  if (programme.slug === "athx-2026") return intent === "continue" ? "/today" : "/my-programmes/athx-2026";
+  const base = programme.base_path || `/my-programmes/${programme.slug}`;
+  return intent === "continue" ? `${base}/today` : base;
+}
+
+function stateLabel(state: CustomerProgramme["state"]) {
+  if (state === "ready") return "Ready to start";
+  if (state === "completed") return "Completed";
+  return "Active";
 }
 
 function StatStrip({ label, value }: { label: string; value: string }) {
@@ -340,112 +273,11 @@ function StatStrip({ label, value }: { label: string; value: string }) {
   );
 }
 
-function SemReadyCard({ onStart }: { onStart: () => void }) {
-  return (
-    <article className="border-t border-border/60 pt-8">
-      <p className="eyebrow text-foreground-muted">Compete · 02</p>
-      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 2026</h3>
-      <p className="text-foreground-muted text-sm mt-3 max-w-[44ch]">Strength. Endurance. MetCon. — eight-week competition preparation.</p>
-      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
-        <li>Status · <span className="text-bone">Ready to start</span></li>
-        <li>Format · <span className="text-bone">Individual / pairs</span></li>
-      </ul>
-      <div className="mt-8 flex flex-wrap gap-6">
-        <button onClick={onStart} className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
-          Start programme <ArrowRight className="h-3.5 w-3.5" />
-        </button>
-        <Link to="/my-programmes/sem-2026" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
-          View cover
-        </Link>
-      </div>
-    </article>
-  );
-}
-
-function SemActiveCard({ coreCompleted, coreTotal, optionalCompleted, optionalTotal }: { coreCompleted: number; coreTotal: number; optionalCompleted: number; optionalTotal: number }) {
-  const pct = Math.round((coreCompleted / Math.max(1, coreTotal)) * 100);
-  return (
-    <article className="border-t border-border/60 pt-8">
-      <p className="eyebrow text-foreground-muted">Compete · 02</p>
-      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">S.E.M. 2026</h3>
-      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
-        <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
-        <li>Optional <span className="text-bone tabular">{optionalCompleted}/{optionalTotal}</span></li>
-      </ul>
-      <div className="mt-8 max-w-md">
-        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
-          <span>Progress (core)</span>
-          <span className="text-bone tabular">{pct}%</span>
-        </div>
-        <div className="h-[2px] bg-surface-raised overflow-hidden">
-          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
-        </div>
-      </div>
-      <div className="mt-8 flex flex-wrap gap-6">
-        <Link to="/my-programmes/sem-2026/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
-          Continue training <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-        <Link to="/my-programmes/sem-2026" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
-          View cover
-        </Link>
-      </div>
-    </article>
-  );
-}
-
 function Empty({ text }: { text: string }) {
   return (
     <div className="border-t border-border/60 pt-5">
       <p className="text-foreground-muted text-xs uppercase tracking-[0.22em]">{text}</p>
     </div>
-  );
-}
-
-function BtbReadyCard() {
-  return (
-    <article className="border-t border-border/60 pt-8">
-      <p className="eyebrow text-foreground-muted">Foundation · 03</p>
-      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">Basic Training Blueprint+</h3>
-      <p className="text-foreground-muted text-sm mt-4 max-w-[52ch] leading-relaxed">
-        Foundational hybrid training. Set your start date to unlock week 1.
-      </p>
-      <div className="mt-8 flex flex-wrap gap-6">
-        <Link to="/my-programmes/basic-training-blueprint-plus" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
-          Open programme <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-      </div>
-    </article>
-  );
-}
-
-function BtbActiveCard({ coreCompleted, coreTotal }: { coreCompleted: number; coreTotal: number }) {
-  const pct = Math.round((coreCompleted / Math.max(1, coreTotal)) * 100);
-  return (
-    <article className="border-t border-border/60 pt-8">
-      <p className="eyebrow text-foreground-muted">Foundation · 03</p>
-      <h3 className="font-display font-bold text-bone text-3xl lg:text-5xl tracking-[-0.025em] mt-2">Basic Training Blueprint+</h3>
-      <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
-        <li>Core <span className="text-bone tabular">{coreCompleted}/{coreTotal}</span></li>
-        <li>Duration <span className="text-bone">12 weeks</span></li>
-      </ul>
-      <div className="mt-8 max-w-md">
-        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
-          <span>Progress (core)</span>
-          <span className="text-bone tabular">{pct}%</span>
-        </div>
-        <div className="h-[2px] bg-surface-raised overflow-hidden">
-          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
-        </div>
-      </div>
-      <div className="mt-8 flex flex-wrap gap-6">
-        <Link to="/my-programmes/basic-training-blueprint-plus/today" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
-          Continue training <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-        <Link to="/my-programmes/basic-training-blueprint-plus" className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
-          View cover
-        </Link>
-      </div>
-    </article>
   );
 }
 
@@ -484,21 +316,9 @@ function ProgressRing({ pct }: { pct: number }) {
     <div className="relative h-[80px] w-[80px] shrink-0">
       <svg viewBox="0 0 70 70" className="h-full w-full -rotate-90">
         <circle cx="35" cy="35" r={r} stroke="var(--surface-raised)" strokeWidth="4" fill="none" />
-        <circle
-          cx="35"
-          cy="35"
-          r={r}
-          stroke="var(--signal)"
-          strokeWidth="4"
-          fill="none"
-          strokeDasharray={c}
-          strokeDashoffset={off}
-          strokeLinecap="round"
-        />
+        <circle cx="35" cy="35" r={r} stroke="var(--signal)" strokeWidth="4" fill="none" strokeDasharray={c} strokeDashoffset={off} strokeLinecap="round" />
       </svg>
-      <span className="absolute inset-0 grid place-items-center text-bone font-display text-sm tabular">
-        {pct}%
-      </span>
+      <span className="absolute inset-0 grid place-items-center text-bone font-display text-sm tabular">{pct}%</span>
     </div>
   );
 }
