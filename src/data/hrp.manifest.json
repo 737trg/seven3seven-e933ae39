@@ -1,0 +1,4451 @@
+{
+  "id": "hrp-2026",
+  "slug": "hybrid-race-plan",
+  "title": "HYBRID RACE PLAN",
+  "subtitle": "Run hard. Move well. Hold output.",
+  "product_line": "COMPETE",
+  "version": "1.0.0",
+  "duration_weeks": 12,
+  "core_sessions_per_week": 5,
+  "optional_sessions_per_week": 1,
+  "core_session_total": 61,
+  "optional_session_total": 12,
+  "level": "First-time to experienced hybrid racers",
+  "purpose": "Twelve-week preparation for HYROX or The Hybrid Games (Solo or Doubles). Every athlete trains as an individual; Doubles-specific shared work is planned inside Race Day tools.",
+  "tagline": "RUN HARD. MOVE WELL. HOLD OUTPUT.",
+  "supporting_statement": "BUILD THE ENGINE. OWN THE STATIONS. RACE WITHOUT FALLING APART.",
+  "format_options": [
+    "Solo",
+    "Doubles"
+  ],
+  "event_options": [
+    "HYROX",
+    "The Hybrid Games"
+  ],
+  "category_options": [
+    "Open",
+    "Pro"
+  ],
+  "sex_options": [
+    "Male",
+    "Female"
+  ],
+  "track_options": [
+    "BUILD",
+    "STANDARD",
+    "PERFORMANCE"
+  ],
+  "track_descriptions": {
+    "BUILD": "First-time racers, lower current training volume or return to structured training. Use the lower end of prescribed ranges, use run-walk where stated and reduce station volume before reducing movement standards.",
+    "STANDARD": "Suitable for most athletes. Use the middle of prescribed ranges and progress when pace, movement and recovery remain repeatable.",
+    "PERFORMANCE": "For experienced athletes with high current training tolerance. Use the upper end only when movement quality, pace and recovery remain stable."
+  },
+  "independent_disclaimer": "Produced independently by SEVEN3SEVEN. Designed for athletes preparing for HYROX or The Hybrid Games but not produced, approved or endorsed by either organiser. Always verify the latest published rulebook and athlete briefing.",
+  "enabled_pages": {
+    "today": true,
+    "programme": true,
+    "progress": true,
+    "race": true,
+    "calculator": true,
+    "learn": true,
+    "profile": true
+  },
+  "nav_labels": {
+    "race": "Race Day",
+    "learn": "Learn",
+    "calculator": "Calculator",
+    "profile": "Profile"
+  },
+  "profile_fields": [
+    "displayName",
+    "startDate",
+    "raceDate",
+    "event",
+    "format",
+    "sex",
+    "category",
+    "track",
+    "units",
+    "recent5k",
+    "twentyMinDistance",
+    "backSquat",
+    "deadlift",
+    "wallBallSet",
+    "machineBenchmark",
+    "equipment",
+    "limitations",
+    "soundCues",
+    "vibration"
+  ],
+  "event_profiles": {
+    "HYROX": {
+      "Women Open": {
+        "run": "8 x 1 km",
+        "sled_push_kg": 102,
+        "sled_pull_kg": 78,
+        "farmers_kg_each": 16,
+        "lunge_kg": 10,
+        "wall_ball_kg": 4,
+        "wall_ball_target_m": 2.75,
+        "skierg_m": 1000,
+        "row_m": 1000,
+        "burpee_broad_jump_m": 80
+      },
+      "Men Open": {
+        "run": "8 x 1 km",
+        "sled_push_kg": 152,
+        "sled_pull_kg": 103,
+        "farmers_kg_each": 24,
+        "lunge_kg": 20,
+        "wall_ball_kg": 6,
+        "wall_ball_target_m": 3.0,
+        "skierg_m": 1000,
+        "row_m": 1000,
+        "burpee_broad_jump_m": 80
+      },
+      "Women Pro": {
+        "run": "8 x 1 km",
+        "sled_push_kg": 152,
+        "sled_pull_kg": 103,
+        "farmers_kg_each": 24,
+        "lunge_kg": 20,
+        "wall_ball_kg": 6,
+        "wall_ball_target_m": 3.0,
+        "skierg_m": 1000,
+        "row_m": 1000,
+        "burpee_broad_jump_m": 80
+      },
+      "Men Pro": {
+        "run": "8 x 1 km",
+        "sled_push_kg": 202,
+        "sled_pull_kg": 153,
+        "farmers_kg_each": 32,
+        "lunge_kg": 30,
+        "wall_ball_kg": 9,
+        "wall_ball_target_m": 3.0,
+        "skierg_m": 1000,
+        "row_m": 1000,
+        "burpee_broad_jump_m": 80
+      }
+    },
+    "The Hybrid Games": {
+      "Female Solo": {
+        "run": "10 x 600 m + 200 m finish",
+        "air_bike_cal": 30,
+        "wall_balls": 20,
+        "row_m": 500,
+        "burpee_broad_jump_m": 50,
+        "db_snatch": "20 alt @ 15 kg",
+        "lunge_m": 50,
+        "lunge_kg_each": 15,
+        "farmers_m": 100,
+        "farmers_kg_each": 16,
+        "sled_pull_kg": 78,
+        "skierg_m": 600,
+        "sled_push_kg": 102
+      },
+      "Male Solo": {
+        "run": "10 x 600 m + 200 m finish",
+        "air_bike_cal": 40,
+        "wall_balls": 25,
+        "row_m": 600,
+        "burpee_broad_jump_m": 60,
+        "db_snatch": "20 alt @ 22.5 kg",
+        "lunge_m": 50,
+        "lunge_kg_each": 22.5,
+        "farmers_m": 100,
+        "farmers_kg_each": 24,
+        "sled_pull_kg": 103,
+        "skierg_m": 700,
+        "sled_push_kg": 152
+      },
+      "Female Doubles": {
+        "run": "10 x 600 m + 200 m finish",
+        "air_bike_cal": 30,
+        "wall_balls": 20,
+        "row_m": 500,
+        "burpee_broad_jump_m": 50,
+        "db_snatch": "20 alt @ 15 kg",
+        "lunge_m": 50,
+        "lunge_kg_each": 15,
+        "farmers_m": 100,
+        "farmers_kg_each": 16,
+        "sled_pull_kg": 78,
+        "skierg_m": 600,
+        "sled_push_kg": 102,
+        "shared_work": true
+      },
+      "Male Doubles": {
+        "run": "10 x 600 m + 200 m finish",
+        "air_bike_cal": 40,
+        "wall_balls": 25,
+        "row_m": 600,
+        "burpee_broad_jump_m": 60,
+        "db_snatch": "20 alt @ 22.5 kg",
+        "lunge_m": 50,
+        "lunge_kg_each": 22.5,
+        "farmers_m": 100,
+        "farmers_kg_each": 24,
+        "sled_pull_kg": 103,
+        "skierg_m": 700,
+        "sled_push_kg": 152,
+        "shared_work": true
+      }
+    }
+  },
+  "learn": {
+    "tabs": {
+      "training_terms": [
+        "RPE \u2014 rating of perceived exertion; a subjective 0\u201310 scale used to guide effort.",
+        "Zone 2 \u2014 easy conversational aerobic effort, RPE 4-5.",
+        "Threshold \u2014 controlled hard running at RPE 7.5-8 that can be sustained for extended blocks.",
+        "Race-distance repetition \u2014 a running interval at the exact race run distance (1 km HYROX, 600 m Hybrid Games).",
+        "Compromised running \u2014 running immediately after a station under residual fatigue.",
+        "Brick \u2014 a session stacking running with station work in event order.",
+        "Deload \u2014 a reduced-volume week designed to absorb accumulated training.",
+        "Taper \u2014 the final phase before race day: lower volume, retain small doses of race pace and load.",
+        "No-rep \u2014 a repetition disallowed by the judge for failing the movement standard.",
+        "Transition \u2014 the change between run and station, or station and station."
+      ],
+      "movement_standards": [
+        "Sled push \u2014 hips low, arms long, push through the floor. Reset if the sled stops mid-lane.",
+        "Sled pull \u2014 hand-over-hand or rope-over-shoulder. Rope management costs seconds.",
+        "Burpee broad jump \u2014 chest to floor, two-foot take-off and landing behind the line.",
+        "Wall ball \u2014 legal squat depth and ball contact above the target line.",
+        "Lunge \u2014 legal knee contact where required. Full extension at the top of each step.",
+        "Farmers carry \u2014 chest tall, controlled turns, avoid dropping the implements.",
+        "Dumbbell snatch \u2014 one clean pull from the floor to overhead. Alternate hands as prescribed.",
+        "Machine stations \u2014 practise damper, footplate and monitor setup as part of the transition."
+      ],
+      "race_guidance": [
+        "Pacing principle \u2014 the second half should not be significantly slower than the first.",
+        "Station break plan \u2014 decide set sizes and breaths in advance; do not decide mid-set.",
+        "Doubles \u2014 plan A/B stations and handover cues before race day.",
+        "Fuel and hydration \u2014 practise pre-race meal, fluids and carbohydrate in rehearsals only.",
+        "Official information \u2014 always verify the latest published rulebook and athlete briefing."
+      ],
+      "equipment_substitutions": [
+        "Running \u2192 treadmill at 1% incline if outdoor running is unsafe.",
+        "SkiErg \u2192 tall-kneeling banded pulls if no ergometer is available.",
+        "Rower \u2192 SkiErg or bike at equivalent RPE, matching duration not distance.",
+        "Air bike \u2192 any bike ergometer at matched effort.",
+        "Sled \u2192 heavy resistance-band drag or hill push at matched effort.",
+        "Wall balls \u2192 heavy squat-to-press with a dumbbell.",
+        "Farmers carry \u2192 dual kettlebells or trap-bar carry at matched load.",
+        "Lunges \u2192 walking lunges bodyweight or dumbbells at matched load.",
+        "Burpee broad jumps \u2192 burpee-to-target if space is limited.",
+        "Dumbbell snatch \u2192 kettlebell snatch at similar load and reps."
+      ]
+    }
+  },
+  "calculator": {
+    "run_paces": [
+      "200 m",
+      "300 m",
+      "400 m",
+      "600 m",
+      "800 m",
+      "1 km"
+    ],
+    "lifts": [
+      "back_squat",
+      "deadlift"
+    ],
+    "percentages": [
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      110
+    ],
+    "rounding_kg": 2.5,
+    "rpe_guide": {
+      "6": "Easy. Could complete many more reps or minutes at this effort.",
+      "7": "Steady. Sustainable for a long block.",
+      "7.5": "Controlled hard. Threshold work sits here.",
+      "8": "Hard. Race-distance repeats at target pace.",
+      "9": "Very hard. Reserved for peak sessions and race.",
+      "10": "Maximal. Used only on race day."
+    },
+    "sled_note": "Sled mass alone does not determine difficulty. Turf, footwear and sled design change friction. Use event load as the reference, but use RPE and movement speed to make the final training decision."
+  },
+  "race_tools": {
+    "sections": [
+      "running",
+      "machines",
+      "sled",
+      "wall_balls",
+      "carries_lunges",
+      "burpees",
+      "doubles",
+      "fuel_hydration",
+      "equipment_checklist",
+      "race_review"
+    ]
+  },
+  "progress_metrics": {
+    "running": [
+      "5km_benchmark",
+      "event_distance_repeat_avg",
+      "pace_dropoff",
+      "compromised_run_dropoff",
+      "zone2_duration"
+    ],
+    "strength": [
+      "back_squat_marker",
+      "deadlift_marker",
+      "race_load_sled_split",
+      "farmers_carry_split"
+    ],
+    "stations": [
+      "wall_ball_set_size",
+      "machine_split",
+      "lunge_split",
+      "burpee_broad_jump_split",
+      "no_reps",
+      "planned_break_accuracy"
+    ],
+    "hybrid_performance": [
+      "brick_time",
+      "simulation_time",
+      "transition_time",
+      "race_plan_accuracy"
+    ],
+    "adherence": [
+      "core_sessions_completed",
+      "optional_sessions_completed",
+      "weekly_consistency",
+      "readiness_trend"
+    ]
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "phase": "FOUNDATION",
+      "title": "Establish the engine.",
+      "load": "Moderate",
+      "checkpoint": "Record honest running, strength, sled and station baselines without turning the opening week into a race.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength + sled baseline",
+          "duration": "60-70 min",
+          "purpose": "Establish lower-body strength markers and learn efficient sled positions at low fatigue.</td></tr>",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "8-10 min easy machine, ankle and hip mobility, bodyweight squats, hinges and progressive barbell sets.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Back squat marker",
+              "instruction": "Work to 1 x 5 at RPE 7.5-8. Then complete 3 x 5 at about 90% of that load. Rest 2-3 min.",
+              "timer": "rest",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Romanian deadlift",
+              "instruction": "3 x 6 at RPE 7. Keep the bar close and stop each set with three good reps available.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled mechanics",
+              "instruction": "6 x 12.5 m push and 6 x 12.5 m pull at RPE 6-7. Use short controlled steps, a rigid trunk and smooth rope recovery. Use the race-load percentage shown for your selected event and category. Sled loading is finally governed by RPE because turf and sled friction vary between venues.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Trunk + calves",
+              "instruction": "3 rounds: 30 sec heavy suitcase hold each side, 12 controlled calf raises and 8 dead bugs each side.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The baseline should feel useful, not heroic. Finish knowing every repetition could be repeated with the same shape.",
+          "log_fields": [
+            "squat_top_set",
+            "sled_load",
+            "sled_splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Run repeatability baseline",
+          "duration": "45-60 min",
+          "purpose": "Establish current sustainable speed and pace drop-off without using an all-out time trial.</td></tr>",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy running with drills and 4 x 20 sec relaxed strides.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Main set",
+              "instruction": "Complete 4-6 x 3 min at RPE 7.5 with 2 min easy jog or walk. BUILD track: use the lower end of all ranges. STANDARD: use the middle. PERFORMANCE: use the upper end only when pace and movement remain repeatable.",
+              "timer": "interval",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Event reference",
+              "instruction": "HYROX: use 1 km as the race-distance repetition. The Hybrid Games: use 600 m and preserve a fast but controlled final 200 m when prescribed. Use the recorded three-minute pace to set a conservative starting reference, not a race prediction.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYROX": "use 1 km as the race-distance repetition.",
+                "HYBRID_GAMES": "use 600 m and preserve a fast but controlled final 200 m when prescribed. Use the recorded three-minute pace to set a conservative starting reference, not a race prediction."
+              }
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8-10 min easy running or walking until breathing is controlled.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The final repetition should resemble the first. Large drop-off means the opening pace was too ambitious.",
+          "log_fields": [
+            "rep_paces",
+            "dropoff",
+            "RPE",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic base + strides",
+          "duration": "40-60 min",
+          "purpose": "Build low-intensity running volume and finish with a small dose of relaxed speed.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "35-55 min easy run or run-walk at RPE 4-5. Conversation should remain possible. BUILD track may alternate 4 min run / 1 min walk.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Strides",
+              "instruction": "4 x 15 sec fast but relaxed with at least 60 sec walking recovery. Stop if posture or foot strike becomes forced.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-8 min calves, ankles, hips and thoracic rotation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Easy volume only works when it stays easy. Do not turn the final ten minutes into a threshold run.",
+          "log_fields": [
+            "duration",
+            "distance",
+            "average_HR",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Station repeatability",
+          "duration": "50-60 min",
+          "purpose": "Assess movement standards and repeatable station work without creating excessive soreness.",
+          "pillar": "Station Capacity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy SkiErg, row or bike plus light wall balls, lunges, carries and burpee broad-jump practice.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "24-min EMOM",
+              "instruction": "Rotate six minutes for four rounds: 1) 10-12 cal machine, 2) 10 wall balls, 3) 30-40 m farmers carry, 4) 10 walking lunges, 5) 5 burpee broad jumps, 6) rest. Use 50-65% race load.",
+              "timer": "emom",
+              "log": [
+                "rounds",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Event-specific skill",
+              "instruction": "HYROX: practise SkiErg setup and sled lane turns. The Hybrid Games: practise air-bike setup and alternating dumbbell-snatch rhythm. Keep this technical.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYROX": "practise SkiErg setup and sled lane turns.",
+                "HYBRID_GAMES": "practise air-bike setup and alternating dumbbell-snatch rhythm. Keep this technical."
+              }
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8 min easy machine work.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Every working minute should leave at least 15 seconds. Reduce reps before standards deteriorate.",
+          "log_fields": [
+            "completed_minutes",
+            "lowest_rest",
+            "loads",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Hybrid baseline brick",
+          "duration": "55-70 min",
+          "purpose": "Introduce compromised running and capture honest baseline transitions.</td>",
+          "pillar": "Hybrid Performance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min easy run and machine work with one light set of each selected station.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Brick",
+              "instruction": "Complete 4 rounds at RPE 7: race-distance run, then one station. Round 1 engine station, Round 2 loaded carry, Round 3 burpee or lunge pattern, Round 4 wall-ball or dumbbell pattern. Use 60-70% race volume and load.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": {
+                "HYROX": "use 1 km as the race-distance repetition.",
+                "HYBRID_GAMES": "use 600 m and preserve a fast but controlled final 200 m when prescribed."
+              }
+            },
+            {
+              "name": "Review",
+              "instruction": "Record the first and final run pace, the slowest transition and the movement that caused the greatest pace change.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy walk or spin.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "A baseline is valuable only when it can be repeated. Hold back enough to learn what changes after each station.",
+          "log_fields": [
+            "run_splits",
+            "station_splits",
+            "transition_times",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional recovery + movement standards",
+          "duration": "30-45 min",
+          "purpose": "Add low-fatigue aerobic work and practise legal movement without affecting programme completion.</td>",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "20-30 min bike, row, SkiErg or run at RPE 3-4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Movement practice",
+              "instruction": "Two easy rounds of 5 wall balls, 4 burpee broad jumps, 20 m carry, 10 m lunge and 4 event-specific reps. Use very light load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "8-10 min ankles, hips, shoulders and front-rack position.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "This session should improve how you feel. Skip it when recovery is poor.",
+          "log_fields": [
+            "zone2_result",
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "phase": "BUILD",
+      "title": "Add useful volume.",
+      "load": "Moderate",
+      "checkpoint": "Increase total quality work while keeping running pace, lifting technique and station standards repeatable.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength volume + sled capacity",
+          "duration": "60-70 min",
+          "purpose": "Build general force and increase controlled sled exposure.</td></tr>",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy machine, mobility and progressive squat/deadlift sets.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Back squat",
+              "instruction": "4 x 5 at RPE 7-7.5. Rest 2-3 min.",
+              "timer": "rest",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 5 at RPE 7. Use a controlled start and full lockout.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled capacity",
+              "instruction": "8 x 12.5 m push and 8 x 12.5 m pull at 70-80% of race load or RPE 7. Rest enough to keep each lane within 10% of the first.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Accessory",
+              "instruction": "3 x 8 split squat each leg and 3 x 12 calf raises.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Coach note",
+              "instruction": "The sled is strength-endurance practice, not a test. Keep the feet moving and avoid maximal grinding.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "squat_load",
+            "deadlift_load",
+            "sled_splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Controlled running intervals",
+          "duration": "50-65 min",
+          "purpose": "Increase hard sustainable running volume while protecting repeatability.</td></tr>",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy with drills and 4 strides.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Intervals",
+              "instruction": "Complete 5-7 x 3 min at RPE 8 with 90 sec easy recovery. BUILD track: use the lower end of all ranges. STANDARD: use the middle. PERFORMANCE: use the upper end only when pace and movement remain repeatable.",
+              "timer": "interval",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Pace review",
+              "instruction": "Aim for no more than 3% pace drop-off from fastest to slowest repetition.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "rep_paces",
+            "dropoff",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic base extension",
+          "duration": "45-65 min",
+          "purpose": "Extend low-intensity duration and improve durability.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "45-65 min at RPE 4-5. BUILD track may use run-walk; PERFORMANCE track may finish the final 10 min at upper Zone 2, not threshold.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Foot and calf capacity",
+              "instruction": "2 rounds: 15 tibialis raises, 15 calf raises and 30 sec single-leg balance each side.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "duration",
+            "distance",
+            "average_HR",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Station strength + efficiency",
+          "duration": "55-65 min",
+          "purpose": "Build the strength behind carries, lunges, wall balls and event-specific dumbbell work.",
+          "pillar": "Station Strength",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Upper strength",
+              "instruction": "4 x 6 dumbbell or barbell press at RPE 7 and 4 x 8 chest-supported row or pull-up variation.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Carry strength",
+              "instruction": "6 x 40 m farmers carry at 70-85% race load. Rest 45-60 sec.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Lunge strength",
+              "instruction": "4 x 20 m walking lunge at 60-75% race load, keeping full extension and legal knee contact where required.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Wall-ball density",
+              "instruction": "5 x 15 reps with 45 sec rest at race ball weight or a legal scaled weight.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Event-specific",
+              "instruction": "The Hybrid Games: 4 x 10 alternating dumbbell snatches at 60-75% race load. HYROX: 4 x 12 SkiErg pulls focused on long powerful strokes.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYBRID_GAMES": "4 x 10 alternating dumbbell snatches at 60-75% race load.",
+                "HYROX": "4 x 12 SkiErg pulls focused on long powerful strokes."
+              }
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "carry_load",
+            "lunge_load",
+            "wall_ball_reps",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Engine + load brick",
+          "duration": "60-75 min",
+          "purpose": "Build repeatability across running, machines and loaded work.",
+          "pillar": "Hybrid Performance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10-12 min run, machine and station rehearsal.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Brick",
+              "instruction": "Complete 5 rounds at RPE 7.5. Each round: race-distance run plus one station. Alternate engine stations and loaded stations. Use 65-75% race volume and load.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": {
+                "HYROX": "use 1 km as the race-distance repetition.",
+                "HYBRID_GAMES": "use 600 m and preserve a fast but controlled final 200 m when prescribed."
+              }
+            },
+            {
+              "name": "Finish",
+              "instruction": "2 x 200 m controlled fast running with full walking recovery. Hybrid Games athletes use this to practise sprint posture, not maximal speed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8-10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The final run should remain within 5% of the first. Reduce station volume if run mechanics collapse.",
+          "log_fields": [
+            "run_splits",
+            "station_splits",
+            "dropoff",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional easy machine + skills",
+          "duration": "35-50 min",
+          "purpose": "Add aerobic volume and technical rehearsal at low fatigue.</td>",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy machine",
+              "instruction": "25-35 min easy row, bike or SkiErg at RPE 4.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Skills",
+              "instruction": "10-12 min practising machine setup, sled rope organisation, wall-ball target rhythm or dumbbell-snatch changeovers.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Leave the gym fresher than you entered.",
+          "log_fields": [
+            "zone2_result",
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "phase": "FOUNDATION OVERLOAD",
+      "title": "Build repeatability.",
+      "load": "High",
+      "checkpoint": "Raise threshold, strengthen race positions and complete the first half-race rehearsal without racing it.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Heavy strength + sled",
+          "duration": "60-75 min",
+          "purpose": "Increase force while keeping race-specific sled work technically clean.</td>",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "Work to 1 x 4 at RPE 8, then 3 x 4 at 90% of the top set.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "4 x 4 at RPE 7.5-8.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled push/pull",
+              "instruction": "10 x 12.5 m total push lanes and 10 x 12.5 m total pull lanes at 80-90% race load or RPE 8. Use full recovery between pairs of lanes.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Single-leg + trunk",
+              "instruction": "3 x 8 reverse lunge each leg and 3 x 30 sec heavy front-rack or suitcase hold.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Heavy does not mean slow. End the set when position or speed changes meaningfully.",
+          "log_fields": [
+            "strength_loads",
+            "sled_splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Threshold blocks",
+          "duration": "55-70 min",
+          "purpose": "Improve the pace that can be held while lactate and breathing remain controlled.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-15 min easy with strides.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Threshold",
+              "instruction": "3 x 8 min at RPE 7.5-8 with 3 min easy jog. BUILD: 3 x 6 min. PERFORMANCE: 3 x 10 min.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Fast finish",
+              "instruction": "4 x 20 sec relaxed fast running with 60 sec walk.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8-10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Threshold is controlled discomfort. It is not a time trial.",
+          "log_fields": [
+            "block_paces",
+            "dropoff",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic durability",
+          "duration": "50-70 min",
+          "purpose": "Build easy volume and the ability to run efficiently on accumulated fatigue.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "50-70 min at RPE 4-5. Keep cadence and posture stable.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "8 min calves, hips and thoracic rotation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "This run is the foundation beneath the hard work. Keep it genuinely easy.",
+          "log_fields": [
+            "duration",
+            "distance",
+            "average_HR"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Station density intervals",
+          "duration": "55-65 min",
+          "purpose": "Increase work density while preserving legal movement.",
+          "pillar": "Station Capacity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "10 min easy plus movement rehearsal.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Five-minute intervals",
+              "instruction": "Complete 4-5 x 5 min with 2 min easy recovery. Each interval uses one machine and two movements. Example: 250 m row or 12 cal bike, 10 wall balls, 20 m carry, repeat. Use 70-80% race load.",
+              "timer": "interval",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Burpee technique",
+              "instruction": "4 x 10 m burpee broad jumps at controlled rhythm with full recovery.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8 min easy machine.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The goal is equal intervals. Do not chase a huge first score.",
+          "log_fields": [
+            "interval_scores",
+            "dropoff",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "First half-race rehearsal",
+          "duration": "60-85 min",
+          "purpose": "Rehearse the first half of the selected race in order at controlled effort.",
+          "pillar": "Race Rehearsal",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12-15 min including race shoes, machine settings and one short station primer.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "HYROX option",
+              "instruction": "Complete 4 x 1 km with stations 1-4 in official order: SkiErg, sled push, sled pull, burpee broad jump. Use 70% station volume and 75-85% race load. Hold RPE 8.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "Complete 5 x 600 m with stations 1-5 in official order: air bike, wall balls, row, burpee broad jump, dumbbell snatch. Use 70% station volume and 75-85% race load. Hold RPE 8.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Record pacing, no-reps, equipment delays and the first sign of run deterioration.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "This is practice under pressure, not a race. Finish with enough control to explain exactly what happened.",
+          "log_fields": [
+            "run_splits",
+            "station_splits",
+            "transitions",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional recovery",
+          "duration": "25-40 min",
+          "purpose": "Promote recovery after the first rehearsal.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "20-30 min at RPE 3-4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min easy mobility and breathing.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "No extra intensity this week.",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "phase": "DELOAD",
+      "title": "Absorb the work.",
+      "load": "Low",
+      "checkpoint": "Reduce total volume by roughly one third, retain movement quality and finish fresher than the week began.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Deload strength + sled technique",
+          "duration": "45-55 min",
+          "purpose": "Maintain key positions with low fatigue.</td>",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "3 x 5 at RPE 6.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "2 x 5 at RPE 6.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled technique",
+              "instruction": "4 x 12.5 m push and 4 x 12.5 m pull at RPE 6. Smooth turns and rope management.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min hips, ankles and thoracic rotation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Every set should feel crisp.",
+          "log_fields": [
+            "loads",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Easy running + strides",
+          "duration": "35-50 min",
+          "purpose": "Retain rhythm while reducing hard running volume.</td>",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Easy run",
+              "instruction": "30-40 min at RPE 4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Strides",
+              "instruction": "4 x 15 sec relaxed fast with full recovery.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Finish more energetic than you started.",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Short aerobic base",
+          "duration": "35-50 min",
+          "purpose": "Maintain easy volume.</td>",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "35-50 min easy machine or run at RPE 4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Technique EMOM",
+          "duration": "40-50 min",
+          "purpose": "Rehearse standards at reduced volume.",
+          "pillar": "Station Skill",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "18-min EMOM",
+              "instruction": "Rotate: 1) easy machine, 2) 8 wall balls, 3) 20 m carry, 4) 8 lunges, 5) 4 burpee broad jumps, 6) rest. Complete 3 rounds at 50-60% race load.",
+              "timer": "emom",
+              "log": [
+                "rounds",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Event skill",
+              "instruction": "HYROX: sled turns and wall-ball target. Hybrid Games: dumbbell-snatch hand change and 200 m sprint posture.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYROX": "sled turns and wall-ball target.",
+                "HYBRID_GAMES": "dumbbell-snatch hand change and 200 m sprint posture."
+              }
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Short controlled brick",
+          "duration": "45-60 min",
+          "purpose": "Maintain compromised-running familiarity with low stress.",
+          "pillar": "Hybrid Performance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Brick",
+              "instruction": "3 rounds: race-distance run at RPE 6.5 plus one short station at 50-60% race volume and load.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "splits",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional mobility walk",
+          "duration": "20-40 min",
+          "purpose": "Support recovery only.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Walk or easy spin",
+              "instruction": "20-30 min easy.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "phase": "SPECIFIC BUILD",
+      "title": "Raise threshold.",
+      "load": "High",
+      "checkpoint": "Increase race-distance running quality and raise exposure to race-relevant station loads.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength build + race-load sled",
+          "duration": "60-75 min",
+          "purpose": "Develop force and make race-load sled work more economical.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "Work to 1 x 3 at RPE 8, then 3 x 4 at RPE 7.5.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "4 x 4 at RPE 8.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled",
+              "instruction": "6-8 x 12.5 m push and pull at 90-100% race load or RPE 8. Rest 90-150 sec between lanes.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Accessory",
+              "instruction": "3 x 8 split squat each side and 3 x 10 heavy row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Race load should move with control. Surface friction overrides the number printed on the sled.",
+          "log_fields": [
+            "strength_loads",
+            "sled_splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Race-distance repeats",
+          "duration": "55-75 min",
+          "purpose": "Develop the ability to repeat the exact race run distance at controlled hard effort.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "15 min easy with drills and strides.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "HYROX option",
+              "instruction": "4-6 x 1 km at RPE 8 with 2 min easy jog. BUILD 4, STANDARD 5, PERFORMANCE 6.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "6-10 x 600 m at RPE 8 with 75-90 sec easy jog. BUILD 6, STANDARD 8, PERFORMANCE 10.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The final repetition should remain within 3-4% of the first.",
+          "log_fields": [
+            "splits",
+            "dropoff",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic base",
+          "duration": "55-75 min",
+          "purpose": "Continue building the engine that supports every station and recovery between efforts.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "55-75 min at RPE 4-5. Choose running unless impact tolerance requires a machine.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Easy volume remains the largest low-cost opportunity in the programme.",
+          "log_fields": [
+            "duration",
+            "distance",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Wall-ball, lunge + carry",
+          "duration": "55-70 min",
+          "purpose": "Build the late-race local muscular endurance shared by both events.",
+          "pillar": "Station Capacity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Wall-ball sets",
+              "instruction": "Complete 60-90 total legal reps in sets of 10-20 at race weight or one step below. Rest 30-45 sec.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Lunges",
+              "instruction": "5 x 20 m at 75-90% race load. Rest 60 sec.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Farmers carry",
+              "instruction": "5 x 40 m at race load. Keep shoulders set and turns efficient.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Event-specific",
+              "instruction": "Hybrid Games: 5 x 10 dumbbell snatches at 75-85% race load. HYROX: 5 x 250 m SkiErg at strong sustainable pace.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYBRID_GAMES": "5 x 10 dumbbell snatches at 75-85% race load.",
+                "HYROX": "5 x 250 m SkiErg at strong sustainable pace."
+              }
+            },
+            {
+              "name": "Trunk",
+              "instruction": "3 x 40 sec heavy carry hold or front-rack hold.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Stop a set before a legal movement becomes an argument.",
+          "log_fields": [
+            "wall_ball_sets",
+            "lunge_load",
+            "carry_splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Compromised running",
+          "duration": "65-80 min",
+          "purpose": "Improve the ability to return to race pace after station work.",
+          "pillar": "Hybrid Performance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy plus station primers.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Six-round brick",
+              "instruction": "6 rounds: race-distance run, then 2-4 min of station work. Alternate machine, sled, carry, lunge, burpee and wall-ball/dumbbell patterns. Use 75-85% race load and 50-60% race station volume.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Compare the run after the hardest station with the opening run.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8-10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The station is not finished when the reps end; it is finished when race pace returns.",
+          "log_fields": [
+            "run_splits",
+            "station_splits",
+            "dropoff",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional skill + easy aerobic",
+          "duration": "35-50 min",
+          "purpose": "Refine technical details without adding fatigue.",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "25-35 min at RPE 3-4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Skills",
+              "instruction": "10 min of the least efficient movement identified in Week 3.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Practise the weakness; do not punish it.",
+          "log_fields": [
+            "zone2_result",
+            "movement_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "phase": "CAPACITY",
+      "title": "Hold output.",
+      "load": "High",
+      "checkpoint": "Extend threshold, raise station capacity and complete a controlled two-thirds race simulation.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Deadlift strength + heavy sled",
+          "duration": "60-75 min",
+          "purpose": "Raise force for sled work, carries and late-race posture.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Deadlift",
+              "instruction": "5 x 3 at RPE 8. Rest 3 min.",
+              "timer": "rest",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Front squat or back squat",
+              "instruction": "3 x 5 at RPE 7.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Heavy sled",
+              "instruction": "4 x 25 m push and 4 x 25 m pull at race load or RPE 8. Full recovery.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Upper back",
+              "instruction": "4 x 8 row or pull-up variation.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Heavy sled work should be powerful, not stationary.",
+          "log_fields": [
+            "deadlift_load",
+            "sled_splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Extended threshold",
+          "duration": "60-75 min",
+          "purpose": "Increase sustained speed close to race intensity.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "15 min easy with strides.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Threshold",
+              "instruction": "2 x 12-18 min at RPE 7.5-8 with 4 min easy jog. BUILD 12, STANDARD 15, PERFORMANCE 18.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The second block should be as controlled as the first.",
+          "log_fields": [
+            "block_paces",
+            "dropoff",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Long aerobic endurance",
+          "duration": "60-80 min",
+          "purpose": "Build the duration required for a 60-120 minute race.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "60-80 min at RPE 4-5. BUILD may use 50-60 min; PERFORMANCE may finish with 10 min at upper Zone 2.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Fuel and hydrate this run as practice for longer training, not as a race simulation.",
+          "log_fields": [
+            "duration",
+            "distance",
+            "fuel_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Machine + movement intervals",
+          "duration": "55-70 min",
+          "purpose": "Improve high-aerobic station output and legal movement under elevated breathing.",
+          "pillar": "Station Capacity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Intervals",
+              "instruction": "5 rounds: 3 min machine at RPE 8, 12 wall balls, 20 m lunge, 20 m carry, then 2 min easy. Alternate SkiErg, row and air bike according to event access.",
+              "timer": "interval",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled skill",
+              "instruction": "4 x 12.5 m push and pull at 80-90% race load, focusing on entry and exit.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "8 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Station speed is only useful when the athlete can run again immediately afterwards.",
+          "log_fields": [
+            "round_scores",
+            "dropoff",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Two-thirds race simulation",
+          "duration": "75-95 min",
+          "purpose": "Rehearse a large portion of the selected event in exact order at controlled race effort.",
+          "pillar": "Race Rehearsal",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "Complete 6 x 1 km with stations 1-6 in order. Use 65-70% station volume and 85-100% race load. Hold target race run effort, not maximal pace.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "Complete 7 x 600 m with stations 1-7 in order. Use 65-70% station volume and 85-100% race load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Record no-reps, equipment settings, run drop-off and whether planned breaks were followed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The best rehearsal produces information without needing several days to recover.",
+          "log_fields": [
+            "run_splits",
+            "station_splits",
+            "transitions",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional recovery",
+          "duration": "25-40 min",
+          "purpose": "Restore movement after the long rehearsal.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "20-30 min at RPE 3.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "No skills under fatigue today.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "phase": "OVERLOAD",
+      "title": "Peak broad workload.",
+      "load": "High",
+      "checkpoint": "Complete the highest overall training load while protecting legal movement and the quality of race-distance running.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Heavy strength + race sled",
+          "duration": "65-75 min",
+          "purpose": "Reach the strongest broad training week without missed reps.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "4 x 3 at RPE 8-8.5.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 4 at RPE 8.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled",
+              "instruction": "4 x 25 m push and 4 x 25 m pull at race load. If movement stalls, reduce load rather than extending grind time.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Carry",
+              "instruction": "4 x 50 m farmers carry at race load.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "No missed repetitions. This week already contains enough stress.",
+          "log_fields": [
+            "strength_loads",
+            "sled_splits",
+            "carry_splits"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Race pace + speed",
+          "duration": "\u2014",
+          "purpose": "Hold race-distance rhythm and finish each set with controlled speed.</td>",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "3 sets: 1 km at target race pace, 400 m at 5 km effort, 3 min easy. Rest 4 min between sets.",
+              "timer": "rest",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "5 sets: 600 m at target race pace, 200 m fast but controlled, 90 sec easy. Rest 3 min after sets 2 and 4.",
+              "timer": "rest",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Speed reserve should sharpen race pace, not create a sprint injury.",
+          "log_fields": [
+            "splits",
+            "dropoff",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic durability",
+          "duration": "\u2014",
+          "purpose": "Complete the longest easy aerobic session of the build.</td>",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "65-85 min at RPE 4-5. Keep it easy throughout.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The longest run is not the hardest run.",
+          "log_fields": [
+            "duration",
+            "distance",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Race-load station density",
+          "duration": "\u2014",
+          "purpose": "Increase density at or near race load without sacrificing standards.</td>",
+          "pillar": "Station Capacity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "30-min density block",
+              "instruction": "Complete steady rounds of one machine, one lower-body station and one upper/full-body station. Use 85-100% race load and 30-50% race volume per round. Keep RPE 8.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Late-race finisher",
+              "instruction": "3 rounds: 20 m lunges, 15 wall balls, 200 m controlled run. Rest 90 sec.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Race load is only useful when the athlete owns the standard.",
+          "log_fields": [
+            "density_score",
+            "no_reps",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Three-quarter race rehearsal",
+          "duration": "80-105 min",
+          "purpose": "Rehearse approximately three quarters of the event in exact order.",
+          "pillar": "Race Rehearsal",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "Complete 6 x 1 km plus stations 1-6 at 75% official volume and full race load where safe. Target controlled race effort.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "Complete 8 x 600 m plus stations 1-8 at 75% official volume and full race load where safe.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Record the exact point where pace, grip or standards first changed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Do not turn a 75% rehearsal into a 100% race. The week is already the overload.",
+          "log_fields": [
+            "splits",
+            "transitions",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional easy recovery",
+          "duration": "20-35 min",
+          "purpose": "Support recovery only.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy movement",
+              "instruction": "20-30 min walk, bike or very easy row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Skip without guilt if rest is more useful.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "phase": "MIDPOINT DELOAD",
+      "title": "Recalibrate and recover.",
+      "load": "Moderate",
+      "checkpoint": "",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength recalibration",
+          "duration": "50-65 min",
+          "purpose": "Update safe strength and sled references without maximal testing.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "Work to 1 x 5 at RPE 8. Compare with Week 1.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "Work to 1 x 5 at RPE 8, then 2 x 5 at 85-90% of the top set.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled benchmark",
+              "instruction": "4 x 12.5 m push and pull at race load. Record best legal split and average split.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Recalibration provides better numbers; it does not need a failed lift.",
+          "log_fields": [
+            "strength_markers",
+            "sled_splits"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Running benchmark",
+          "duration": "45-65 min",
+          "purpose": "Update current running fitness and race-pace references.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Option A",
+              "instruction": "Complete a 5 km time trial on a flat measured route after a full warm-up.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Option B",
+              "instruction": "When a 5 km test is unsuitable, complete 20 min at the fastest sustainable even effort and record distance.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10-15 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Start conservatively and finish faster. A positive split teaches very little.",
+          "log_fields": [
+            "benchmark_result",
+            "splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Short aerobic base",
+          "duration": "40-55 min",
+          "purpose": "Maintain easy volume while absorbing the benchmark.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "40-55 min at RPE 4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Keep it easy.",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Station benchmark",
+          "duration": "45-60 min",
+          "purpose": "Compare repeatability with Week 1 at a standardised load.",
+          "pillar": "Station Capacity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Benchmark",
+              "instruction": "3 rounds with 2 min rest: 500 m row or 20 cal bike, 20 wall balls, 40 m carry, 20 m lunge and 10 m burpee broad jumps. Use the same load each round.",
+              "timer": "rest",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Event-specific",
+              "instruction": "Hybrid Games: add 10 dumbbell snatches each round. HYROX: add 250 m SkiErg each round.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYBRID_GAMES": "add 10 dumbbell snatches each round.",
+                "HYROX": "add 250 m SkiErg each round."
+              }
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8 min easy.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The score is only useful when the standard and load are identical across rounds.",
+          "log_fields": [
+            "round_times",
+            "dropoff",
+            "no_reps"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Short brick recalibration",
+          "duration": "45-60 min",
+          "purpose": "Recheck compromised pace at reduced total volume.",
+          "pillar": "Hybrid Performance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Brick",
+              "instruction": "4 rounds: race-distance run plus one 2-3 min station at 70-80% race load. Hold RPE 7.5.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Update target race pace based on Week 8 running and brick results.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Finish fresh enough to begin the specific block confidently.",
+          "log_fields": [
+            "splits",
+            "updated_targets"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional mobility + easy machine",
+          "duration": "25-40 min",
+          "purpose": "Complete low-stress recovery.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy machine",
+              "instruction": "20-30 min at RPE 3.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "No hidden test.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "phase": "SPECIFICITY",
+      "title": "Own race pace.",
+      "load": "High",
+      "checkpoint": "",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength maintenance + overload sled",
+          "duration": "55-70 min",
+          "purpose": "Maintain strength while making race load feel manageable.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "3 x 4 at RPE 7.5-8.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 4 at RPE 7.5-8.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Overload sled",
+              "instruction": "6 x 12.5 m push and pull at 100-110% race load or RPE 8-8.5. Reduce if speed stalls. Sled surface governs load.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Carry",
+              "instruction": "4 x 50 m at race load.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Overload is short and controlled. It is not an excuse for ugly movement.",
+          "log_fields": [
+            "strength_loads",
+            "sled_splits"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Race-distance pace rehearsal",
+          "duration": "60-80 min",
+          "purpose": "Repeat race distance at the updated target pace.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "5-7 x 1 km at target race pace with 90 sec easy recovery. BUILD 5, STANDARD 6, PERFORMANCE 7.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "8-10 x 600 m at target race pace with 60 sec easy recovery, then 3 x 200 m at planned finish speed with full recovery.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Race pace should become boringly repeatable.",
+          "log_fields": [
+            "splits",
+            "dropoff",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic support",
+          "duration": "50-65 min",
+          "purpose": "Maintain the aerobic base without stealing recovery from specific work.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "50-65 min at RPE 4-5.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Keep the easy day easy.",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Segmented station rehearsal",
+          "duration": "60-75 min",
+          "purpose": "Complete race-specific station groups at full load with planned breaks.",
+          "pillar": "Station Specificity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX early stations",
+              "instruction": "SkiErg, sled push and sled pull at 70-80% race volume and full race load. Rest 3 min between stations.",
+              "timer": "rest",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "HYROX late stations",
+              "instruction": "Farmers carry, lunges and wall balls at 70-80% race volume and full race load. Use planned set sizes.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games early stations",
+              "instruction": "Air bike, wall balls, row, burpees and dumbbell snatch at 70-80% race volume and full load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games late stations",
+              "instruction": "Lunges, farmers, sled pull, SkiErg and sled push at 70-80% race volume and full load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Select the relevant event option only and record planned versus actual breaks.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The session is segmented so full-load quality can be rehearsed without turning it into another race.",
+          "log_fields": [
+            "station_splits",
+            "breaks",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Eighty-percent race rehearsal",
+          "duration": "80-110 min",
+          "purpose": "Rehearse most of the event using exact order, target run pace and full loads.",
+          "pillar": "Race Rehearsal",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "Complete 7 x 1 km and stations 1-7 in order. Use 80% station volume and full race load. Stop before wall balls.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "Complete 8 x 600 m and stations 1-8 in order. Use 80% station volume and full race load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Record target versus actual pace, no-reps, transition loss and fuel/hydration notes.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The athlete should finish confident, not destroyed.",
+          "log_fields": [
+            "splits",
+            "transitions",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional transition skills",
+          "duration": "25-40 min",
+          "purpose": "Practise race logistics at low intensity.",
+          "pillar": "Recovery + Skill",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "20-25 min at RPE 3.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Transitions",
+              "instruction": "Practise shoe choice, machine setup, sled lane entry, carry pickup and planned station breaks.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Keep heart rate low. This is rehearsal of decisions.",
+          "log_fields": [
+            "transition_notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "phase": "PEAK",
+      "title": "Peak specificity.",
+      "load": "High but controlled",
+      "checkpoint": "Complete the final major rehearsal with full run count, controlled station volume and no unnecessary racing.",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength + sled primer \u2014",
+          "duration": "50-65 min",
+          "purpose": "Maintain force while reducing total lifting volume.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "3 x 3 at RPE 7.5.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "3 x 3 at RPE 7.5.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled",
+              "instruction": "4 x 12.5 m push and pull at race load, then 2 x 12.5 m at 105% race load if movement remains fast.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Upper support",
+              "instruction": "3 x 8 row and 2 x 10 press at RPE 7.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "This is maintenance, not a strength test.",
+          "log_fields": [
+            "loads",
+            "sled_splits"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Short threshold intervals \u2014",
+          "duration": "50-65 min",
+          "purpose": "Retain threshold speed without creating deep fatigue.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Warm-up",
+              "instruction": "12 min easy with strides.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Intervals",
+              "instruction": "4-5 x 5 min at RPE 8 with 2 min easy. Use updated pace.",
+              "timer": "interval",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Stop at four if pace or posture begins to fall.",
+          "log_fields": [
+            "splits",
+            "dropoff"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Aerobic support \u2014",
+          "duration": "45-60 min",
+          "purpose": "Maintain easy volume before the final major rehearsal.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "45-60 min at RPE 4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Late-race station rehearsal",
+          "duration": "45-60 min",
+          "purpose": "Rehearse the stations most likely to expose fatigue late in the event.",
+          "pillar": "Station Specificity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "3 rounds: 500 m row, 50 m farmers carry, 25 m lunges, 25 wall balls. Use full race load. Rest 3 min.",
+              "timer": "rest",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "3 rounds: 500 m SkiErg, 25 m sled pull, 25 m sled push and 200 m run. Use full race load and controlled rest.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8 min easy.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "round_times",
+            "breaks",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Final major race rehearsal",
+          "duration": "85-120 min",
+          "purpose": "Rehearse full race structure at controlled intensity approximately two weeks from competition.",
+          "pillar": "Race Rehearsal",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "Complete all 8 x 1 km runs at target pace. Complete every station in order at 70-80% official volume and full race load. Hold RPE 8-8.5.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "Complete all 10 x 600 m runs and the 200 m finish at controlled speed. Complete every station in order at 70-80% official volume and full race load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Race strategy review",
+              "instruction": "Lock target run pace, machine settings, planned station breaks, footwear and fuel/hydration decisions.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10-15 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "splits",
+            "transitions",
+            "race_plan"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional recovery",
+          "duration": "20-35 min",
+          "purpose": "Reduce stiffness after the final major rehearsal.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Easy movement",
+              "instruction": "20-30 min walk, spin or easy row.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-10 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "No additional station work.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "phase": "SHARPEN",
+      "title": "Keep speed, lose fatigue.",
+      "load": "Moderate",
+      "checkpoint": "",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength maintenance",
+          "duration": "45-55 min",
+          "purpose": "Retain strength with very low fatigue.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "3 x 3 at RPE 7.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "2 x 3 at RPE 7.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled",
+              "instruction": "4 x 12.5 m push and pull at 80-90% race load. Full recovery.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Carry",
+              "instruction": "2 x 50 m at race load.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Every rep should move with confidence.",
+          "log_fields": [
+            "loads",
+            "sled_splits"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Race-pace sharpening",
+          "duration": "45-60 min",
+          "purpose": "Keep race pace familiar with generous recovery.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "4-5 x 1 km at target race pace with 2.5 min easy recovery.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "6-8 x 600 m at target race pace with 90 sec easy recovery, then 2 x 200 m at planned finish speed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "10 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The pace should feel sharper because recovery is greater.",
+          "log_fields": [
+            "splits",
+            "RPE"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Short aerobic base \u2014",
+          "duration": "35-50 min",
+          "purpose": "Maintain aerobic rhythm while reducing volume.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Zone 2",
+              "instruction": "35-50 min at RPE 4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Finish relaxed.",
+          "log_fields": [
+            "duration",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Friday",
+          "title": "Station speed primer \u2014",
+          "duration": "35-50 min",
+          "purpose": "Touch race load in short clean sets.",
+          "pillar": "Station Specificity",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Primer sets",
+              "instruction": "Complete 2-3 short sets at each key station using 30-40% race volume and full race load. Rest fully between sets.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Transitions",
+              "instruction": "Practise 4-6 run-to-station and station-to-run transitions at low total volume.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Easy flush",
+              "instruction": "8 min easy.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Fast, legal and fresh. Stop before fatigue changes the movement.",
+          "log_fields": [
+            "splits",
+            "notes"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Saturday",
+          "title": "Half-race confidence rehearsal \u2014",
+          "duration": "50-75 min",
+          "purpose": "Confirm pace and execution using half the race structure.",
+          "pillar": "Race Rehearsal",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "HYROX option",
+              "instruction": "Complete 4 x 1 km and four selected stations at 50% race volume, full load and target race pace.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Hybrid Games option",
+              "instruction": "Complete 5 x 600 m and five selected stations at 50% race volume, full load and target race pace.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Review",
+              "instruction": "Confirm final race plan. Do not add new strategies after this session.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Finish wanting to continue. Confidence is the target.",
+          "log_fields": [
+            "splits",
+            "final_plan"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Sunday",
+          "title": "Optional mobility \u2014",
+          "duration": "20-30 min",
+          "purpose": "Support recovery without adding training stress.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Walk + mobility",
+              "instruction": "20-30 min total.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "phase": "TAPER + RACE",
+      "title": "Race ready.",
+      "load": "",
+      "checkpoint": "",
+      "sessions": [
+        {
+          "session": 1,
+          "recommended_day": "Monday",
+          "title": "Strength primer",
+          "duration": "35-45 min",
+          "purpose": "Keep the nervous system familiar with force without creating soreness.",
+          "pillar": "Strength + Sled",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Back squat",
+              "instruction": "2 x 3 at RPE 6-7.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deadlift",
+              "instruction": "2 x 3 at RPE 6-7.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Sled",
+              "instruction": "2-4 x 12.5 m push and pull at 60-75% race load.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Easy mobility",
+              "instruction": "8 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "loads",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 2,
+          "recommended_day": "Tuesday",
+          "title": "Run primer",
+          "duration": "30-45 min",
+          "purpose": "Touch race pace with low volume.",
+          "pillar": "Running",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Easy run",
+              "instruction": "15 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Primer",
+              "instruction": "HYROX: 4 x 400 m at target 1 km race pace with 2 min easy. Hybrid Games: 5 x 300 m at target 600 m pace with 90 sec easy.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYROX": "4 x 400 m at target 1 km race pace with 2 min easy.",
+                "HYBRID_GAMES": "5 x 300 m at target 600 m pace with 90 sec easy."
+              }
+            },
+            {
+              "name": "Strides",
+              "instruction": "2 x 15 sec relaxed fast.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Cool-down",
+              "instruction": "8 min easy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [
+            "splits",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 3,
+          "recommended_day": "Wednesday",
+          "title": "Easy aerobic reset",
+          "duration": "25-40 min",
+          "purpose": "Maintain routine and reduce tension.",
+          "pillar": "Aerobic Endurance",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Easy aerobic",
+              "instruction": "25-40 min at RPE 3-4.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Mobility",
+              "instruction": "5-8 min.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Do less rather than more.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 4,
+          "recommended_day": "Thursday",
+          "title": "OR FRIDAY | Movement primer",
+          "duration": "20-35 min",
+          "purpose": "Rehearse standards and equipment without fatigue.",
+          "pillar": "Race Skill",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Primer circuit",
+              "instruction": "One or two easy sets of each relevant movement at 30-40% race volume and 40-60% race load.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Equipment check",
+              "instruction": "Confirm shoes, clothing, machine settings, nutrition, travel and race documents.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "This is reassurance, not training.",
+          "log_fields": [
+            "checklist",
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 5,
+          "recommended_day": "Day Before Race",
+          "title": "Optional pre-race walk",
+          "duration": "\u2014",
+          "purpose": "Reduce stiffness and settle nerves.",
+          "pillar": "Recovery",
+          "priority": "OPTIONAL",
+          "blocks": [
+            {
+              "name": "Walk + mobility",
+              "instruction": "15-25 min easy. Stop if it adds fatigue.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "Rest is also a valid choice.",
+          "log_fields": [
+            "feel"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 6,
+          "recommended_day": "Race Day",
+          "title": "Race day Event duration",
+          "duration": "\u2014",
+          "purpose": "Execute the selected HYROX or Hybrid Games plan.",
+          "pillar": "Competition",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "Pre-race",
+              "instruction": "Follow the planned meal, hydration, arrival and warm-up timeline. Do not introduce new food, footwear or equipment.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Run plan",
+              "instruction": "Open below emotional pace, settle into target rhythm and judge every station by the quality of the run that follows.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Station plan",
+              "instruction": "Follow planned machine settings, breaks, movement standards and transitions. Avoid no-reps and unnecessary equipment delay.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Finish",
+              "instruction": "HYROX: protect wall-ball standards under fatigue. Hybrid Games: preserve enough posture and leg speed for the final sled push and 200 m finish.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": {
+                "HYROX": "protect wall-ball standards under fatigue.",
+                "HYBRID_GAMES": "preserve enough posture and leg speed for the final sled push and 200 m finish."
+              }
+            },
+            {
+              "name": "Review",
+              "instruction": "Record finish time, splits, penalties, what worked and the next training priority.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "The fitness is built. Race day is decision-making under pressure.",
+          "log_fields": [
+            "finish_time",
+            "splits",
+            "penalties",
+            "review"
+          ],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        },
+        {
+          "session": 7,
+          "recommended_day": "Race Day",
+          "title": "tools",
+          "duration": "\u2014",
+          "purpose": "",
+          "pillar": "",
+          "priority": "CORE",
+          "blocks": [
+            {
+              "name": "AREA",
+              "instruction": "PLAN BEFORE RACE",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Running",
+              "instruction": "Opening pace, target average pace, maximum acceptable drop-off, final-run or 200 m finish strategy.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Machines",
+              "instruction": "Damper/footplate settings, opening output, target split and exit routine.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Sled",
+              "instruction": "Footwear, lane turns, body position, rope organisation and contingency if the surface is slower than expected.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Wall balls",
+              "instruction": "Opening set, planned set sizes, breathing pattern and no-rep response.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Carries and lunges",
+              "instruction": "Grip strategy, turn method, planned breaks and posture cue.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Burpees",
+              "instruction": "Cadence, jump length and the point where shorter legal jumps become more efficient.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Doubles",
+              "instruction": "Athlete A/B strengths, planned station split, handover cue and contingency.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Fuel/hydration",
+              "instruction": "Pre-race meal, fluids, carbohydrate and timing practised in rehearsal.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "RESULT",
+              "instruction": "RECORD",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Finish",
+              "instruction": "Official time, placing and penalties.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Running",
+              "instruction": "Every split and pace drop-off.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Stations",
+              "instruction": "Every split, break pattern and no-rep.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Transitions",
+              "instruction": "Time lost and equipment issue.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Decision review",
+              "instruction": "What worked, what changed and what should be trained next.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "TERM",
+              "instruction": "MEANING",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "RPE",
+              "instruction": "A 1-10 effort scale. RPE 6 leaves about four good repetitions or substantial pace reserve; RPE 8 is hard but controlled; RPE 10 is maximal and reserved for competition or planned testing.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Zone 2",
+              "instruction": "Easy aerobic work at a conversational pace, usually RPE 4-5.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Threshold",
+              "instruction": "The fastest controlled effort that can be sustained for extended blocks without sprinting or rapid pace collapse.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Race-distance repetition",
+              "instruction": "The run distance repeated by the selected event: 1 km for HYROX or 600 m for The Hybrid Games.",
+              "timer": "interval",
+              "log": [],
+              "category_specific": {}
+            },
+            {
+              "name": "Compromised running",
+              "instruction": "Running performed after station work, where breathing, local fatigue and posture are already challenged.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Brick",
+              "instruction": "A session alternating running with one or more race stations.",
+              "timer": "countdown",
+              "log": [
+                "duration",
+                "distance",
+                "RPE",
+                "notes"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Deload",
+              "instruction": "A planned reduction in volume and fatigue while key movement patterns are retained.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Taper",
+              "instruction": "The final reduction in training volume before race day while small doses of intensity are maintained.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "No-rep",
+              "instruction": "A repetition that fails the organiser\u2019s movement standard and does not count.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Transition",
+              "instruction": "The time and actions required to move from running into a station and back out to running.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "TERM",
+              "instruction": "MEANING",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Sled push and pull",
+              "instruction": "Move the entire sled through every required lane while respecting the current organiser\u2019s lane, rope and body-position rules. Surface friction changes the effective demand.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "splits",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Burpee broad jump",
+              "instruction": "Complete the event\u2019s current chest-to-floor, hand placement, take-off and landing requirements. Practise the exact published standard before race day.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Wall ball",
+              "instruction": "Use the correct ball, target height, squat depth and valid target contact. A fast no-rep costs more than a controlled legal rep.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "TERM",
+              "instruction": "MEANING",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Lunge",
+              "instruction": "Use the prescribed load position, knee contact and full extension required by the selected event.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Farmers carry",
+              "instruction": "Carry the correct implements through the full distance and return them as instructed without cutting corners.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Dumbbell snatch",
+              "instruction": "For The Hybrid Games, follow current alternating-hand, floor contact and overhead lockout requirements.",
+              "timer": "countdown",
+              "log": [
+                "load",
+                "reps",
+                "RPE"
+              ],
+              "category_specific": null
+            },
+            {
+              "name": "Machine stations",
+              "instruction": "Set footplates, dampers and straps before starting where permitted. Do not leave before the required distance or calories are confirmed.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "TERM",
+              "instruction": "MEANING",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Pacing principle",
+              "instruction": "Start at the fastest pace you can maintain, not the fastest pace you can produce once.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Station break plan",
+              "instruction": "Decide planned set sizes before the race and change only when the data or movement quality demands it.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Doubles",
+              "instruction": "Both athletes complete the programme individually. On race day, split eligible work around relative strengths while obeying the organiser\u2019s rules for running together and station entry.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Fuel and hydration",
+              "instruction": "Practise the pre-race meal, fluid intake and any carbohydrate strategy during longer rehearsals. Nothing new on race day.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            },
+            {
+              "name": "Official information",
+              "instruction": "Formats, loads, standards and penalties can change. Always check the latest organiser rulebook and athlete briefing.",
+              "timer": "countdown",
+              "log": [],
+              "category_specific": null
+            }
+          ],
+          "coach_note": "",
+          "log_fields": [],
+          "readiness_adjustment": {
+            "ready": "Complete the session as written.",
+            "average": "Use the lower end of every prescribed range. Remove one accessory set or one interval where required.",
+            "heavy": "Reduce strength load by approximately 5-7.5%. Reduce interval or hybrid-brick volume by approximately 20%. Preserve legal movement and session purpose."
+          }
+        }
+      ]
+    }
+  ]
+}
