@@ -7,6 +7,7 @@ import {
   Flame,
   Trophy,
   Calculator,
+  LayoutGrid,
 } from "lucide-react";
 import { Wordmark } from "./Wordmark";
 
@@ -21,6 +22,7 @@ const items = [
 const secondary = [
   { to: "/race", label: "Race day", icon: Trophy },
   { to: "/calculator", label: "Load calculator", icon: Calculator },
+  { to: "/my-programmes", label: "My library", icon: LayoutGrid },
 ];
 
 export function Sidebar() {
