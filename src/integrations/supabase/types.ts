@@ -47,11 +47,14 @@ export type Database = {
       entitlements: {
         Row: {
           created_at: string
+          expires_at: string | null
           granted_at: string
           granted_by: string | null
           id: string
           metadata: Json
+          order_id: string | null
           product_id: string
+          programme_version_id: string | null
           revoked_at: string | null
           source: Database["public"]["Enums"]["entitlement_source"]
           updated_at: string
@@ -59,11 +62,14 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          expires_at?: string | null
           granted_at?: string
           granted_by?: string | null
           id?: string
           metadata?: Json
+          order_id?: string | null
           product_id: string
+          programme_version_id?: string | null
           revoked_at?: string | null
           source?: Database["public"]["Enums"]["entitlement_source"]
           updated_at?: string
@@ -71,11 +77,14 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          expires_at?: string | null
           granted_at?: string
           granted_by?: string | null
           id?: string
           metadata?: Json
+          order_id?: string | null
           product_id?: string
+          programme_version_id?: string | null
           revoked_at?: string | null
           source?: Database["public"]["Enums"]["entitlement_source"]
           updated_at?: string
@@ -83,13 +92,178 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "entitlements_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "entitlements_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
             referencedRelation: "products"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "entitlements_programme_version_id_fkey"
+            columns: ["programme_version_id"]
+            isOneToOne: false
+            referencedRelation: "programme_versions"
+            referencedColumns: ["id"]
+          },
         ]
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          discount_pence: number
+          final_price_pence: number
+          id: string
+          order_id: string
+          product_id: string
+          programme_version_id: string | null
+          refunded_at: string | null
+          stripe_price_id: string | null
+          unit_price_pence: number
+        }
+        Insert: {
+          created_at?: string
+          discount_pence?: number
+          final_price_pence?: number
+          id?: string
+          order_id: string
+          product_id: string
+          programme_version_id?: string | null
+          refunded_at?: string | null
+          stripe_price_id?: string | null
+          unit_price_pence?: number
+        }
+        Update: {
+          created_at?: string
+          discount_pence?: number
+          final_price_pence?: number
+          id?: string
+          order_id?: string
+          product_id?: string
+          programme_version_id?: string | null
+          refunded_at?: string | null
+          stripe_price_id?: string | null
+          unit_price_pence?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_programme_version_id_fkey"
+            columns: ["programme_version_id"]
+            isOneToOne: false
+            referencedRelation: "programme_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          currency: string
+          discount_pence: number
+          environment: string
+          id: string
+          order_status: string
+          payment_status: string
+          promotion_code: string | null
+          purchased_at: string | null
+          refunded_at: string | null
+          stripe_checkout_session_id: string
+          stripe_customer_id: string | null
+          stripe_payment_intent_id: string | null
+          subtotal_pence: number
+          total_pence: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          discount_pence?: number
+          environment?: string
+          id?: string
+          order_status?: string
+          payment_status?: string
+          promotion_code?: string | null
+          purchased_at?: string | null
+          refunded_at?: string | null
+          stripe_checkout_session_id: string
+          stripe_customer_id?: string | null
+          stripe_payment_intent_id?: string | null
+          subtotal_pence?: number
+          total_pence?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          discount_pence?: number
+          environment?: string
+          id?: string
+          order_status?: string
+          payment_status?: string
+          promotion_code?: string | null
+          purchased_at?: string | null
+          refunded_at?: string | null
+          stripe_checkout_session_id?: string
+          stripe_customer_id?: string | null
+          stripe_payment_intent_id?: string | null
+          subtotal_pence?: number
+          total_pence?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      processed_payment_events: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          processed_at: string
+          processing_status: string
+          stripe_event_id: string
+          stripe_event_type: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          processed_at?: string
+          processing_status?: string
+          stripe_event_id: string
+          stripe_event_type: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          processed_at?: string
+          processing_status?: string
+          stripe_event_id?: string
+          stripe_event_type?: string
+        }
+        Relationships: []
       }
       products: {
         Row: {
@@ -457,6 +631,10 @@ export type Database = {
         Returns: boolean
       }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      user_has_entitlement: {
+        Args: { _product_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "owner" | "admin" | "athlete"

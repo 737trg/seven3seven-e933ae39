@@ -23,6 +23,7 @@ import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in
 import { Route as MarketingResetPasswordRouteImport } from './routes/_marketing.reset-password'
 import { Route as MarketingMyProgrammesRouteImport } from './routes/_marketing.my-programmes'
 import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing.forgot-password'
+import { Route as MarketingCartRouteImport } from './routes/_marketing.cart'
 import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
 import { Route as MarketingAccountRouteImport } from './routes/_marketing.account'
 import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
@@ -61,6 +62,12 @@ import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-
 import { Route as MarketingProgrammesSem2026RouteImport } from './routes/_marketing.programmes.sem-2026'
 import { Route as MarketingProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/_marketing.programmes.basic-training-blueprint-plus'
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
+import { Route as MarketingLegalTermsRouteImport } from './routes/_marketing.legal.terms'
+import { Route as MarketingLegalRefundsRouteImport } from './routes/_marketing.legal.refunds'
+import { Route as MarketingLegalPrivacyRouteImport } from './routes/_marketing.legal.privacy'
+import { Route as MarketingCheckoutSuccessRouteImport } from './routes/_marketing.checkout.success'
+import { Route as MarketingCheckoutCancelRouteImport } from './routes/_marketing.checkout.cancel'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 import { Route as MyProgrammesSem2026ProgrammeSSessionIdRouteImport } from './routes/my-programmes.sem-2026.programme.s.$sessionId'
@@ -133,6 +140,11 @@ const MarketingMyProgrammesRoute = MarketingMyProgrammesRouteImport.update({
 const MarketingForgotPasswordRoute = MarketingForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingCartRoute = MarketingCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => MarketingRoute,
 } as any)
 const MarketingApparelRoute = MarketingApparelRouteImport.update({
@@ -351,6 +363,38 @@ const MarketingProgrammesSlugRoute = MarketingProgrammesSlugRouteImport.update({
   path: '/programmes/$slug',
   getParentRoute: () => MarketingRoute,
 } as any)
+const MarketingLegalTermsRoute = MarketingLegalTermsRouteImport.update({
+  id: '/legal/terms',
+  path: '/legal/terms',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingLegalRefundsRoute = MarketingLegalRefundsRouteImport.update({
+  id: '/legal/refunds',
+  path: '/legal/refunds',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingLegalPrivacyRoute = MarketingLegalPrivacyRouteImport.update({
+  id: '/legal/privacy',
+  path: '/legal/privacy',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingCheckoutSuccessRoute =
+  MarketingCheckoutSuccessRouteImport.update({
+    id: '/checkout/success',
+    path: '/checkout/success',
+    getParentRoute: () => MarketingRoute,
+  } as any)
+const MarketingCheckoutCancelRoute = MarketingCheckoutCancelRouteImport.update({
+  id: '/checkout/cancel',
+  path: '/checkout/cancel',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
   id: '/w/$week',
   path: '/w/$week',
@@ -388,6 +432,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof MarketingAboutRoute
   '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
+  '/cart': typeof MarketingCartRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
   '/reset-password': typeof MarketingResetPasswordRoute
@@ -397,6 +442,11 @@ export interface FileRoutesByFullPath {
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/checkout/cancel': typeof MarketingCheckoutCancelRoute
+  '/checkout/success': typeof MarketingCheckoutSuccessRoute
+  '/legal/privacy': typeof MarketingLegalPrivacyRoute
+  '/legal/refunds': typeof MarketingLegalRefundsRoute
+  '/legal/terms': typeof MarketingLegalTermsRoute
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
@@ -427,6 +477,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
 }
@@ -444,6 +495,7 @@ export interface FileRoutesByTo {
   '/about': typeof MarketingAboutRoute
   '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
+  '/cart': typeof MarketingCartRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
   '/reset-password': typeof MarketingResetPasswordRoute
@@ -451,6 +503,11 @@ export interface FileRoutesByTo {
   '/sign-up': typeof MarketingSignUpRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
+  '/checkout/cancel': typeof MarketingCheckoutCancelRoute
+  '/checkout/success': typeof MarketingCheckoutSuccessRoute
+  '/legal/privacy': typeof MarketingLegalPrivacyRoute
+  '/legal/refunds': typeof MarketingLegalRefundsRoute
+  '/legal/terms': typeof MarketingLegalTermsRoute
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
@@ -481,6 +538,7 @@ export interface FileRoutesByTo {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
 }
@@ -500,6 +558,7 @@ export interface FileRoutesById {
   '/_marketing/about': typeof MarketingAboutRoute
   '/_marketing/account': typeof MarketingAccountRoute
   '/_marketing/apparel': typeof MarketingApparelRoute
+  '/_marketing/cart': typeof MarketingCartRoute
   '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
   '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
   '/_marketing/reset-password': typeof MarketingResetPasswordRoute
@@ -510,6 +569,11 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
+  '/_marketing/checkout/cancel': typeof MarketingCheckoutCancelRoute
+  '/_marketing/checkout/success': typeof MarketingCheckoutSuccessRoute
+  '/_marketing/legal/privacy': typeof MarketingLegalPrivacyRoute
+  '/_marketing/legal/refunds': typeof MarketingLegalRefundsRoute
+  '/_marketing/legal/terms': typeof MarketingLegalTermsRoute
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/_marketing/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/_marketing/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
@@ -540,6 +604,7 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
 }
@@ -559,6 +624,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/apparel'
+    | '/cart'
     | '/forgot-password'
     | '/my-programmes'
     | '/reset-password'
@@ -568,6 +634,11 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
+    | '/checkout/cancel'
+    | '/checkout/success'
+    | '/legal/privacy'
+    | '/legal/refunds'
+    | '/legal/terms'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
     | '/programmes/sem-2026'
@@ -598,6 +669,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/api/public/payments/webhook'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
   fileRoutesByTo: FileRoutesByTo
@@ -615,6 +687,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/apparel'
+    | '/cart'
     | '/forgot-password'
     | '/my-programmes'
     | '/reset-password'
@@ -622,6 +695,11 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
+    | '/checkout/cancel'
+    | '/checkout/success'
+    | '/legal/privacy'
+    | '/legal/refunds'
+    | '/legal/terms'
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
     | '/programmes/sem-2026'
@@ -652,6 +730,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/api/public/payments/webhook'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
   id:
@@ -670,6 +749,7 @@ export interface FileRouteTypes {
     | '/_marketing/about'
     | '/_marketing/account'
     | '/_marketing/apparel'
+    | '/_marketing/cart'
     | '/_marketing/forgot-password'
     | '/_marketing/my-programmes'
     | '/_marketing/reset-password'
@@ -680,6 +760,11 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
     | '/_marketing/'
+    | '/_marketing/checkout/cancel'
+    | '/_marketing/checkout/success'
+    | '/_marketing/legal/privacy'
+    | '/_marketing/legal/refunds'
+    | '/_marketing/legal/terms'
     | '/_marketing/programmes/$slug'
     | '/_marketing/programmes/basic-training-blueprint-plus'
     | '/_marketing/programmes/sem-2026'
@@ -710,6 +795,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
+    | '/api/public/payments/webhook'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
   fileRoutesById: FileRoutesById
@@ -723,6 +809,7 @@ export interface RootRouteChildren {
   MyProgrammesBasicTrainingBlueprintPlusRoute: typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   MyProgrammesSem2026Route: typeof MyProgrammesSem2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
+  ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -823,6 +910,13 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof MarketingForgotPasswordRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/cart': {
+      id: '/_marketing/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof MarketingCartRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_marketing/apparel': {
@@ -1091,6 +1185,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingProgrammesSlugRouteImport
       parentRoute: typeof MarketingRoute
     }
+    '/_marketing/legal/terms': {
+      id: '/_marketing/legal/terms'
+      path: '/legal/terms'
+      fullPath: '/legal/terms'
+      preLoaderRoute: typeof MarketingLegalTermsRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/legal/refunds': {
+      id: '/_marketing/legal/refunds'
+      path: '/legal/refunds'
+      fullPath: '/legal/refunds'
+      preLoaderRoute: typeof MarketingLegalRefundsRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/legal/privacy': {
+      id: '/_marketing/legal/privacy'
+      path: '/legal/privacy'
+      fullPath: '/legal/privacy'
+      preLoaderRoute: typeof MarketingLegalPrivacyRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/checkout/success': {
+      id: '/_marketing/checkout/success'
+      path: '/checkout/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof MarketingCheckoutSuccessRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/checkout/cancel': {
+      id: '/_marketing/checkout/cancel'
+      path: '/checkout/cancel'
+      fullPath: '/checkout/cancel'
+      preLoaderRoute: typeof MarketingCheckoutCancelRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/api/public/payments/webhook': {
+      id: '/api/public/payments/webhook'
+      path: '/api/public/payments/webhook'
+      fullPath: '/api/public/payments/webhook'
+      preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app/programme/w/$week': {
       id: '/_app/programme/w/$week'
       path: '/w/$week'
@@ -1162,12 +1298,18 @@ interface MarketingRouteChildren {
   MarketingAboutRoute: typeof MarketingAboutRoute
   MarketingAccountRoute: typeof MarketingAccountRoute
   MarketingApparelRoute: typeof MarketingApparelRoute
+  MarketingCartRoute: typeof MarketingCartRoute
   MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
   MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
   MarketingResetPasswordRoute: typeof MarketingResetPasswordRoute
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
+  MarketingCheckoutCancelRoute: typeof MarketingCheckoutCancelRoute
+  MarketingCheckoutSuccessRoute: typeof MarketingCheckoutSuccessRoute
+  MarketingLegalPrivacyRoute: typeof MarketingLegalPrivacyRoute
+  MarketingLegalRefundsRoute: typeof MarketingLegalRefundsRoute
+  MarketingLegalTermsRoute: typeof MarketingLegalTermsRoute
   MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
   MarketingProgrammesBasicTrainingBlueprintPlusRoute: typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   MarketingProgrammesSem2026Route: typeof MarketingProgrammesSem2026Route
@@ -1178,12 +1320,18 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingAboutRoute: MarketingAboutRoute,
   MarketingAccountRoute: MarketingAccountRoute,
   MarketingApparelRoute: MarketingApparelRoute,
+  MarketingCartRoute: MarketingCartRoute,
   MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
   MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
   MarketingResetPasswordRoute: MarketingResetPasswordRoute,
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
+  MarketingCheckoutCancelRoute: MarketingCheckoutCancelRoute,
+  MarketingCheckoutSuccessRoute: MarketingCheckoutSuccessRoute,
+  MarketingLegalPrivacyRoute: MarketingLegalPrivacyRoute,
+  MarketingLegalRefundsRoute: MarketingLegalRefundsRoute,
+  MarketingLegalTermsRoute: MarketingLegalTermsRoute,
   MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
   MarketingProgrammesBasicTrainingBlueprintPlusRoute:
     MarketingProgrammesBasicTrainingBlueprintPlusRoute,
@@ -1331,6 +1479,7 @@ const rootRouteChildren: RootRouteChildren = {
     MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren,
   MyProgrammesSem2026Route: MyProgrammesSem2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
+  ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
