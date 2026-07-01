@@ -58,6 +58,7 @@ import { Route as MyProgrammesAthx2026ProgrammeRouteImport } from './routes/my-p
 import { Route as MyProgrammesAthx2026ProfileRouteImport } from './routes/my-programmes.athx-2026.profile'
 import { Route as MyProgrammesAthx2026LearnRouteImport } from './routes/my-programmes.athx-2026.learn'
 import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-programmes.athx-2026.calculator'
+import { Route as MarketingProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/_marketing.programmes.basic-training-blueprint-plus'
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
@@ -332,6 +333,12 @@ const MyProgrammesAthx2026CalculatorRoute =
     path: '/calculator',
     getParentRoute: () => MyProgrammesAthx2026Route,
   } as any)
+const MarketingProgrammesBasicTrainingBlueprintPlusRoute =
+  MarketingProgrammesBasicTrainingBlueprintPlusRouteImport.update({
+    id: '/programmes/basic-training-blueprint-plus',
+    path: '/programmes/basic-training-blueprint-plus',
+    getParentRoute: () => MarketingRoute,
+  } as any)
 const MarketingProgrammesSlugRoute = MarketingProgrammesSlugRouteImport.update({
   id: '/programmes/$slug',
   path: '/programmes/$slug',
@@ -384,6 +391,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
+  '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -436,6 +444,7 @@ export interface FileRoutesByTo {
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
+  '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -493,6 +502,7 @@ export interface FileRoutesById {
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
+  '/_marketing/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -549,6 +559,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/workout/$sessionId'
     | '/programmes/$slug'
+    | '/programmes/basic-training-blueprint-plus'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -601,6 +612,7 @@ export interface FileRouteTypes {
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/programmes/$slug'
+    | '/programmes/basic-training-blueprint-plus'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -657,6 +669,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId'
     | '/_marketing/'
     | '/_marketing/programmes/$slug'
+    | '/_marketing/programmes/basic-training-blueprint-plus'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -1044,6 +1057,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesAthx2026CalculatorRouteImport
       parentRoute: typeof MyProgrammesAthx2026Route
     }
+    '/_marketing/programmes/basic-training-blueprint-plus': {
+      id: '/_marketing/programmes/basic-training-blueprint-plus'
+      path: '/programmes/basic-training-blueprint-plus'
+      fullPath: '/programmes/basic-training-blueprint-plus'
+      preLoaderRoute: typeof MarketingProgrammesBasicTrainingBlueprintPlusRouteImport
+      parentRoute: typeof MarketingRoute
+    }
     '/_marketing/programmes/$slug': {
       id: '/_marketing/programmes/$slug'
       path: '/programmes/$slug'
@@ -1129,6 +1149,7 @@ interface MarketingRouteChildren {
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
   MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
+  MarketingProgrammesBasicTrainingBlueprintPlusRoute: typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   MarketingProgrammesIndexRoute: typeof MarketingProgrammesIndexRoute
 }
 
@@ -1143,6 +1164,8 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
   MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
+  MarketingProgrammesBasicTrainingBlueprintPlusRoute:
+    MarketingProgrammesBasicTrainingBlueprintPlusRoute,
   MarketingProgrammesIndexRoute: MarketingProgrammesIndexRoute,
 }
 
@@ -1290,13 +1313,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
