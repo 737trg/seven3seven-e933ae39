@@ -21,7 +21,6 @@ import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes
 import { Route as MarketingSignUpRouteImport } from './routes/_marketing.sign-up'
 import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in'
 import { Route as MarketingResetPasswordRouteImport } from './routes/_marketing.reset-password'
-import { Route as MarketingProgrammesRouteImport } from './routes/_marketing.programmes'
 import { Route as MarketingMyProgrammesRouteImport } from './routes/_marketing.my-programmes'
 import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing.forgot-password'
 import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
@@ -36,6 +35,7 @@ import { Route as AppLearnRouteImport } from './routes/_app.learn'
 import { Route as AppCalculatorRouteImport } from './routes/_app.calculator'
 import { Route as MyProgrammesSem2026IndexRouteImport } from './routes/my-programmes.sem-2026.index'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusIndexRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.index'
+import { Route as MarketingProgrammesIndexRouteImport } from './routes/_marketing.programmes.index'
 import { Route as WorkoutSessionIdDoneRouteImport } from './routes/workout.$sessionId.done'
 import { Route as MyProgrammesSem2026TodayRouteImport } from './routes/my-programmes.sem-2026.today'
 import { Route as MyProgrammesSem2026ProgressRouteImport } from './routes/my-programmes.sem-2026.progress'
@@ -123,11 +123,6 @@ const MarketingResetPasswordRoute = MarketingResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => MarketingRoute,
 } as any)
-const MarketingProgrammesRoute = MarketingProgrammesRouteImport.update({
-  id: '/programmes',
-  path: '/programmes',
-  getParentRoute: () => MarketingRoute,
-} as any)
 const MarketingMyProgrammesRoute = MarketingMyProgrammesRouteImport.update({
   id: '/my-programmes',
   path: '/my-programmes',
@@ -199,6 +194,12 @@ const MyProgrammesBasicTrainingBlueprintPlusIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => MyProgrammesBasicTrainingBlueprintPlusRoute,
+  } as any)
+const MarketingProgrammesIndexRoute =
+  MarketingProgrammesIndexRouteImport.update({
+    id: '/programmes/',
+    path: '/programmes/',
+    getParentRoute: () => MarketingRoute,
   } as any)
 const WorkoutSessionIdDoneRoute = WorkoutSessionIdDoneRouteImport.update({
   id: '/done',
@@ -332,9 +333,9 @@ const MyProgrammesAthx2026CalculatorRoute =
     getParentRoute: () => MyProgrammesAthx2026Route,
   } as any)
 const MarketingProgrammesSlugRoute = MarketingProgrammesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => MarketingProgrammesRoute,
+  id: '/programmes/$slug',
+  path: '/programmes/$slug',
+  getParentRoute: () => MarketingRoute,
 } as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
   id: '/w/$week',
@@ -375,7 +376,6 @@ export interface FileRoutesByFullPath {
   '/apparel': typeof MarketingApparelRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
-  '/programmes': typeof MarketingProgrammesRouteWithChildren
   '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
@@ -406,6 +406,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/sem-2026/progress': typeof MyProgrammesSem2026ProgressRoute
   '/my-programmes/sem-2026/today': typeof MyProgrammesSem2026TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
+  '/programmes/': typeof MarketingProgrammesIndexRoute
   '/my-programmes/basic-training-blueprint-plus/': typeof MyProgrammesBasicTrainingBlueprintPlusIndexRoute
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -429,7 +430,6 @@ export interface FileRoutesByTo {
   '/apparel': typeof MarketingApparelRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
-  '/programmes': typeof MarketingProgrammesRouteWithChildren
   '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
@@ -458,6 +458,7 @@ export interface FileRoutesByTo {
   '/my-programmes/sem-2026/progress': typeof MyProgrammesSem2026ProgressRoute
   '/my-programmes/sem-2026/today': typeof MyProgrammesSem2026TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
+  '/programmes': typeof MarketingProgrammesIndexRoute
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusIndexRoute
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -483,7 +484,6 @@ export interface FileRoutesById {
   '/_marketing/apparel': typeof MarketingApparelRoute
   '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
   '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
-  '/_marketing/programmes': typeof MarketingProgrammesRouteWithChildren
   '/_marketing/reset-password': typeof MarketingResetPasswordRoute
   '/_marketing/sign-in': typeof MarketingSignInRoute
   '/_marketing/sign-up': typeof MarketingSignUpRoute
@@ -515,6 +515,7 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026/progress': typeof MyProgrammesSem2026ProgressRoute
   '/my-programmes/sem-2026/today': typeof MyProgrammesSem2026TodayRoute
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
+  '/_marketing/programmes/': typeof MarketingProgrammesIndexRoute
   '/my-programmes/basic-training-blueprint-plus/': typeof MyProgrammesBasicTrainingBlueprintPlusIndexRoute
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
@@ -540,7 +541,6 @@ export interface FileRouteTypes {
     | '/apparel'
     | '/forgot-password'
     | '/my-programmes'
-    | '/programmes'
     | '/reset-password'
     | '/sign-in'
     | '/sign-up'
@@ -571,6 +571,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/progress'
     | '/my-programmes/sem-2026/today'
     | '/workout/$sessionId/done'
+    | '/programmes/'
     | '/my-programmes/basic-training-blueprint-plus/'
     | '/my-programmes/sem-2026/'
     | '/programme/s/$sessionId'
@@ -594,7 +595,6 @@ export interface FileRouteTypes {
     | '/apparel'
     | '/forgot-password'
     | '/my-programmes'
-    | '/programmes'
     | '/reset-password'
     | '/sign-in'
     | '/sign-up'
@@ -623,6 +623,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/progress'
     | '/my-programmes/sem-2026/today'
     | '/workout/$sessionId/done'
+    | '/programmes'
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/sem-2026'
     | '/programme/s/$sessionId'
@@ -647,7 +648,6 @@ export interface FileRouteTypes {
     | '/_marketing/apparel'
     | '/_marketing/forgot-password'
     | '/_marketing/my-programmes'
-    | '/_marketing/programmes'
     | '/_marketing/reset-password'
     | '/_marketing/sign-in'
     | '/_marketing/sign-up'
@@ -679,6 +679,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/progress'
     | '/my-programmes/sem-2026/today'
     | '/workout/$sessionId/done'
+    | '/_marketing/programmes/'
     | '/my-programmes/basic-training-blueprint-plus/'
     | '/my-programmes/sem-2026/'
     | '/_app/programme/s/$sessionId'
@@ -784,13 +785,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketingResetPasswordRouteImport
       parentRoute: typeof MarketingRoute
     }
-    '/_marketing/programmes': {
-      id: '/_marketing/programmes'
-      path: '/programmes'
-      fullPath: '/programmes'
-      preLoaderRoute: typeof MarketingProgrammesRouteImport
-      parentRoute: typeof MarketingRoute
-    }
     '/_marketing/my-programmes': {
       id: '/_marketing/my-programmes'
       path: '/my-programmes'
@@ -888,6 +882,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/my-programmes/basic-training-blueprint-plus/'
       preLoaderRoute: typeof MyProgrammesBasicTrainingBlueprintPlusIndexRouteImport
       parentRoute: typeof MyProgrammesBasicTrainingBlueprintPlusRoute
+    }
+    '/_marketing/programmes/': {
+      id: '/_marketing/programmes/'
+      path: '/programmes'
+      fullPath: '/programmes/'
+      preLoaderRoute: typeof MarketingProgrammesIndexRouteImport
+      parentRoute: typeof MarketingRoute
     }
     '/workout/$sessionId/done': {
       id: '/workout/$sessionId/done'
@@ -1045,10 +1046,10 @@ declare module '@tanstack/react-router' {
     }
     '/_marketing/programmes/$slug': {
       id: '/_marketing/programmes/$slug'
-      path: '/$slug'
+      path: '/programmes/$slug'
       fullPath: '/programmes/$slug'
       preLoaderRoute: typeof MarketingProgrammesSlugRouteImport
-      parentRoute: typeof MarketingProgrammesRoute
+      parentRoute: typeof MarketingRoute
     }
     '/_app/programme/w/$week': {
       id: '/_app/programme/w/$week'
@@ -1117,28 +1118,18 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
-interface MarketingProgrammesRouteChildren {
-  MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
-}
-
-const MarketingProgrammesRouteChildren: MarketingProgrammesRouteChildren = {
-  MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
-}
-
-const MarketingProgrammesRouteWithChildren =
-  MarketingProgrammesRoute._addFileChildren(MarketingProgrammesRouteChildren)
-
 interface MarketingRouteChildren {
   MarketingAboutRoute: typeof MarketingAboutRoute
   MarketingAccountRoute: typeof MarketingAccountRoute
   MarketingApparelRoute: typeof MarketingApparelRoute
   MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
   MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
-  MarketingProgrammesRoute: typeof MarketingProgrammesRouteWithChildren
   MarketingResetPasswordRoute: typeof MarketingResetPasswordRoute
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
+  MarketingProgrammesSlugRoute: typeof MarketingProgrammesSlugRoute
+  MarketingProgrammesIndexRoute: typeof MarketingProgrammesIndexRoute
 }
 
 const MarketingRouteChildren: MarketingRouteChildren = {
@@ -1147,11 +1138,12 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingApparelRoute: MarketingApparelRoute,
   MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
   MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
-  MarketingProgrammesRoute: MarketingProgrammesRouteWithChildren,
   MarketingResetPasswordRoute: MarketingResetPasswordRoute,
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
   MarketingIndexRoute: MarketingIndexRoute,
+  MarketingProgrammesSlugRoute: MarketingProgrammesSlugRoute,
+  MarketingProgrammesIndexRoute: MarketingProgrammesIndexRoute,
 }
 
 const MarketingRouteWithChildren = MarketingRoute._addFileChildren(
@@ -1298,3 +1290,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

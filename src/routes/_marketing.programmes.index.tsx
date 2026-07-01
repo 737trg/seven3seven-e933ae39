@@ -5,7 +5,7 @@ import { ProgrammeCarousel } from "@/components/marketing/ProgrammeCarousel";
 
 const SITE = "https://seven3seven.lovable.app";
 
-export const Route = createFileRoute("/_marketing/programmes")({
+export const Route = createFileRoute("/_marketing/programmes/")({
   head: () => ({
     meta: [
       { title: "Programmes — SEVEN3SEVEN" },
