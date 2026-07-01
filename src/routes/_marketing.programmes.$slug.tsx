@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { useBtbStarted, btbStore } from "@/lib/btb/store";
 import { ensureEnrolment } from "@/lib/enrolment.functions";
+import { cart, type CartItemSlug, useCart } from "@/lib/cart";
 import { getPublicProgramme, PUBLIC_PROGRAMMES, statusLabel, type PublicProgramme } from "@/data/publicProgrammes";
 
 const SITE = "https://seven3seven.lovable.app";
@@ -54,6 +55,7 @@ function ProductPage() {
   const { items: entitled } = useEntitlements(user?.id);
   const owns = entitled.some((e) => e.slug === p.slug);
   const btbStarted = useBtbStarted();
+  const cartState = useCart();
   const navigate = useNavigate();
   const startEnrolment = useServerFn(ensureEnrolment);
   const [starting, setStarting] = useState(false);
@@ -64,6 +66,9 @@ function ProductPage() {
   }, [user?.id]);
 
   const isBtb = p.slug === "basic-training-blueprint-plus";
+  const isCartProduct = p.slug === "basic-training-blueprint-plus" || p.slug === "sem-2026" || p.slug === "hybrid-race-plan";
+  const cartSlug = isCartProduct ? (p.slug as CartItemSlug) : null;
+  const inCart = cartSlug ? cart.slugs(cartState).includes(cartSlug) : false;
   const started = isBtb ? btbStarted.started : false;
   const showLiveCta = p.status === "live" && owns && isBtb;
 
@@ -80,6 +85,11 @@ function ProductPage() {
     } finally {
       setStarting(false);
     }
+  };
+
+  const handleAddToCart = () => {
+    if (!cartSlug) return;
+    cart.add(cartSlug);
   };
 
   const otherProgrammes = PUBLIC_PROGRAMMES.filter((x) => x.slug !== p.slug).slice(0, 3);
@@ -261,6 +271,44 @@ function ProductPage() {
                   {started ? "Programme in progress" : "You own this programme"}
                 </p>
               </>
+            ) : owns ? (
+              <>
+                <Link
+                  to="/my-programmes"
+                  className="inline-flex items-center gap-3 px-8 py-5 bg-signal text-bone font-display uppercase text-[12px] tracking-[0.28em]"
+                >
+                  Open in library <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <p className="eyebrow text-foreground-muted mt-5">You own this programme</p>
+              </>
+            ) : p.status === "live" && cartSlug ? (
+              inCart ? (
+                <>
+                  <div className="flex flex-col sm:flex-row lg:justify-end items-stretch gap-3">
+                    <span className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-bone/10 text-bone font-display uppercase text-[12px] tracking-[0.28em] ring-1 ring-bone/30">
+                      <Check className="h-3.5 w-3.5 text-signal" /> In cart
+                    </span>
+                    <Link
+                      to="/cart"
+                      className="inline-flex items-center justify-center gap-3 px-8 py-5 bg-bone text-obsidian font-display uppercase text-[12px] tracking-[0.28em] hover:bg-signal hover:text-bone transition-colors"
+                    >
+                      View cart <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                  <p className="eyebrow text-foreground-muted mt-5">Ready for checkout</p>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleAddToCart}
+                    className="inline-flex items-center gap-3 px-8 py-5 bg-bone text-obsidian font-display uppercase text-[12px] tracking-[0.28em] hover:bg-signal hover:text-bone transition-colors"
+                  >
+                    Add to cart <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                  <p className="eyebrow text-foreground-muted mt-5">{statusLabel(p.status)}</p>
+                </>
+              )
             ) : (
               <>
                 <button
