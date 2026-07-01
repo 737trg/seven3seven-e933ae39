@@ -47,8 +47,9 @@ export function MarketingFooter() {
 
           <FooterCol title="Support" className="col-span-1 md:col-span-2">
             <FooterLink to="/about">Contact</FooterLink>
-            <span className="text-foreground-muted/60 text-xs">Terms</span>
-            <span className="text-foreground-muted/60 text-xs">Privacy</span>
+            <FooterLink to="/legal/terms">Terms</FooterLink>
+            <FooterLink to="/legal/privacy">Privacy</FooterLink>
+            <FooterLink to="/legal/refunds">Refunds</FooterLink>
           </FooterCol>
 
           <FooterCol title="Train with purpose" className="col-span-2 md:col-span-2">
