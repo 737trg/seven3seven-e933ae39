@@ -83,7 +83,23 @@ export function BtbShell({ children, eyebrow, title }: { children: ReactNode; ey
       </main>
 
       {/* mobile bottom nav */}
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 border-t border-border bg-background/95 backdrop-blur z-40">
+      <nav className="lg:hidden fixed bottom-0 inset-x-0 border-t border-border bg-background/95 backdrop-blur z-40" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <div className="flex items-center justify-center gap-6 px-5 py-2 border-b border-border/60">
+          {secondary.map((it) => {
+            const active = pathname === it.to;
+            const Icon = it.icon;
+            return (
+              <Link
+                key={it.to}
+                to={it.to}
+                className={`flex items-center gap-1.5 text-[10px] uppercase tracking-widest ${active ? "text-bone" : "text-foreground-muted"}`}
+              >
+                <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
+                <span>{it.label}</span>
+              </Link>
+            );
+          })}
+        </div>
         <ul className="grid grid-cols-5">
           {primary.map((it) => {
             const active = pathname === it.to || pathname.startsWith(it.to + "/");
