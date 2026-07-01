@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, X } from "lucide-react";
 import basicImg from "@/assets/programme-basic-training.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
@@ -861,7 +861,7 @@ function Section({
   tone,
 }: {
   eyebrow: string;
-  children: React.ReactNode;
+  children: ReactNode;
   tone?: "dark";
 }) {
   return (
