@@ -23,6 +23,7 @@ import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in
 import { Route as MarketingResetPasswordRouteImport } from './routes/_marketing.reset-password'
 import { Route as MarketingMyProgrammesRouteImport } from './routes/_marketing.my-programmes'
 import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing.forgot-password'
+import { Route as MarketingCartRouteImport } from './routes/_marketing.cart'
 import { Route as MarketingApparelRouteImport } from './routes/_marketing.apparel'
 import { Route as MarketingAccountRouteImport } from './routes/_marketing.account'
 import { Route as MarketingAboutRouteImport } from './routes/_marketing.about'
@@ -137,6 +138,11 @@ const MarketingMyProgrammesRoute = MarketingMyProgrammesRouteImport.update({
 const MarketingForgotPasswordRoute = MarketingForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingCartRoute = MarketingCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => MarketingRoute,
 } as any)
 const MarketingApparelRoute = MarketingApparelRouteImport.update({
@@ -413,6 +419,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof MarketingAboutRoute
   '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
+  '/cart': typeof MarketingCartRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
   '/reset-password': typeof MarketingResetPasswordRoute
@@ -473,6 +480,7 @@ export interface FileRoutesByTo {
   '/about': typeof MarketingAboutRoute
   '/account': typeof MarketingAccountRoute
   '/apparel': typeof MarketingApparelRoute
+  '/cart': typeof MarketingCartRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
   '/reset-password': typeof MarketingResetPasswordRoute
@@ -533,6 +541,7 @@ export interface FileRoutesById {
   '/_marketing/about': typeof MarketingAboutRoute
   '/_marketing/account': typeof MarketingAccountRoute
   '/_marketing/apparel': typeof MarketingApparelRoute
+  '/_marketing/cart': typeof MarketingCartRoute
   '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
   '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
   '/_marketing/reset-password': typeof MarketingResetPasswordRoute
@@ -596,6 +605,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/apparel'
+    | '/cart'
     | '/forgot-password'
     | '/my-programmes'
     | '/reset-password'
@@ -656,6 +666,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/apparel'
+    | '/cart'
     | '/forgot-password'
     | '/my-programmes'
     | '/reset-password'
@@ -715,6 +726,7 @@ export interface FileRouteTypes {
     | '/_marketing/about'
     | '/_marketing/account'
     | '/_marketing/apparel'
+    | '/_marketing/cart'
     | '/_marketing/forgot-password'
     | '/_marketing/my-programmes'
     | '/_marketing/reset-password'
@@ -873,6 +885,13 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof MarketingForgotPasswordRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/cart': {
+      id: '/_marketing/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof MarketingCartRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_marketing/apparel': {
@@ -1240,6 +1259,7 @@ interface MarketingRouteChildren {
   MarketingAboutRoute: typeof MarketingAboutRoute
   MarketingAccountRoute: typeof MarketingAccountRoute
   MarketingApparelRoute: typeof MarketingApparelRoute
+  MarketingCartRoute: typeof MarketingCartRoute
   MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
   MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
   MarketingResetPasswordRoute: typeof MarketingResetPasswordRoute
@@ -1259,6 +1279,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingAboutRoute: MarketingAboutRoute,
   MarketingAccountRoute: MarketingAccountRoute,
   MarketingApparelRoute: MarketingApparelRoute,
+  MarketingCartRoute: MarketingCartRoute,
   MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
   MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
   MarketingResetPasswordRoute: MarketingResetPasswordRoute,
