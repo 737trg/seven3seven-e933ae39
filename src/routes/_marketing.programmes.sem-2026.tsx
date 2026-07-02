@@ -22,29 +22,50 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
 const SLUG = "sem-2026";
-const TITLE = "S.E.M 2026 | SEVEN3SEVEN";
+const TITLE = "S.E.M 2026 | ATHX-Style Hybrid Competition Training | SEVEN3SEVEN";
 const DESC =
-  "An eight-week ATHX and ATHX Pro preparation programme developing competition strength, run-row endurance, MetCon capacity and Race Day execution.";
+  "S.E.M 2026 is an eight-week hybrid competition training programme built for ATHX-style athletes — progressive strength, run-row endurance and strength endurance MetCon work. From SEVEN3SEVEN.";
+const ABS_IMG = `${SITE}${semImg.url}`;
 
 export const Route = createFileRoute("/_marketing/programmes/sem-2026")({
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: "S.E.M 2026" },
-      {
-        property: "og:description",
-        content:
-          "Strength. Endurance. MetCon. Prepared enough to do all three when it counts.",
-      },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE}/programmes/${SLUG}` },
-      { property: "og:image", content: semImg.url },
-      { name: "twitter:image", content: semImg.url },
+      { property: "og:image", content: ABS_IMG },
+      { name: "twitter:image", content: ABS_IMG },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `${SITE}/programmes/${SLUG}` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "S.E.M 2026",
+          description: DESC,
+          image: [ABS_IMG],
+          brand: { "@type": "Brand", name: "SEVEN3SEVEN" },
+          sku: "s37-sem-2026",
+          category: "Fitness training programme",
+          offers: {
+            "@type": "Offer",
+            url: `${SITE}/programmes/${SLUG}`,
+            priceCurrency: "GBP",
+            price: "19.99",
+            availability: "https://schema.org/InStock",
+            seller: { "@type": "Organization", name: "SEVEN3SEVEN" },
+          },
+        }),
+      },
+    ],
   }),
   component: SemProductPage,
 });
