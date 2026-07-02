@@ -4,7 +4,7 @@ import { CART_CATALOG, cart, useCart } from "@/lib/cart";
 import { createCheckoutSession } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 import { useAuth } from "@/lib/useAuth";
-import { PaymentModeBanner } from "@/components/marketing/PaymentModeBanner";
+
 
 export const Route = createFileRoute("/_marketing/cart")({
   component: CartPage,
