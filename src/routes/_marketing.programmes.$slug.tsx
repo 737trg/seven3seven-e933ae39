@@ -10,7 +10,18 @@ import { ensureEnrolment } from "@/lib/enrolment.functions";
 import { cart, type CartItemSlug, useCart } from "@/lib/cart";
 import { getPublicProgramme, PUBLIC_PROGRAMMES, statusLabel, type PublicProgramme } from "@/data/publicProgrammes";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
+
+const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
+  "hybrid-race-plan": {
+    title:
+      "Hybrid Race Plan | HYROX & Hybrid Games Training Plan | SEVEN3SEVEN",
+    description:
+      "A 12-week hybrid race programme for HYROX-style and Hybrid Games-style events. Running, machine conditioning, station work and pacing — built by SEVEN3SEVEN.",
+  },
+};
+
+const PAID_SLUGS = new Set(["basic-training-blueprint-plus", "sem-2026", "hybrid-race-plan"]);
 
 export const Route = createFileRoute("/_marketing/programmes/$slug")({
   loader: ({ params }) => {
@@ -20,9 +31,11 @@ export const Route = createFileRoute("/_marketing/programmes/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.programme;
-    const title = p ? `${p.title} — SEVEN3SEVEN` : "Programme — SEVEN3SEVEN";
-    const desc = p?.description ?? "Programme — SEVEN3SEVEN.";
+    const override = p ? SEO_OVERRIDES[p.slug] : undefined;
+    const title = override?.title ?? (p ? `${p.title} — SEVEN3SEVEN` : "Programme — SEVEN3SEVEN");
+    const desc = override?.description ?? p?.description ?? "Programme — SEVEN3SEVEN.";
     const url = p ? `${SITE}/programmes/${p.slug}` : `${SITE}/programmes`;
+    const absImg = p?.image ? `${SITE}${p.image}` : undefined;
     return {
       meta: [
         { title },
@@ -31,9 +44,41 @@ export const Route = createFileRoute("/_marketing/programmes/$slug")({
         { property: "og:description", content: desc },
         { property: "og:type", content: "website" },
         { property: "og:url", content: url },
-        ...(p?.image ? [{ property: "og:image", content: p.image }, { name: "twitter:image", content: p.image }] : []),
+        ...(absImg
+          ? [
+              { property: "og:image", content: absImg },
+              { name: "twitter:image", content: absImg },
+              { name: "twitter:card", content: "summary_large_image" },
+            ]
+          : []),
       ],
       links: [{ rel: "canonical", href: url }],
+      scripts:
+        p && PAID_SLUGS.has(p.slug)
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "Product",
+                  name: p.title,
+                  description: desc,
+                  image: absImg ? [absImg] : undefined,
+                  brand: { "@type": "Brand", name: "SEVEN3SEVEN" },
+                  sku: `s37-${p.slug}`,
+                  category: "Fitness training programme",
+                  offers: {
+                    "@type": "Offer",
+                    url,
+                    priceCurrency: "GBP",
+                    price: "19.99",
+                    availability: "https://schema.org/InStock",
+                    seller: { "@type": "Organization", name: "SEVEN3SEVEN" },
+                  },
+                }),
+              },
+            ]
+          : undefined,
     };
   },
   notFoundComponent: () => (

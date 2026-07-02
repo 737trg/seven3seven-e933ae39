@@ -22,11 +22,12 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
 const SLUG = "basic-training-blueprint-plus";
-const TITLE = "Basic Training Blueprint+ — SEVEN3SEVEN";
+const TITLE = "Basic Training Blueprint+ | Army Assessment & Basic Training Preparation | SEVEN3SEVEN";
 const DESC =
-  "A 12-week progressive physical-preparation programme for Regular and Reserve soldier applicants. Pass assessment. Arrive ready.";
+  "A structured 12-week British Army fitness programme for candidates preparing for Army assessment and Basic Training. Running, strength, loaded conditioning and robustness — built by SEVEN3SEVEN.";
+const ABS_IMG = `${SITE}${basicImg.url}`;
 
 export const Route = createFileRoute("/_marketing/programmes/basic-training-blueprint-plus")({
   head: () => ({
@@ -37,10 +38,34 @@ export const Route = createFileRoute("/_marketing/programmes/basic-training-blue
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE}/programmes/${SLUG}` },
-      { property: "og:image", content: basicImg.url },
-      { name: "twitter:image", content: basicImg.url },
+      { property: "og:image", content: ABS_IMG },
+      { name: "twitter:image", content: ABS_IMG },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `${SITE}/programmes/${SLUG}` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "Basic Training Blueprint+",
+          description: DESC,
+          image: [ABS_IMG],
+          brand: { "@type": "Brand", name: "SEVEN3SEVEN" },
+          sku: "s37-btb-plus",
+          category: "Fitness training programme",
+          offers: {
+            "@type": "Offer",
+            url: `${SITE}/programmes/${SLUG}`,
+            priceCurrency: "GBP",
+            price: "19.99",
+            availability: "https://schema.org/InStock",
+            seller: { "@type": "Organization", name: "SEVEN3SEVEN" },
+          },
+        }),
+      },
+    ],
   }),
   component: BtbProductPage,
 });

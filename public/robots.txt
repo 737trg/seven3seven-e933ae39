@@ -16,5 +16,8 @@ Disallow: /sign-up
 Disallow: /forgot-password
 Disallow: /account
 Disallow: /athx-2026
+Disallow: /cart
+Disallow: /checkout/
+Disallow: /reset-password
 
-Sitemap: https://seven3seven.lovable.app/sitemap.xml
+Sitemap: https://737trg.com/sitemap.xml
