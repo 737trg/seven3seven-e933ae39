@@ -4,7 +4,7 @@ import { CART_CATALOG, cart, useCart } from "@/lib/cart";
 import { createCheckoutSession } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 import { useAuth } from "@/lib/useAuth";
-import { PaymentModeBanner } from "@/components/marketing/PaymentModeBanner";
+
 
 export const Route = createFileRoute("/_marketing/cart")({
   component: CartPage,
@@ -64,7 +64,6 @@ function CartPage() {
 
   return (
     <>
-    <PaymentModeBanner />
     <div className="max-w-3xl mx-auto px-6 lg:px-12 py-20 lg:py-28">
       <p className="eyebrow">Cart</p>
       <h1 className="font-display font-bold text-bone text-4xl lg:text-6xl tracking-[-0.03em] leading-[0.95] mt-4">
