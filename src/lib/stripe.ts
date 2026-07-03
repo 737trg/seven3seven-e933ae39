@@ -8,10 +8,18 @@
  */
 export type StripeEnv = 'sandbox' | 'live';
 
-const PAYMENTS_MODE = (import.meta.env.VITE_PAYMENTS_MODE as string | undefined) ?? 'sandbox';
+// Derive environment from the publishable token prefix — the source of
+// truth Vite loads per-mode from .env.development / .env.production.
+// pk_live_… → live, pk_test_… → sandbox. Never silently default to live.
+const CLIENT_TOKEN = import.meta.env.VITE_PAYMENTS_CLIENT_TOKEN as string | undefined;
 
 export function getStripeEnvironment(): StripeEnv {
-  return PAYMENTS_MODE === 'live' ? 'live' : 'sandbox';
+  if (CLIENT_TOKEN?.startsWith('pk_live_')) return 'live';
+  if (CLIENT_TOKEN?.startsWith('pk_test_')) return 'sandbox';
+  throw new Error(
+    'Stripe payments are not configured for this build. ' +
+    'Complete Stripe go-live to enable production checkout.',
+  );
 }
 
 export function isSandboxPayments(): boolean {
