@@ -2,6 +2,7 @@ import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { SemShell } from "@/components/sem/SemShell";
 import { findSession, blockId } from "@/lib/sem/manifest";
 import { useSemProfile } from "@/lib/sem/store";
+import { Flame } from "lucide-react";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/programme/s/$sessionId")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Session" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -70,10 +71,16 @@ function SessionPage() {
         </div>
 
         <aside>
-          <div className="border border-border p-5">
-            <p className="eyebrow mb-2">Live runner</p>
-            <p className="text-foreground-muted text-sm">The block-by-block runner with timers and per-set logging arrives in the next release. For now your results page reads from the database and reflects any completions logged.</p>
-          </div>
+          <Link
+            to="/workout/$sessionId"
+            params={{ sessionId: sid }}
+            className="w-full inline-flex items-center justify-center gap-2 h-14 px-7 text-sm font-display font-medium uppercase tracking-wide bg-signal text-bone hover:bg-signal/90 rounded-[4px]"
+          >
+            <Flame className="h-4 w-4" /> Start session
+          </Link>
+          <p className="mt-3 text-foreground-muted text-xs">
+            Launches the block-by-block runner with timers, per-set logging and autosave.
+          </p>
           {session.readiness_adjustment && (
             <div className="mt-6 border border-border p-5">
               <p className="eyebrow mb-2">Readiness adjustments</p>
