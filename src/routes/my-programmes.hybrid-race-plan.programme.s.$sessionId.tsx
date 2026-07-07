@@ -43,6 +43,18 @@ function SessionPage() {
               <p className="text-bone text-sm">{session.coach_note}</p>
             </div>
           )}
+          {(session as unknown as { progression_standard?: string }).progression_standard && (
+            <div className="mt-4 border-l-2 border-border pl-4">
+              <p className="eyebrow text-foreground-muted mb-1">Progression standard</p>
+              <p className="text-bone text-sm">{(session as unknown as { progression_standard: string }).progression_standard}</p>
+            </div>
+          )}
+          {(session as unknown as { intensity?: string }).intensity && (
+            <div className="mt-4 border-l-2 border-border pl-4">
+              <p className="eyebrow text-foreground-muted mb-1">Intensity</p>
+              <p className="text-bone text-sm">{(session as unknown as { intensity: string }).intensity}</p>
+            </div>
+          )}
 
           <ol className="mt-10 space-y-6">
             {session.blocks.map((b, i) => (
