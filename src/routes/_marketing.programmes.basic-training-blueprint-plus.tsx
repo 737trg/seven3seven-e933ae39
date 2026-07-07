@@ -24,9 +24,9 @@ import {
 
 const SITE = "https://737trg.com";
 const SLUG = "basic-training-blueprint-plus";
-const TITLE = "Basic Training Blueprint+ | Army Assessment & Basic Training Preparation | SEVEN3SEVEN";
+const TITLE = "Basic Training Blueprint+ | Army Prep | SEVEN3SEVEN";
 const DESC =
-  "A structured 12-week British Army fitness programme for candidates preparing for Army assessment and Basic Training. Running, strength, loaded conditioning and robustness — built by SEVEN3SEVEN.";
+  "A 12-week Army fitness programme for candidates preparing for Army assessment and Basic Training. Running, strength and loaded conditioning by SEVEN3SEVEN.";
 const ABS_IMG = `${SITE}${basicImg.url}`;
 
 export const Route = createFileRoute("/_marketing/programmes/basic-training-blueprint-plus")({
