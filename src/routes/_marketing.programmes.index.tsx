@@ -3,7 +3,7 @@ import { ArrowDown } from "lucide-react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { ProgrammeCarousel } from "@/components/marketing/ProgrammeCarousel";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
 
 export const Route = createFileRoute("/_marketing/programmes/")({
   head: () => ({
