@@ -9,6 +9,22 @@ export type HrpBlock = {
   rest?: string | null;
   rpe?: string | null;
   scaling?: string | null;
+  /** New in HRP_INTERACTIVE_V2_1 — semantic kind used by the runner + log drawer. */
+  kind?:
+    | "strength"
+    | "sled"
+    | "station"
+    | "run_interval"
+    | "aerobic"
+    | "hybrid_brick"
+    | "emom"
+    | "amrap_density"
+    | "mobility_recovery"
+    | "log";
+  /** When a Main-set / Secondary-work paragraph contains multiple exercises,
+   *  the parser splits them into discrete items so each renders as its own
+   *  card in the runner. */
+  items?: string[];
 };
 
 export type HrpSession = {

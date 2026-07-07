@@ -261,7 +261,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
             </div>
           )}
 
-          {block.timer && (
+          {block.timer && timerHasDuration(block.timer) && (
             <div className="mt-10 border border-border p-5 text-sm text-foreground-muted">
               <p className="eyebrow mb-2">Timer</p>
               <p className="text-bone tabular font-display text-2xl">
@@ -383,14 +383,37 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
 function timerLabel(t: SessionBlock["timer"]) {
   if (!t) return "—";
   switch (t.type) {
-    case "countdown": return `Countdown · ${formatClock(t.durationSec ?? 0)}`;
+    case "countdown": return t.durationSec ? `Countdown · ${formatClock(t.durationSec)}` : "—";
     case "stopwatch": return "Stopwatch";
-    case "emom": return `EMOM · ${t.minutes} min`;
-    case "amrap": return `AMRAP · ${formatClock(t.durationSec ?? 0)}`;
+    case "emom": return t.minutes ? `EMOM · ${t.minutes} min` : "—";
+    case "amrap": return t.durationSec ? `AMRAP · ${formatClock(t.durationSec)}` : "—";
     case "intervals": return `Intervals · ${t.rounds ?? "?"} rounds`;
-    case "rft": return `RFT · cap ${formatClock(t.capSec ?? 0)}`;
+    case "rft": return t.capSec ? `RFT · cap ${formatClock(t.capSec)}` : "—";
     case "rest": return `Rest · ${t.restSec}s`;
     default: return "—";
+  }
+}
+
+/** Only render the timer card when the timer carries real, actionable duration.
+ *  Prevents empty "Countdown · 0:00" cards on aerobic/mobility/log blocks. */
+function timerHasDuration(t: SessionBlock["timer"]): boolean {
+  if (!t) return false;
+  switch (t.type) {
+    case "countdown":
+    case "amrap":
+      return (t.durationSec ?? 0) > 0;
+    case "emom":
+      return (t.minutes ?? 0) > 0;
+    case "rft":
+      return (t.capSec ?? 0) > 0;
+    case "intervals":
+      return (t.rounds ?? 0) > 0 || (t.workSec ?? 0) > 0;
+    case "rest":
+      return (t.restSec ?? 0) > 0;
+    case "stopwatch":
+      return true;
+    default:
+      return false;
   }
 }
 

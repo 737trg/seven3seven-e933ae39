@@ -42,12 +42,22 @@ function parseTimer(raw: string | null | undefined): TimerSpec | undefined {
   if (!s || s === "none") return undefined;
   const num = (m: RegExpMatchArray | null) => (m ? Number(m[1]) : 0);
   if (s.startsWith("rest")) return { type: "rest", restSec: num(s.match(/rest_(\d+)/)) || 60 };
-  if (s.startsWith("countdown")) return { type: "countdown", durationSec: num(s.match(/countdown_(\d+)/)) };
-  if (s.startsWith("amrap")) return { type: "amrap", durationSec: num(s.match(/amrap_(\d+)/)) };
-  if (s.startsWith("for_time")) return { type: "rft", capSec: num(s.match(/for_time_(\d+)/)) };
+  if (s.startsWith("countdown")) {
+    const d = num(s.match(/countdown_(\d+)/));
+    return d > 0 ? { type: "countdown", durationSec: d } : undefined;
+  }
+  if (s.startsWith("amrap")) {
+    const d = num(s.match(/amrap_(\d+)/));
+    return d > 0 ? { type: "amrap", durationSec: d } : undefined;
+  }
+  if (s.startsWith("for_time")) {
+    const d = num(s.match(/for_time_(\d+)/));
+    return d > 0 ? { type: "rft", capSec: d } : undefined;
+  }
   if (s.startsWith("emom")) {
     const sec = num(s.match(/emom_(\d+)/));
-    return { type: "emom", minutes: sec ? Math.max(1, Math.round(sec / 60)) : 10 };
+    if (sec <= 0) return undefined;
+    return { type: "emom", minutes: Math.max(1, Math.round(sec / 60)) };
   }
   if (s.startsWith("interval")) {
     const sec = num(s.match(/interval_(\d+)/));
@@ -227,13 +237,33 @@ function resolveHrp(id: string): ResolvedSession | undefined {
               .map(([k, v]) => `${k.replace(/_/g, " ")}: ${typeof v === "string" ? v : JSON.stringify(v)}`)
               .join(" · ")
           : null;
+        // When the parser split a multi-exercise paragraph into discrete items,
+        // render each item as its own bullet in the runner instead of one
+        // wall of text. Falls back to the original instruction otherwise.
+        const lines = b.items && b.items.length > 0
+          ? b.items.slice()
+          : buildLines(b.instruction, { categorySpecific: cs });
+        // Map manifest kind → BlockKind for the runner + log form router.
+        const kindMap: Record<string, BlockKind> = {
+          strength: "mainLift",
+          sled: "assistance",
+          station: "conditioning",
+          run_interval: "conditioning",
+          aerobic: "conditioning",
+          hybrid_brick: "conditioning",
+          emom: "conditioning",
+          amrap_density: "conditioning",
+          mobility_recovery: b.name.toLowerCase().includes("cool") ? "cooldown" : "warmup",
+          log: "log",
+        };
+        const inferred = b.kind ? kindMap[b.kind] : inferBlockKind(b.name, b.instruction);
         return {
           id: hrpBlockId(w.week, s.session, i),
           order: i + 1,
-          kind: inferBlockKind(b.name, b.instruction),
+          kind: inferred,
           title: b.name,
           timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
-          lines: buildLines(b.instruction, { categorySpecific: cs }),
+          lines,
           note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
         };
       });
