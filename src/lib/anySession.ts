@@ -58,6 +58,50 @@ function parseTimer(raw: string | null | undefined): TimerSpec | undefined {
   return undefined;
 }
 
+/**
+ * Extract minutes/seconds from a block name/instruction. Handles patterns like
+ * "24-min EMOM", "8 min AMRAP", "5-minute intervals", "30-second work".
+ */
+function extractMinutesFromText(text: string): { minutes?: number; seconds?: number } {
+  const t = text.toLowerCase();
+  const mMin = t.match(/(\d+)\s*[- ]?\s*(?:min(?:ute)?s?)\b/);
+  const mSec = t.match(/(\d+)\s*[- ]?\s*(?:sec(?:ond)?s?)\b/);
+  return {
+    minutes: mMin ? Number(mMin[1]) : undefined,
+    seconds: mSec ? Number(mSec[1]) : undefined,
+  };
+}
+
+/**
+ * Refine a parsed TimerSpec using hints from the block title + instruction
+ * (e.g. "24-min EMOM" → 24, "8-min AMRAP" → 480s cap).
+ */
+function refineTimer(spec: TimerSpec | undefined, title: string, instruction?: string | null): TimerSpec | undefined {
+  if (!spec) return spec;
+  const hint = extractMinutesFromText(`${title} ${instruction ?? ""}`);
+  if (spec.type === "emom") {
+    if (hint.minutes) return { ...spec, minutes: hint.minutes };
+    return spec;
+  }
+  if (spec.type === "amrap") {
+    if (hint.minutes && !spec.durationSec) return { ...spec, durationSec: hint.minutes * 60 };
+    return spec;
+  }
+  if (spec.type === "rft") {
+    if (hint.minutes && !spec.capSec) return { ...spec, capSec: hint.minutes * 60 };
+    return spec;
+  }
+  if (spec.type === "countdown") {
+    if (hint.minutes && !spec.durationSec) return { ...spec, durationSec: hint.minutes * 60 };
+    return spec;
+  }
+  if (spec.type === "intervals") {
+    if (hint.seconds && !spec.workSec) return { ...spec, workSec: hint.seconds };
+    return spec;
+  }
+  return spec;
+}
+
 // ---- Block kind inference -----------------------------------------------
 
 function inferBlockKind(name: string, instruction?: string | null): BlockKind {
