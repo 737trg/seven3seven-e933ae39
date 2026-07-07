@@ -24,9 +24,9 @@ import {
 
 const SITE = "https://737trg.com";
 const SLUG = "sem-2026";
-const TITLE = "S.E.M 2026 | ATHX-Style Hybrid Competition Training | SEVEN3SEVEN";
+const TITLE = "S.E.M 2026 | Hybrid Competition Training | SEVEN3SEVEN";
 const DESC =
-  "S.E.M 2026 is an eight-week hybrid competition training programme built for ATHX-style athletes — progressive strength, run-row endurance and strength endurance MetCon work. From SEVEN3SEVEN.";
+  "An 8-week hybrid competition programme: progressive strength, run-row endurance and MetCon work for ATHX-style athletes. From SEVEN3SEVEN.";
 const ABS_IMG = `${SITE}${semImg.url}`;
 
 export const Route = createFileRoute("/_marketing/programmes/sem-2026")({
