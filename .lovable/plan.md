@@ -1,110 +1,88 @@
+# Hybrid Race Plan → Interactive V2.1
 
-## Goal
+Rebuild the Hybrid Race Plan from the attached Markdown so every block is a first-class typed unit with its own logging modal and correct timer behaviour, then silently migrate existing HRP owners onto the new version.
 
-Replace the current Hybrid Race Plan (HRP) content and engine with the full 12-week programme from `SEVEN3SEVEN_Hybrid_Race_Plan_User_Download.pdf`. Silently upgrade existing HRP owners to the new version, fix dashboard logic issues, and keep the current dark editorial Seven3Seven design intact.
+## 1. New HRP manifest (Markdown as source of truth)
 
-No visual redesign. No customer-facing "migration" language.
+Author `src/lib/programmes/hybridRacePlan/manifest.ts` by hand-transcribing all 12 weeks × 6 sessions from the uploaded Markdown. Structure:
 
----
+```text
+Week -> Session -> Block[]  where Block is a discriminated union by `kind`
+```
 
-## 1. Ingest the PDF as source of truth
+Block kinds (one per required type):
 
-- Upload the new PDF as a CDN asset (replaces `src/assets/hrp-download.pdf.asset.json`). The "Download PDF" button on the HRP programme page points to this URL.
-- Parse all 12 weeks from the PDF into a single typed manifest. Every week contains: `weekNumber`, `phase`, `trainingLoad`, `keyAim`, and every session with all PDF fields (`purpose`, `intensity`, `warmUp`, `mainSet`, `secondaryWork`, `programmeFocus`, `coolDown`, `record`, `progressionStandard`, `coachNote`) plus derived `blocks[]` with correct `timerType`/`timerDurationSeconds` and per-block `logSchema`.
-- Weeks 1–11 = 5 core sessions + 1 optional recovery/skills. Week 12 = strength primer, run primer, easy aerobic reset, movement primer, Race Day, optional post-race reset/reflection.
-- Include the shared PDF reference tables: Station Load Levels (L1–L5), Race Volume Levels (RVL 1–5), Readiness actions, Progression order.
+- `strength_block` — array of `exercises[]`, each with `sets[]` of `{ type: 'warmup'|'top'|'backoff'|'accessory', reps, rpe, prescribedRestSec }`. Multi-exercise "Main set" paragraphs are split into separate exercise cards (e.g. Back squat top, Back squat back-off, RDL).
+- `run_interval_block` — `reps[]` of `{ distanceM? , durationSec?, targetPace?, recoverySec? }`.
+- `aerobic_block` — `{ durationMin, target: 'Z2'|'easy', notes }`, no forced timer.
+- `sled_block` — `{ mode: 'push'|'pull', reps, distanceM, prescribedLoad, restSec }`.
+- `station_block` — `{ station: 'wallball'|'farmers'|'lunge'|'burpee_broad'|'db_snatch'|'ski'|'row'|'bike'|..., prescription }`. Logging fields adapt to station type.
+- `emom_block` — `{ totalMinutes, minutes: [{ station, prescription }] }` with a true rolling 60-sec timer.
+- `amrap_or_density_block` — `{ durationSec, movements[] }` with real countdown; omitted when block has no window.
+- `hybrid_brick_block` — `{ rounds: [{ run: {distanceM}, station: {...} }] }`.
+- `mobility_or_recovery_block` — `{ durationMin?, items[] }`, no forced timer.
 
-## 2. Programme engine (reusable foundation)
+Session shape carries the coaching context (`purpose`, `intensity`, `progressionStandard`, `coachNote`, `eventFocus`) — these render in the session detail page and expandable Coach Notes, **not** the active workout screen. `isOptional: true` on session 6 each week.
 
-Create `src/lib/programmeEngine/` — used by HRP now, and by BTB/SEM/ATHX/future plans later.
+## 2. Logging schemas + drawer
 
-- `types.ts` — `Programme`, `Week`, `Session`, `Block`, `LearnArticle`, `LogSchema`, `LogField`, block types (`strength`, `run`, `sled`, `station`, `brick`, `recovery`, `race`, `raceReview`).
-- `registry.ts` — maps programme slug → manifest.
-- `resolver.ts` — resolves a session by programme+week+day, returns typed blocks + log schemas.
-- `progress.ts` — completion %, current week (from enrolment `started_at` + user completions), next session across programmes, programme-specific metrics (run repeatability, strength reserve, sled ability, station repeatability, no-reps, brick drop-off, race readiness).
-- `logSchemas.ts` — schema-per-block-type matching the spec (strength, running, sled, station, brick, recovery, race review). No-rep target wording included verbatim.
+Add `src/lib/programmes/logSchemas.ts` mapping each block kind to its logging field set (exactly as specified in the request). Extend `LogDrawer` to render per-kind forms:
 
-BTB, SEM, ATHX are wrapped as thin manifests using their existing content so the same engine drives them (no content change to those plans in this pass).
+- Strength: exercise picker → set rows (load, reps, RPE, missed, notes) + rest timer button.
+- Run intervals: rep rows (distance/time, split, RPE) + auto fastest/slowest/drop-off.
+- Sled: push/pull, distance, load, surface, footwear, split, RPE, stall toggle.
+- Station: adaptive fields per station type.
+- EMOM: per-minute completed y/n, reps/m/cal, load, rest remaining, lowest rest, limiter.
+- AMRAP/density: rounds, extra reps, loads, no-reps, breaks, limiter.
+- Brick: per-round run split, station split, transition, RPE + auto drop-off summary.
+- Recovery: duration, completed, readiness after, soreness.
 
-## 3. Hybrid Race Plan manifest
+Save to a new `hrp_block_logs` table (see §4). Also keep a `legacyNotes` text field per block for imported/unmappable data.
 
-`src/lib/programmes/hybridRacePlan/` — the full 12-week manifest, one file per week for maintainability (`week01.ts` … `week12.ts`) plus `index.ts` that composes them, plus `learn.ts` (Built for Hybrid Racing, How to Use the Plan, Intensity and Load Levels, Race Volume Levels, Pace Drop-Off and Race Pace, Choosing Load and Race Volume, Breaking Stations Without Panic, Race Day Tools, Safety and Sources) and `raceDayTools.ts`.
+## 3. Runner + timers
 
-Every session includes all PDF fields verbatim and typed blocks with the correct timers (e.g. 24-min EMOM → 1440s). The old `src/lib/hrp/manifest.ts` is deleted and imports updated to the new module.
+Update `src/routes/workout.$sessionId.tsx` and block card component so the active workout screen shows only: block number, title, short prescription, key cue, timer (conditional), single kind-specific log button ("Log strength", "Log run splits", etc.).
 
-## 4. Silent upgrade for existing HRP owners
+Timer rules:
 
-- Database: single migration that (a) marks the existing HRP `programme_version` as superseded and (b) inserts a new `programme_version` row for the rebuilt plan, then updates every active `programme_enrolments` row where `product = HRP` to point at the new version. `entitlements` remain unchanged so nobody re-purchases.
-- Reset per-user session progress only where the old session id no longer maps to a new session (orphaned completions stay in history but are not shown as "current"). Completed session count and streaks are preserved by remapping day-of-week + week where a match exists.
-- Zero customer-facing wording about "migration", "V2", "legacy", "upgrade", "schema".
+- Remove default timer card. Never render "Countdown · 0:00".
+- Countdown only when `durationSec > 0` (AMRAP/density, timed carries).
+- EMOM: real rolling 60-sec repeat with current minute + station.
+- Strength/interval/AMRAP rest buttons open a rest timer sheet.
+- Aerobic/recovery/mobility: no timer.
 
-## 5. Dashboard logic fixes (no visual redesign)
+Session detail page (`my-programmes.hybrid-race-plan.programme.s.$sessionId.tsx`) keeps the long-form coaching context in an expandable "Coach notes" panel.
 
-`src/lib/useCustomerDashboard.ts` + `src/routes/my-programmes.index.tsx`:
+## 4. Data migration (silent, preserves access + progress)
 
-- **Current week**: never blank when the user has an active programme. Compute from enrolment `started_at` + user's local week if no completions yet.
-- **Multiple active programmes**: show "Next session" (soonest across all programmes) and "Primary programme" (most recent activity) instead of a single ambiguous current week.
-- **Progress %**: real value = completed core sessions ÷ programme total core sessions.
-- **Recent activity**: render session `name` (e.g. "Strength + sled — Week 3") not internal session id.
-- **Programme card actions**: Continue Training, View Programme, Download PDF (only when programme has a PDF).
-- Responsive check on mobile at existing breakpoints; no new components introduced beyond what's needed.
+Single SQL migration:
 
-## 6. Guided session player + logging
+1. Insert new `programme_versions` row for HRP with `version = 'HRP_INTERACTIVE_V2_1'`, mark as current.
+2. Update every `programme_enrolments.programme_version_id` and every non-revoked `entitlements.programme_version_id` pointing at any prior HRP version to the new version id. No re-purchase.
+3. Create `public.hrp_block_logs` (id, user_id, session_id, block_id, kind, payload jsonb, legacy_notes text, created_at, updated_at) with GRANTs (`authenticated`, `service_role`), RLS enabled, policies scoped to `auth.uid() = user_id`, and `update_updated_at_column` trigger.
+4. Best-effort remap of existing `workout_results` rows into `hrp_block_logs` by `session_id`+`block_id` where the new block ids match; unmapped rows are copied verbatim into `legacy_notes`.
+5. Core-completion view/logic excludes `isOptional` sessions from the denominator.
 
-Existing dark player is kept. Fixes only:
+## 5. Progress + dashboard
 
-- Block timer reads `timerDurationSeconds` from the manifest — no more hard-coded 10 min fallback.
-- `LogDrawer` renders fields from the block's `logSchema` (schema-driven), giving strength / running / sled / station / brick / recovery / race review the correct fields listed in the spec.
-- No-rep guidance line rendered on any block with a `noReps` field.
+Update `useCustomerDashboard` + HRP progress helpers so:
 
-## 7. Learn, Race Day, Progress
+- Completion % = completed core sessions / 60 (12 weeks × 5 core).
+- Optional recovery sessions show as bonus, never lower %.
+- Current week + next core session surface on `my-programmes` dashboard, keeping the existing S3S dark visual direction (no card/colour changes).
 
-- `src/routes/my-programmes.hybrid-race-plan.learn.tsx` reads from the HRP `learn.ts` (programme-specific articles, linked to sessions via `relatedSessions`).
-- Race Day tools page reads from `raceDayTools.ts`.
-- Progress page reads programme-specific metrics from `programmeEngine/progress.ts`.
+## 6. Verification
 
-## 8. Acceptance verification (before hand-off)
-
-- Build passes; typecheck clean.
-- HRP programme page lists 12 weeks; each normal week has 5 core + 1 optional; Week 12 has the taper/race/reset layout.
-- Spot-check three sessions (e.g. Wk1 Fri Station repeatability baseline, Wk7 Fri Race-load station density, Wk12 Race Day) against the PDF verbatim.
-- Existing test user with old HRP entitlement lands on the new plan with no re-purchase and no "migration" wording.
-- Dashboard shows correct current week + next session for that user.
-- Playwright screenshot of dashboard + HRP programme page + one guided session to confirm dark S3S styling is unchanged.
-
----
-
-## Out of scope for this pass
-
-- Visual redesign of any page.
-- Content changes to BTB / SEM / ATHX (only wrapped in the new engine).
-- New payment or auth flows.
+- `bun run build` + `tsgo` clean.
+- Playwright: sign in as test user, open HRP week 1 sessions 1–6, confirm no "Countdown · 0:00", strength/run/sled/station/EMOM/brick/recovery each open the correct log modal.
+- SQL check: `jamesnichol9@gmail.com` enrolment now points at `HRP_INTERACTIVE_V2_1`, entitlement intact, prior `workout_results` still readable.
 
 ## Technical notes
 
-```text
-src/lib/
-  programmeEngine/
-    types.ts
-    registry.ts
-    resolver.ts
-    progress.ts
-    logSchemas.ts
-  programmes/
-    hybridRacePlan/
-      index.ts
-      week01.ts ... week12.ts
-      learn.ts
-      raceDayTools.ts
-    basicTrainingBlueprint/index.ts   (thin wrapper of current content)
-    sem2026/index.ts                  (thin wrapper)
-    athx/index.ts                     (thin wrapper)
-```
+- Old `src/lib/hrp/manifest.ts` + `src/data/hrp.manifest.json` are deleted; `anySession.ts` HRP branch swapped for the new engine adapter.
+- `programmeEngine` registry gains an `HRP_INTERACTIVE_V2_1` entry so future programmes can reuse the same block kinds + log schemas.
+- No visual redesign: dashboard, session detail, and runner keep current dark S3S typography, borders and red accent.
 
-Migration (single file):
-1. Insert new `programme_versions` row for HRP with the new manifest hash.
-2. Mark previous HRP version `is_current = false`.
-3. `UPDATE programme_enrolments SET programme_version_id = <new>` for all HRP enrolments.
-4. GRANTs unchanged (no new tables).
+## Scope check
 
-`src/lib/hrp/*` is deleted after callers are migrated to `programmeEngine` + `programmes/hybridRacePlan`.
+This is a large change (manifest transcription of 72 sessions, new log drawer variants, runner rewrite, DB migration). I'll implement it in that order and report back with a build + Playwright pass before you review.
