@@ -344,8 +344,9 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
             {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
             {paused ? "Resume" : "Pause"}
           </button>
-          <span className="tabular text-foreground-muted text-xs ml-auto">
-            {doneCount}/{total} blocks
+          <span className="tabular text-foreground-muted text-xs ml-auto flex flex-col items-end leading-tight">
+            <span className="text-bone">Block {idx + 1}/{total}</span>
+            <span>Completed {doneCount}/{total}</span>
           </span>
           {idx < total - 1 ? (
             <button
@@ -399,6 +400,50 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
               className="bg-signal text-bone hover:bg-signal/90 rounded-none text-[11px] uppercase tracking-widest"
             >
               Complete without result
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Review-or-restart prompt when opening a previously completed session */}
+      <AlertDialog open={restartPrompt} onOpenChange={setRestartPrompt}>
+        <AlertDialogContent className="bg-background border border-border text-bone rounded-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="font-display text-bone">
+              You've already completed this session
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-foreground-muted text-sm">
+              Review your previous result, or start a fresh attempt from Block 1?
+              Your previous log stays in your history either way.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-2">
+            <AlertDialogCancel
+              onClick={() => {
+                setRestartPrompt(false);
+                if (s) {
+                  void navigate({
+                    to: "/workout/$sessionId/done",
+                    params: { sessionId: s.id },
+                  });
+                }
+              }}
+              className="bg-transparent border border-border text-bone hover:bg-surface-raised rounded-none text-[11px] uppercase tracking-widest"
+            >
+              Review previous
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                // Clean slate for a fresh attempt.
+                startedAt.current = new Date().toISOString();
+                setIdx(0);
+                setDone({});
+                setElapsed(0);
+                setRestartPrompt(false);
+              }}
+              className="bg-signal text-bone hover:bg-signal/90 rounded-none text-[11px] uppercase tracking-widest"
+            >
+              Restart session
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
