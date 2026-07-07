@@ -237,13 +237,33 @@ function resolveHrp(id: string): ResolvedSession | undefined {
               .map(([k, v]) => `${k.replace(/_/g, " ")}: ${typeof v === "string" ? v : JSON.stringify(v)}`)
               .join(" · ")
           : null;
+        // When the parser split a multi-exercise paragraph into discrete items,
+        // render each item as its own bullet in the runner instead of one
+        // wall of text. Falls back to the original instruction otherwise.
+        const lines = b.items && b.items.length > 0
+          ? b.items.slice()
+          : buildLines(b.instruction, { categorySpecific: cs });
+        // Map manifest kind → BlockKind for the runner + log form router.
+        const kindMap: Record<string, BlockKind> = {
+          strength: "mainLift",
+          sled: "assistance",
+          station: "conditioning",
+          run_interval: "conditioning",
+          aerobic: "conditioning",
+          hybrid_brick: "conditioning",
+          emom: "conditioning",
+          amrap_density: "conditioning",
+          mobility_recovery: b.name.toLowerCase().includes("cool") ? "cooldown" : "warmup",
+          log: "log",
+        };
+        const inferred = b.kind ? kindMap[b.kind] : inferBlockKind(b.name, b.instruction);
         return {
           id: hrpBlockId(w.week, s.session, i),
           order: i + 1,
-          kind: inferBlockKind(b.name, b.instruction),
+          kind: inferred,
           title: b.name,
           timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
-          lines: buildLines(b.instruction, { categorySpecific: cs }),
+          lines,
           note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
         };
       });
