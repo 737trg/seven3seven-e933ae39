@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator, LayoutGrid } from "lucide-react";
+import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator, LayoutGrid, X } from "lucide-react";
 import { Wordmark } from "@/components/shell/Wordmark";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
@@ -73,7 +73,15 @@ export function HrpShell({ children, eyebrow, title }: { children: ReactNode; ey
         </div>
       </aside>
 
-      <main className="flex-1 min-w-0 pb-32 lg:pb-0">
+      <main className="flex-1 min-w-0 pb-32 lg:pb-0 relative">
+        <Link
+          to="/my-programmes"
+          data-exit-dashboard
+          className="absolute top-4 right-4 lg:top-6 lg:right-6 z-30 inline-flex items-center gap-2 h-9 px-3 border border-border bg-background/80 backdrop-blur text-foreground-muted hover:text-bone hover:border-bone transition-colors text-[10px] uppercase tracking-widest font-display"
+          aria-label="Exit to dashboard"
+        >
+          <X className="h-3.5 w-3.5" /> Exit
+        </Link>
         {(eyebrow || title) && (
           <header className="border-b border-border px-5 lg:px-10 py-8 lg:py-10">
             {eyebrow && <p className="eyebrow text-signal">{eyebrow}</p>}

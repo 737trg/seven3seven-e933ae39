@@ -12,7 +12,7 @@ import { AthxAccessGate } from "@/lib/athxAccess";
 export const Route = createFileRoute("/my-programmes/athx-2026")({
   head: () => ({
     meta: [
-      { title: "ATHX 2026 — 737 TRG" },
+      { title: "ATHX 2026 — SEVEN3SEVEN" },
       { name: "description", content: "ATHX 2026 — Nico's personalised programme cover." },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -101,7 +101,7 @@ function AthxCover() {
           </div>
 
           <div className="mt-20 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-widest text-foreground-muted border-t border-border pt-6">
-            <span>737 TRG · Performance label</span>
+            <span>Seven3Seven · Performance label</span>
             <span>Built for Nico · Men's Pairs · ATHX Pro</span>
             <span>v1.0 · Prepared 30.06.2026</span>
           </div>

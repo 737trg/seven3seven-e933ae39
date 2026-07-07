@@ -16,7 +16,7 @@ import { ArrowRight, ChevronRight, Flame, Clock } from "lucide-react";
 export const Route = createFileRoute("/_app/today")({
   head: () => ({
     meta: [
-      { title: "Today — 737 TRG" },
+      { title: "Today — SEVEN3SEVEN" },
       { name: "description", content: "Today's session, readiness check and weekly progress." },
     ],
   }),

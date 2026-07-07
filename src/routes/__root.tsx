@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "SEVEN3SEVEN",
-          alternateName: "737 TRG",
+          alternateName: "Seven3Seven",
           url: "https://737trg.com",
           logo: "https://737trg.com/favicon.ico",
         }),
