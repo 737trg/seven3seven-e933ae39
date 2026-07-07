@@ -71,8 +71,11 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   const [logOpen, setLogOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [restartPrompt, setRestartPrompt] = useState(false);
   const startedAt = useRef<string>(new Date().toISOString());
-  const restored = useRef(false);
+  // Tracks which sessionId the current React state belongs to, so switching
+  // sessions never lets a previous session's state leak into a new one.
+  const restoredFor = useRef<string | null>(null);
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Subscribe to store so newly-saved results re-render the summary line.
@@ -93,20 +96,45 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
     return () => { if (tick.current) clearInterval(tick.current); };
   }, [paused]);
 
+  // Reset + restore whenever the session id changes. Without gating on the
+  // exact sessionId, React state from a previous session (idx, done, elapsed)
+  // leaked into a freshly-opened session and got persisted back under the
+  // new session's key — causing new sessions to open at the last block, and
+  // completed-block counts to bleed across sessions.
   useEffect(() => {
     if (!s) return;
-    const savedWorkout = store.getWorkoutState(s.id);
-    if (savedWorkout) {
-      startedAt.current = savedWorkout.startedAt;
-      setIdx(Math.min(savedWorkout.currentBlockIndex, s.blocks.length - 1));
-      setDone(savedWorkout.done);
-      setElapsed(savedWorkout.elapsedSec);
+    // Always reset first so a fresh session starts clean.
+    restoredFor.current = null;
+    startedAt.current = new Date().toISOString();
+    setIdx(0);
+    setDone({});
+    setElapsed(0);
+    setPaused(false);
+    setLogOpen(false);
+    setConfirmOpen(false);
+    setRestartPrompt(false);
+
+    const saved = store.getWorkoutState(s.id);
+    const previousLog = store.getLog(s.id);
+    if (saved && saved.sessionId === s.id) {
+      // Resume in-progress attempt for THIS session only.
+      startedAt.current = saved.startedAt;
+      setIdx(Math.min(Math.max(0, saved.currentBlockIndex), s.blocks.length - 1));
+      setDone(saved.done ?? {});
+      setElapsed(saved.elapsedSec ?? 0);
+    } else if (previousLog?.completed) {
+      // Session was completed previously — ask review vs restart before persisting.
+      setRestartPrompt(true);
     }
-    restored.current = true;
-  }, [s]);
+    // Mark state as belonging to this session so the persist effect can run.
+    restoredFor.current = s.id;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s?.id]);
 
   useEffect(() => {
-    if (!s || !restored.current) return;
+    if (!s) return;
+    if (restoredFor.current !== s.id) return; // don't persist stale state under a new id
+    if (restartPrompt) return; // waiting for user choice
     store.saveWorkoutState({
       sessionId: s.id,
       startedAt: startedAt.current,
@@ -115,7 +143,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
       elapsedSec: elapsed,
       done,
     });
-  }, [s, idx, elapsed, done]);
+  }, [s, idx, elapsed, done, restartPrompt]);
 
   if (!s) {
     return <div className="min-h-screen flex items-center justify-center text-foreground-muted">Session not found.</div>;
@@ -317,8 +345,9 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
             {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
             {paused ? "Resume" : "Pause"}
           </button>
-          <span className="tabular text-foreground-muted text-xs ml-auto">
-            {doneCount}/{total} blocks
+          <span className="tabular text-foreground-muted text-xs ml-auto flex flex-col items-end leading-tight">
+            <span className="text-bone">Block {idx + 1}/{total}</span>
+            <span>Completed {doneCount}/{total}</span>
           </span>
           {idx < total - 1 ? (
             <button
@@ -372,6 +401,50 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
               className="bg-signal text-bone hover:bg-signal/90 rounded-none text-[11px] uppercase tracking-widest"
             >
               Complete without result
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Review-or-restart prompt when opening a previously completed session */}
+      <AlertDialog open={restartPrompt} onOpenChange={setRestartPrompt}>
+        <AlertDialogContent className="bg-background border border-border text-bone rounded-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="font-display text-bone">
+              You've already completed this session
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-foreground-muted text-sm">
+              Review your previous result, or start a fresh attempt from Block 1?
+              Your previous log stays in your history either way.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-2">
+            <AlertDialogCancel
+              onClick={() => {
+                setRestartPrompt(false);
+                if (s) {
+                  void navigate({
+                    to: "/workout/$sessionId/done",
+                    params: { sessionId: s.id },
+                  });
+                }
+              }}
+              className="bg-transparent border border-border text-bone hover:bg-surface-raised rounded-none text-[11px] uppercase tracking-widest"
+            >
+              Review previous
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                // Clean slate for a fresh attempt.
+                startedAt.current = new Date().toISOString();
+                setIdx(0);
+                setDone({});
+                setElapsed(0);
+                setRestartPrompt(false);
+              }}
+              className="bg-signal text-bone hover:bg-signal/90 rounded-none text-[11px] uppercase tracking-widest"
+            >
+              Restart session
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
