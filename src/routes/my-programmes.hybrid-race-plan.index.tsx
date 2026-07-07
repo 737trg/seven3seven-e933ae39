@@ -1,12 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Download } from "lucide-react";
 import { Wordmark } from "@/components/shell/Wordmark";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { hrpStore, useHrpStarted } from "@/lib/hrp/store";
-import { getProgrammeDownloadUrl } from "@/lib/pdf.functions";
+import hrpPdf from "@/assets/hrp-download.pdf.asset.json";
 
 export const Route = createFileRoute("/my-programmes/hybrid-race-plan/")({
   head: () => ({
@@ -24,10 +22,6 @@ function SemCover() {
   const { items, loading: entLoading } = useEntitlements(user?.id);
   const started = useHrpStarted();
   const navigate = useNavigate();
-  const getUrl = useServerFn(getProgrammeDownloadUrl);
-  const [downloading, setDownloading] = useState(false);
-  const [downloadError, setDownloadError] = useState<string | null>(null);
-
   const entitled = !authLoading && !entLoading && items.some((i) => i.slug === "hybrid-race-plan");
 
   return (
@@ -86,21 +80,17 @@ function SemCover() {
               >
                 {started.started ? "Continue programme" : "Start programme"} <ArrowRight className="h-3.5 w-3.5" />
               </button>
-              <button
-                disabled={!entitled || downloading}
-                onClick={async () => {
-                  setDownloadError(null); setDownloading(true);
-                  try {
-                    const r = await getUrl({ data: { slug: "hybrid-race-plan" } });
-                    window.open(r.url, "_blank", "noopener,noreferrer");
-                  } catch (e: any) { setDownloadError(e?.message ?? "Could not generate download."); }
-                  finally { setDownloading(false); }
-                }}
-                className="h-12 px-6 inline-flex items-center justify-center gap-3 border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display disabled:opacity-40"
+              <a
+                href={entitled ? hrpPdf.url : undefined}
+                download={entitled ? "SEVEN3SEVEN_Hybrid_Race_Plan.pdf" : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!entitled}
+                onClick={(e) => { if (!entitled) e.preventDefault(); }}
+                className={`h-12 px-6 inline-flex items-center justify-center gap-3 border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display ${entitled ? "" : "opacity-40 pointer-events-none"}`}
               >
-                <Download className="h-3.5 w-3.5" /> {downloading ? "Preparing…" : "Download PDF"}
-              </button>
-              {downloadError && <p className="text-signal text-xs">{downloadError}</p>}
+                <Download className="h-3.5 w-3.5" /> Download PDF
+              </a>
               {!entitled && !entLoading && (
                 <p className="text-foreground-muted text-[10px] uppercase tracking-widest">Sign in with your owner account to unlock.</p>
               )}
