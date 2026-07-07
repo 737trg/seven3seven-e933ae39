@@ -14,10 +14,9 @@ const SITE = "https://737trg.com";
 
 const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   "hybrid-race-plan": {
-    title:
-      "Hybrid Race Plan | HYROX & Hybrid Games Training Plan | SEVEN3SEVEN",
+    title: "Hybrid Race Plan | HYROX-Style Training | SEVEN3SEVEN",
     description:
-      "A 12-week hybrid race programme for HYROX-style and Hybrid Games-style events. Running, machine conditioning, station work and pacing — built by SEVEN3SEVEN.",
+      "A 12-week hybrid race programme for HYROX-style and Hybrid Games-style events: running, machine conditioning, station work and pacing.",
   },
 };
 
