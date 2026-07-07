@@ -128,7 +128,8 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
     }
     // Mark state as belonging to this session so the persist effect can run.
     restoredFor.current = s.id;
-  }, [s?.id, s]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s?.id]);
 
   useEffect(() => {
     if (!s) return;
