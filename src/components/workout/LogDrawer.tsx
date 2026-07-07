@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { store } from "@/lib/store";
-import { PROGRAMME } from "@/data/programme";
 import { formatClock } from "@/lib/programmeUtils";
 import { inferLogKind, kindLabel, summariseResult } from "./logKind";
 import type {
@@ -757,7 +756,7 @@ export function LogDrawer({
     const result: BlockResult = {
       ...state,
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-      programmeId: PROGRAMME.id,
+      programmeId: store.currentProgrammeId(),
       weekNumber: session.weekNumber,
       sessionId: session.id,
       blockId: block.id,
@@ -768,6 +767,9 @@ export function LogDrawer({
       prescribed: block.lines[0],
     };
     store.appendResult(result);
+    // Mirror to Supabase for non-ATHX programmes so their existing
+    // progress pages (which read workout_results) reflect this log.
+    void mirrorResultToSupabase(result);
     onSaved?.(result);
     onOpenChange(false);
   };
