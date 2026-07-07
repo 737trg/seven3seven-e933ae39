@@ -44,7 +44,7 @@ async function mirrorResultToSupabase(result: BlockResult) {
       block_id: result.blockId,
       exercise_id: result.exercise,
       kind: result.kind,
-      payload: result as unknown as Record<string, unknown>,
+      payload: JSON.parse(JSON.stringify(result)),
     });
   } catch {
     // Non-fatal — local result is still saved.
