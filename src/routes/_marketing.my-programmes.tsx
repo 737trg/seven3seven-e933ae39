@@ -72,7 +72,13 @@ function MyProgrammesPage() {
   return (
     <>
       <section className="relative">
-        <img src={heroAsset.url} alt="" aria-hidden className="block w-full h-auto bg-background select-none" draggable={false} />
+        <img
+          src={heroAsset.url}
+          alt=""
+          aria-hidden
+          className="block w-full h-[28vh] md:h-[36vh] lg:h-[44vh] max-h-[520px] object-cover object-center bg-background select-none"
+          draggable={false}
+        />
         <div className="bg-background">
           <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
             <p className="eyebrow text-foreground-muted mb-6 md:mb-8">
