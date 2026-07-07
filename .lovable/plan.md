@@ -1,140 +1,114 @@
 
-# 737 TRG — ATHX 2026 Hybrid Performance App
+## Goal
 
-## 1. Product summary
+Rebuild the Hybrid Race Plan (HRP) as the complete 12-week programme from the uploaded PDF, on top of a reusable Seven3Seven programme engine. Preserve the current dark, editorial dashboard look. Fix "My programmes" logic. Existing HRP purchasers get the new plan silently.
 
-A premium, mobile-first training web app for the 7-week ATHX 2026 hybrid programme + race week, built for Nico (Men's Pairs, ATHX Pro working assumption, race 23/08/2026). The app turns the supplied PDF into a usable, in-gym tool: dark editorial UI, one obvious "today's work" view, focused live workout mode with the right timer for each block (EMOM / AMRAP / RFT / strength rest), and clean logging of strength loads, conditioning scores and reflections. Version one is front-end only with `localStorage` persistence — no auth, no cloud, no payments — structured so cloud can be added later without redesigning the UI.
+## Scope boundaries
 
-## 2. What I extracted from the PDF (source-of-truth confirmation)
+- No visual redesign of the dashboard, sidebar, or workout player. Only logic and data fixes.
+- No changes to Basic Training Blueprint+, SEM 2026, or ATHX content or routes. They continue to work as-is on the same engine.
+- No DB schema changes. No RLS or entitlement changes. Existing `entitlements` for the `hybrid-race-plan` product already grant access — we replace the underlying manifest, not the product.
+- Customer-facing copy contains no migration, legacy, V2, schema, or internal wording.
 
-- Athlete profile: Nico, Men's Pairs ATHX Pro (working assumption — uses 22.5 kg DBs, 70 kg sandbag, 30" box, 1 km run/row swap). 5K 20:51, 10K 46:00, SP 80, BS 165, DL 200, C&J 117, Sn 80, DB 22.5.
-- Competition demands table: Strength 20 min (1RM SP + 3RM BS + 5RM DL, pair total), Endurance 22 min (run/row 1 km swaps), MetCon-X 25 min cap (Ski → DB GTOH → sandbag → box jumps → lunges → burpee broad jumps → Ski).
-- Weekly rhythm: Mon press, Tue endurance, Wed mixed conditioning, Thu squat, Fri Oly + Z2, Sat deadlift + ATHX work, Sun rest.
-- Four session rules, effort guide, "when to change a session" matrix, and load-guide (50–95% of 1RM rounded to 2.5 kg).
-- All 7 build weeks (Week 1 Foundation → Week 7 Sharpen) plus Race Week, with daily sessions, purposes, set/rep/load/distance prescriptions, coach notes and per-block timing windows. Each week has a phase label, training-load label, key checkpoint and coach notes per session.
-- Race-day plan: warm-up priorities, strength attempt planner (SP 1RM / BS 3RM / DL 5RM, Attempts 1–3 with decision rule), endurance strategy, MetCon partner split planner (Ski cal, GTOH reps, sandbag order, box jump-overs, lunges, burpee broad jumps, final Ski cal), equipment/food/hydration notes, race schedule, final reminders.
-- Glossary (AMRAP, EMOM, RPE, Zone 2, threshold, deload, taper, primer, top set, back-off, GTOH, box jump over, burpee broad jump, DB/SB, Erg, etc.).
-- Movement-standard cheat sheet + rules (no straps/wraps/supportive suits).
-- Worksheets: weekly completion tracker, partner split planner, sources/safety notes.
+## 1. Programme engine (shared foundation)
 
-I'll re-read each week's full session tables when writing the data file so prescriptions are 1:1 with the PDF.
+Introduce a typed programme model in `src/types/programmeEngine.ts` covering: Programme, Phase, Week, Session, Block, LearnArticle, ProgressMetric, Tool, Glossary, LogSchema. Fields match the brief (durationWeeks, weeklyStructure, pdfDownload, phases, weeks, learnContent, progressMetrics, tools, accessRules, etc.).
 
-## 3. Sitemap
+Add `src/lib/programmeEngine/` with:
+- `registry.ts` — maps slug → programme manifest loader (hybrid-race-plan, basic-training-blueprint-plus, sem-2026, athx-2026).
+- `resolveSession.ts` — replaces the current ad-hoc `anySession.ts` mapping. Given `(programmeSlug, sessionId)`, returns a normalised `Session` with typed `Block[]`, timers, and per-block `logSchema`.
+- `logSchemas.ts` — declarative log field sets per block type (strength, running, sled, station, hybrid-brick, recovery, race-review), matching the brief's field lists exactly.
+- `progressMetrics.ts` — pluggable per-programme metric calculators (HRP: run repeatability, strength reserve, sled ability, station repeatability, no-reps, brick drop-off, race readiness).
+
+The existing BTB / SEM / ATHX manifests keep working by adapter — they register through the same registry but retain their current data files. Only HRP swaps to the new manifest.
+
+## 2. Hybrid Race Plan content (source of truth = uploaded PDF)
+
+Replace `src/data/hrp.manifest.json` with a fully rebuilt manifest generated from every page of the PDF:
+
+- 12 weeks total. Weeks 1–11 use the 5 core + 1 optional structure. Week 12 is taper + race + optional post-race reset/reflection.
+- Each week captures: phase, training load, key aim, checkpoint.
+- Each session captures every field the PDF lists: day, name, type, optional flag, estimated duration, purpose, intensity, warm-up, main set, secondary work, programme/event focus, cool-down, record, progression standard, coach note.
+- Every block gets a typed prescription plus `timerType` and `timerDurationSeconds` derived from the PDF (e.g. 24-min EMOM → EMOM timer at 1440 s, not the current 10-min fallback).
+- Learn content on the manifest: Built for Hybrid Racing, How to Use the Plan, Intensity and Load Levels, Race Volume Levels, Pace Drop-Off and Race Pace, Choosing Load and Race Volume, Breaking Stations Without Panic, Race Day Tools, Safety and Sources. Each article links to relevant sessions.
+- Glossary entries for Station Load Levels (L1–L5) and Race Volume Levels (RVL 1–5).
+- Race Day tools block populated from the PDF's Race Day Tools section.
+
+The manifest will be authored directly from the parsed PDF content (all 12 weeks, no summarisation, no placeholders). Given the size (~150+ blocks), this ships as one structured JSON manifest plus TS validators that will fail the build if any required field is missing for any session.
+
+The PDF itself is uploaded as a Lovable asset and referenced from the manifest as `pdfDownload` so the "Download PDF" action serves the uploaded file.
+
+## 3. Dashboard logic fixes (no visual redesign)
+
+Update `_marketing.my-programmes.tsx` and the "My programmes" hero/stat row:
+
+- "Current week" derives from the primary active programme's start date and duration. Never blank when at least one programme is active.
+- When multiple programmes are active, show "Next session" across all programmes (soonest scheduled or most-recently-touched), plus a "Primary programme" pill on the card the user last opened.
+- Active-programme cards read real progress from `session_completions` + local progress store (already programme-scoped after the last change), showing: progress %, current week, next session title, and actions: Continue Training, View Programme, Download PDF (only when `pdfDownload` is set).
+- Recent activity uses customer-facing session names from the manifest, not raw slugs or ids.
+- Mobile layout: same structure, single column, no card redesign.
+
+## 4. Silent migration for existing HRP customers
+
+- No SQL migration, no entitlement changes. The `hybrid-race-plan` product entitlement continues to grant access; we only replace the manifest that slug resolves to.
+- Local per-user HRP progress is namespaced by `programmeId = "hybrid-race-plan"`. Because session ids change with the new manifest, add a one-time client-side reconciliation on first load of the HRP dashboard: any legacy per-session progress under the old ids is archived (kept in local storage under a `legacy_*` key so nothing is destroyed) and the UI shows the new plan starting cleanly from Week 1. No banner, no wording — it just feels like an upgraded plan.
+- Server-side `session_completions` rows remain untouched; they just no longer match new session ids and are ignored for progress %. This is invisible to the user.
+
+## 5. Today, Programme, Session detail, Guided player
+
+All existing routes stay; only the data they consume changes:
+
+- **Today**: what / why / how hard / what to record / related Learn article, using engine fields. Sticky "Start session" and "Last completed session".
+- **Programme**: overview, phase/week selector, current week, six session cards per week for HRP, completion state, PDF download, Learn links, programme-specific tools.
+- **Session detail**: shows Purpose, Intensity, Warm-up, Main set, Secondary work, Programme/Event focus, Cool-down, Record, Progression standard, Coach note, then a single "Start Guided Session" button (existing style).
+- **Guided player** (`workout.$sessionId`): keeps current dark player. Fixes: sticky header with exit / programme + session / elapsed timer; progress bar; "Block x of y"; correct timer per block (driven by `timerDurationSeconds`); pause/resume; previous/next; mark block complete; autosave + resume unfinished sessions (already partially implemented — extended to all programmes via the engine).
+
+## 6. Logging (smart per block type)
+
+`LogDrawer` becomes schema-driven: it renders fields declared by the block's `logSchema` (strength / running / sled / station / hybrid-brick / recovery / race-review) with the exact fields listed in the brief. Existing `workout_results` writes stay compatible — new fields are stored in the existing `payload` jsonb (no schema change).
+
+No-rep wording standardised to: "Target: zero no-reps. If no-reps appear, record them and reduce volume or load next exposure."
+
+## 7. Progress
+
+`_app.progress.tsx` (and per-programme progress pages) read progress metrics from the engine. For HRP: sessions completed, results logged, consistency, current week, completion %, run repeatability, strength reserve, sled ability, station repeatability, no-reps, brick drop-off, race readiness. Other programmes keep their existing metrics until they are migrated to engine metrics later.
+
+## 8. Learn
+
+`_app.learn.tsx` and the per-programme Learn routes read Learn articles from the active programme's manifest. HRP ships with the 9 articles listed above. Session detail links to the related Learn article by id.
+
+## 9. Acceptance checks (self-verified before finishing)
+
+- Build passes with the new manifest validators (fails loudly if any HRP session/block is missing a required field).
+- Programme page for HRP lists 12 weeks, each normal week shows 6 sessions (5 core + 1 optional), Week 12 includes post-race reset/reflection.
+- Every session opens; guided player runs with correct timers (spot-check the 24-min EMOM and any AMRAP/RFT blocks against the PDF).
+- Dashboard shows current week + next session for an HRP user; PDF download works.
+- BTB, SEM, ATHX pages still load and start sessions.
+- No customer-facing string mentions migration, legacy, V2, schema, Lovable, ChatGPT, or test data.
+
+## Technical notes
+
+- No DB migrations, no RLS changes, no entitlement changes.
+- PDF asset added via `lovable-assets` from `/mnt/user-uploads/`, referenced from the HRP manifest.
+- Old `src/lib/anySession.ts` is replaced by `resolveSession` but kept as a thin shim during the change so existing imports keep compiling; removed once all call sites move over.
+- Manifest is a single JSON file (`src/data/hrp.manifest.json`) with a TS wrapper that runs Zod-style validation at import time.
+- Existing `useHrpProgress`, `useHrpProfile`, `hrpStore` continue to be the HRP state layer; only session id shape and manifest reader change.
 
 ```text
-/                       Landing (public)
-/today                  Today dashboard (default after entering app)
-/programme              Programme — Timeline + Week toggle
-/programme/w/$week      Week detail
-/programme/s/$sessionId Session detail
-/workout/$sessionId     Live workout mode (focused, no nav)
-/workout/$sessionId/done Completion screen
-/progress               Progress dashboard
-/learn                  Glossary + movement standards + comp rules (tabs)
-/race                   Race-day control centre
-/calculator             Load + RPE calculator
-/profile                Profile + settings
+                         ┌───────────────────────────┐
+                         │  programme registry        │
+                         │  slug → manifest loader    │
+                         └────┬───────────┬──────────┘
+                              │           │
+                    ┌─────────▼──┐   ┌────▼──────────┐
+                    │ HRP (new)   │   │ BTB / SEM /   │
+                    │ full 12wk   │   │ ATHX (kept)   │
+                    └─────┬───────┘   └────┬──────────┘
+                          │                │
+                     resolveSession, logSchemas, progressMetrics
+                          │
+              ┌───────────┼────────────┬──────────────┐
+              ▼           ▼            ▼              ▼
+          Dashboard   Programme     Session       Guided player
+          (logic fix) (weeks/6)     detail         + LogDrawer
 ```
-
-Mobile: bottom nav (Today, Programme, Progress, Learn, Profile). Desktop: minimal left sidebar with persistent `737 TRG` wordmark; Race / Calculator surfaced in Profile + as inline links from Today and Programme.
-
-## 4. Reusable component inventory
-
-- Shell: `AppShell`, `Sidebar`, `BottomNav`, `Wordmark`, `Header`, `Container`, `SectionDivider`.
-- Typography & primitives: `Eyebrow`, `DisplayNumber` (tabular), `MetaRow`, `KeyValue`, `Tag`, `CategoryLabel`, `RedAccent`.
-- Programme: `WeekStrip`, `WeekCard`, `PhaseBadge`, `LoadBadge`, `DayCard`, `SessionMetaBar`, `CompletionRing`, `ProgressBar`.
-- Session: `BlockHeader`, `BlockCard` (variants: warmup / mainLift / assistance / conditioning / cooldown / log), `ExerciseRow`, `PrescribedSet`, `CompletedSetRow`, `CoachNote`, `Accordion` (How hard / What to record / Terms / Standards / Adjustments), `StickyStartBar`.
-- Workout mode: `WorkoutHUD`, `TimerDisplay`, `EmomTimer`, `AmrapTimer`, `RftStopwatch`, `RestTimer`, `IntervalTimer`, `StrengthSetLogger`, `RpeSelector`, `RoundCounter`, `BlockStepper`, `PauseSheet`, `EndSessionConfirm`.
-- Inputs: `NumberStepper` (kg / reps / cal / m), `SegmentedControl` (Ready/Average/Heavy, units), `WeightInput`, `TimeInput`, `Toggle`.
-- Progress: `TrendLine`, `PRStat`, `WeeklyConsistencyGrid`, `BenchmarkCard`.
-- Race: `AttemptPlanner`, `SplitPlannerRow`, `Checklist`, `ScheduleList`.
-- Learn: `GlossaryItem`, `MovementStandardCard`, `SearchField`, `Tabs`.
-- Utility: `Empty`, `ErrorState`, `Skeleton`, `Toast`, `Modal`, `BottomSheet`.
-
-## 5. Programme data model
-
-Typed TS in `src/data/` (programme content) + `src/types/` (shapes). Content lives in data files, never inline in components.
-
-```text
-Athlete { id, name, units, pbs:{press,squat,deadlift,cleanJerk,snatch,run5k,run10k}, workingDb }
-Programme { id, name, category, raceDate, weeks: Week[], raceWeek: Week }
-Week { number, label, phase, load, dateRange, objective, checkpoint, sessions: Session[] }
-Session { id, weekNumber, day, title, category, duration, purpose, expectedEffort,
-          blocks: SessionBlock[], coachNote?, adjustments? }
-SessionBlock { id, order, kind: 'warmup'|'mainLift'|'assistance'|'conditioning'|'cooldown'|'log',
-               title, timeWindow?, timer?: TimerSpec, items: Exercise[], note? }
-TimerSpec = { type:'countdown'|'stopwatch'|'emom'|'amrap'|'intervals'|'rft'|'rest',
-              durationSec?, minutes?, work?, rest?, rounds?, capSec? }
-Exercise { id, name, prescribed: PrescribedSet[], standardRef?, glossaryRefs? }
-PrescribedSet { sets?, reps?, loadKg?, loadPctOf1RM?, distanceM?, calories?, rpe?, restSec?, notes? }
-CompletedSet { setIndex, reps, loadKg, rpe?, completed:boolean, note? }
-ConditioningResult { rounds?, extraReps?, timeSec?, capped?, score? }
-EnduranceResult { intervals: { distanceM?, timeSec?, splitPer500?, splitPerKm? }[] }
-ReadinessEntry { date, level:'ready'|'average'|'heavy' }
-SessionLog { sessionId, startedAt, endedAt, durationSec, readiness?, blocks: BlockLog[],
-             sessionRpe?, reflection? }
-BlockLog { blockId, completed:boolean, sets?: CompletedSet[], conditioning?: ConditioningResult,
-           endurance?: EnduranceResult }
-PersonalBest { lift, valueKg, date }
-GlossaryTerm { term, short, example, appearsIn: sessionId[] }
-MovementStandard { movement, validRep, commonMistake, cue, eventLoad? }
-RaceStrategy { attempts:{ press:[1,2,3], squat3rm:[1,2,3], deadlift5rm:[1,2,3] } }
-PartnerSplit { ski1Cal, gtohReps, sandbagOrder, boxJumpOverReps, lungeM, burpeeBroadM, ski2Cal, notes }
-```
-
-Persistence layer: `src/lib/store.ts` — a thin repo with `getAthlete`, `getProgramme`, `getLogs`, `saveLog`, `updateAthlete`, `getReadiness`, `setReadiness`, `getRaceStrategy`, `getPartnerSplit`. Backed by `localStorage` v1 with a `STORAGE_VERSION` key and JSON serializer; designed to be swapped for a Supabase repo later without touching UI.
-
-## 6. Design system
-
-- Tokens in `src/styles.css` via `@theme`, semantic-only — no hex in components.
-- Palette: obsidian `#090909`, graphite `#151515`, raised `#1D1D1D`, bone `#F4F2ED`, muted `#9A9A9A`, divider `#2B2B2B`, signal red `#D82932`. Dark-first; light mode out of scope.
-- Type: Space Grotesk (display, 500/700) + Inter (body, 400/500/600); tabular-nums utility for all numeric readouts. Oversized display numerals for weights/times/weeks.
-- Spacing: 4px base, generous vertical rhythm. Containers max 1240px desktop, full-bleed mobile.
-- Radii: 0, 4, 8 (cap at 10). Buttons: crisp rectangular; primary = bone bg / obsidian text; accent = signal-red filled; ghost = bone-outline.
-- Dividers: 1px `#2B2B2B`, used instead of card chrome where possible.
-- Iconography: lucide line icons at low weight; sparing use.
-- Motion: 120–200ms ease-out; no flourish. No glass, no gradients, no neon.
-- Imagery: editorial training photography, high-contrast, with subtle dark overlay + optional grain. Hero/full-bleed only at landing, week headers and race page.
-
-## 7. Interactive workout functionality
-
-- Live mode is a separate route with the app chrome hidden; only HUD, timer, current block, prev/next, pause, end.
-- Timer engine: single `useWorkoutClock` hook using `performance.now()` + `setInterval`, drives EMOM minute boundaries, AMRAP countdown, RFT stopwatch, interval work/rest, and rest timers. Audio cue (short beep) + `navigator.vibrate` where supported; toggleable in profile.
-- Strength logger: per-set prescribed row → tap to log actual load/reps + RPE; auto-start rest timer on log; never auto-mark prescribed as completed.
-- EMOM: minute index, current movement, "complete" tick reveals rest remaining in the minute.
-- AMRAP: round counter + extra-reps stepper, auto-saved.
-- RFT: stopwatch + per-round checkboxes + cap awareness.
-- State: `useWorkoutSession` keeps a snapshot in `localStorage` keyed by sessionId, restored on reload; "Resume session?" prompt on Today if an open session exists.
-- Readiness check at session start surfaces the PDF's "when to change a session" guidance contextually; does not mutate the programme.
-
-## 8. Mobile + desktop behaviour
-
-- Mobile-first. Bottom nav (5 tabs, 56px), sticky `Start session` on session detail, single-column blocks, large touch targets (≥44px), swipe between blocks in live mode.
-- Tablet: 2-column for programme week.
-- Desktop: left sidebar nav (240px), wider timeline strip, 2-column dashboard (Today + Next/Recent), session detail = blocks list + sticky purpose/effort panel, progress charts side-by-side. Live mode stays focused-centre, max 720px width.
-- Accessibility: semantic landmarks, focus-visible rings in signal-red, keyboard nav for steppers/timers, `aria-live` for timer transitions, prefers-reduced-motion respected.
-
-## 9. Build phases
-
-- Phase 1 — Foundations: design tokens, fonts, AppShell + sidebar/bottom-nav, routing (TanStack Start file routes), type definitions, programme data file scaffold (Weeks 1–7 + Race Week extracted from PDF), landing page, Today dashboard with mock+real data.
-- Phase 2 — Programme + Learn: Programme timeline & week view, session detail with all block variants and accordions, Glossary + Movement standards + comp rules.
-- Phase 3 — Live workout: timer engine, all timer variants, strength logger, conditioning logger, resume-on-reload, completion screen, localStorage repo.
-- Phase 4 — Progress + tools: progress dashboard (charts), load calculator + RPE guide, race-day control centre (attempts + splits + checklist), profile/settings.
-- Phase 5 — Polish: responsive pass, a11y review, empty/error/skeleton states, motion polish, copy pass, QA on iPhone + desktop viewports.
-
-## 10. PDF content I could not confidently extract yet
-
-The PDF table-of-contents, summary tables, week 1 overviews, all coach notes, race-day plan, glossary and movement standards parsed cleanly. The following sections were truncated in my first pass and I will fully re-extract before writing the data file in Phase 1 — content will come verbatim from the PDF, not inferred:
-
-- Week 1 Wednesday/Friday/Saturday session tables (sets/reps/loads/distances).
-- Weeks 2–7 full per-day block tables (each day's exact prescription and timing windows).
-- Race-week Mon/Tue/Wed/Fri/Sat sessions.
-- Sections 04 (full personal-load percentage table) and 09 (worksheet fields).
-- Movement-standard cheat sheet full row content + competition rules list beyond the equipment ban.
-- Section 10 source links.
-
-If any cell in the PDF is ambiguous (e.g. "___" worksheet blanks, partner-split fields), I will render it as an editable user field rather than invent a value. No sessions will be invented or rewritten.
-
----
-
-Ready to start Phase 1 on approval. Confirm: (a) plan looks right, (b) ATHX Pro working assumption is correct, (c) happy with the palette + Space Grotesk/Inter pairing before I lock the design system.
