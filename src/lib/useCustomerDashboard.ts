@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { EntitledProduct } from "@/lib/useEntitlements";
+import { HRP } from "@/lib/hrp/manifest";
+import { BTB } from "@/lib/btb/manifest";
+import { SEM } from "@/lib/sem/manifest";
+import { PROGRAMME as ATHX } from "@/data/programme";
 
 type EnrolmentRow = {
   id: string;
@@ -133,6 +137,23 @@ export function useCustomerDashboard(userId: string | undefined, entitlements: E
         .sort((a, b) => (b.enrolment!.updated_at < a.enrolment!.updated_at ? -1 : 1));
 
       const byProductSlug = new Map(programmes.map((p) => [p.product_id, { slug: p.slug, name: p.name }]));
+
+      const sessionTitleFor = (slug: string, sessionId: string): string | undefined => {
+        try {
+          if (slug === "hybrid-race-plan") {
+            for (const w of HRP.weeks) for (const s of w.sessions) if (`hrp-w${w.week}-s${s.session}` === sessionId) return s.title;
+          } else if (slug === "basic-training-blueprint-plus") {
+            for (const w of BTB.weeks) for (const s of w.sessions) if (`btb-w${w.week}-s${s.session}` === sessionId) return s.title;
+          } else if (slug === "sem-2026") {
+            for (const w of SEM.weeks) for (const s of w.sessions) if (`sem8-w${w.week}-s${s.session}` === sessionId || `sem-w${w.week}-s${s.session}` === sessionId) return s.title;
+          } else if (slug === "athx-2026") {
+            const s = ATHX.weeks.flatMap((w) => w.sessions).find((x) => x.id === sessionId);
+            return s?.title;
+          }
+        } catch { /* ignore */ }
+        return undefined;
+      };
+
       const recent: ActivityItem[] = [
         ...programmes
           .filter((p) => p.enrolment)
@@ -154,31 +175,46 @@ export function useCustomerDashboard(userId: string | undefined, entitlements: E
           })),
         ...completions.map((c) => {
           const product = byProductSlug.get(c.product_id);
+          const title = sessionTitleFor(product?.slug ?? "", c.session_id);
           return {
             ts: c.completed_at,
             kind: "session" as const,
-            title: "Session completed",
-            sub: `${product?.name ?? "Programme"} · ${c.session_id}`,
+            title: title ? `Completed ${title}` : "Session completed",
+            sub: `${product?.name ?? "Programme"}${c.week ? ` · Week ${c.week}` : ""}`,
             productSlug: product?.slug ?? "",
           };
         }),
         ...results.map((r) => {
           const product = byProductSlug.get(r.product_id);
+          const title = sessionTitleFor(product?.slug ?? "", r.session_id);
           return {
             ts: r.logged_at,
             kind: "result" as const,
-            title: "Result logged",
-            sub: `${product?.name ?? "Programme"} · ${r.kind ?? r.session_id}`,
+            title: title ? `Logged result · ${title}` : "Result logged",
+            sub: `${product?.name ?? "Programme"}${r.kind ? ` · ${r.kind}` : ""}`,
             productSlug: product?.slug ?? "",
           };
         }),
       ].sort((a, b) => (a.ts < b.ts ? 1 : -1)).slice(0, 5);
 
+      // Current-week fallback: use the primary (most-recently-updated) active
+      // programme's stored current_week; if missing, derive from started_at.
+      const primary = activeProgrammes[0];
+      let currentWeek: number | null = primary?.enrolment?.current_week ?? null;
+      if (!currentWeek && primary?.enrolment?.started_at) {
+        const startMs = new Date(primary.enrolment.started_at).getTime();
+        if (!Number.isNaN(startMs)) {
+          const weeks = Math.floor((Date.now() - startMs) / (7 * 24 * 60 * 60 * 1000)) + 1;
+          const cap = primary.duration_weeks ?? 12;
+          currentWeek = Math.max(1, Math.min(cap, weeks));
+        }
+      }
+
       setState({
         loading: false,
         programmes,
         activeCount: activeProgrammes.length,
-        currentWeek: activeProgrammes[0]?.enrolment?.current_week ?? null,
+        currentWeek,
         sessionsCompleted: completions.length,
         resultsLogged: results.length,
         recent,
