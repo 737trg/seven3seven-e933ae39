@@ -6,7 +6,7 @@ import { useHrpProfile } from "@/lib/hrp/store";
 import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/my-programmes/hybrid-race-plan/programme")({
+export const Route = createFileRoute("/my-programmes/hybrid-race-plan/programme/")({
   head: () => ({ meta: [{ title: "HYBRID RACE PLAN — Programme" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProgrammePage,
 });

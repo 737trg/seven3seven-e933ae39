@@ -6,7 +6,7 @@ import { useSemProfile } from "@/lib/sem/store";
 import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/my-programmes/sem-2026/programme")({
+export const Route = createFileRoute("/my-programmes/sem-2026/programme/")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Programme" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProgrammePage,
 });

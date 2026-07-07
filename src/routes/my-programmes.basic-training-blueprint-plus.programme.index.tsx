@@ -5,7 +5,7 @@ import { useBtbProgress } from "@/lib/btb/progress";
 import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const Route = createFileRoute("/my-programmes/basic-training-blueprint-plus/programme")({
+export const Route = createFileRoute("/my-programmes/basic-training-blueprint-plus/programme/")({
   head: () => ({ meta: [{ title: "Basic Training Blueprint+ — Programme" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProgrammePage,
 });
