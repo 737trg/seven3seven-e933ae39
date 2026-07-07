@@ -186,7 +186,7 @@ function resolveBtb(id: string): ResolvedSession | undefined {
         order: i + 1,
         kind: inferBlockKind(b.name, b.instruction),
         title: b.name,
-        timer: parseTimer(b.timer),
+        timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
         lines: buildLines(b.instruction, { rpe: b.rpe, rest: b.rest, scaling: b.scaling, log: b.log }),
         note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
       }));
@@ -232,7 +232,7 @@ function resolveHrp(id: string): ResolvedSession | undefined {
           order: i + 1,
           kind: inferBlockKind(b.name, b.instruction),
           title: b.name,
-          timer: parseTimer(b.timer),
+          timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
           lines: buildLines(b.instruction, { categorySpecific: cs }),
           note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
         };
@@ -279,7 +279,7 @@ function resolveSem(id: string): ResolvedSession | undefined {
           order: i + 1,
           kind: inferBlockKind(b.name, b.instruction),
           title: b.name,
-          timer: parseTimer(b.timer),
+          timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
           lines: buildLines(b.instruction, { categorySpecific: cs }),
           note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
         };
