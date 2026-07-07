@@ -6,7 +6,7 @@ import progShot from "@/assets/athx-programme.png.asset.json";
 import progressShot from "@/assets/athx-progress.png.asset.json";
 import { PUBLIC_PROGRAMMES, statusLabel } from "@/data/publicProgrammes";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
 
 export const Route = createFileRoute("/_marketing/")({
   head: () => ({
@@ -63,6 +63,8 @@ function HomePage() {
           alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
           className="block w-full h-auto bg-background select-none"
           draggable={false}
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="bg-background">
           <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-28 pb-16 md:pb-24 lg:pb-28">
