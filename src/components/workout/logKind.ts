@@ -3,18 +3,34 @@ import type { SessionBlock, LogKind } from "@/types/programme";
 export function inferLogKind(block: SessionBlock): LogKind {
   const t = block.timer?.type;
   const title = block.title.toLowerCase();
+  const lines = (block.lines ?? []).join(" ").toLowerCase();
+  const text = `${title} ${lines}`;
   if (t === "amrap") return "amrap";
   if (t === "emom") return "emom";
   if (t === "rft") return "rft";
   if (t === "intervals") return "intervals";
+  // HRP: run intervals, thresholds, race-distance repeats → intervals form
+  if (/\b(threshold|intervals?|repeats|race[- ]pace|race[- ]distance|strides?)\b/.test(text)) {
+    return "intervals";
+  }
+  // HRP: hybrid bricks (run + station rounds)
+  if (/\bbrick\b|\brounds?.*(station|machine)\b/.test(text)) {
+    return "intervals";
+  }
+  // HRP: sled push/pull work → intervals (distance + split logging)
+  if (/\bsled\b/.test(text)) return "intervals";
+  // HRP: aerobic Zone 2 / easy running / recovery cardio
+  if (/(zone\s*2|z2|easy run|aerobic|easy machine)/.test(text)) return "zone2";
+  // HRP: carry / farmers / suitcase
+  if (/(farmer|carry|suitcase)/.test(text)) return "carry";
+  // HRP: holds
+  if (/(hold|plank|hang|iso)/.test(text)) return "hold";
   if (block.kind === "mainLift" || block.kind === "assistance") {
     if (/(clean|jerk|snatch)/.test(title)) return "olympic";
+    if (/\bsled\b/.test(text)) return "intervals";
     return "strength";
   }
   if (block.kind === "conditioning") {
-    if (/(zone\s*2|z2|easy run|aerobic)/.test(title)) return "zone2";
-    if (/(carry|farmer|sandbag carry|yoke)/.test(title)) return "carry";
-    if (/(hold|plank|hang|iso)/.test(title)) return "hold";
     if (t === "countdown") return "timecap";
     return "generic";
   }
