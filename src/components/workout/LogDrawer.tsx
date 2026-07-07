@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { store } from "@/lib/store";
-import { PROGRAMME } from "@/data/programme";
 import { formatClock } from "@/lib/programmeUtils";
+import { supabase } from "@/integrations/supabase/client";
 import { inferLogKind, kindLabel, summariseResult } from "./logKind";
 import type {
   BlockResult,
@@ -17,6 +17,39 @@ import type {
   StrengthSetGroup,
 } from "@/types/programme";
 import { Check, Plus, X, Minus, Timer } from "lucide-react";
+
+const NON_ATHX_SLUGS: Record<string, string> = {
+  "basic-training-blueprint-plus": "basic-training-blueprint-plus",
+  "hybrid-race-plan": "hybrid-race-plan",
+  "sem-2026": "sem-2026",
+};
+
+async function mirrorResultToSupabase(result: BlockResult) {
+  const slug = NON_ATHX_SLUGS[result.programmeId];
+  if (!slug) return; // ATHX or unknown — leave existing behaviour untouched.
+  try {
+    const { data: userRes } = await supabase.auth.getUser();
+    const uid = userRes?.user?.id;
+    if (!uid) return;
+    const { data: product } = await supabase
+      .from("products")
+      .select("id")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (!product) return;
+    await supabase.from("workout_results").insert({
+      user_id: uid,
+      product_id: product.id,
+      session_id: result.sessionId,
+      block_id: result.blockId,
+      exercise_id: result.exercise,
+      kind: result.kind,
+      payload: JSON.parse(JSON.stringify(result)),
+    });
+  } catch {
+    // Non-fatal — local result is still saved.
+  }
+}
 
 /* ---------------------------------------------------------------- *
  * Small primitives kept local so we don't introduce generic form chrome
@@ -757,7 +790,7 @@ export function LogDrawer({
     const result: BlockResult = {
       ...state,
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-      programmeId: PROGRAMME.id,
+      programmeId: store.currentProgrammeId(),
       weekNumber: session.weekNumber,
       sessionId: session.id,
       blockId: block.id,
@@ -768,6 +801,9 @@ export function LogDrawer({
       prescribed: block.lines[0],
     };
     store.appendResult(result);
+    // Mirror to Supabase for non-ATHX programmes so their existing
+    // progress pages (which read workout_results) reflect this log.
+    void mirrorResultToSupabase(result);
     onSaved?.(result);
     onOpenChange(false);
   };

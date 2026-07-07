@@ -32,6 +32,79 @@ export function useAthxAccess() {
   );
 }
 
+/**
+ * Access gate parameterised by programme slug — used by the shared
+ * workout runner so BTB / HRP / SEM / ATHX all share the same experience
+ * but keep their local storage cleanly scoped per programme.
+ */
+export function useProgrammeAccess(slug: string, programmeId: string) {
+  const { user, loading: authLoading } = useAuth();
+  const { items, loading: entLoading } = useEntitlements(user?.id);
+  // ATHX uses programme_version_id for versioning; other programmes may not.
+  const hasAccess =
+    !!user &&
+    items.some((item) =>
+      slug === ATHX_SLUG ? item.slug === slug && !!item.programme_version_id : item.slug === slug,
+    );
+  const configKey = `${user?.id ?? "anonymous"}:${programmeId}:${hasAccess ? "1" : "0"}:${authLoading || entLoading ? "loading" : "ready"}`;
+  const [configuredKey, setConfiguredKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (authLoading || entLoading) return;
+    store.configureAccess({ userId: user?.id ?? null, entitled: hasAccess, programmeId });
+    setConfiguredKey(configKey);
+  }, [authLoading, entLoading, user?.id, hasAccess, programmeId, configKey]);
+
+  return useMemo(
+    () => ({
+      user,
+      loading: authLoading || entLoading || configuredKey !== configKey,
+      hasAccess,
+      entitlements: items,
+    }),
+    [user, authLoading, entLoading, configuredKey, configKey, hasAccess, items],
+  );
+}
+
+export function ProgrammeAccessGate({
+  slug,
+  programmeId,
+  programmeName,
+  children,
+}: {
+  slug: string;
+  programmeId: string;
+  programmeName: string;
+  children: ReactNode;
+}) {
+  const { user, loading, hasAccess } = useProgrammeAccess(slug, programmeId);
+  if (loading) return <PrivateAccessShell eyebrow="Checking access" title="Loading." />;
+  if (!user) {
+    return (
+      <PrivateAccessShell eyebrow="Members only" title="Sign in to continue.">
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <Link to="/sign-in" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Sign in</Link>
+          <Link to="/my-programmes" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">My programmes</Link>
+        </div>
+      </PrivateAccessShell>
+    );
+  }
+  if (!hasAccess) {
+    return (
+      <PrivateAccessShell eyebrow="No access" title={`${programmeName} is private.`}>
+        <p className="mt-4 text-foreground-muted text-sm max-w-sm mx-auto">
+          This programme is not in your library.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <Link to="/my-programmes" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">My programmes</Link>
+          <Link to="/programmes" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Browse programmes</Link>
+        </div>
+      </PrivateAccessShell>
+    );
+  }
+  return <>{children}</>;
+}
+
 export function AthxAccessGate({ children }: { children: ReactNode }) {
   const { user, loading, hasAccess } = useAthxAccess();
 

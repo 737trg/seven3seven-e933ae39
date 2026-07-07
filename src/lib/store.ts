@@ -11,7 +11,7 @@ import type {
 import { PROGRAMME } from "@/data/programme";
 
 const LEGACY_KEY = "trg737.v1";
-const PROGRAMME_ID = "athx-2026";
+const DEFAULT_PROGRAMME_ID = "athx-2026";
 const STORAGE_VERSION = 2;
 
 interface Store {
@@ -48,20 +48,22 @@ const isBrowser = () => typeof window !== "undefined";
 
 let cache: Store | null = null;
 let activeUserId: string | null = null;
-let athxEntitled = false;
+let entitled = false;
+let activeProgrammeId: string = DEFAULT_PROGRAMME_ID;
 
 const scopedKey = () => {
-  if (!activeUserId || !athxEntitled) return null;
-  return `${LEGACY_KEY}:${activeUserId}:${PROGRAMME_ID}`;
+  if (!activeUserId || !entitled) return null;
+  return `${LEGACY_KEY}:${activeUserId}:${activeProgrammeId}`;
 };
 
-const migrationKey = (userId: string) => `${LEGACY_KEY}:${userId}:${PROGRAMME_ID}:legacy-migrated`;
-const backupKey = (userId: string) => `${LEGACY_KEY}:${userId}:${PROGRAMME_ID}:legacy-backup`;
+const migrationKey = (userId: string) => `${LEGACY_KEY}:${userId}:${activeProgrammeId}:legacy-migrated`;
+const backupKey = (userId: string) => `${LEGACY_KEY}:${userId}:${activeProgrammeId}:legacy-backup`;
 
 const canReadAthxLocalState = () => isBrowser() && !!scopedKey();
 
 const migrateLegacyIfNeeded = () => {
-  if (!isBrowser() || !activeUserId || !athxEntitled) return;
+  if (!isBrowser() || !activeUserId || !entitled) return;
+  if (activeProgrammeId !== DEFAULT_PROGRAMME_ID) return;
   const key = scopedKey();
   if (!key) return;
   if (window.localStorage.getItem(migrationKey(activeUserId)) === "true") return;
@@ -120,14 +122,29 @@ const write = (s: Store) => {
 };
 
 export const store = {
-  configureAthxAccess: ({ userId, entitled }: { userId: string | null; entitled: boolean }) => {
-    const changed = activeUserId !== userId || athxEntitled !== entitled;
+  configureAthxAccess: (opts: { userId: string | null; entitled: boolean }) =>
+    store.configureAccess({ ...opts, programmeId: DEFAULT_PROGRAMME_ID }),
+  configureAccess: ({
+    userId,
+    entitled: ent,
+    programmeId,
+  }: {
+    userId: string | null;
+    entitled: boolean;
+    programmeId?: string;
+  }) => {
+    const nextProgrammeId = programmeId ?? DEFAULT_PROGRAMME_ID;
+    const changed =
+      activeUserId !== userId || entitled !== ent || activeProgrammeId !== nextProgrammeId;
     activeUserId = userId;
-    athxEntitled = entitled;
+    entitled = ent;
+    activeProgrammeId = nextProgrammeId;
     if (changed) cache = null;
-    if (entitled) migrateLegacyIfNeeded();
+    if (ent) migrateLegacyIfNeeded();
     if (isBrowser()) window.dispatchEvent(new CustomEvent("trg737:change"));
   },
+  currentProgrammeId: () => activeProgrammeId,
+  currentUserId: () => activeUserId,
   isAthxLocalStateEnabled: () => !!scopedKey(),
   getAthlete: () => read().athlete,
   updateAthlete: (patch: Partial<Athlete>) => {

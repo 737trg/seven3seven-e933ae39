@@ -7,13 +7,15 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { getSessionById } from "@/data/programme";
+import { resolveSession, type ResolvedSession } from "@/lib/anySession";
+import { supabase } from "@/integrations/supabase/client";
 import { ChevronLeft, ChevronRight, Pause, Play, X, Check } from "lucide-react";
 import { formatClock } from "@/lib/programmeUtils";
+import type { SessionBlock } from "@/types/programme";
 import { store, subscribeStore } from "@/lib/store";
 import { LogDrawer } from "@/components/workout/LogDrawer";
 import { summariseResult } from "@/components/workout/logKind";
-import { AthxAccessGate } from "@/lib/athxAccess";
+import { ProgrammeAccessGate } from "@/lib/athxAccess";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,14 +38,32 @@ function WorkoutRoute() {
   const isDoneRoute = useRouterState({
     select: (state) => state.location.pathname.endsWith("/done"),
   });
+  const { sessionId } = useParams({ from: "/workout/$sessionId" });
+  const resolved = resolveSession(sessionId);
+  const programme = resolved?.programme;
+  const slug = programme?.slug ?? "athx-2026";
+  const programmeId = programme?.programmeId ?? "athx-2026";
+  const programmeName =
+    slug === "basic-training-blueprint-plus"
+      ? "Basic Training Blueprint+"
+      : slug === "hybrid-race-plan"
+        ? "Hybrid Race Plan"
+        : slug === "sem-2026"
+          ? "S.E.M 2026"
+          : "ATHX 2026";
 
-  return <AthxAccessGate>{isDoneRoute ? <Outlet /> : <WorkoutPage />}</AthxAccessGate>;
+  return (
+    <ProgrammeAccessGate slug={slug} programmeId={programmeId} programmeName={programmeName}>
+      {isDoneRoute ? <Outlet /> : <WorkoutPage resolved={resolved} />}
+    </ProgrammeAccessGate>
+  );
 }
 
-function WorkoutPage() {
+function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   const { sessionId } = useParams({ from: "/workout/$sessionId" });
   const navigate = useNavigate();
-  const s = getSessionById(sessionId);
+  const s = resolved?.session;
+  const programme = resolved?.programme;
   const [idx, setIdx] = useState(0);
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [paused, setPaused] = useState(false);
@@ -154,6 +174,15 @@ function WorkoutPage() {
       blocks: s.blocks.map((b) => ({ blockId: b.id, completed: !!done[b.id] })),
     });
     store.clearWorkoutState(s.id);
+    // Mirror completion to Supabase for non-ATHX programmes so their
+    // existing progress pages (which read session_completions) reflect it.
+    if (programme && !programme.isAthx) {
+      void mirrorCompletionToSupabase({
+        slug: programme.slug,
+        sessionId: s.id,
+        durationSec: elapsed,
+      });
+    }
     void navigate({
       to: "/workout/$sessionId/done",
       params: { sessionId: s.id },
@@ -166,8 +195,7 @@ function WorkoutPage() {
       <header className="border-b border-border">
         <div className="max-w-[720px] mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
           <Link
-            to="/programme/s/$sessionId"
-            params={{ sessionId: s.id }}
+            to={programme?.backHref || `/programme/s/${s.id}`}
             className="text-foreground-muted hover:text-bone inline-flex items-center gap-1 text-xs uppercase tracking-widest"
           >
             <X className="h-4 w-4" /> Exit
@@ -352,7 +380,7 @@ function WorkoutPage() {
   );
 }
 
-function timerLabel(t: NonNullable<ReturnType<typeof getSessionById>>["blocks"][number]["timer"]) {
+function timerLabel(t: SessionBlock["timer"]) {
   if (!t) return "—";
   switch (t.type) {
     case "countdown": return `Countdown · ${formatClock(t.durationSec ?? 0)}`;
@@ -363,5 +391,31 @@ function timerLabel(t: NonNullable<ReturnType<typeof getSessionById>>["blocks"][
     case "rft": return `RFT · cap ${formatClock(t.capSec ?? 0)}`;
     case "rest": return `Rest · ${t.restSec}s`;
     default: return "—";
+  }
+}
+
+async function mirrorCompletionToSupabase(params: {
+  slug: string;
+  sessionId: string;
+  durationSec: number;
+}) {
+  try {
+    const { data: userRes } = await supabase.auth.getUser();
+    const uid = userRes?.user?.id;
+    if (!uid) return;
+    const { data: product } = await supabase
+      .from("products")
+      .select("id")
+      .eq("slug", params.slug)
+      .maybeSingle();
+    if (!product) return;
+    await supabase.from("session_completions").insert({
+      user_id: uid,
+      product_id: product.id,
+      session_id: params.sessionId,
+      duration_seconds: params.durationSec,
+    });
+  } catch {
+    // Non-fatal — local log is still saved.
   }
 }
