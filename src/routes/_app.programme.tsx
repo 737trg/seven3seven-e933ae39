@@ -5,7 +5,7 @@ import { Tag } from "@/components/ui-prim/Tag";
 export const Route = createFileRoute("/_app/programme")({
   head: () => ({
     meta: [
-      { title: "Programme — 737 TRG" },
+      { title: "Programme — SEVEN3SEVEN" },
       { name: "description", content: "Seven-week build plus race week. Phases, loads and daily sessions." },
     ],
   }),
