@@ -60,13 +60,19 @@ function parseTimer(raw: string | null | undefined): TimerSpec | undefined {
 
 // ---- Block kind inference -----------------------------------------------
 
-function inferBlockKind(name: string): BlockKind {
-  const t = name.toLowerCase();
-  if (/(warm|mobility prep|activation)/.test(t)) return "warmup";
-  if (/(cool|stretch|down-?regulate|breath)/.test(t)) return "cooldown";
-  if (/(log|reflection|debrief|record)/.test(t)) return "log";
-  if (/(squat|deadlift|press|bench|clean|snatch|jerk|row|pull-?up|dip)/.test(t)) return "mainLift";
-  if (/(accessory|assistance|carry|hold|core)/.test(t)) return "assistance";
+function inferBlockKind(name: string, instruction?: string | null): BlockKind {
+  const n = name.toLowerCase();
+  const t = `${n} ${(instruction ?? "").toLowerCase()}`;
+  if (/(warm[- ]?up|mobility prep|activation|primer)/.test(n)) return "warmup";
+  if (/(cool[- ]?down|stretch|down-?regulate|breath)/.test(n)) return "cooldown";
+  if (/(^|\b)(log|reflection|debrief|record|finish)\b/.test(n)) return "log";
+  // Detect resistance/strength work either from the block title or the
+  // instruction text (e.g. "Support" → split squat + calf raise + tibialis).
+  const liftWords = /(squat|deadlift|press|bench|clean|snatch|jerk|pull[- ]?up|chin[- ]?up|dip|curl|row(?!\s*erg)|hinge|lunge|split squat|calf raise|tibialis|kettlebell|barbell|dumbbell|isometric|iso pull|mid[- ]?thigh|hip thrust|glute bridge|good morning|farmer|carry|hold|plank|hang)/;
+  const setsReps = /\b\d+\s*[x×]\s*\d+/;
+  if (/(accessor|assistance|support|carry|hold|core)/.test(n)) return "assistance";
+  if (/(main strength|strength|main lift|primary lift|top set|back[- ]?off)/.test(n)) return "mainLift";
+  if (liftWords.test(t) || setsReps.test(t)) return "mainLift";
   return "conditioning";
 }
 
@@ -134,7 +140,7 @@ function resolveBtb(id: string): ResolvedSession | undefined {
       const blocks: SessionBlock[] = s.blocks.map((b, i) => ({
         id: btbBlockId(w.week, s.session, i),
         order: i + 1,
-        kind: inferBlockKind(b.name),
+        kind: inferBlockKind(b.name, b.instruction),
         title: b.name,
         timer: parseTimer(b.timer),
         lines: buildLines(b.instruction, { rpe: b.rpe, rest: b.rest, scaling: b.scaling, log: b.log }),
@@ -180,7 +186,7 @@ function resolveHrp(id: string): ResolvedSession | undefined {
         return {
           id: hrpBlockId(w.week, s.session, i),
           order: i + 1,
-          kind: inferBlockKind(b.name),
+          kind: inferBlockKind(b.name, b.instruction),
           title: b.name,
           timer: parseTimer(b.timer),
           lines: buildLines(b.instruction, { categorySpecific: cs }),
@@ -227,7 +233,7 @@ function resolveSem(id: string): ResolvedSession | undefined {
         return {
           id: semBlockId(w.week, s.session, i),
           order: i + 1,
-          kind: inferBlockKind(b.name),
+          kind: inferBlockKind(b.name, b.instruction),
           title: b.name,
           timer: parseTimer(b.timer),
           lines: buildLines(b.instruction, { categorySpecific: cs }),
