@@ -11,6 +11,7 @@ import { resolveSession, type ResolvedSession } from "@/lib/anySession";
 import { supabase } from "@/integrations/supabase/client";
 import { ChevronLeft, ChevronRight, Pause, Play, X, Check } from "lucide-react";
 import { formatClock } from "@/lib/programmeUtils";
+import type { SessionBlock } from "@/types/programme";
 import { store, subscribeStore } from "@/lib/store";
 import { LogDrawer } from "@/components/workout/LogDrawer";
 import { summariseResult } from "@/components/workout/logKind";
@@ -379,7 +380,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   );
 }
 
-function timerLabel(t: NonNullable<ReturnType<typeof getSessionById>>["blocks"][number]["timer"]) {
+function timerLabel(t: SessionBlock["timer"]) {
   if (!t) return "—";
   switch (t.type) {
     case "countdown": return `Countdown · ${formatClock(t.durationSec ?? 0)}`;
@@ -390,5 +391,31 @@ function timerLabel(t: NonNullable<ReturnType<typeof getSessionById>>["blocks"][
     case "rft": return `RFT · cap ${formatClock(t.capSec ?? 0)}`;
     case "rest": return `Rest · ${t.restSec}s`;
     default: return "—";
+  }
+}
+
+async function mirrorCompletionToSupabase(params: {
+  slug: string;
+  sessionId: string;
+  durationSec: number;
+}) {
+  try {
+    const { data: userRes } = await supabase.auth.getUser();
+    const uid = userRes?.user?.id;
+    if (!uid) return;
+    const { data: product } = await supabase
+      .from("products")
+      .select("id")
+      .eq("slug", params.slug)
+      .maybeSingle();
+    if (!product) return;
+    await supabase.from("session_completions").insert({
+      user_id: uid,
+      product_id: product.id,
+      session_id: params.sessionId,
+      duration_seconds: params.durationSec,
+    });
+  } catch {
+    // Non-fatal — local log is still saved.
   }
 }
