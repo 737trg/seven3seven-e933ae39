@@ -24,9 +24,9 @@ import {
 
 const SITE = "https://737trg.com";
 const SLUG = "sem-2026";
-const TITLE = "S.E.M 2026 | ATHX-Style Hybrid Competition Training | SEVEN3SEVEN";
+const TITLE = "S.E.M 2026 | Hybrid Competition Training | SEVEN3SEVEN";
 const DESC =
-  "S.E.M 2026 is an eight-week hybrid competition training programme built for ATHX-style athletes — progressive strength, run-row endurance and strength endurance MetCon work. From SEVEN3SEVEN.";
+  "An 8-week hybrid competition programme: progressive strength, run-row endurance and MetCon work for ATHX-style athletes. From SEVEN3SEVEN.";
 const ABS_IMG = `${SITE}${semImg.url}`;
 
 export const Route = createFileRoute("/_marketing/programmes/sem-2026")({
@@ -63,6 +63,18 @@ export const Route = createFileRoute("/_marketing/programmes/sem-2026")({
             availability: "https://schema.org/InStock",
             seller: { "@type": "Organization", name: "SEVEN3SEVEN" },
           },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map(([q, a]) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
         }),
       },
     ],

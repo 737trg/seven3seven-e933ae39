@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
 
 export const Route = createFileRoute("/_marketing/apparel")({
   head: () => ({

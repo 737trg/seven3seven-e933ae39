@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import nicoAsset from "@/assets/nico-rope.png.asset.json";
 import { useAuth } from "@/lib/useAuth";
 
-const SITE = "https://seven3seven.lovable.app";
+const SITE = "https://737trg.com";
 
 export const Route = createFileRoute("/_marketing/about")({
   head: () => ({
@@ -27,6 +27,28 @@ export const Route = createFileRoute("/_marketing/about")({
       { name: "twitter:image", content: `${SITE}${nicoAsset.url}` },
     ],
     links: [{ rel: "canonical", href: `${SITE}/about` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          url: `${SITE}/about`,
+          name: "About SEVEN3SEVEN",
+          description:
+            "The story behind SEVEN3SEVEN, a hybrid fitness and performance brand founded by former British Army Physical Training Instructor Nico.",
+          mainEntity: {
+            "@type": "Person",
+            name: "Nico",
+            jobTitle: "Founder & Coach",
+            worksFor: { "@type": "Organization", name: "SEVEN3SEVEN" },
+            description:
+              "Former British Army soldier (12 years, 4th Regiment Royal Artillery) and All Arms Physical Training Instructor. Hybrid athlete and coach.",
+            image: `${SITE}${nicoAsset.url}`,
+          },
+        }),
+      },
+    ],
   }),
   component: AboutPage,
 });

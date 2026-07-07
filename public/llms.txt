@@ -1,0 +1,21 @@
+# SEVEN3SEVEN
+
+> Hybrid fitness and performance brand producing structured strength, endurance and conditioning programmes built to be followed, not filed away.
+
+SEVEN3SEVEN (also known as 737 TRG) is founded by Nico, a former British Army soldier and All Arms Physical Training Instructor. Programmes combine an interactive app experience with a permanent downloadable PDF.
+
+## Pages
+
+- [Home](/): Brand overview and current programmes.
+- [About](/about): The story behind SEVEN3SEVEN and its founder.
+- [Programmes](/programmes): Full catalogue of hybrid training programmes.
+- [Basic Training Blueprint+](/programmes/basic-training-blueprint-plus): 12-week Army assessment and Basic Training preparation programme.
+- [S.E.M 2026](/programmes/sem-2026): 8-week hybrid competition programme for ATHX-style athletes.
+- [Hybrid Race Plan](/programmes/hybrid-race-plan): 12-week hybrid race programme for HYROX-style and Hybrid Games-style events.
+- [Apparel](/apparel): SEVEN3SEVEN apparel.
+
+## Optional
+
+- [Privacy Policy](/legal/privacy)
+- [Terms of Service](/legal/terms)
+- [Refund Policy](/legal/refunds)
