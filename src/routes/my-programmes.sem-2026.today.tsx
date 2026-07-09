@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SemShell } from "@/components/sem/SemShell";
 import { SEM, allSessions, isCore, sessionId } from "@/lib/sem/manifest";
 import { semStore, useSemProfile, useSemReadiness, currentSemWeek, type SemReadiness } from "@/lib/sem/store";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
+import pdfAsset from "@/assets/sem-2026-download.pdf.asset.json";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/today")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -46,6 +47,7 @@ function TodayPage() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: currentId }} className="h-11 px-6 inline-flex items-center bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display">Start session</Link>
             <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: currentId }} className="h-11 px-6 inline-flex items-center border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display">View detail</Link>
+            <a href={pdfAsset.url} target="_blank" rel="noopener noreferrer" className="h-11 px-6 inline-flex items-center gap-2 border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display hover:border-bone"><Download className="h-4 w-4" /> PDF</a>
           </div>
 
           <div className="mt-10">
