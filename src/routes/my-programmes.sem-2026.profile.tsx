@@ -3,6 +3,8 @@ import { SemShell } from "@/components/sem/SemShell";
 import { semStore, useSemProfile, type SemUnits, type SemFormat, type SemCategory, type SemSex, type SemMode } from "@/lib/sem/store";
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
+import pdfAsset from "@/assets/sem-2026-download.pdf.asset.json";
+import { Download } from "lucide-react";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/profile")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -94,6 +96,20 @@ function ProfilePage() {
       <p className="text-foreground-muted text-xs mt-8 max-w-[60ch]">
         S.E.M 2026 does not collect Olympic-lifting benchmarks. Pairs mode only changes the Race day tools — it does not alter the training programme.
       </p>
+      <div className="mt-10 border-t border-border pt-6">
+        <p className="eyebrow mb-3">Programme download</p>
+        <a
+          href={pdfAsset.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 h-11 px-5 border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display hover:border-bone"
+        >
+          <Download className="h-4 w-4" /> S.E.M 2026 PDF
+        </a>
+        <p className="text-foreground-muted text-xs mt-3 max-w-[60ch]">
+          The PDF is the printable reference. The app is the guided version — use it in the gym.
+        </p>
+      </div>
     </SemShell>
   );
 }
