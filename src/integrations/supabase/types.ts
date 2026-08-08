@@ -235,6 +235,54 @@ export type Database = {
         }
         Relationships: []
       }
+      personal_records: {
+        Row: {
+          achieved_on: string
+          created_at: string
+          id: string
+          lift_key: string
+          lift_label: string
+          metric: string
+          note: string | null
+          reps: number | null
+          source_session_id: string | null
+          unit: string
+          updated_at: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          achieved_on?: string
+          created_at?: string
+          id?: string
+          lift_key: string
+          lift_label: string
+          metric?: string
+          note?: string | null
+          reps?: number | null
+          source_session_id?: string | null
+          unit?: string
+          updated_at?: string
+          user_id: string
+          value: number
+        }
+        Update: {
+          achieved_on?: string
+          created_at?: string
+          id?: string
+          lift_key?: string
+          lift_label?: string
+          metric?: string
+          note?: string | null
+          reps?: number | null
+          source_session_id?: string | null
+          unit?: string
+          updated_at?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: []
+      }
       processed_payment_events: {
         Row: {
           created_at: string
@@ -544,6 +592,94 @@ export type Database = {
           {
             foreignKeyName: "session_completions_product_id_fkey"
             columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      session_schedule_overrides: {
+        Row: {
+          action: string
+          created_at: string
+          day_of_week: string | null
+          id: string
+          product_id: string
+          reason: string | null
+          session_id: string
+          swap_with_session_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          action?: string
+          created_at?: string
+          day_of_week?: string | null
+          id?: string
+          product_id: string
+          reason?: string | null
+          session_id: string
+          swap_with_session_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          day_of_week?: string | null
+          id?: string
+          product_id?: string
+          reason?: string | null
+          session_id?: string
+          swap_with_session_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_schedule_overrides_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_preferences: {
+        Row: {
+          created_at: string
+          onboarding_completed_at: string | null
+          primary_product_id: string | null
+          settings: Json
+          training_days: string[]
+          units: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          onboarding_completed_at?: string | null
+          primary_product_id?: string | null
+          settings?: Json
+          training_days?: string[]
+          units?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          onboarding_completed_at?: string | null
+          primary_product_id?: string | null
+          settings?: Json
+          training_days?: string[]
+          units?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_preferences_primary_product_id_fkey"
+            columns: ["primary_product_id"]
             isOneToOne: false
             referencedRelation: "products"
             referencedColumns: ["id"]
