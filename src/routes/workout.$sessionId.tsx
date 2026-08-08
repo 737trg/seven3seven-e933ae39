@@ -207,9 +207,9 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
       blocks: s.blocks.map((b) => ({ blockId: b.id, completed: !!done[b.id] })),
     });
     store.clearWorkoutState(s.id);
-    // Mirror completion to Supabase for non-ATHX programmes so their
-    // existing progress pages (which read session_completions) reflect it.
-    if (programme && !programme.isAthx) {
+    // Record completion in the backend for every programme (ATHX included) so
+    // progress pages, the library percentage and the current week stay in sync.
+    if (programme) {
       void mirrorCompletionToSupabase({
         slug: programme.slug,
         sessionId: s.id,
@@ -530,19 +530,16 @@ async function mirrorCompletionToSupabase(params: {
 }) {
   try {
     const { data: userRes } = await supabase.auth.getUser();
-    const uid = userRes?.user?.id;
-    if (!uid) return;
-    const { data: product } = await supabase
-      .from("products")
-      .select("id")
-      .eq("slug", params.slug)
-      .maybeSingle();
-    if (!product) return;
-    await supabase.from("session_completions").insert({
-      user_id: uid,
-      product_id: product.id,
-      session_id: params.sessionId,
-      duration_seconds: params.durationSec,
+    if (!userRes?.user?.id) return;
+    const meta = sessionProgressMeta(params.slug, params.sessionId);
+    await recordSessionCompletion({
+      data: {
+        slug: params.slug,
+        sessionId: params.sessionId,
+        durationSec: params.durationSec,
+        week: meta.week,
+        totalSessions: meta.total || null,
+      },
     });
   } catch {
     // Non-fatal — local log is still saved.
