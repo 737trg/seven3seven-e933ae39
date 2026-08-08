@@ -44,6 +44,42 @@ export type Database = {
         }
         Relationships: []
       }
+      body_metrics: {
+        Row: {
+          bodyfat_pct: number | null
+          created_at: string
+          id: string
+          measured_on: string
+          note: string | null
+          resting_hr: number | null
+          updated_at: string
+          user_id: string
+          weight_kg: number | null
+        }
+        Insert: {
+          bodyfat_pct?: number | null
+          created_at?: string
+          id?: string
+          measured_on?: string
+          note?: string | null
+          resting_hr?: number | null
+          updated_at?: string
+          user_id: string
+          weight_kg?: number | null
+        }
+        Update: {
+          bodyfat_pct?: number | null
+          created_at?: string
+          id?: string
+          measured_on?: string
+          note?: string | null
+          resting_hr?: number | null
+          updated_at?: string
+          user_id?: string
+          weight_kg?: number | null
+        }
+        Relationships: []
+      }
       entitlements: {
         Row: {
           created_at: string
