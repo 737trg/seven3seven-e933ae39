@@ -17,6 +17,10 @@
   --muted-fg: oklch(0.66 0 0);        /* #9A9A9A */
   --bone:     oklch(0.95 0.005 90);   /* #F4F2ED */
   --signal:   oklch(0.59 0.21 24);    /* #D82932 */
+  /* Earned: reserved for progress, PBs and streaks so achievement reads
+     differently from the brand's alert red. */
+  --earned:   oklch(0.74 0.15 152);
+  --planned:  oklch(0.38 0 0);
 
   --background: var(--obsidian);
   --surface: var(--graphite);
@@ -50,6 +54,8 @@
   --color-bone: var(--bone);
   --color-obsidian: var(--obsidian);
   --color-signal: var(--signal);
+  --color-earned: var(--earned);
+  --color-planned: var(--planned);
   --color-muted: var(--surface);
   --color-muted-foreground: var(--foreground-muted);
   --color-card: var(--surface);
