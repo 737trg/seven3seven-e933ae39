@@ -22,6 +22,18 @@ export function NextSessionCard({
   const pct = stored !== null && stored > 0 ? Math.round(stored) : derived;
   const isNew = programme.state === "ready";
 
+  // Plans advance by completion, not by calendar — so a missed week never
+  // leaves stale sessions behind. Say so, rather than letting a long gap
+  // feel like failure.
+  const lastAt = programme.completions
+    .map((c) => c.completed_at)
+    .sort()
+    .pop();
+  const daysSince = lastAt
+    ? Math.floor((Date.now() - new Date(lastAt).getTime()) / 86_400_000)
+    : null;
+  const returning = !isNew && daysSince !== null && daysSince >= 10;
+
   return (
     <article className="hairline border-signal/40 elevated p-5 md:p-8">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
