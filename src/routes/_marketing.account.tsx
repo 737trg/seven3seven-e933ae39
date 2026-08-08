@@ -211,10 +211,6 @@ function AccountPage() {
         )}
       </div>
 
-      <div className="mt-16 border-t border-border/60 pt-8 flex items-center justify-between">
-        {null}
-      </div>
-
       {/* Membership */}
       <div className="mt-16">
         <h2 className="eyebrow border-b border-border/60 pb-4 mb-6">Membership</h2>
