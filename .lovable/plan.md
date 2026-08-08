@@ -1,76 +1,91 @@
-# Phase 3 + Membership: SEVEN3SEVEN Club
+# Landing page re-jig: two clear paths, correct prices
 
-## Is the model viable?
+## The marketer's read
 
-Yes, with one adjustment. £14.99/month for "everything" alongside one-off lifetime programmes is workable, because the two buyers are different people:
+Right now the homepage sells one thing (buy a programme) and buries the Club on a
+separate pricing page. That wastes the strongest asset you have: a £14.99/month
+recurring product that most visitors will never scroll far enough to discover.
 
-- **One-off buyer**: wants one plan, owns it forever, trains solo. Low price, no ongoing cost.
-- **Member**: wants all programmes, coaching intelligence, leaderboards, recaps. Recurring revenue.
+A visitor lands with one of two mindsets:
 
-The "sign up for a month, take the PDF, leave" worry is real but small, and it self-corrects: when the membership lapses, programme access lapses too. Members **rent** access; they do not acquire a lifetime licence. So a one-month raid gets 30 days of app access and a PDF, while the lifetime purchase still has real value.
+1. "I've got a specific event/goal" → wants a programme, wants the PDF, wants to own it.
+2. "I want to get fit and stay on it" → wants the app, the coaching, the leaderboard, the community.
 
-Recommendation: **do not lower one-off prices.** Instead make the one-off tier deliberately complete-but-plain, and put the addictive layer (adaptive coaching, standards, leaderboards, recaps, multi-programme) behind membership.
+The page should force that choice above the fold instead of hoping they find it.
+Everything else on the page is support for whichever door they walked through.
 
-## Feature split
+Recommended wording (tested-style, no fluff, no invented claims):
 
-**PAYG (one-off programme, lifetime)**
-- The programme they bought: full session runner, timers, logging
-- Session/week completion tracking and programme progress
-- Basic dashboard: next session, streak, completion
-- PDF download of their plan
+- Hero H1: **Train like it matters.**
+- Hero sub: One payment for the plan you need, or £14.99 a month for everything.
+- Primary button: **Join SEVEN3SEVEN Club — £14.99/mo**
+- Secondary button: **Buy a programme — from £19.99**
 
-**Club membership (£14.99/mo)**
-- Every programme, current and future, while subscribed
-- Adaptive coaching: readiness check + load suggestions
-- PB tracking, PB trend charts, standards/benchmarks panel
-- Body metrics log and trends
-- Leaderboards
-- Weekly recap email
-- Share cards
-- Schedule controls (move/skip/swap days)
+Club goes first because it is the higher lifetime value and the lower entry
+decision. The one-off is right next to it, same size, so nobody feels funnelled.
 
-Existing customers are grandfathered: anyone holding an entitlement before launch keeps the coaching/PB/metrics features they already use, free, forever. Removing features from people who already paid is the biggest churn and complaint risk here, so we avoid it entirely.
+## What changes
 
-## Leaderboards without manual validation
+**1. Correct the price everywhere**
 
-You cannot police typed-in weights, so don't build something that needs policing.
+Programmes are £19.99, not £20. The homepage already reads live prices from the
+database; the pricing page hardcodes "From £20". Fix that to £19.99 and make the
+pricing page read the real product price so it can never drift again.
 
-- Boards rank only **what the app itself recorded**: sessions completed, weeks completed, current streak, total training time from the runner's own timers.
-- No global weight or time boards. PB numbers stay private and only feed the athlete's own standards panel.
-- Opt-in only, athlete-chosen display name, monthly reset so newcomers can win.
+**2. New hero: the fork in the road**
 
-Self-validating: you can't fake a completed session without stepping through the runner.
+Keep the current image, gradient and typography exactly as they are. Replace the
+single CTA row with the two-path choice: Club primary, one-off secondary, plus a
+one-line reassurance underneath ("Cancel anytime · Lifetime access on one-off
+plans · Secure Stripe checkout").
 
-## Weekly recap email
+**3. A two-door block immediately after the hero**
 
-Yes — week just gone plus week ahead, sent Sunday evening:
-- Sessions completed vs planned, streak, total time
-- Any new PBs (private, in their own email only)
-- Leaderboard position if opted in
-- Next week's sessions with a deep link into the first one
+Directly below the fold, before the goal chooser, add a side-by-side comparison
+block (stacked on mobile) so the decision is made in the first two screens:
 
-## Pricing page
+```text
+ +---------------------------+   +---------------------------+
+ | SEVEN3SEVEN CLUB          |   | ONE-OFF PROGRAMME         |
+ | £14.99 / month            |   | from £19.99 once          |
+ | Every programme           |   | One programme, for life   |
+ | Coaching + PB + standards |   | Full app tracking         |
+ | Leaderboard + metrics     |   | The permanent PDF         |
+ | [ Join the Club ]         |   | [ Browse programmes ]     |
+ +---------------------------+   +---------------------------+
+```
 
-New `/pricing` route linked from header and footer:
-- Two columns: **One-off programme** (lifetime, that plan only) and **Club membership** (£14.99/mo, everything, cancel anytime)
-- Comparison table using the split above
-- FAQ: what happens when I cancel (data kept, access stops), can I buy a plan *and* be a member (yes)
-- Unique metadata, canonical URL, Product/Offer JSON-LD
+This replaces the current generic "What's included" trust strip, which is doing
+less work than the space deserves. Its four points get folded into the two cards.
+
+**4. Sharpen the rest of the page for the two paths**
+
+- The goal chooser ("What are you training for?") stays, renumbered, with a line
+  under it noting all three are included with Club.
+- The "What you get" section gains one Club-specific panel (coaching, standards,
+  leaderboard) so the membership is justified, not just priced.
+- The closing CTA becomes the same two-door choice rather than a single
+  "Buy your programme" button.
+- Header keeps Pricing; the mobile menu gets a Join the Club action so the
+  membership is reachable from any page on a phone.
+
+**5. Honest copy only**
+
+No invented member counts, testimonials, results or urgency. The words that carry
+weight are the real ones: every programme included, cancel anytime, PDF stays with
+one-off purchases, lifetime access on what you buy.
 
 ## Technical notes
 
-- New Stripe product `club_membership` with a recurring monthly price created through the payments tooling; checkout reuses the gateway client in `src/lib/stripe.server.ts`.
-- New `subscriptions` table (user_id, status, price_id, current_period_end, environment) written by the existing webhook route `src/routes/api/public/payments/webhook.ts`, extended for `customer.subscription.*` and `invoice.*` events. RLS: athlete reads own row; service role writes; explicit GRANTs.
-- New DB function `has_club_access(_user_id)` — true for an active/trialing/past-due subscription **or** a grandfathered flag. A single `useAccess()` hook wraps it; every gated panel checks it.
-- Programme access becomes: owns entitlement **OR** has club access. Route guards and the library page share that rule.
-- Grandfathering: one migration stamping legacy full access on profiles that already hold an entitlement.
-- Leaderboard: monthly aggregate over `session_completions`, exposed through a security-definer function so no raw rows leak; opt-in flag and display name stored in `user_preferences`.
-- Recap email: scaffolded on the Lovable email stack, triggered weekly by a scheduled call to a public API route guarded by a shared secret. Requires a verified sender domain before it can actually send.
-
-## Build order
-
-1. Membership plumbing: Stripe product/price, subscriptions table, webhook events, `has_club_access`, grandfather migration.
-2. Access layer: `useAccess()`, gate the Phase 1/2 panels, unlock all programmes for members.
-3. `/pricing` page plus upgrade prompts on locked panels.
-4. Leaderboards (opt-in, activity-based).
-5. Weekly recap email (needs sender domain).
+- `src/routes/_marketing.pricing.tsx`: replace the hardcoded `From £20` with the
+  live minimum published product price via the existing price helper.
+- `src/routes/_marketing.index.tsx`: rewrite the hero CTA row, swap the trust strip
+  for the two-door block, add the Club panel to "What you get", update the closing
+  CTA. Reuse existing tokens, `btn-signal` / `btn-ghost`, `Reveal`, and the
+  established display scale — no new visual language.
+- Club CTAs link to `/pricing` (which owns the checkout button) rather than
+  triggering Stripe from the homepage, so signed-out visitors get context first.
+- Update the homepage `head()` description to mention both routes, and refresh the
+  FAQ JSON-LD with a membership-vs-one-off question.
+- Mobile first: verify no horizontal overflow at 320px and that both hero buttons
+  fit without wrapping.
