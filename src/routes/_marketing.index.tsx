@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import heroAsset from "@/assets/home-hero.jpg.asset.json";
+import founderAsset from "@/assets/founder-nico.jpg.asset.json";
 import todayShot from "@/assets/athx-today.png.asset.json";
 import progShot from "@/assets/athx-programme.png.asset.json";
 import progressShot from "@/assets/athx-progress.png.asset.json";
@@ -248,9 +249,9 @@ function HomePage() {
         <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div className="lg:col-span-5">
             <img
-              src={heroAsset.url}
+              src={founderAsset.url}
               alt="Nico, founder of SEVEN3SEVEN"
-              className="w-full aspect-[4/5] object-cover object-[70%_center]"
+              className="w-full aspect-[4/5] object-cover object-center"
               loading="lazy"
             />
           </div>
