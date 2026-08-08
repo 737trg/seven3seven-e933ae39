@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown } from "lucide-react";
-import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { ProgrammeCarousel } from "@/components/marketing/ProgrammeCarousel";
 
 const SITE = "https://737trg.com";
@@ -43,25 +42,18 @@ export const Route = createFileRoute("/_marketing/programmes/")({
 function ProgrammesPage() {
   return (
     <>
-      {/* HERO — image first, text block below */}
+      {/* HERO — compact, shoppable */}
       <section className="relative">
-        <img
-          src={heroAsset.url}
-          alt=""
-          aria-hidden
-          className="block w-full h-auto bg-background select-none"
-          draggable={false}
-        />
         <div className="bg-background">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-28 pb-14 md:pb-20 lg:pb-24">
+          <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 pb-12 md:pb-16">
             <p className="eyebrow text-foreground-muted mb-6 md:mb-8">Programmes</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.5rem,7vw,5.5rem)] max-w-[14ch]">
+            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.25rem,6vw,4.5rem)] max-w-[14ch]">
               Built for<br />a clear objective.
             </h1>
-            <p className="text-bone/80 text-base md:text-lg mt-6 md:mt-7 max-w-[56ch] leading-relaxed">
-              Choose the programme that matches the outcome you're training for.
+            <p className="text-bone/80 text-base md:text-lg mt-6 max-w-[56ch] leading-relaxed">
+              Choose the programme that matches the outcome you're training for. £19.99 each.
             </p>
-            <p className="text-foreground-muted text-sm mt-4 max-w-[56ch]">
+            <p className="text-foreground-muted text-sm mt-3 max-w-[56ch]">
               Buy once. Follow it interactively. Log your work. Keep the PDF.
             </p>
           </div>
