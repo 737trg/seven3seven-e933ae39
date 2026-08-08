@@ -1,12 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+const SITE = "https://737trg.com";
+
 export const Route = createFileRoute("/_marketing/legal/refunds")({
   component: RefundsPage,
   head: () => ({
     meta: [
       { title: "Refund Policy — SEVEN3SEVEN" },
-      { name: "description", content: "SEVEN3SEVEN refund policy for digital programmes." },
+      {
+        name: "description",
+        content:
+          "Refund terms for SEVEN3SEVEN digital training programmes, including how to request a review within 7 days of purchase.",
+      },
+      { property: "og:title", content: "Refund Policy — SEVEN3SEVEN" },
+      {
+        property: "og:description",
+        content: "Refund terms for SEVEN3SEVEN digital training programmes.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE}/legal/refunds` },
     ],
+    links: [{ rel: "canonical", href: `${SITE}/legal/refunds` }],
   }),
 });
 
