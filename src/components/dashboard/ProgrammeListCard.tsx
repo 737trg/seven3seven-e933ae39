@@ -22,12 +22,12 @@ export function ProgrammeListCard({
   const showProgress = !!programme.enrolment && (pct > 0 || programme.completions.length > 0);
 
   return (
-    <article className="relative border border-border/60 bg-surface/20 hover:border-bone/40 transition-colors">
-      <Link to={href} className="block p-5 md:p-6">
+    <article className="relative hairline bg-surface/20 hover:border-bone/40 transition-colors">
+      <Link to={href} className="press block p-5 md:p-6">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
-          <div className="min-w-0 pr-10">
-            <p className="eyebrow text-foreground-muted truncate">{programme.collection}</p>
-            <h3 className="font-display font-bold text-bone text-xl md:text-3xl tracking-[-0.025em] mt-1.5 leading-tight">
+          <div className="min-w-0 pr-12">
+            <p className="eyebrow text-foreground-muted break-words">{programme.collection}</p>
+            <h3 className="display-sm md:display-md text-bone mt-1.5">
               {programme.name}
             </h3>
           </div>
@@ -47,8 +47,8 @@ export function ProgrammeListCard({
               <span>Progress</span>
               <span className="text-bone tabular">{pct}%</span>
             </div>
-            <div className="h-[2px] bg-surface-raised overflow-hidden">
-              <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+        <div className="h-[2px] bg-surface-raised overflow-hidden rounded-full">
+              <div className="h-full bg-signal transition-[width] duration-500" style={{ width: `${pct}%` }} />
             </div>
           </div>
         )}
@@ -63,7 +63,7 @@ export function ProgrammeListCard({
         onClick={() => onPin(programme)}
         aria-pressed={isPrimary}
         title={isPrimary ? "Remove as focus programme" : "Make this my focus programme"}
-        className={`absolute top-3 right-3 h-11 w-11 inline-flex items-center justify-center transition-colors ${
+        className={`absolute top-2 right-2 tap inline-flex items-center justify-center transition-colors ${
           isPrimary ? "text-signal" : "text-foreground-muted hover:text-bone"
         }`}
       >

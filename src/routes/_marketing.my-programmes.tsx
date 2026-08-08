@@ -103,15 +103,15 @@ function MyProgrammesPage() {
     <>
       {/* Header: text-first on mobile, editorial image only from lg up. */}
       <section className="border-b border-border/60">
-        <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-12 pt-8 md:pt-14 lg:pt-16 pb-6 md:pb-10 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+        <div className="max-w-[1440px] mx-auto container-x pt-8 md:pt-14 lg:pt-16 pb-6 md:pb-10 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
           <div className="min-w-0">
-            <p className="eyebrow text-foreground-muted mb-3">
+            <p className="eyebrow text-foreground-muted mb-3 break-words">
               {displayName ? `${displayName} — Library` : "Your library"}
             </p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,9vw,4.5rem)]">
+            <h1 className="display-xl text-bone">
               My programmes.
             </h1>
-            <p className="text-bone/70 text-sm md:text-base mt-3 max-w-[46ch]">
+            <p className="lede mt-3 max-w-[46ch]">
               Your training. Your progress. All in one place.
             </p>
           </div>
@@ -126,20 +126,21 @@ function MyProgrammesPage() {
         </div>
       </section>
 
-      <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-12">
+      <div className="max-w-[1440px] mx-auto container-x">
         <div className="py-6 md:py-8">
           <StatRow
+            loading={dashboard.loading}
             items={[
-              { label: "Active", value: dashboard.loading ? "—" : String(dashboard.activeCount) },
-              { label: "Week", value: dashboard.loading ? "—" : dashboard.currentWeek ? String(dashboard.currentWeek) : "—" },
-              { label: "Sessions", value: dashboard.loading ? "—" : String(dashboard.sessionsCompleted) },
-              { label: "Streak", value: dashboard.loading ? "—" : String(streak.current) },
+              { label: "Active", value: String(dashboard.activeCount) },
+              { label: "Week", value: dashboard.currentWeek ? String(dashboard.currentWeek) : "—" },
+              { label: "Sessions", value: String(dashboard.sessionsCompleted) },
+              { label: "Streak", value: String(streak.current) },
             ]}
           />
         </div>
       </div>
 
-      <section className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-12 pb-16 lg:pb-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-10 lg:gap-x-12 xl:gap-x-16">
+      <section className="max-w-[1440px] mx-auto container-x pb-16 lg:pb-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-10 lg:gap-x-12 xl:gap-x-16">
         <div className="space-y-10 lg:pr-4 xl:pr-8">
           {focus && (
             <NextSessionCard
@@ -149,10 +150,18 @@ function MyProgrammesPage() {
             />
           )}
 
+          {dashboard.loading && dashboard.programmes.length === 0 && (
+            <div className="space-y-4" aria-hidden>
+              <div className="h-44 hairline bg-surface/20 animate-pulse" />
+              <div className="h-28 hairline bg-surface/20 animate-pulse" />
+            </div>
+          )}
+
           {dashboard.programmes.length === 0 && !dashboard.loading && (
-            <div className="border border-border/60 p-6 text-center">
-              <p className="text-bone text-sm">You don’t own any programmes yet.</p>
-              <Link to="/programmes" className="mt-4 inline-flex items-center gap-2 eyebrow text-signal">
+            <div className="hairline elevated p-8 text-center">
+              <p className="display-sm text-bone">No programmes yet.</p>
+              <p className="body-sm mt-2">Pick a plan and your first session appears here.</p>
+              <Link to="/programmes" className="tap press mt-5 inline-flex items-center gap-2 eyebrow text-signal">
                 Browse programmes <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
@@ -276,7 +285,7 @@ function SidebarCard({ title, children }: { title: string; children: React.React
 
 function SideLink({ to, label }: { to: string; label: string }) {
   return (
-    <Link to={to} className="flex items-center justify-between py-4 text-bone text-sm hover:text-signal transition-colors border-b border-border/60 last:border-0">
+    <Link to={to} className="press min-h-12 flex items-center justify-between py-4 text-bone text-sm hover:text-signal transition-colors border-b border-border/60 last:border-0">
       <span>{label}</span>
       <ArrowRight className="h-3 w-3" />
     </Link>

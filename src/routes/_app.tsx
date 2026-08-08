@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_app")({
 function AppLayout() {
   return (
     <AthxAccessGate>
-      <div className="min-h-screen flex bg-background text-foreground">
+      <div className="min-h-dvh flex bg-background text-foreground">
         <Sidebar />
         <div className="flex-1 min-w-0 flex flex-col">
           <MobileHeader />

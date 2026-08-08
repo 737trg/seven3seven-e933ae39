@@ -47,14 +47,14 @@ function ProgrammePage() {
                     <div className="min-w-0">
                       <p className="text-bone text-sm flex items-center gap-2">
                         {done && <CheckCircle2 className="h-3.5 w-3.5 text-signal shrink-0" />}
-                        <span className="truncate">{s.title}</span>
+                        <span className="min-w-0 break-words">{s.title}</span>
                         {optional && <span className="ml-1 inline-block text-[9px] uppercase tracking-widest border border-border px-1.5 py-0.5 text-foreground-muted">Optional</span>}
                       </p>
-                      <p className="text-foreground-muted text-[10px] uppercase tracking-widest mt-1 truncate">
+                      <p className="text-foreground-muted text-[10px] uppercase tracking-widest mt-1 break-words">
                         {s.recommended_day} · {s.pillar} · {s.duration} · {s.purpose}
                       </p>
                     </div>
-                    <Link to="/my-programmes/hybrid-race-plan/programme/s/$sessionId" params={{ sessionId: id }} className="shrink-0 text-foreground-muted hover:text-bone inline-flex items-center gap-2 text-[10px] uppercase tracking-widest">
+                    <Link to="/my-programmes/hybrid-race-plan/programme/s/$sessionId" params={{ sessionId: id }} className="tap press shrink-0 text-foreground-muted hover:text-bone inline-flex items-center justify-end gap-2 text-[10px] uppercase tracking-widest">
                       View <ArrowRight className="h-3 w-3" />
                     </Link>
                   </li>

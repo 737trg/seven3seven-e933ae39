@@ -42,16 +42,16 @@ function ProgrammePage() {
                 return (
                   <li key={id} className="py-4 flex items-center justify-between gap-4">
                     <div className="min-w-0">
-                      <p className="text-bone text-sm flex items-center gap-2">
+                      <p className="text-bone text-sm flex flex-wrap items-center gap-2">
                         {done && <CheckCircle2 className="h-3.5 w-3.5 text-signal shrink-0" />}
-                        <span className="truncate">Session {s.session} — {s.title}</span>
+                        <span className="min-w-0 break-words">Session {s.session} — {s.title}</span>
                         {optional && <span className="ml-1 inline-block text-[9px] uppercase tracking-widest border border-border px-1.5 py-0.5 text-foreground-muted">Optional</span>}
                       </p>
-                      <p className="text-foreground-muted text-[10px] uppercase tracking-widest mt-1 truncate">
+                      <p className="text-foreground-muted text-[10px] uppercase tracking-widest mt-1 break-words">
                         {s.duration} · {s.purpose}
                       </p>
                     </div>
-                    <Link to="/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId" params={{ sessionId: id }} className="shrink-0 text-foreground-muted hover:text-bone inline-flex items-center gap-2 text-[10px] uppercase tracking-widest">
+                    <Link to="/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId" params={{ sessionId: id }} className="tap press shrink-0 text-foreground-muted hover:text-bone inline-flex items-center justify-end gap-2 text-[10px] uppercase tracking-widest">
                       View <ArrowRight className="h-3 w-3" />
                     </Link>
                   </li>

@@ -30,7 +30,7 @@ export function BottomNav() {
             <Link
               key={it.to}
               to={it.to}
-              className={`flex items-center gap-1.5 text-[10px] uppercase tracking-widest ${
+              className={`press min-h-11 flex items-center gap-1.5 text-[10px] uppercase tracking-widest ${
                 active ? "text-bone" : "text-foreground-muted"
               }`}
             >
@@ -48,7 +48,7 @@ export function BottomNav() {
             <li key={it.to}>
               <Link
                 to={it.to}
-                className={`flex flex-col items-center gap-1 py-2.5 text-[10px] uppercase tracking-widest ${
+                className={`press min-h-14 flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-widest ${
                   active ? "text-bone" : "text-foreground-muted"
                 }`}
               >

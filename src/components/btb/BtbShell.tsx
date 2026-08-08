@@ -34,8 +34,8 @@ export function BtbShell({ children, eyebrow, title }: { children: ReactNode; ey
   if (!authLoading && !entLoading && !items.some((i) => i.slug === "basic-training-blueprint-plus")) return <GateNoEntitlement />;
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex">
-      <aside className="hidden lg:flex flex-col w-[240px] shrink-0 border-r border-border bg-background sticky top-0 h-screen px-6 py-8">
+    <div className="min-h-dvh bg-background text-foreground flex">
+      <aside className="hidden lg:flex flex-col w-[240px] shrink-0 border-r border-border bg-background sticky top-0 h-dvh px-6 py-8">
         <div className="mb-12">
           <Wordmark size="lg" />
           <p className="eyebrow mt-3">BTB+</p>

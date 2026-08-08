@@ -149,7 +149,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   }, [s, idx, elapsed, done, restartPrompt]);
 
   if (!s) {
-    return <div className="min-h-screen flex items-center justify-center text-foreground-muted">Session not found.</div>;
+    return <div className="min-h-dvh flex items-center justify-center text-foreground-muted">Session not found.</div>;
   }
 
   const block = s.blocks[idx];
@@ -225,23 +225,23 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-dvh bg-background text-foreground flex flex-col">
       {/* HUD */}
-      <header className="border-b border-border">
-        <div className="max-w-[720px] mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur safe-t">
+        <div className="max-w-[720px] mx-auto px-5 lg:px-10 py-3 flex items-center gap-3">
           <Link
             to={programme?.backHref || `/programme/s/${s.id}`}
-            className="text-foreground-muted hover:text-bone inline-flex items-center gap-1 text-xs uppercase tracking-widest"
+            className="tap press shrink-0 text-foreground-muted hover:text-bone inline-flex items-center gap-1 text-xs uppercase tracking-widest"
           >
-            <X className="h-4 w-4" /> Exit
+            <X className="h-4 w-4" /> <span className="hidden sm:inline">Exit</span>
           </Link>
-          <div className="text-center">
+          <div className="min-w-0 flex-1 text-center">
             <p className="eyebrow">{s.day} · Week {s.weekNumber === 8 ? "RW" : s.weekNumber}</p>
-            <p className="font-display text-bone text-sm">{s.title}</p>
+            <p className="font-display text-bone text-sm leading-tight break-words">{s.title}</p>
           </div>
           <span
             suppressHydrationWarning
-            className="tabular text-bone font-display text-lg w-20 text-right"
+            className="tabular text-bone font-display text-base sm:text-lg w-16 sm:w-20 text-right shrink-0"
           >
             {formatClock(elapsed)}
           </span>
@@ -259,7 +259,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
                   title={b.title}
                   aria-label={`Block ${i + 1}: ${b.title}`}
                   aria-current={isCurrent ? "step" : undefined}
-                  className={`shrink-0 h-8 min-w-8 px-2 text-[10px] font-display tabular uppercase tracking-widest border transition-colors ${
+                  className={`press shrink-0 h-9 min-w-9 px-2 text-[10px] font-display tabular uppercase tracking-widest border transition-colors ${
                     isCurrent
                       ? "border-signal bg-signal/15 text-bone"
                       : isDone
@@ -286,15 +286,15 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
           <p className="eyebrow mb-4">
             Block {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {block.timeWindow ?? ""}
           </p>
-          <h1 className="font-display font-bold text-bone text-3xl lg:text-5xl leading-[0.95] tracking-tight">
+          <h1 className="display-lg text-bone">
             {block.title}
           </h1>
 
-          <ul className="mt-10 space-y-3">
+          <ul className="mt-8 md:mt-10 space-y-3.5">
             {block.lines.map((l, i) => (
-              <li key={i} className="flex items-start gap-3 text-bone text-base lg:text-lg leading-snug">
-                <span className="text-signal h-1.5 w-1.5 rounded-full mt-2.5 shrink-0" />
-                <span>{l}</span>
+              <li key={i} className="flex items-start gap-3 text-bone text-[1.0625rem] lg:text-lg leading-snug">
+                <span className="bg-signal h-1.5 w-1.5 rounded-full mt-2.5 shrink-0" />
+                <span className="min-w-0 break-words">{l}</span>
               </li>
             ))}
           </ul>
@@ -341,13 +341,13 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
           <div className="mt-10 space-y-3">
             <button
               onClick={() => setLogOpen(true)}
-              className="w-full h-11 inline-flex items-center justify-center gap-2 text-[11px] font-display uppercase tracking-widest border border-border text-foreground-muted hover:text-bone hover:border-bone transition-colors rounded-[4px]"
+              className="press w-full h-12 inline-flex items-center justify-center gap-2 text-[11px] font-display uppercase tracking-widest border border-border text-foreground-muted hover:text-bone hover:border-bone transition-colors rounded-[4px]"
             >
               {todaysResult ? "Edit logged result" : "Log work"}
             </button>
             <button
               onClick={requestComplete}
-              className={`w-full h-14 inline-flex items-center justify-center gap-2 text-sm font-display uppercase tracking-wide rounded-[4px] transition-colors ${
+              className={`press w-full h-14 inline-flex items-center justify-center gap-2 text-sm font-display uppercase tracking-wide rounded-[4px] transition-colors ${
                 done[block.id]
                   ? "bg-signal text-bone"
                   : "bg-surface-raised text-bone hover:bg-surface-raised/80"
@@ -361,40 +361,40 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
       </main>
 
       <footer
-        className="border-t border-border bg-background"
+        className="sticky bottom-0 z-30 border-t border-border bg-background/95 backdrop-blur"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <div className="max-w-[720px] mx-auto px-5 lg:px-10 py-4 flex items-center gap-3">
+        <div className="max-w-[720px] mx-auto px-5 lg:px-10 py-3 flex items-center gap-2 sm:gap-3">
           <button
             onClick={prev}
             disabled={idx === 0}
-            className="h-12 w-12 border border-border text-bone disabled:opacity-30 flex items-center justify-center"
+            className="press h-12 w-12 shrink-0 border border-border text-bone disabled:opacity-30 flex items-center justify-center"
             aria-label="Previous block"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={() => setPaused(!paused)}
-            className="h-12 px-4 border border-border text-bone inline-flex items-center gap-2 text-xs uppercase tracking-widest"
+            className="press h-12 px-3 sm:px-4 shrink-0 border border-border text-bone inline-flex items-center gap-2 text-xs uppercase tracking-widest"
           >
             {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
-            {paused ? "Resume" : "Pause"}
+            <span className="hidden sm:inline">{paused ? "Resume" : "Pause"}</span>
           </button>
-          <span className="tabular text-foreground-muted text-xs ml-auto flex flex-col items-end leading-tight">
+          <span className="tabular text-foreground-muted text-[11px] ml-auto flex flex-col items-end leading-tight">
             <span className="text-bone">Block {idx + 1}/{total}</span>
             <span>Completed {doneCount}/{total}</span>
           </span>
           {idx < total - 1 ? (
             <button
               onClick={next}
-              className="h-12 px-5 bg-bone text-obsidian font-display text-xs uppercase tracking-wide inline-flex items-center gap-2"
+              className="press h-12 px-4 sm:px-5 shrink-0 bg-bone text-obsidian font-display text-xs uppercase tracking-wide inline-flex items-center gap-2"
             >
               Next <ChevronRight className="h-4 w-4" />
             </button>
           ) : (
             <button
               onClick={finish}
-              className="h-12 px-5 bg-signal text-bone font-display text-xs uppercase tracking-wide inline-flex items-center gap-2"
+              className="press h-12 px-4 sm:px-5 shrink-0 bg-signal text-bone font-display text-xs uppercase tracking-wide inline-flex items-center gap-2"
             >
               Finish
             </button>
