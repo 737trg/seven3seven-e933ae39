@@ -14,9 +14,15 @@ export type NextSession = {
   done: number;
 };
 
-type Entry = { id: string; title: string; week: number };
+export type SessionEntry = { id: string; title: string; week: number };
+type Entry = SessionEntry;
 
 function entriesFor(slug: string): Entry[] {
+  return programmeSessionEntries(slug);
+}
+
+/** Ordered core sessions for a programme slug, straight from its manifest. */
+export function programmeSessionEntries(slug: string): SessionEntry[] {
   try {
     if (slug === "hybrid-race-plan") {
       void HRP;
@@ -39,6 +45,13 @@ function entriesFor(slug: string): Entry[] {
     /* manifest shape drift should never break the dashboard */
   }
   return [];
+}
+
+/** Week + total-core-session count for a finished session, for progress writes. */
+export function sessionProgressMeta(slug: string, sessionId: string): { week: number | null; total: number } {
+  const entries = programmeSessionEntries(slug);
+  const hit = entries.find((e) => e.id === sessionId);
+  return { week: hit?.week ?? null, total: entries.length };
 }
 
 function runnerHref(programme: CustomerProgramme, id: string): string {

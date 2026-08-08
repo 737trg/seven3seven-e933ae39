@@ -19,6 +19,7 @@ export function ProgrammeListCard({
   onPin: (p: CustomerProgramme) => void;
 }) {
   const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
+  const showProgress = !!programme.enrolment && (pct > 0 || programme.completions.length > 0);
 
   return (
     <article className="relative border border-border/60 bg-surface/20 hover:border-bone/40 transition-colors">
@@ -40,7 +41,7 @@ export function ProgrammeListCard({
           <li className="border border-border/60 px-2 py-1 text-bone leading-none">{stateLabel}</li>
         </ul>
 
-        {programme.enrolment && (
+        {showProgress && (
           <div className="mt-5">
             <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
               <span>Progress</span>
