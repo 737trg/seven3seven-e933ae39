@@ -94,12 +94,12 @@ export const Route = createFileRoute("/_marketing/")({
       {
         name: "description",
         content:
-          "Premium hybrid fitness programmes built to develop strength, endurance and the ability to perform when it counts. Buy once. Follow interactively. Keep the PDF.",
+          "Join the SEVEN3SEVEN Club for £14.99/month and unlock every hybrid training programme, or buy one outright from £19.99 and keep it for life.",
       },
       { property: "og:title", content: "SEVEN3SEVEN — Hybrid Fitness | Performance" },
       {
         property: "og:description",
-        content: "Structured hybrid programmes. Built to be followed, not filed away.",
+        content: "Every programme for £14.99/month, or buy one outright. Built to be followed, not filed away.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE}/` },
@@ -125,6 +125,18 @@ export const Route = createFileRoute("/_marketing/")({
           "@type": "WebSite",
           name: "SEVEN3SEVEN",
           url: SITE,
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
         }),
       },
     ],
@@ -156,43 +168,50 @@ function HomePage() {
         <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-28 md:pt-32">
           <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
           <h1 className="mt-4 md:mt-5 display-xl text-bone max-w-[16ch]">
-            Prepare for what<br />you're training for.
+            Train like it matters.
           </h1>
           <p className="mt-5 lede max-w-[52ch]">
             Structured 8–12 week programmes for military preparation, competition and hybrid
-            racing. Follow every session in the app, log your work, and keep the full PDF.
+            racing. Join the Club for {CLUB_PRICE} a month and get everything, or buy one
+            programme outright and keep it for life.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link to="/programmes" className="btn-signal press tap w-full sm:w-auto text-center">
-              Buy your programme
+            <Link to="/pricing" className="btn-signal press tap w-full sm:w-auto text-center">
+              Join the Club — {CLUB_PRICE}/mo
               <ArrowRight className="h-3.5 w-3.5 shrink-0" />
             </Link>
-            <a href="#choose" className="btn-ghost press tap w-full sm:w-auto">
-              Find your programme
-            </a>
+            <Link to="/programmes" className="btn-ghost press tap w-full sm:w-auto text-center">
+              Buy a programme — from {FROM_PRICE}
+            </Link>
           </div>
           <p className="mt-4 eyebrow text-bone/60">
-            From {price("basic-training-blueprint-plus")} · one payment, lifetime access
+            Cancel anytime · Lifetime access on one-off plans · Secure Stripe checkout
           </p>
         </div>
       </section>
 
-      {/* TRUST STRIP */}
-      <section aria-label="What's included" className="border-y border-border/60 bg-background">
-        <div className="max-w-[1600px] mx-auto container-x py-5 grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-5 md:gap-x-6">
-          {[
-            "Structured 8–12 week plan",
-            "Interactive session app",
-            "Full PDF you keep",
-            "Secure Stripe checkout",
-          ].map((t) => (
-            <span key={t} className="flex items-start gap-2.5 min-w-0">
-              <Check className="h-3.5 w-3.5 shrink-0 text-signal mt-[2px]" strokeWidth={2.5} />
-              <span className="min-w-0 font-display uppercase text-[10px] md:text-[11px] leading-[1.5] tracking-[0.16em] md:tracking-[0.2em] text-bone/80">
-                {t}
-              </span>
-            </span>
-          ))}
+      {/* TWO DOORS — make the decision in the first two screens */}
+      <section aria-label="Ways to train" className="border-y border-border/60 bg-background">
+        <div className="max-w-[1440px] mx-auto container-x py-12 lg:py-16 grid gap-4 md:gap-5 md:grid-cols-2">
+          <DoorCard
+            eyebrow="SEVEN3SEVEN Club"
+            price={CLUB_PRICE}
+            unit="/ month"
+            line="Everything we build, while you're a member."
+            points={CLUB_POINTS}
+            cta="Join the Club"
+            to="/pricing"
+            primary
+          />
+          <DoorCard
+            eyebrow="One-off programme"
+            price={FROM_PRICE}
+            unit="once"
+            line="Buy a plan outright and own it forever."
+            points={ONEOFF_POINTS}
+            cta="Browse programmes"
+            to="/programmes"
+          />
         </div>
       </section>
 
