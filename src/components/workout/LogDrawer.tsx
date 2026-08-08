@@ -20,6 +20,8 @@ import type {
 import { Check, Plus, X, Minus, Timer } from "lucide-react";
 
 const MIRRORED_SLUGS: Record<string, string> = {
+  // Local programme id → product slug.
+  "athx-2026-nico": "athx-2026",
   "athx-2026": "athx-2026",
   "basic-training-blueprint-plus": "basic-training-blueprint-plus",
   "hybrid-race-plan": "hybrid-race-plan",
