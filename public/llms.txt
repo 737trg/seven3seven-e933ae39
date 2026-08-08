@@ -2,16 +2,18 @@
 
 > Hybrid fitness and performance brand producing structured strength, endurance and conditioning programmes built to be followed, not filed away.
 
-SEVEN3SEVEN (also known as 737 TRG) is founded by Nico, a former British Army soldier and All Arms Physical Training Instructor. Programmes combine an interactive app experience with a permanent downloadable PDF.
+SEVEN3SEVEN is founded by Nico, a former British Army soldier and All Arms Physical Training Instructor. Every programme combines an interactive web app (session-by-session tracking, timers, logging, progress and personal bests) with a permanent downloadable PDF.
+
+Each programme costs £19.99 GBP as a one-off payment with lifetime access. SEVEN3SEVEN is an independent brand and is not affiliated with, endorsed by or partnered with the British Army, ATHX, HYROX or Hybrid Games.
 
 ## Pages
 
 - [Home](/): Brand overview and current programmes.
 - [About](/about): The story behind SEVEN3SEVEN and its founder.
 - [Programmes](/programmes): Full catalogue of hybrid training programmes.
-- [Basic Training Blueprint+](/programmes/basic-training-blueprint-plus): 12-week Army assessment and Basic Training preparation programme.
-- [S.E.M 2026](/programmes/sem-2026): 8-week hybrid competition programme for ATHX-style athletes.
-- [Hybrid Race Plan](/programmes/hybrid-race-plan): 12-week hybrid race programme for HYROX-style and Hybrid Games-style events.
+- [Basic Training Blueprint+](/programmes/basic-training-blueprint-plus): 12-week British Army assessment and Basic Training preparation programme — mid-thigh pull, medicine-ball throw, 2 km run and military work capacity. £19.99.
+- [S.E.M 2026](/programmes/sem-2026): 8-week hybrid competition programme built around strength, endurance and MetCon for ATHX-style athletes. £19.99.
+- [Hybrid Race Plan](/programmes/hybrid-race-plan): 12-week hybrid race programme for HYROX-style and Hybrid Games-style events. £19.99.
 - [Apparel](/apparel): SEVEN3SEVEN apparel.
 
 ## Optional
