@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
+import { useMembership } from "@/lib/useMembership";
+import { createMembershipCheckout, createMembershipPortal } from "@/lib/membership.functions";
+import { getStripeEnvironment } from "@/lib/stripe";
 import { ArrowRight, LogOut } from "lucide-react";
 
 export const Route = createFileRoute("/_marketing/account")({
@@ -25,6 +28,8 @@ type ProfileForm = {
 function AccountPage() {
   const { user, loading } = useAuth();
   const { items: entitled } = useEntitlements(user?.id);
+  const membership = useMembership(user?.id);
+  const [membershipBusy, setMembershipBusy] = useState(false);
   const navigate = useNavigate();
 
   const [form, setForm] = useState<ProfileForm>({
@@ -191,7 +196,9 @@ function AccountPage() {
               <li key={e.product_id} className="py-4 flex items-center justify-between gap-4">
                 <div>
                   <p className="text-bone font-display uppercase tracking-widest text-sm">{e.name}</p>
-                  <p className="text-foreground-muted text-xs mt-1">Lifetime access</p>
+                  <p className="text-foreground-muted text-xs mt-1">
+                    {e.via_membership ? "Included with membership" : "Lifetime access"}
+                  </p>
                 </div>
                 {e.base_path ? (
                   <a href={e.base_path} className="inline-flex items-center gap-2 text-bone text-xs uppercase tracking-widest hover:text-signal">
@@ -201,6 +208,69 @@ function AccountPage() {
               </li>
             ))}
           </ul>
+        )}
+      </div>
+
+      <div className="mt-16 border-t border-border/60 pt-8 flex items-center justify-between">
+        {null}
+      </div>
+
+      {/* Membership */}
+      <div className="mt-16">
+        <h2 className="eyebrow border-b border-border/60 pb-4 mb-6">Membership</h2>
+        {membership.isMember ? (
+          <div className="space-y-3">
+            <p className="text-bone text-sm">
+              SEVEN3SEVEN Club — {membership.cancelAtPeriodEnd ? "ends" : "renews"}{" "}
+              {membership.renewsOn ? new Date(membership.renewsOn).toLocaleDateString("en-GB") : "—"}
+            </p>
+            <button
+              onClick={async () => {
+                setMembershipBusy(true);
+                const res = await createMembershipPortal({
+                  data: { returnUrl: `${window.location.origin}/account`, environment: getStripeEnvironment() },
+                });
+                setMembershipBusy(false);
+                if ("url" in res) window.open(res.url, "_blank", "noopener");
+              }}
+              disabled={membershipBusy}
+              className="inline-flex items-center gap-2 h-11 px-5 border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display hover:border-bone"
+            >
+              Manage membership
+            </button>
+          </div>
+        ) : membership.isLegacy ? (
+          <p className="text-foreground-muted text-sm">
+            You were with us before the Club launched — the coaching, PB and metrics tools stay
+            unlocked on your account for free.
+          </p>
+        ) : (
+          <div className="space-y-3">
+            <p className="text-foreground-muted text-sm">
+              Not a member. £14.99/month unlocks every programme plus the full coaching toolkit.
+            </p>
+            <button
+              onClick={async () => {
+                setMembershipBusy(true);
+                const res = await createMembershipCheckout({
+                  data: {
+                    returnUrl: `${window.location.origin}/checkout/success`,
+                    cancelUrl: `${window.location.origin}/account`,
+                    environment: getStripeEnvironment(),
+                  },
+                });
+                setMembershipBusy(false);
+                if ("url" in res && res.url) window.location.href = res.url;
+              }}
+              disabled={membershipBusy}
+              className="inline-flex items-center gap-2 h-11 px-5 bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display"
+            >
+              Join the Club
+            </button>
+            <Link to="/pricing" className="block text-foreground-muted text-xs uppercase tracking-widest hover:text-bone">
+              See what&rsquo;s included <ArrowRight className="inline h-3 w-3" />
+            </Link>
+          </div>
         )}
       </div>
 
