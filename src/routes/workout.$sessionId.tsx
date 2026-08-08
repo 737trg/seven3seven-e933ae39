@@ -9,6 +9,8 @@ import {
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { resolveSession, type ResolvedSession } from "@/lib/anySession";
 import { supabase } from "@/integrations/supabase/client";
+import { sessionProgressMeta } from "@/lib/nextSession";
+import { recordSessionCompletion } from "@/lib/progress.functions";
 import { ChevronLeft, ChevronRight, Pause, Play, X, Check } from "lucide-react";
 import { formatClock } from "@/lib/programmeUtils";
 import type { SessionBlock } from "@/types/programme";
