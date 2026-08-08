@@ -19,15 +19,16 @@ import type {
 } from "@/types/programme";
 import { Check, Plus, X, Minus, Timer } from "lucide-react";
 
-const NON_ATHX_SLUGS: Record<string, string> = {
+const MIRRORED_SLUGS: Record<string, string> = {
+  "athx-2026": "athx-2026",
   "basic-training-blueprint-plus": "basic-training-blueprint-plus",
   "hybrid-race-plan": "hybrid-race-plan",
   "sem-2026": "sem-2026",
 };
 
 async function mirrorResultToSupabase(result: BlockResult) {
-  const slug = NON_ATHX_SLUGS[result.programmeId];
-  if (!slug) return; // ATHX or unknown — leave existing behaviour untouched.
+  const slug = MIRRORED_SLUGS[result.programmeId];
+  if (!slug) return; // Unknown programme — nothing to mirror.
   try {
     const { data: userRes } = await supabase.auth.getUser();
     const uid = userRes?.user?.id;
