@@ -10,6 +10,9 @@ import { computeStreak } from "@/lib/streak";
 import { nextSessionFor } from "@/lib/nextSession";
 import { StreakCard } from "@/components/dashboard/StreakCard";
 import { PersonalRecordsPanel } from "@/components/dashboard/PersonalRecordsPanel";
+import { PbTrendPanel } from "@/components/dashboard/PbTrendPanel";
+import { BenchmarksPanel } from "@/components/dashboard/BenchmarksPanel";
+import { BodyMetricsPanel } from "@/components/dashboard/BodyMetricsPanel";
 import { StatRow } from "@/components/dashboard/StatRow";
 import { NextSessionCard } from "@/components/dashboard/NextSessionCard";
 import { ProgrammeListCard } from "@/components/dashboard/ProgrammeListCard";
@@ -185,6 +188,18 @@ function MyProgrammesPage() {
 
           <SidebarCard title="Personal records">
             <PersonalRecordsPanel userId={user?.id} defaultUnit={prefs.units} />
+          </SidebarCard>
+
+          <SidebarCard title="PB trend">
+            <PbTrendPanel userId={user?.id} />
+          </SidebarCard>
+
+          <SidebarCard title="Standards">
+            <BenchmarksPanel userId={user?.id} />
+          </SidebarCard>
+
+          <SidebarCard title="Body metrics">
+            <BodyMetricsPanel userId={user?.id} units={prefs.units} />
           </SidebarCard>
 
           <SidebarCard title="Recent activity">
