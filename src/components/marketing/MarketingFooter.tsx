@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube } from "lucide-react";
 import { Seven3SevenLogo } from "./Seven3SevenLogo";
+import logoAsset from "@/assets/seven3seven-logo-v2.png.asset.json";
 
 export function MarketingFooter() {
   return (
