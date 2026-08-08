@@ -289,7 +289,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
           <p className="eyebrow mb-4">
             Block {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {block.timeWindow ?? ""}
           </p>
-          {idx === 0 && (
+          {idx === 0 && club && (
             <div className="mb-6">
               <ReadinessCheck
                 input={readiness.input}
