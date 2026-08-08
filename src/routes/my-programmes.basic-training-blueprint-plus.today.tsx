@@ -74,6 +74,7 @@ function TodayPage() {
                   <div className="min-w-0">
                     <p className="text-bone text-sm truncate">{s.title}</p>
                     <p className="text-foreground-muted text-[10px] uppercase tracking-widest">Session {s.session} · {s.duration}</p>
+                    <SessionScheduleControls sessionId={id} override={schedule.bySession[id]} onSet={schedule.set} onClear={schedule.clear} />
                   </div>
                   <Link to="/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId" params={{ sessionId: id }} className="text-foreground-muted hover:text-bone"><ArrowRight className="h-4 w-4" /></Link>
                 </li>

@@ -78,6 +78,7 @@ function TodayPage() {
                   <div className="min-w-0">
                     <p className="text-bone text-sm truncate">{s.title}</p>
                     <p className="text-foreground-muted text-[10px] uppercase tracking-widest">{s.recommended_day} · {s.pillar} · {s.duration}{!isCore(s) && " · OPTIONAL"}</p>
+                    <SessionScheduleControls sessionId={id} override={schedule.bySession[id]} onSet={schedule.set} onClear={schedule.clear} />
                   </div>
                   <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: id }} className="text-foreground-muted hover:text-bone"><ArrowRight className="h-4 w-4" /></Link>
                 </li>
