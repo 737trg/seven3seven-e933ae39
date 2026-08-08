@@ -1,12 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+const SITE = "https://737trg.com";
+
 export const Route = createFileRoute("/_marketing/legal/terms")({
   component: TermsPage,
   head: () => ({
     meta: [
       { title: "Terms of Service — SEVEN3SEVEN" },
-      { name: "description", content: "SEVEN3SEVEN terms of service and purchase terms." },
+      {
+        name: "description",
+        content:
+          "Terms of service for buying and using SEVEN3SEVEN hybrid training programmes, including licence, access and health disclaimers.",
+      },
+      { property: "og:title", content: "Terms of Service — SEVEN3SEVEN" },
+      {
+        property: "og:description",
+        content: "Purchase and usage terms for SEVEN3SEVEN training programmes.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE}/legal/terms` },
     ],
+    links: [{ rel: "canonical", href: `${SITE}/legal/terms` }],
   }),
 });
 

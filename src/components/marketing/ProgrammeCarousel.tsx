@@ -99,7 +99,7 @@ export function ProgrammeCarousel() {
           >
             <img
               src={p.image}
-              alt={p.title}
+              alt={`${p.title} — SEVEN3SEVEN hybrid training programme`}
               draggable={false}
               className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.04]"
               loading="lazy"

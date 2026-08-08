@@ -1,12 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+const SITE = "https://737trg.com";
+
 export const Route = createFileRoute("/_marketing/legal/privacy")({
   component: PrivacyPage,
   head: () => ({
     meta: [
       { title: "Privacy Policy — SEVEN3SEVEN" },
-      { name: "description", content: "SEVEN3SEVEN privacy policy." },
+      {
+        name: "description",
+        content:
+          "How SEVEN3SEVEN collects, uses and stores your data when you buy and follow a hybrid training programme.",
+      },
+      { property: "og:title", content: "Privacy Policy — SEVEN3SEVEN" },
+      {
+        property: "og:description",
+        content: "How SEVEN3SEVEN handles your account and payment data.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE}/legal/privacy` },
     ],
+    links: [{ rel: "canonical", href: `${SITE}/legal/privacy` }],
   }),
 });
 
