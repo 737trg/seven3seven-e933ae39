@@ -53,8 +53,8 @@ export function MarketingFooter() {
           </FooterCol>
 
           <FooterCol title="Train with purpose" className="col-span-2 md:col-span-2">
-            <span className="text-bone text-xs">Drop 01 — in preparation</span>
-            <span className="text-foreground-muted text-xs">First programmes — in development</span>
+            <span className="text-bone text-xs">Programmes available now — £19.99</span>
+            <span className="text-foreground-muted text-xs">One payment. Lifetime access.</span>
           </FooterCol>
         </div>
 
