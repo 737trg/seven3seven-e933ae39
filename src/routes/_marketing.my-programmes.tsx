@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Activity, CalendarDays, Trophy } from "lucide-react";
+import { ArrowRight, Activity, CalendarDays, Trophy, Star, Flame } from "lucide-react";
 import { useEffect, useRef } from "react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { useCustomerDashboard, type CustomerProgramme, type ActivityItem } from "@/lib/useCustomerDashboard";
+import { usePreferences } from "@/lib/usePreferences";
 import { recoverPendingPurchases } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
@@ -23,6 +24,7 @@ function MyProgrammesPage() {
   const { user, loading: authLoading } = useAuth();
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
+  const { prefs, update: updatePrefs } = usePreferences(user?.id);
   const recoveryRef = useRef<string | null>(null);
   useEffect(() => {
     if (!user?.id) return;
@@ -62,6 +64,20 @@ function MyProgrammesPage() {
   const ready = dashboard.programmes.filter((p) => p.state === "ready");
   const active = dashboard.programmes.filter((p) => p.state === "active");
   const completed = dashboard.programmes.filter((p) => p.state === "completed");
+  // The athlete's highlighted programme: their explicit pick, otherwise the
+  // most recently trained active programme, otherwise the first ready one.
+  const focus =
+    dashboard.programmes.find((p) => p.product_id === prefs.primary_product_id) ??
+    [...active].sort((a, b) =>
+      (b.enrolment?.updated_at ?? "").localeCompare(a.enrolment?.updated_at ?? ""),
+    )[0] ??
+    ready[0];
+  const setPrimary = (programme: CustomerProgramme) => {
+    void updatePrefs({
+      primary_product_id:
+        prefs.primary_product_id === programme.product_id ? null : programme.product_id,
+    });
+  };
   const progressPct = dashboard.programmes.length
     ? Math.round(
         dashboard.programmes.reduce((sum, programme) => sum + (programme.enrolment?.completion_pct ?? 0), 0) /
@@ -105,13 +121,32 @@ function MyProgrammesPage() {
 
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-12 lg:gap-x-12 xl:gap-x-16">
         <div className="space-y-14 lg:space-y-16 lg:pr-4 xl:pr-8">
-          <ProgrammeGroup title="Active" empty="No active programmes" programmes={active} />
-          <ProgrammeGroup title="Ready to start" empty="No programmes ready to start" programmes={ready} />
+          {focus && <FocusCard programme={focus} />}
+          <ProgrammeGroup
+            title="Active"
+            empty="No active programmes"
+            programmes={active}
+            primaryId={prefs.primary_product_id}
+            onPin={setPrimary}
+          />
+          <ProgrammeGroup
+            title="Ready to start"
+            empty="No programmes ready to start"
+            programmes={ready}
+            primaryId={prefs.primary_product_id}
+            onPin={setPrimary}
+          />
           <div>
             <p className="eyebrow mb-4">Upcoming</p>
             <Empty text="No upcoming programmes" />
           </div>
-          <ProgrammeGroup title="Completed" empty="No completed programmes yet" programmes={completed} />
+          <ProgrammeGroup
+            title="Completed"
+            empty="No completed programmes yet"
+            programmes={completed}
+            primaryId={prefs.primary_product_id}
+            onPin={setPrimary}
+          />
         </div>
 
         <div aria-hidden className="hidden lg:block w-px bg-border/60" />
@@ -153,7 +188,60 @@ function MyProgrammesPage() {
   );
 }
 
-function ProgrammeGroup({ title, empty, programmes }: { title: string; empty: string; programmes: CustomerProgramme[] }) {
+function FocusCard({ programme }: { programme: CustomerProgramme }) {
+  const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
+  return (
+    <article className="border border-signal/40 bg-surface/40 p-6 md:p-8">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
+        <div className="min-w-0">
+          <p className="eyebrow text-signal">Your focus</p>
+          <h2 className="font-display font-bold text-bone text-3xl md:text-5xl tracking-[-0.025em] mt-2 leading-[0.95]">
+            {programme.name}
+          </h2>
+        </div>
+        <Flame className="h-6 w-6 text-signal shrink-0" strokeWidth={1.5} />
+      </div>
+      <div className="mt-6 max-w-md">
+        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
+          <span>{stateLabel(programme.state)}</span>
+          <span className="text-bone tabular">{pct}%</span>
+        </div>
+        <div className="h-[2px] bg-surface-raised overflow-hidden">
+          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link
+          to={programmePath(programme, "continue")}
+          className="h-12 px-6 inline-flex items-center gap-2 bg-signal text-bone font-display text-[11px] uppercase tracking-[0.28em] rounded-[4px]"
+        >
+          {programme.state === "ready" ? "Start training" : "Continue training"}
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        <Link
+          to={programmePath(programme, "cover")}
+          className="h-12 px-6 inline-flex items-center border border-border text-bone font-display text-[11px] uppercase tracking-[0.28em] rounded-[4px] hover:border-bone"
+        >
+          Programme
+        </Link>
+      </div>
+    </article>
+  );
+}
+
+function ProgrammeGroup({
+  title,
+  empty,
+  programmes,
+  primaryId,
+  onPin,
+}: {
+  title: string;
+  empty: string;
+  programmes: CustomerProgramme[];
+  primaryId: string | null;
+  onPin: (p: CustomerProgramme) => void;
+}) {
   return (
     <div>
       <p className="eyebrow mb-4">{title}</p>
@@ -162,7 +250,13 @@ function ProgrammeGroup({ title, empty, programmes }: { title: string; empty: st
       ) : (
         <div className="space-y-10">
           {programmes.map((programme, index) => (
-            <ProgrammeCard key={programme.product_id} programme={programme} index={index + 1} />
+            <ProgrammeCard
+              key={programme.product_id}
+              programme={programme}
+              index={index + 1}
+              isPrimary={primaryId === programme.product_id}
+              onPin={onPin}
+            />
           ))}
         </div>
       )}
@@ -170,7 +264,17 @@ function ProgrammeGroup({ title, empty, programmes }: { title: string; empty: st
   );
 }
 
-function ProgrammeCard({ programme, index }: { programme: CustomerProgramme; index: number }) {
+function ProgrammeCard({
+  programme,
+  index,
+  isPrimary,
+  onPin,
+}: {
+  programme: CustomerProgramme;
+  index: number;
+  isPrimary: boolean;
+  onPin: (p: CustomerProgramme) => void;
+}) {
   const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
   const href = programmePath(programme, programme.state === "active" ? "continue" : "cover");
   const cta = programme.state === "ready" ? "Start programme" : programme.state === "completed" ? "View programme" : "Continue training";
@@ -178,10 +282,28 @@ function ProgrammeCard({ programme, index }: { programme: CustomerProgramme; ind
   return (
     <article className="border-t border-border/60 pt-8">
       <div className="flex flex-col">
-        <p className="eyebrow text-foreground-muted">{programme.collection} · {String(index).padStart(2, "0")}</p>
-        <h3 className="font-display font-bold text-bone text-3xl lg:text-6xl tracking-[-0.025em] mt-2">
-          {programme.name}
-        </h3>
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
+          <div className="min-w-0">
+            <p className="eyebrow text-foreground-muted">{programme.collection} · {String(index).padStart(2, "0")}</p>
+            <h3 className="font-display font-bold text-bone text-3xl lg:text-6xl tracking-[-0.025em] mt-2">
+              {programme.name}
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={() => onPin(programme)}
+            aria-pressed={isPrimary}
+            title={isPrimary ? "Remove as focus programme" : "Make this my focus programme"}
+            className={`shrink-0 h-10 w-10 border inline-flex items-center justify-center transition-colors ${
+              isPrimary
+                ? "border-signal text-signal"
+                : "border-border text-foreground-muted hover:text-bone hover:border-bone"
+            }`}
+          >
+            <Star className="h-4 w-4" fill={isPrimary ? "currentColor" : "none"} />
+            <span className="sr-only">{isPrimary ? "Focus programme" : "Set as focus programme"}</span>
+          </button>
+        </div>
         <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
           <li className="inline-flex items-center gap-2"><CalendarDays className="h-3 w-3" />{programme.duration_weeks ? `${programme.duration_weeks} weeks` : "Programme"}</li>
           <li className="inline-flex items-center gap-2"><Trophy className="h-3 w-3" />{stateLabel(programme.state)}</li>

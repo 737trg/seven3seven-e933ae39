@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/
 import { useIsMobile } from "@/hooks/use-mobile";
 import { store } from "@/lib/store";
 import { formatClock } from "@/lib/programmeUtils";
+import { cueEnd, cueTick } from "@/lib/alertCue";
 import { supabase } from "@/integrations/supabase/client";
 import { inferLogKind, kindLabel, summariseResult } from "./logKind";
 import type {
@@ -200,7 +201,11 @@ function StrengthForm({
     restTick.current = setInterval(() => {
       setRestRemaining((r) => {
         if (r == null) return null;
-        if (r <= 1) return null;
+        if (r <= 1) {
+          cueEnd();
+          return null;
+        }
+        if (r <= 4) cueTick();
         return r - 1;
       });
     }, 1000);

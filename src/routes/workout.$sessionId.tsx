@@ -14,6 +14,7 @@ import { formatClock } from "@/lib/programmeUtils";
 import type { SessionBlock } from "@/types/programme";
 import { store, subscribeStore } from "@/lib/store";
 import { LogDrawer } from "@/components/workout/LogDrawer";
+import { BlockTimer, timerIsRunnable } from "@/components/workout/BlockTimer";
 import { summariseResult } from "@/components/workout/logKind";
 import { ProgrammeAccessGate } from "@/lib/athxAccess";
 import {
@@ -178,6 +179,10 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   const completeBlock = () => {
     setDone((d) => ({ ...d, [block.id]: true }));
     setConfirmOpen(false);
+    // Move the athlete straight on to the next block — one less tap mid-session.
+    if (idx < total - 1) {
+      window.setTimeout(() => setIdx((i) => Math.min(total - 1, i + 1)), 220);
+    }
   };
 
   const requestComplete = () => {
@@ -239,11 +244,37 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
             {formatClock(elapsed)}
           </span>
         </div>
-        {/* progress */}
+        {/* Block rail — jump to any block, see what's done at a glance */}
+        <div className="max-w-[720px] mx-auto w-full px-5 lg:px-10 pb-3">
+          <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
+            {s.blocks.map((b, i) => {
+              const isDone = !!done[b.id];
+              const isCurrent = i === idx;
+              return (
+                <button
+                  key={b.id}
+                  onClick={() => setIdx(i)}
+                  title={b.title}
+                  aria-label={`Block ${i + 1}: ${b.title}`}
+                  aria-current={isCurrent ? "step" : undefined}
+                  className={`shrink-0 h-8 min-w-8 px-2 text-[10px] font-display tabular uppercase tracking-widest border transition-colors ${
+                    isCurrent
+                      ? "border-signal bg-signal/15 text-bone"
+                      : isDone
+                        ? "border-signal/40 text-signal"
+                        : "border-border text-foreground-muted hover:text-bone hover:border-bone"
+                  }`}
+                >
+                  {isDone && !isCurrent ? "✓" : String(i + 1).padStart(2, "0")}
+                </button>
+              );
+            })}
+          </div>
+        </div>
         <div className="h-[2px] bg-surface-raised">
           <div
             className="h-full bg-signal transition-all"
-            style={{ width: `${((idx + 1) / total) * 100}%` }}
+            style={{ width: `${(doneCount / total) * 100}%` }}
           />
         </div>
       </header>
@@ -289,14 +320,16 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
             </div>
           )}
 
-          {block.timer && timerHasDuration(block.timer) && (
+          {block.timer && timerIsRunnable(block.timer) ? (
+            <BlockTimer key={block.id} timer={block.timer} />
+          ) : block.timer && timerHasDuration(block.timer) ? (
             <div className="mt-10 border border-border p-5 text-sm text-foreground-muted">
               <p className="eyebrow mb-2">Timer</p>
               <p className="text-bone tabular font-display text-2xl">
                 {timerLabel(block.timer)}
               </p>
             </div>
-          )}
+          ) : null}
 
           {block.note && (
             <p className="mt-8 text-xs text-foreground-muted italic">{block.note}</p>
