@@ -16,7 +16,10 @@ export function NextSessionCard({
   next: NextSession | null;
   overviewHref: string;
 }) {
-  const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
+  // Fall back to completed-session count when no percentage is stored yet.
+  const stored = programme.enrolment?.completion_pct ?? null;
+  const derived = next && next.total > 0 ? Math.round((next.done / next.total) * 100) : 0;
+  const pct = stored !== null && stored > 0 ? Math.round(stored) : derived;
   const isNew = programme.state === "ready";
 
   return (
