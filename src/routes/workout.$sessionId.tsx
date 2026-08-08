@@ -18,6 +18,8 @@ import { store, subscribeStore } from "@/lib/store";
 import { LogDrawer } from "@/components/workout/LogDrawer";
 import { ReadinessCheck } from "@/components/workout/ReadinessCheck";
 import { useReadiness } from "@/lib/useReadiness";
+import { useAuth } from "@/lib/useAuth";
+import { useMembership } from "@/lib/useMembership";
 import { BlockTimer, timerIsRunnable } from "@/components/workout/BlockTimer";
 import { summariseResult } from "@/components/workout/logKind";
 import { ProgrammeAccessGate } from "@/lib/athxAccess";
@@ -83,6 +85,8 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   const restoredFor = useRef<string | null>(null);
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
   const readiness = useReadiness();
+  const { user } = useAuth();
+  const club = useMembership(user?.id).hasClubAccess;
 
   // Subscribe to store so newly-saved results re-render the summary line.
   const resultsTick = useSyncExternalStore(
@@ -289,7 +293,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
           <p className="eyebrow mb-4">
             Block {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {block.timeWindow ?? ""}
           </p>
-          {idx === 0 && (
+          {idx === 0 && club && (
             <div className="mb-6">
               <ReadinessCheck
                 input={readiness.input}

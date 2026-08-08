@@ -10,6 +10,8 @@ export type EntitledProduct = {
   base_path: string | null;
   collection: string;
   duration_weeks: number | null;
+  /** True when this unlock comes from a Club membership rather than a purchase. */
+  via_membership: boolean;
 };
 
 export function useEntitlements(userId: string | undefined) {
@@ -30,7 +32,7 @@ export function useEntitlements(userId: string | undefined) {
     (async () => {
       const { data, error } = await supabase
         .from("entitlements")
-        .select("id, product_id, programme_version_id, products(slug, name, base_path, collection, duration_weeks)")
+        .select("id, product_id, programme_version_id, metadata, products(slug, name, base_path, collection, duration_weeks)")
         .eq("user_id", userId)
         .is("revoked_at", null);
       if (!active) return;
@@ -49,6 +51,7 @@ export function useEntitlements(userId: string | undefined) {
               base_path: (r.products as any).base_path,
               collection: (r.products as any).collection,
               duration_weeks: (r.products as any).duration_weeks,
+              via_membership: (r.metadata as Record<string, unknown> | null)?.membership === true,
             })),
         );
       }

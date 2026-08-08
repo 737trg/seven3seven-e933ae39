@@ -28,12 +28,22 @@ export const getProgrammeDownloadUrl = createServerFn({ method: "POST" })
 
     const { data: ent } = await supabaseAdmin
       .from("entitlements")
-      .select("id")
+      .select("id, metadata")
       .eq("user_id", userId)
       .eq("product_id", product.id)
-      .is("revoked_at", null)
-      .maybeSingle();
-    if (!ent) throw new Error("You do not have access to this programme.");
+      .is("revoked_at", null);
+    // Membership entitlements (metadata.membership = true) unlock the app, not
+    // the permanent PDF. PDFs stay with one-off purchases.
+    const outright = (ent ?? []).some(
+      (row) => (row.metadata as Record<string, unknown> | null)?.membership !== true,
+    );
+    if (!outright) {
+      throw new Error(
+        (ent ?? []).length > 0
+          ? "The permanent PDF is included with a one-off purchase. Your membership gives you the full programme inside the app."
+          : "You do not have access to this programme.",
+      );
+    }
 
     const { data: version, error: vErr } = await supabaseAdmin
       .from("programme_versions")

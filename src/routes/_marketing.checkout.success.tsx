@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { cart } from "@/lib/cart";
 import { confirmCheckoutFulfilment } from "@/lib/checkout.functions";
+import { syncMyMembership } from "@/lib/membership.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
 type Search = { session_id?: string };
@@ -23,6 +24,7 @@ function SuccessPage() {
   const { session_id } = Route.useSearch();
   const [status, setStatus] = useState<"pending" | "ready" | "failed">("pending");
   const [slugs, setSlugs] = useState<string[]>([]);
+  const [isMembership, setIsMembership] = useState(false);
   const clearedRef = useRef(false);
 
   useEffect(() => {
@@ -47,6 +49,17 @@ function SuccessPage() {
             cart.clear();
           }
           return;
+        }
+        // A subscription checkout carries no product slugs — confirm the
+        // membership instead.
+        if ("slugs" in res && res.slugs.length === 0) {
+          const m = await syncMyMembership({ data: { environment } });
+          if (cancelled) return;
+          if (m.ok && m.active) {
+            setIsMembership(true);
+            setStatus("ready");
+            return;
+          }
         }
       } catch {
         /* ignore transient */
@@ -73,7 +86,11 @@ function SuccessPage() {
       {status === "ready" && (
         <>
           <p className="text-foreground-muted">
-            {slugs.length > 1 ? "Your programmes are ready." : "Your programme is ready."}
+            {isMembership
+              ? "Your SEVEN3SEVEN Club membership is live. Every programme is unlocked."
+              : slugs.length > 1
+                ? "Your programmes are ready."
+                : "Your programme is ready."}
           </p>
           <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/my-programmes" className="bg-bone text-obsidian uppercase tracking-[0.22em] text-xs px-8 py-4 font-medium">

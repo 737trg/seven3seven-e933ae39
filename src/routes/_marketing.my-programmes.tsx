@@ -13,6 +13,9 @@ import { PersonalRecordsPanel } from "@/components/dashboard/PersonalRecordsPane
 import { PbTrendPanel } from "@/components/dashboard/PbTrendPanel";
 import { BenchmarksPanel } from "@/components/dashboard/BenchmarksPanel";
 import { BodyMetricsPanel } from "@/components/dashboard/BodyMetricsPanel";
+import { LeaderboardPanel } from "@/components/dashboard/LeaderboardPanel";
+import { ClubLock } from "@/components/dashboard/ClubLock";
+import { useMembership } from "@/lib/useMembership";
 import { StatRow } from "@/components/dashboard/StatRow";
 import { NextSessionCard } from "@/components/dashboard/NextSessionCard";
 import { ProgrammeListCard } from "@/components/dashboard/ProgrammeListCard";
@@ -35,6 +38,8 @@ function MyProgrammesPage() {
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
   const { prefs, update: updatePrefs } = usePreferences(user?.id);
+  const membership = useMembership(user?.id);
+  const club = membership.hasClubAccess;
   const streak = useMemo(
     () => computeStreak(dashboard.programmes.flatMap((p) => p.completions.map((c) => c.completed_at))),
     [dashboard.programmes],
@@ -191,15 +196,27 @@ function MyProgrammesPage() {
           </SidebarCard>
 
           <SidebarCard title="PB trend">
-            <PbTrendPanel userId={user?.id} />
+            <ClubLock unlocked={club} blurb="See how each lift has moved over time.">
+              <PbTrendPanel userId={user?.id} />
+            </ClubLock>
           </SidebarCard>
 
           <SidebarCard title="Standards">
-            <BenchmarksPanel userId={user?.id} />
+            <ClubLock unlocked={club} blurb="Score your bests against military entry, hybrid race and strength standards.">
+              <BenchmarksPanel userId={user?.id} />
+            </ClubLock>
           </SidebarCard>
 
           <SidebarCard title="Body metrics">
-            <BodyMetricsPanel userId={user?.id} units={prefs.units} />
+            <ClubLock unlocked={club} blurb="Track bodyweight, body fat and resting heart rate alongside your training.">
+              <BodyMetricsPanel userId={user?.id} units={prefs.units} />
+            </ClubLock>
+          </SidebarCard>
+
+          <SidebarCard title="Leaderboard">
+            <ClubLock unlocked={club} blurb="Compete on monthly consistency with other members.">
+              <LeaderboardPanel userId={user?.id} />
+            </ClubLock>
           </SidebarCard>
 
           <SidebarCard title="Recent activity">
