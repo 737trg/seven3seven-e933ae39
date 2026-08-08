@@ -139,6 +139,62 @@
     linear-gradient(180deg, #0d0d0d 0%, #0a0a0a 100%);
 }
 
+/* Scroll reveal — used by <Reveal /> on the marketing pages */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Primary / secondary marketing CTAs — signal red reserved for primary only */
+@utility btn-signal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: var(--signal);
+  color: var(--bone);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 1.05rem 1.75rem;
+  transition: filter 200ms ease, transform 200ms ease;
+  &:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+  }
+}
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border: 1px solid var(--border);
+  color: var(--bone);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 1.05rem 1.75rem;
+  transition: border-color 200ms ease, color 200ms ease;
+  &:hover {
+    border-color: var(--bone);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 @utility scrollbar-hide {
   scrollbar-width: none;
   -ms-overflow-style: none;
