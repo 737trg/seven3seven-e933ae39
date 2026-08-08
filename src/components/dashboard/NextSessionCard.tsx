@@ -51,6 +51,11 @@ export function NextSessionCard({
       </div>
 
       <div className="mt-5">
+        {returning && (
+          <p className="text-[11px] text-foreground-muted mb-3 leading-snug">
+            {daysSince} days since your last session — nothing is lost. Your plan picks up exactly where you stopped.
+          </p>
+        )}
         <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
           <span>{next ? `${next.done} of ${next.total} sessions` : "Progress"}</span>
           <span className="text-bone tabular">{pct}%</span>
