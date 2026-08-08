@@ -6,6 +6,10 @@ import { formatClock } from "@/lib/programmeUtils";
 import { cueEnd, cueTick } from "@/lib/alertCue";
 import { supabase } from "@/integrations/supabase/client";
 import { inferLogKind, kindLabel, summariseResult } from "./logKind";
+import { suggestLoad } from "@/lib/loadSuggestion";
+import { prCandidateFrom, type PrCandidate } from "@/lib/prDetect";
+import { slugifyLift } from "@/lib/usePersonalRecords";
+import type { ReadinessAdaptation } from "@/lib/readiness";
 import type {
   BlockResult,
   BlockResultDraft,
@@ -189,15 +193,28 @@ function StrengthForm({
   state,
   setState,
   block,
+  suggestion,
 }: {
   state: BlockResultDraft;
   setState: (s: BlockResultDraft) => void;
   block: SessionBlock;
+  suggestion: { kg: number; reason: string } | null;
 }) {
   const sets = state.sets ?? [];
   const restSec = block.timer?.restSec ?? 90;
   const [restRemaining, setRestRemaining] = useState<number | null>(null);
   const restTick = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const applySuggestion = () => {
+    if (!suggestion) return;
+    setState({
+      ...state,
+      sets: (sets.length > 0 ? sets : [{ group: "top" as StrengthSetGroup }]).map((s) => ({
+        ...s,
+        weightKg: suggestion.kg,
+      })),
+    });
+  };
 
   useEffect(() => {
     if (restRemaining == null) return;
@@ -262,6 +279,22 @@ function StrengthForm({
 
   return (
     <div className="space-y-6">
+      {suggestion && (
+        <div className="border border-border px-4 py-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="eyebrow text-foreground-muted">Suggested working load</p>
+            <p className="text-bone font-display tabular text-xl leading-tight">{suggestion.kg} kg</p>
+            <p className="text-[10px] text-foreground-muted/80 mt-0.5">{suggestion.reason}</p>
+          </div>
+          <button
+            type="button"
+            onClick={applySuggestion}
+            className="press shrink-0 h-9 px-3 text-[10px] uppercase tracking-widest border border-bone text-bone"
+          >
+            Use
+          </button>
+        </div>
+      )}
       {restRemaining != null && (
         <div className="border border-signal/40 bg-signal/5 px-4 py-3 flex items-center justify-between">
           <span className="text-[10px] uppercase tracking-widest text-foreground-muted inline-flex items-center gap-1.5">
