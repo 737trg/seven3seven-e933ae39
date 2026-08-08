@@ -430,8 +430,11 @@ export type Database = {
           created_at: string
           display_name: string | null
           email: string | null
+          first_name: string | null
           id: string
+          last_name: string | null
           legacy_full_access: boolean
+          unit_preference: string
           updated_at: string
         }
         Insert: {
@@ -439,8 +442,11 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           email?: string | null
+          first_name?: string | null
           id: string
+          last_name?: string | null
           legacy_full_access?: boolean
+          unit_preference?: string
           updated_at?: string
         }
         Update: {
@@ -448,8 +454,11 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           email?: string | null
+          first_name?: string | null
           id?: string
+          last_name?: string | null
           legacy_full_access?: boolean
+          unit_preference?: string
           updated_at?: string
         }
         Relationships: []
