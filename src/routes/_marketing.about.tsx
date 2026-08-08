@@ -62,7 +62,7 @@ function AboutPage() {
       <section className="bg-background border-b border-border/60">
         <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-32 pb-20 md:pb-28 lg:pb-32">
           <p className="eyebrow text-foreground-muted mb-8">About SEVEN3SEVEN</p>
-          <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] uppercase text-[clamp(2.75rem,8vw,6.5rem)] max-w-[16ch]">
+          <h1 className="display-xl uppercase text-bone max-w-[16ch]">
             Built from identity.
             <br />
             <span className="text-foreground-muted">Turned into purpose.</span>

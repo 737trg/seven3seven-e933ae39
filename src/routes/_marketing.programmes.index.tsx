@@ -47,7 +47,7 @@ function ProgrammesPage() {
         <div className="bg-background">
           <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 pb-12 md:pb-16">
             <p className="eyebrow text-foreground-muted mb-6 md:mb-8">Programmes</p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.88] text-[clamp(2.25rem,6vw,4.5rem)] max-w-[14ch]">
+            <h1 className="display-xl text-bone max-w-[14ch]">
               Built for<br />a clear objective.
             </h1>
             <p className="text-bone/80 text-base md:text-lg mt-6 max-w-[56ch] leading-relaxed">
@@ -78,8 +78,8 @@ function ProgrammesPage() {
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
             <p className="eyebrow mb-5 text-signal">Status</p>
-            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[18ch]">
-              Three programmes.<br />Built to perform.
+            <h2 className="display-lg text-bone max-w-[18ch]">
+              Three live programmes.<br />Built to perform.
             </h2>
             <p className="text-foreground-muted text-sm md:text-base mt-6 max-w-[52ch]">
               Structured training for service preparation, competition and hybrid racing.

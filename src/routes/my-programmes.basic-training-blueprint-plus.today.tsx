@@ -75,7 +75,7 @@ function TodayPage() {
               return (
                 <li key={id} className="py-3 flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-bone text-sm truncate">{s.title}</p>
+                    <p className="text-bone text-sm break-words">{s.title}</p>
                     <p className="text-foreground-muted text-[10px] uppercase tracking-widest">Session {s.session} · {s.duration}</p>
                     <SessionScheduleControls sessionId={id} override={schedule.bySession[id]} onSet={schedule.set} onClear={schedule.clear} />
                   </div>

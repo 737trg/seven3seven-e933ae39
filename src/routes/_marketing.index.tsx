@@ -114,7 +114,7 @@ function HomePage() {
   return (
     <>
       {/* HERO — one screen: offer, price, action */}
-      <section className="relative min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-5rem)] flex items-end overflow-hidden">
+      <section className="relative min-h-[min(100svh-4rem,44rem)] lg:min-h-[calc(100svh-5rem)] flex items-end overflow-hidden">
         <img
           src={heroAsset.url}
           alt="SEVEN3SEVEN athlete pulling a heavy rope during a hybrid conditioning session"
@@ -131,39 +131,42 @@ function HomePage() {
               "linear-gradient(180deg, rgba(9,9,9,0.72) 0%, rgba(9,9,9,0.25) 35%, rgba(9,9,9,0.85) 78%, rgba(9,9,9,1) 100%)",
           }}
         />
-        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pb-14 md:pb-20 pt-32">
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-28 md:pt-32">
           <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
-          <h1 className="mt-5 font-display font-bold text-bone leading-[0.9] tracking-[-0.03em] text-[clamp(2.5rem,7vw,5.5rem)] max-w-[16ch]">
+          <h1 className="mt-4 md:mt-5 display-xl text-bone max-w-[16ch]">
             Prepare for what<br />you're training for.
           </h1>
-          <p className="mt-6 text-bone/85 text-base md:text-lg max-w-[52ch] leading-[1.55]">
+          <p className="mt-5 lede max-w-[52ch]">
             Structured 8–12 week programmes for military preparation, competition and hybrid
             racing. Follow every session in the app, log your work, and keep the full PDF.
           </p>
-          <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link to="/programmes" className="btn-signal w-full sm:w-auto">
-              Buy your programme — from {price("basic-training-blueprint-plus")}
-              <ArrowRight className="h-3.5 w-3.5" />
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Link to="/programmes" className="btn-signal press tap w-full sm:w-auto text-center">
+              Buy your programme
+              <ArrowRight className="h-3.5 w-3.5 shrink-0" />
             </Link>
-            <a href="#choose" className="btn-ghost w-full sm:w-auto">
+            <a href="#choose" className="btn-ghost press tap w-full sm:w-auto">
               Find your programme
             </a>
           </div>
+          <p className="mt-4 eyebrow text-bone/60">
+            From {price("basic-training-blueprint-plus")} · one payment, lifetime access
+          </p>
         </div>
       </section>
 
       {/* TRUST STRIP */}
       <section aria-label="What's included" className="border-y border-border/60 bg-background">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5 grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-6">
+        <div className="max-w-[1600px] mx-auto container-x py-5 grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-5 md:gap-x-6">
           {[
             "Structured 8–12 week plan",
             "Interactive session app",
             "Full PDF you keep",
             "Secure Stripe checkout",
           ].map((t) => (
-            <span key={t} className="flex items-center gap-2.5 min-w-0">
-              <Check className="h-3.5 w-3.5 shrink-0 text-signal" strokeWidth={2.5} />
-              <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.2em] text-bone/80 truncate">
+            <span key={t} className="flex items-start gap-2.5 min-w-0">
+              <Check className="h-3.5 w-3.5 shrink-0 text-signal mt-[2px]" strokeWidth={2.5} />
+              <span className="min-w-0 font-display uppercase text-[10px] md:text-[11px] leading-[1.5] tracking-[0.16em] md:tracking-[0.2em] text-bone/80">
                 {t}
               </span>
             </span>

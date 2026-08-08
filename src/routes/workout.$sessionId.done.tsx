@@ -34,7 +34,7 @@ function DonePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-6">
+    <div className="min-h-dvh bg-background text-foreground flex flex-col items-center justify-center p-6">
       <div className="max-w-[560px] w-full">
         <p className="eyebrow mb-3">Session complete</p>
         <h1 className="font-display font-bold text-bone text-4xl lg:text-6xl leading-none">

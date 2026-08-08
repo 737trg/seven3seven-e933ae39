@@ -165,7 +165,7 @@ function ProductPage() {
               <span className="h-px w-8 bg-bone/40 hidden md:inline-block" />
               <span className="hidden md:inline eyebrow text-bone/55">{statusLabel(p.status)}</span>
             </div>
-            <h1 className="font-display font-bold text-bone tracking-[-0.03em] leading-[0.9] text-[clamp(2.5rem,8vw,6.25rem)] max-w-[18ch]">
+            <h1 className="display-xl text-bone max-w-[18ch]">
               {p.title}
             </h1>
             <p className="text-bone/85 text-lg md:text-xl mt-6 max-w-[44ch]">{p.shortLine}</p>
@@ -255,7 +255,7 @@ function ProductPage() {
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 lg:py-28 grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-4">
             <p className="eyebrow mb-6">What's included</p>
-            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,4vw,3.25rem)] max-w-[14ch]">
+            <h2 className="display-lg text-bone max-w-[14ch]">
               Built to be followed properly.
             </h2>
           </div>
