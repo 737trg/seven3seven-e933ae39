@@ -3,6 +3,7 @@ import type Stripe from 'stripe';
 import { type StripeEnv, verifyWebhook } from '@/lib/stripe.server';
 import { supabaseAdmin } from '@/integrations/supabase/client.server';
 import { fulfilCheckoutSession } from '@/lib/fulfilment.server';
+import { syncStripeSubscription } from '@/lib/membership.server';
 
 async function handleEvent(event: Stripe.Event, env: StripeEnv) {
   // Idempotency: record the event first; if it's a duplicate, skip.
@@ -21,7 +22,17 @@ async function handleEvent(event: Stripe.Event, env: StripeEnv) {
       case 'checkout.session.completed':
       case 'checkout.session.async_payment_succeeded': {
         const session = event.data.object as Stripe.Checkout.Session;
+        if (session.mode === 'subscription') {
+          // Membership: the customer.subscription.* events do the work.
+          break;
+        }
         await fulfilCheckoutSession(session.id, env);
+        break;
+      }
+      case 'customer.subscription.created':
+      case 'customer.subscription.updated':
+      case 'customer.subscription.deleted': {
+        await syncStripeSubscription(event.data.object as Stripe.Subscription, env);
         break;
       }
       case 'charge.refunded': {
