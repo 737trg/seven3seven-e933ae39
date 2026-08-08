@@ -83,7 +83,7 @@ function MyProgrammesPage() {
       (b.enrolment?.updated_at ?? "").localeCompare(a.enrolment?.updated_at ?? ""),
     )[0] ??
     ready[0];
-  const focusNext = useMemo(() => nextSessionFor(focus), [focus]);
+  const focusNext = nextSessionFor(focus);
   const setPrimary = (programme: CustomerProgramme) => {
     void updatePrefs({
       primary_product_id:
