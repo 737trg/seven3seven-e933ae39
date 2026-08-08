@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Activity, CalendarDays, Trophy, Star, Flame } from "lucide-react";
+import { ArrowRight, Activity } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
@@ -7,8 +7,12 @@ import { useEntitlements } from "@/lib/useEntitlements";
 import { useCustomerDashboard, type CustomerProgramme, type ActivityItem } from "@/lib/useCustomerDashboard";
 import { usePreferences } from "@/lib/usePreferences";
 import { computeStreak } from "@/lib/streak";
+import { nextSessionFor } from "@/lib/nextSession";
 import { StreakCard } from "@/components/dashboard/StreakCard";
 import { PersonalRecordsPanel } from "@/components/dashboard/PersonalRecordsPanel";
+import { StatRow } from "@/components/dashboard/StatRow";
+import { NextSessionCard } from "@/components/dashboard/NextSessionCard";
+import { ProgrammeListCard } from "@/components/dashboard/ProgrammeListCard";
 import { recoverPendingPurchases } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
@@ -53,9 +57,9 @@ function MyProgrammesPage() {
           <p className="eyebrow text-signal mb-3">Members only</p>
           <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">Sign in to access your programmes</h1>
           <p className="text-foreground-muted text-sm mt-4">Your library, progress and downloads live behind your account.</p>
-          <div className="mt-8 flex justify-center gap-4">
-            <Link to="/sign-in" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Sign in</Link>
-            <Link to="/sign-up" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">Create account</Link>
+          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+            <Link to="/sign-in" className="h-12 px-6 inline-flex items-center justify-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Sign in</Link>
+            <Link to="/sign-up" className="h-12 px-6 inline-flex items-center justify-center border border-border text-bone text-xs uppercase tracking-widest font-display">Create account</Link>
           </div>
         </div>
       </section>
@@ -79,6 +83,7 @@ function MyProgrammesPage() {
       (b.enrolment?.updated_at ?? "").localeCompare(a.enrolment?.updated_at ?? ""),
     )[0] ??
     ready[0];
+  const focusNext = useMemo(() => nextSessionFor(focus), [focus]);
   const setPrimary = (programme: CustomerProgramme) => {
     void updatePrefs({
       primary_product_id:
@@ -92,68 +97,74 @@ function MyProgrammesPage() {
       )
     : 0;
 
+  const others = [...active, ...ready].filter((p) => p.product_id !== focus?.product_id);
+
   return (
     <>
-      <section className="relative">
-        <img
-          src={heroAsset.url}
-          alt=""
-          aria-hidden
-          className="block w-full h-[28vh] md:h-[36vh] lg:h-[44vh] max-h-[520px] object-cover object-center bg-background select-none"
-          draggable={false}
-        />
-        <div className="bg-background">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-12 pt-14 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20">
-            <p className="eyebrow text-foreground-muted mb-6 md:mb-8">
-              {displayName || "Complete your profile"} — Library
+      {/* Header: text-first on mobile, editorial image only from lg up. */}
+      <section className="border-b border-border/60">
+        <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-12 pt-8 md:pt-14 lg:pt-16 pb-6 md:pb-10 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
+          <div className="min-w-0">
+            <p className="eyebrow text-foreground-muted mb-3">
+              {displayName ? `${displayName} — Library` : "Your library"}
             </p>
-            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.9] text-[clamp(2.5rem,6.5vw,5rem)]">
+            <h1 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,9vw,4.5rem)]">
               My programmes.
             </h1>
-            <p className="text-bone/80 text-base md:text-lg mt-6 max-w-[52ch] leading-relaxed">
+            <p className="text-bone/70 text-sm md:text-base mt-3 max-w-[46ch]">
               Your training. Your progress. All in one place.
             </p>
           </div>
-        </div>
-
-        <div className="border-y border-border/60">
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 divide-x divide-border/60">
-            <StatStrip label="Active" value={dashboard.loading ? "—" : String(dashboard.activeCount)} />
-            <StatStrip label="Current week" value={dashboard.loading ? "—" : dashboard.currentWeek ? String(dashboard.currentWeek) : "—"} />
-            <StatStrip label="Sessions completed" value={dashboard.loading ? "—" : String(dashboard.sessionsCompleted)} />
-            <StatStrip label="Day streak" value={dashboard.loading ? "—" : String(streak.current)} />
-          </div>
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            loading="lazy"
+            className="hidden lg:block w-[360px] xl:w-[440px] h-[200px] xl:h-[240px] object-cover object-center select-none"
+            draggable={false}
+          />
         </div>
       </section>
 
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-12 lg:gap-x-12 xl:gap-x-16">
-        <div className="space-y-14 lg:space-y-16 lg:pr-4 xl:pr-8">
-          {focus && <FocusCard programme={focus} />}
-          <ProgrammeGroup
-            title="Active"
-            empty="No active programmes"
-            programmes={active}
-            primaryId={prefs.primary_product_id}
-            onPin={setPrimary}
+      <div className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-12">
+        <div className="py-6 md:py-8">
+          <StatRow
+            items={[
+              { label: "Active", value: dashboard.loading ? "—" : String(dashboard.activeCount) },
+              { label: "Week", value: dashboard.loading ? "—" : dashboard.currentWeek ? String(dashboard.currentWeek) : "—" },
+              { label: "Sessions", value: dashboard.loading ? "—" : String(dashboard.sessionsCompleted) },
+              { label: "Streak", value: dashboard.loading ? "—" : String(streak.current) },
+            ]}
           />
-          <ProgrammeGroup
-            title="Ready to start"
-            empty="No programmes ready to start"
-            programmes={ready}
-            primaryId={prefs.primary_product_id}
-            onPin={setPrimary}
-          />
-          <div>
-            <p className="eyebrow mb-4">Upcoming</p>
-            <Empty text="No upcoming programmes" />
-          </div>
-          <ProgrammeGroup
-            title="Completed"
-            empty="No completed programmes yet"
-            programmes={completed}
-            primaryId={prefs.primary_product_id}
-            onPin={setPrimary}
-          />
+        </div>
+      </div>
+
+      <section className="max-w-[1440px] mx-auto px-5 md:px-10 lg:px-12 pb-16 lg:pb-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-10 lg:gap-x-12 xl:gap-x-16">
+        <div className="space-y-10 lg:pr-4 xl:pr-8">
+          {focus && (
+            <NextSessionCard
+              programme={focus}
+              next={focusNext}
+              overviewHref={programmePath(focus, "cover")}
+            />
+          )}
+
+          {dashboard.programmes.length === 0 && !dashboard.loading && (
+            <div className="border border-border/60 p-6 text-center">
+              <p className="text-bone text-sm">You don’t own any programmes yet.</p>
+              <Link to="/programmes" className="mt-4 inline-flex items-center gap-2 eyebrow text-signal">
+                Browse programmes <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          )}
+
+          {others.length > 0 && (
+            <ProgrammeGroup title="Your programmes" programmes={others} primaryId={prefs.primary_product_id} onPin={setPrimary} />
+          )}
+
+          {completed.length > 0 && (
+            <ProgrammeGroup title="Completed" programmes={completed} primaryId={prefs.primary_product_id} onPin={setPrimary} />
+          )}
         </div>
 
         <div aria-hidden className="hidden lg:block w-px bg-border/60" />
@@ -161,10 +172,6 @@ function MyProgrammesPage() {
         <aside className="space-y-10 lg:pl-4 xl:pl-8">
           <SidebarCard title="Consistency">
             <StreakCard streak={streak} />
-          </SidebarCard>
-
-          <SidebarCard title="Quick actions">
-            <QuickActions programmes={dashboard.programmes} />
           </SidebarCard>
 
           <SidebarCard title="Personal records">
@@ -176,24 +183,19 @@ function MyProgrammesPage() {
           </SidebarCard>
 
           <SidebarCard title="Your progress">
-            <p className="text-foreground-muted text-[10px] uppercase tracking-widest">All-time overview</p>
-            <div className="mt-4 flex items-center gap-5">
+            <div className="flex items-center gap-5">
               <ProgressRing pct={progressPct} />
-              <div className="space-y-1.5 text-xs">
+              <div className="space-y-1.5 text-xs min-w-0 flex-1">
                 <Row k="Sessions completed" v={String(dashboard.sessionsCompleted)} />
                 <Row k="Results logged" v={String(dashboard.resultsLogged)} />
                 <Row k="Programmes owned" v={String(dashboard.programmes.length)} />
               </div>
             </div>
-            {dashboard.programmes.length === 0 ? (
-              <Link to="/programmes" className="mt-5 inline-flex items-center gap-2 eyebrow text-signal">
-                Browse programmes <ArrowRight className="h-3 w-3" />
-              </Link>
-            ) : (
-              <Link to="/my-programmes" className="mt-5 inline-flex items-center gap-2 eyebrow text-signal">
-                View all programmes <ArrowRight className="h-3 w-3" />
-              </Link>
-            )}
+          </SidebarCard>
+
+          <SidebarCard title="Quick actions">
+            <SideLink to="/programmes" label="Browse programmes" />
+            <SideLink to="/account" label="My account" />
           </SidebarCard>
         </aside>
       </section>
@@ -203,56 +205,13 @@ function MyProgrammesPage() {
   );
 }
 
-function FocusCard({ programme }: { programme: CustomerProgramme }) {
-  const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
-  return (
-    <article className="border border-signal/40 bg-surface/40 p-6 md:p-8">
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
-        <div className="min-w-0">
-          <p className="eyebrow text-signal">Your focus</p>
-          <h2 className="font-display font-bold text-bone text-3xl md:text-5xl tracking-[-0.025em] mt-2 leading-[0.95]">
-            {programme.name}
-          </h2>
-        </div>
-        <Flame className="h-6 w-6 text-signal shrink-0" strokeWidth={1.5} />
-      </div>
-      <div className="mt-6 max-w-md">
-        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
-          <span>{stateLabel(programme.state)}</span>
-          <span className="text-bone tabular">{pct}%</span>
-        </div>
-        <div className="h-[2px] bg-surface-raised overflow-hidden">
-          <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
-        </div>
-      </div>
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link
-          to={programmePath(programme, "continue")}
-          className="h-12 px-6 inline-flex items-center gap-2 bg-signal text-bone font-display text-[11px] uppercase tracking-[0.28em] rounded-[4px]"
-        >
-          {programme.state === "ready" ? "Start training" : "Continue training"}
-          <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-        <Link
-          to={programmePath(programme, "cover")}
-          className="h-12 px-6 inline-flex items-center border border-border text-bone font-display text-[11px] uppercase tracking-[0.28em] rounded-[4px] hover:border-bone"
-        >
-          Programme
-        </Link>
-      </div>
-    </article>
-  );
-}
-
 function ProgrammeGroup({
   title,
-  empty,
   programmes,
   primaryId,
   onPin,
 }: {
   title: string;
-  empty: string;
   programmes: CustomerProgramme[];
   primaryId: string | null;
   onPin: (p: CustomerProgramme) => void;
@@ -260,137 +219,20 @@ function ProgrammeGroup({
   return (
     <div>
       <p className="eyebrow mb-4">{title}</p>
-      {programmes.length === 0 ? (
-        <Empty text={empty} />
-      ) : (
-        <div className="space-y-10">
-          {programmes.map((programme, index) => (
-            <ProgrammeCard
-              key={programme.product_id}
-              programme={programme}
-              index={index + 1}
-              isPrimary={primaryId === programme.product_id}
-              onPin={onPin}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ProgrammeCard({
-  programme,
-  index,
-  isPrimary,
-  onPin,
-}: {
-  programme: CustomerProgramme;
-  index: number;
-  isPrimary: boolean;
-  onPin: (p: CustomerProgramme) => void;
-}) {
-  const pct = Math.round(programme.enrolment?.completion_pct ?? 0);
-  const href = programmePath(programme, programme.state === "active" ? "continue" : "cover");
-  const cta = programme.state === "ready" ? "Start programme" : programme.state === "completed" ? "View programme" : "Continue training";
-
-  return (
-    <article className="border-t border-border/60 pt-8">
-      <div className="flex flex-col">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
-          <div className="min-w-0">
-            <p className="eyebrow text-foreground-muted">{programme.collection} · {String(index).padStart(2, "0")}</p>
-            <h3 className="font-display font-bold text-bone text-3xl lg:text-6xl tracking-[-0.025em] mt-2">
-              {programme.name}
-            </h3>
-          </div>
-          <button
-            type="button"
-            onClick={() => onPin(programme)}
-            aria-pressed={isPrimary}
-            title={isPrimary ? "Remove as focus programme" : "Make this my focus programme"}
-            className={`shrink-0 h-10 w-10 border inline-flex items-center justify-center transition-colors ${
-              isPrimary
-                ? "border-signal text-signal"
-                : "border-border text-foreground-muted hover:text-bone hover:border-bone"
-            }`}
-          >
-            <Star className="h-4 w-4" fill={isPrimary ? "currentColor" : "none"} />
-            <span className="sr-only">{isPrimary ? "Focus programme" : "Set as focus programme"}</span>
-          </button>
-        </div>
-        <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-foreground-muted">
-          <li className="inline-flex items-center gap-2"><CalendarDays className="h-3 w-3" />{programme.duration_weeks ? `${programme.duration_weeks} weeks` : "Programme"}</li>
-          <li className="inline-flex items-center gap-2"><Trophy className="h-3 w-3" />{stateLabel(programme.state)}</li>
-        </ul>
-        {programme.enrolment && (
-          <div className="mt-8 max-w-md">
-            <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
-              <span>Progress</span>
-              <span className="text-bone tabular">{pct}%</span>
-            </div>
-            <div className="h-[2px] bg-surface-raised overflow-hidden">
-              <div className="h-full bg-signal" style={{ width: `${pct}%` }} />
-            </div>
-          </div>
-        )}
-        <div className="mt-8 flex flex-wrap gap-6">
-          <Link to={href} className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
-            {cta} <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-          {programme.state === "active" && (
-            <Link to={programmePath(programme, "cover")} className="inline-flex items-center gap-3 text-foreground-muted font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-border/60 hover:text-bone hover:border-bone transition-colors">
-              View programme
-            </Link>
-          )}
-        </div>
+      <div className="space-y-4">
+        {programmes.map((programme) => (
+          <ProgrammeListCard
+            key={programme.product_id}
+            programme={programme}
+            href={programmePath(programme, programme.state === "active" ? "continue" : "cover")}
+            cta={programme.state === "ready" ? "Start programme" : programme.state === "completed" ? "View programme" : "Continue training"}
+            stateLabel={stateLabel(programme.state)}
+            isPrimary={primaryId === programme.product_id}
+            onPin={onPin}
+          />
+        ))}
       </div>
-    </article>
-  );
-}
-
-function QuickActions({ programmes }: { programmes: CustomerProgramme[] }) {
-  if (programmes.length === 0) {
-    return (
-      <>
-        <SideLink to="/programmes" label="Browse programmes" />
-        <SideLink to="/account" label="My account" />
-      </>
-    );
-  }
-
-  const active = programmes.filter((p) => p.state === "active");
-  const ready = programmes.filter((p) => p.state === "ready");
-  const mostRecent = [...active].sort((a, b) => ((b.enrolment?.updated_at ?? "") < (a.enrolment?.updated_at ?? "") ? -1 : 1))[0];
-
-  if (active.length > 1 && mostRecent) {
-    return (
-      <>
-        <SideLink to={programmePath(mostRecent, "continue")} label={`Continue ${mostRecent.name}`} />
-        <SideLink to="/my-programmes" label="View all programmes" />
-        <SideLink to="/account" label="My account" />
-      </>
-    );
-  }
-
-  if (active.length === 1) {
-    const programme = active[0];
-    return (
-      <>
-        <SideLink to={programmePath(programme, "continue")} label={`Continue ${programme.name}`} />
-        <SideLink to={programmePath(programme, "cover")} label="View programme" />
-        <SideLink to="/account" label="My account" />
-      </>
-    );
-  }
-
-  const next = ready[0] ?? programmes[0];
-  return (
-    <>
-      <SideLink to={programmePath(next, "cover")} label={`Start ${next.name}`} />
-      <SideLink to={programmePath(next, "cover")} label={`View ${next.name} cover`} />
-      <SideLink to="/account" label="My account" />
-    </>
+    </div>
   );
 }
 
@@ -423,23 +265,6 @@ function stateLabel(state: CustomerProgramme["state"]) {
   return "Active";
 }
 
-function StatStrip({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="py-6 px-1 first:pl-0 md:px-6 md:first:pl-0">
-      <p className="eyebrow text-foreground-muted">{label}</p>
-      <p className="font-display text-bone text-3xl md:text-4xl tracking-[-0.02em] tabular mt-3">{value}</p>
-    </div>
-  );
-}
-
-function Empty({ text }: { text: string }) {
-  return (
-    <div className="border-t border-border/60 pt-5">
-      <p className="text-foreground-muted text-xs uppercase tracking-[0.22em]">{text}</p>
-    </div>
-  );
-}
-
 function SidebarCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
@@ -451,7 +276,7 @@ function SidebarCard({ title, children }: { title: string; children: React.React
 
 function SideLink({ to, label }: { to: string; label: string }) {
   return (
-    <Link to={to} className="flex items-center justify-between py-3 text-bone text-sm hover:text-signal transition-colors border-b border-border/60 last:border-0">
+    <Link to={to} className="flex items-center justify-between py-4 text-bone text-sm hover:text-signal transition-colors border-b border-border/60 last:border-0">
       <span>{label}</span>
       <ArrowRight className="h-3 w-3" />
     </Link>
