@@ -38,6 +38,8 @@ function MyProgrammesPage() {
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
   const { prefs, update: updatePrefs } = usePreferences(user?.id);
+  const membership = useMembership(user?.id);
+  const club = membership.hasClubAccess;
   const streak = useMemo(
     () => computeStreak(dashboard.programmes.flatMap((p) => p.completions.map((c) => c.completed_at))),
     [dashboard.programmes],
