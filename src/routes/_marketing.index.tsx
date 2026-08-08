@@ -9,6 +9,24 @@ import { CART_CATALOG, type CartItemSlug } from "@/lib/cart";
 import { Reveal } from "@/components/marketing/Reveal";
 
 const price = (slug: CartItemSlug) => `£${(CART_CATALOG[slug].pricePence / 100).toFixed(2)}`;
+const FROM_PRICE = `£${(
+  Math.min(...Object.values(CART_CATALOG).map((p) => p.pricePence)) / 100
+).toFixed(2)}`;
+const CLUB_PRICE = "£14.99";
+
+const CLUB_POINTS = [
+  "Every programme, current and future",
+  "Adaptive coaching and load suggestions",
+  "PB trends, strength standards, body metrics",
+  "Monthly consistency leaderboard",
+];
+
+const ONEOFF_POINTS = [
+  "One programme, yours for life",
+  "Full interactive app with timers and logging",
+  "The permanent PDF you keep",
+  "Secure Stripe checkout",
+];
 
 const ROUTES: {
   slug: CartItemSlug;
@@ -60,6 +78,10 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: "Can I get a refund?",
     a: "Digital programmes are covered by our refund policy — see the refunds page for the full terms.",
+  },
+  {
+    q: "Club or one-off — which is for me?",
+    a: "Buy a programme outright if you have one goal and want the PDF for life. Join the Club at £14.99 a month if you want every programme plus coaching, standards, metrics and the leaderboard.",
   },
 ];
 
