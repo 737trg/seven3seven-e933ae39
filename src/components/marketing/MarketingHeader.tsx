@@ -3,6 +3,7 @@ import { Menu, ShoppingBag, X, User, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Seven3SevenLogo } from "./Seven3SevenLogo";
 import { useAuth } from "@/lib/useAuth";
+import { cart, useCart } from "@/lib/cart";
 import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
@@ -15,6 +16,8 @@ export function MarketingHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
   const { user, loading } = useAuth();
+  const cartState = useCart();
+  const count = cart.slugs(cartState).length;
 
   return (
     <header className="sticky top-0 z-40 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/50">
@@ -80,15 +83,18 @@ export function MarketingHeader() {
               Sign in
             </Link>
           )}
-          <button
-            type="button"
-            aria-label="Bag (no products available yet)"
-            disabled
-            className="text-foreground-muted/60 cursor-not-allowed"
-            title="No products available yet"
+          <Link
+            to="/cart"
+            aria-label={count ? `Bag — ${count} item${count === 1 ? "" : "s"}` : "Bag"}
+            className="relative text-foreground-muted hover:text-bone transition-colors"
           >
             <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
-          </button>
+            {count > 0 && (
+              <span className="absolute -top-1.5 -right-2 min-w-[16px] h-4 px-1 rounded-full bg-signal text-bone text-[10px] font-display leading-4 text-center tabular">
+                {count}
+              </span>
+            )}
+          </Link>
         </div>
 
         <div className="lg:hidden flex items-center gap-2">
@@ -99,14 +105,18 @@ export function MarketingHeader() {
           >
             <User className="h-5 w-5" strokeWidth={1.5} />
           </Link>
-          <button
-            type="button"
-            aria-label="Bag"
-            disabled
-            className="h-10 w-10 inline-flex items-center justify-center text-foreground-muted/60"
+          <Link
+            to="/cart"
+            aria-label={count ? `Bag — ${count} item${count === 1 ? "" : "s"}` : "Bag"}
+            className="relative h-10 w-10 inline-flex items-center justify-center text-bone"
           >
             <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
-          </button>
+            {count > 0 && (
+              <span className="absolute top-1 right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-signal text-bone text-[10px] font-display leading-4 text-center tabular">
+                {count}
+              </span>
+            )}
+          </Link>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
