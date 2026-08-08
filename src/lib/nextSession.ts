@@ -32,7 +32,7 @@ function entriesFor(slug: string): Entry[] {
     }
     if (slug === "athx-2026") {
       return ATHX.weeks.flatMap((w) =>
-        w.sessions.map((s) => ({ id: s.id, title: s.title, week: w.week })),
+        w.sessions.map((s) => ({ id: s.id, title: s.title, week: w.number })),
       );
     }
   } catch {
