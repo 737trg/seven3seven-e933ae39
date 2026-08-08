@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
-import heroAsset from "@/assets/home-hero.jpg.asset.json";
+import heroAsset from "@/assets/nico-rope.png.asset.json";
 import founderAsset from "@/assets/founder-nico.jpg.asset.json";
 import todayShot from "@/assets/athx-today.png.asset.json";
 import progressShot from "@/assets/athx-progress.png.asset.json";
@@ -117,8 +117,8 @@ function HomePage() {
       <section className="relative min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-5rem)] flex items-end overflow-hidden">
         <img
           src={heroAsset.url}
-          alt="Hybrid athlete training in a gym"
-          className="absolute inset-0 w-full h-full object-cover object-[62%_center] select-none"
+          alt="SEVEN3SEVEN athlete pulling a heavy rope during a hybrid conditioning session"
+          className="absolute inset-0 w-full h-full object-cover object-[70%_30%] md:object-[60%_28%] select-none"
           draggable={false}
           fetchPriority="high"
           decoding="async"
