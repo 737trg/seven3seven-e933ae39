@@ -234,7 +234,7 @@ function HomePage() {
             ))}
           </div>
           <div className="mt-7 flex items-center justify-between gap-4">
-            <p className="eyebrow text-foreground-muted">One payment. Lifetime access.</p>
+            <p className="eyebrow text-foreground-muted">All three included with Club membership.</p>
             <Link to="/programmes" className="eyebrow text-bone inline-flex items-center gap-2 hover:text-signal transition-colors">
               All programmes <ArrowRight className="h-3 w-3" />
             </Link>
@@ -287,6 +287,23 @@ function HomePage() {
             <div className="mt-8 grid sm:grid-cols-2 gap-x-12 gap-y-8">
               <Rtb k="The full PDF" t="Yours to download and keep, forever." />
               <Rtb k="Progress that carries" t="Streaks, personal bests and week-by-week history." />
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="mt-14 ring-1 ring-signal/50 bg-[#0d0d0d] p-7 lg:p-9">
+              <p className="eyebrow text-signal">Club only</p>
+              <h3 className="mt-4 font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(1.75rem,4vw,2.75rem)] max-w-[20ch]">
+                A coach's layer on top of the plan.
+              </h3>
+              <div className="mt-7 grid sm:grid-cols-3 gap-x-10 gap-y-6">
+                <Rtb k="Adaptive coaching" t="A readiness check that scales the day's load." />
+                <Rtb k="Standards" t="Your bests scored against real reference targets." />
+                <Rtb k="Leaderboard" t="Monthly consistency, ranked on sessions you actually did." />
+              </div>
+              <Link to="/pricing" className="btn-signal press tap mt-9 w-full sm:w-auto text-center">
+                See what Club includes <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+              </Link>
             </div>
           </Reveal>
         </div>
@@ -351,12 +368,15 @@ function HomePage() {
             Stop guessing.<br />Start training.
           </h2>
           <p className="mt-6 text-foreground-muted text-sm md:text-base max-w-[46ch] mx-auto">
-            {price("basic-training-blueprint-plus")} per programme. One payment, lifetime access,
-            secure checkout by Stripe.
+            {CLUB_PRICE} a month for everything, or {FROM_PRICE} once for a single programme you
+            keep for life. Secure checkout by Stripe.
           </p>
-          <div className="mt-9 flex justify-center">
-            <Link to="/programmes" className="btn-signal w-full sm:w-auto">
-              Choose your programme <ArrowRight className="h-3.5 w-3.5" />
+          <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Link to="/pricing" className="btn-signal press tap w-full sm:w-auto text-center">
+              Join the Club <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+            </Link>
+            <Link to="/programmes" className="btn-ghost press tap w-full sm:w-auto text-center">
+              Buy a programme
             </Link>
           </div>
         </div>
