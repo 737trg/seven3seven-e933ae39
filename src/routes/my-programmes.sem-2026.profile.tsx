@@ -4,7 +4,7 @@ import { semStore, useSemProfile, type SemUnits, type SemFormat, type SemCategor
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
 import pdfAsset from "@/assets/sem-2026-download.pdf.asset.json";
-import { Download } from "lucide-react";
+import { PdfDownloadLink } from "@/components/dashboard/PdfDownloadLink";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/profile")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -98,14 +98,12 @@ function ProfilePage() {
       </p>
       <div className="mt-10 border-t border-border pt-6">
         <p className="eyebrow mb-3">Programme download</p>
-        <a
+        <PdfDownloadLink
+          slug="sem-2026"
           href={pdfAsset.url}
-          target="_blank"
-          rel="noopener noreferrer"
+          label="S.E.M 2026 PDF"
           className="inline-flex items-center gap-2 h-11 px-5 border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display hover:border-bone"
-        >
-          <Download className="h-4 w-4" /> S.E.M 2026 PDF
-        </a>
+        />
         <p className="text-foreground-muted text-xs mt-3 max-w-[60ch]">
           The PDF is the printable reference. The app is the guided version — use it in the gym.
         </p>
