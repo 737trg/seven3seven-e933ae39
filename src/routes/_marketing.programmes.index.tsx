@@ -79,7 +79,7 @@ function ProgrammesPage() {
           <div className="lg:col-span-8">
             <p className="eyebrow mb-5 text-signal">Status</p>
             <h2 className="display-lg text-bone max-w-[18ch]">
-              Three programmes.<br />Built to perform.
+              Three live programmes.<br />Built to perform.
             </h2>
             <p className="text-foreground-muted text-sm md:text-base mt-6 max-w-[52ch]">
               Structured training for service preparation, competition and hybrid racing.
