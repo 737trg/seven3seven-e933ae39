@@ -8,9 +8,13 @@ export function MarketingFooter() {
       {/* Centred closing wordmark band */}
       <div className="border-b border-border/60">
         <div className="max-w-[1600px] mx-auto px-8 lg:px-16 py-14 lg:py-20 flex justify-center">
-          <p className="font-display font-bold text-bone tracking-[-0.04em] leading-none text-center text-[clamp(2.5rem,11vw,8.5rem)]">
-            SEVEN3SEVEN
-          </p>
+          <img
+            src={logoAsset.url}
+            alt="SEVEN3SEVEN"
+            loading="lazy"
+            className="w-full max-w-[1100px] h-auto select-none"
+            draggable={false}
+          />
         </div>
       </div>
 
