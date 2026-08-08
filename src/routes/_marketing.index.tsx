@@ -365,9 +365,59 @@ function HomePage() {
   );
 }
 
-function GoalCard({ route }: { route: (typeof ROUTES)[number] }) {
+function DoorCard({
+  eyebrow,
+  price: amount,
+  unit,
+  line,
+  points,
+  cta,
+  to,
+  primary,
+}: {
+  eyebrow: string;
+  price: string;
+  unit: string;
+  line: string;
+  points: readonly string[];
+  cta: string;
+  to: "/pricing" | "/programmes";
+  primary?: boolean;
+}) {
   return (
-    <Link
+    <div
+      className={`p-6 md:p-8 flex flex-col ring-1 ${
+        primary ? "ring-signal/60 bg-[#0d0d0d]" : "ring-border bg-background"
+      }`}
+    >
+      <p className={`eyebrow ${primary ? "text-signal" : "text-foreground-muted"}`}>{eyebrow}</p>
+      <p className="mt-3 font-display font-bold text-bone tracking-[-0.025em] text-[clamp(2rem,7vw,3rem)] leading-none">
+        {amount}
+        <span className="ml-2 text-foreground-muted text-sm font-normal tracking-normal">{unit}</span>
+      </p>
+      <p className="mt-3 text-foreground-muted text-sm">{line}</p>
+      <ul className="mt-6 space-y-3 flex-1">
+        {points.map((p) => (
+          <li key={p} className="flex items-start gap-2.5 min-w-0">
+            <Check
+              className={`h-3.5 w-3.5 shrink-0 mt-[3px] ${primary ? "text-signal" : "text-foreground-muted"}`}
+              strokeWidth={2.5}
+            />
+            <span className="min-w-0 text-bone/85 text-sm leading-[1.5]">{p}</span>
+          </li>
+        ))}
+      </ul>
+      <Link
+        to={to}
+        className={`${primary ? "btn-signal" : "btn-ghost"} press tap mt-7 w-full text-center`}
+      >
+        {cta} <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+      </Link>
+    </div>
+  );
+}
+
+function GoalCard({ route }: { route: (typeof ROUTES)[number] }) {
   return (
     <Link
       to="/programmes/$slug"
