@@ -16,6 +16,8 @@ import { formatClock } from "@/lib/programmeUtils";
 import type { SessionBlock } from "@/types/programme";
 import { store, subscribeStore } from "@/lib/store";
 import { LogDrawer } from "@/components/workout/LogDrawer";
+import { ReadinessCheck } from "@/components/workout/ReadinessCheck";
+import { useReadiness } from "@/lib/useReadiness";
 import { BlockTimer, timerIsRunnable } from "@/components/workout/BlockTimer";
 import { summariseResult } from "@/components/workout/logKind";
 import { ProgrammeAccessGate } from "@/lib/athxAccess";
@@ -80,6 +82,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
   // sessions never lets a previous session's state leak into a new one.
   const restoredFor = useRef<string | null>(null);
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
+  const readiness = useReadiness();
 
   // Subscribe to store so newly-saved results re-render the summary line.
   const resultsTick = useSyncExternalStore(
@@ -286,6 +289,16 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
           <p className="eyebrow mb-4">
             Block {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {block.timeWindow ?? ""}
           </p>
+          {idx === 0 && (
+            <div className="mb-6">
+              <ReadinessCheck
+                input={readiness.input}
+                adaptation={readiness.adaptation}
+                logged={readiness.logged}
+                onSave={(next) => void readiness.save(next)}
+              />
+            </div>
+          )}
           <h1 className="display-lg text-bone">
             {block.title}
           </h1>
@@ -408,6 +421,7 @@ function WorkoutPage({ resolved }: { resolved: ResolvedSession | undefined }) {
         onOpenChange={setLogOpen}
         session={s}
         block={block}
+        adaptation={readiness.adaptation}
       />
 
       {/* Confirm complete without logging */}
