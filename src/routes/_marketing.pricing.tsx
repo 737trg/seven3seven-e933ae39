@@ -6,6 +6,12 @@ import { useAuth } from "@/lib/useAuth";
 import { useMembership } from "@/lib/useMembership";
 import { createMembershipCheckout, createMembershipPortal } from "@/lib/membership.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
+import { CART_CATALOG } from "@/lib/cart";
+
+/** Lowest one-off programme price, read from the live catalogue so it can't drift. */
+const FROM_PRICE = `£${(
+  Math.min(...Object.values(CART_CATALOG).map((p) => p.pricePence)) / 100
+).toFixed(2)}`;
 
 const CANONICAL = "https://737trg.com/pricing";
 
@@ -139,7 +145,7 @@ function PricingPage() {
         <div className="hairline p-7 md:p-9 flex flex-col">
           <p className="eyebrow">One-off programme</p>
           <p className="display-md text-bone mt-3">
-            From £20<span className="body-sm"> once</span>
+            From {FROM_PRICE}<span className="body-sm"> once</span>
           </p>
           <p className="body-sm mt-3">Buy a programme outright. It stays in your library for life.</p>
           <ul className="mt-7 space-y-3 flex-1">
