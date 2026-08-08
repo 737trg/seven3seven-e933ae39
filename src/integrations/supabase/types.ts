@@ -431,6 +431,7 @@ export type Database = {
           display_name: string | null
           email: string | null
           id: string
+          legacy_full_access: boolean
           updated_at: string
         }
         Insert: {
@@ -439,6 +440,7 @@ export type Database = {
           display_name?: string | null
           email?: string | null
           id: string
+          legacy_full_access?: boolean
           updated_at?: string
         }
         Update: {
@@ -447,6 +449,7 @@ export type Database = {
           display_name?: string | null
           email?: string | null
           id?: string
+          legacy_full_access?: boolean
           updated_at?: string
         }
         Relationships: []
@@ -681,9 +684,59 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean
+          created_at: string
+          current_period_end: string | null
+          current_period_start: string | null
+          environment: string
+          id: string
+          price_id: string | null
+          product_id: string | null
+          status: string
+          stripe_customer_id: string
+          stripe_subscription_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          environment?: string
+          id?: string
+          price_id?: string | null
+          product_id?: string | null
+          status?: string
+          stripe_customer_id: string
+          stripe_subscription_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          environment?: string
+          id?: string
+          price_id?: string | null
+          product_id?: string | null
+          status?: string
+          stripe_customer_id?: string
+          stripe_subscription_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_preferences: {
         Row: {
           created_at: string
+          leaderboard_name: string | null
+          leaderboard_opt_in: boolean
           onboarding_completed_at: string | null
           primary_product_id: string | null
           settings: Json
@@ -694,6 +747,8 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          leaderboard_name?: string | null
+          leaderboard_opt_in?: boolean
           onboarding_completed_at?: string | null
           primary_product_id?: string | null
           settings?: Json
@@ -704,6 +759,8 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          leaderboard_name?: string | null
+          leaderboard_opt_in?: boolean
           onboarding_completed_at?: string | null
           primary_product_id?: string | null
           settings?: Json
@@ -803,8 +860,16 @@ export type Database = {
         }
         Returns: boolean
       }
+      has_active_membership: {
+        Args: { _environment: string; _user_id: string }
+        Returns: boolean
+      }
       has_active_product_entitlement: {
         Args: { _product_id: string; _user_id: string }
+        Returns: boolean
+      }
+      has_club_access: {
+        Args: { _environment?: string; _user_id: string }
         Returns: boolean
       }
       has_role: {
@@ -815,6 +880,16 @@ export type Database = {
         Returns: boolean
       }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      monthly_leaderboard: {
+        Args: { _month_start: string }
+        Returns: {
+          display_name: string
+          is_me: boolean
+          sessions_completed: number
+          total_seconds: number
+          user_id: string
+        }[]
+      }
       user_has_entitlement: {
         Args: { _product_id: string; _user_id: string }
         Returns: boolean
