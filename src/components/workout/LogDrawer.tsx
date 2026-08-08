@@ -200,7 +200,11 @@ function StrengthForm({
     restTick.current = setInterval(() => {
       setRestRemaining((r) => {
         if (r == null) return null;
-        if (r <= 1) return null;
+        if (r <= 1) {
+          cueEnd();
+          return null;
+        }
+        if (r <= 4) cueTick();
         return r - 1;
       });
     }, 1000);
