@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/seven3seven-logo.png.asset.json";
+import logoAsset from "@/assets/seven3seven-logo-v2.png.asset.json";
 
 interface Props {
   className?: string;
