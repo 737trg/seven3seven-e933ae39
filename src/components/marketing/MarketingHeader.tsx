@@ -132,6 +132,13 @@ export function MarketingHeader() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="px-5 py-4 flex flex-col" aria-label="Mobile">
+            <Link
+              to="/pricing"
+              onClick={() => setOpen(false)}
+              className="btn-signal press tap mb-4 w-full text-center"
+            >
+              Join the Club — £14.99/mo
+            </Link>
             {NAV.map((n) => (
               <Link
                 key={n.to}

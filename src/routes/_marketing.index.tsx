@@ -9,6 +9,24 @@ import { CART_CATALOG, type CartItemSlug } from "@/lib/cart";
 import { Reveal } from "@/components/marketing/Reveal";
 
 const price = (slug: CartItemSlug) => `£${(CART_CATALOG[slug].pricePence / 100).toFixed(2)}`;
+const FROM_PRICE = `£${(
+  Math.min(...Object.values(CART_CATALOG).map((p) => p.pricePence)) / 100
+).toFixed(2)}`;
+const CLUB_PRICE = "£14.99";
+
+const CLUB_POINTS = [
+  "Every programme, current and future",
+  "Adaptive coaching and load suggestions",
+  "PB trends, strength standards, body metrics",
+  "Monthly consistency leaderboard",
+];
+
+const ONEOFF_POINTS = [
+  "One programme, yours for life",
+  "Full interactive app with timers and logging",
+  "The permanent PDF you keep",
+  "Secure Stripe checkout",
+];
 
 const ROUTES: {
   slug: CartItemSlug;
@@ -61,6 +79,10 @@ const FAQS: { q: string; a: string }[] = [
     q: "Can I get a refund?",
     a: "Digital programmes are covered by our refund policy — see the refunds page for the full terms.",
   },
+  {
+    q: "Club or one-off — which is for me?",
+    a: "Buy a programme outright if you have one goal and want the PDF for life. Join the Club at £14.99 a month if you want every programme plus coaching, standards, metrics and the leaderboard.",
+  },
 ];
 
 const SITE = "https://737trg.com";
@@ -72,12 +94,12 @@ export const Route = createFileRoute("/_marketing/")({
       {
         name: "description",
         content:
-          "Premium hybrid fitness programmes built to develop strength, endurance and the ability to perform when it counts. Buy once. Follow interactively. Keep the PDF.",
+          "Join the SEVEN3SEVEN Club for £14.99/month and unlock every hybrid training programme, or buy one outright from £19.99 and keep it for life.",
       },
       { property: "og:title", content: "SEVEN3SEVEN — Hybrid Fitness | Performance" },
       {
         property: "og:description",
-        content: "Structured hybrid programmes. Built to be followed, not filed away.",
+        content: "Every programme for £14.99/month, or buy one outright. Built to be followed, not filed away.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE}/` },
@@ -103,6 +125,18 @@ export const Route = createFileRoute("/_marketing/")({
           "@type": "WebSite",
           name: "SEVEN3SEVEN",
           url: SITE,
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
         }),
       },
     ],
@@ -134,43 +168,50 @@ function HomePage() {
         <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-28 md:pt-32">
           <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
           <h1 className="mt-4 md:mt-5 display-xl text-bone max-w-[16ch]">
-            Prepare for what<br />you're training for.
+            Train like it matters.
           </h1>
           <p className="mt-5 lede max-w-[52ch]">
             Structured 8–12 week programmes for military preparation, competition and hybrid
-            racing. Follow every session in the app, log your work, and keep the full PDF.
+            racing. Join the Club for {CLUB_PRICE} a month and get everything, or buy one
+            programme outright and keep it for life.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link to="/programmes" className="btn-signal press tap w-full sm:w-auto text-center">
-              Buy your programme
+            <Link to="/pricing" className="btn-signal press tap w-full sm:w-auto text-center">
+              Join the Club — {CLUB_PRICE}/mo
               <ArrowRight className="h-3.5 w-3.5 shrink-0" />
             </Link>
-            <a href="#choose" className="btn-ghost press tap w-full sm:w-auto">
-              Find your programme
-            </a>
+            <Link to="/programmes" className="btn-ghost press tap w-full sm:w-auto text-center">
+              Buy a programme — from {FROM_PRICE}
+            </Link>
           </div>
           <p className="mt-4 eyebrow text-bone/60">
-            From {price("basic-training-blueprint-plus")} · one payment, lifetime access
+            Cancel anytime · Lifetime access on one-off plans · Secure Stripe checkout
           </p>
         </div>
       </section>
 
-      {/* TRUST STRIP */}
-      <section aria-label="What's included" className="border-y border-border/60 bg-background">
-        <div className="max-w-[1600px] mx-auto container-x py-5 grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-5 md:gap-x-6">
-          {[
-            "Structured 8–12 week plan",
-            "Interactive session app",
-            "Full PDF you keep",
-            "Secure Stripe checkout",
-          ].map((t) => (
-            <span key={t} className="flex items-start gap-2.5 min-w-0">
-              <Check className="h-3.5 w-3.5 shrink-0 text-signal mt-[2px]" strokeWidth={2.5} />
-              <span className="min-w-0 font-display uppercase text-[10px] md:text-[11px] leading-[1.5] tracking-[0.16em] md:tracking-[0.2em] text-bone/80">
-                {t}
-              </span>
-            </span>
-          ))}
+      {/* TWO DOORS — make the decision in the first two screens */}
+      <section aria-label="Ways to train" className="border-y border-border/60 bg-background">
+        <div className="max-w-[1440px] mx-auto container-x py-12 lg:py-16 grid gap-4 md:gap-5 md:grid-cols-2">
+          <DoorCard
+            eyebrow="SEVEN3SEVEN Club"
+            price={CLUB_PRICE}
+            unit="/ month"
+            line="Everything we build, while you're a member."
+            points={CLUB_POINTS}
+            cta="Join the Club"
+            to="/pricing"
+            primary
+          />
+          <DoorCard
+            eyebrow="One-off programme"
+            price={FROM_PRICE}
+            unit="once"
+            line="Buy a plan outright and own it forever."
+            points={ONEOFF_POINTS}
+            cta="Browse programmes"
+            to="/programmes"
+          />
         </div>
       </section>
 
@@ -193,7 +234,7 @@ function HomePage() {
             ))}
           </div>
           <div className="mt-7 flex items-center justify-between gap-4">
-            <p className="eyebrow text-foreground-muted">One payment. Lifetime access.</p>
+            <p className="eyebrow text-foreground-muted">All three included with Club membership.</p>
             <Link to="/programmes" className="eyebrow text-bone inline-flex items-center gap-2 hover:text-signal transition-colors">
               All programmes <ArrowRight className="h-3 w-3" />
             </Link>
@@ -246,6 +287,23 @@ function HomePage() {
             <div className="mt-8 grid sm:grid-cols-2 gap-x-12 gap-y-8">
               <Rtb k="The full PDF" t="Yours to download and keep, forever." />
               <Rtb k="Progress that carries" t="Streaks, personal bests and week-by-week history." />
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="mt-14 ring-1 ring-signal/50 bg-[#0d0d0d] p-7 lg:p-9">
+              <p className="eyebrow text-signal">Club only</p>
+              <h3 className="mt-4 font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(1.75rem,4vw,2.75rem)] max-w-[20ch]">
+                A coach's layer on top of the plan.
+              </h3>
+              <div className="mt-7 grid sm:grid-cols-3 gap-x-10 gap-y-6">
+                <Rtb k="Adaptive coaching" t="A readiness check that scales the day's load." />
+                <Rtb k="Standards" t="Your bests scored against real reference targets." />
+                <Rtb k="Leaderboard" t="Monthly consistency, ranked on sessions you actually did." />
+              </div>
+              <Link to="/pricing" className="btn-signal press tap mt-9 w-full sm:w-auto text-center">
+                See what Club includes <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+              </Link>
             </div>
           </Reveal>
         </div>
@@ -310,17 +368,72 @@ function HomePage() {
             Stop guessing.<br />Start training.
           </h2>
           <p className="mt-6 text-foreground-muted text-sm md:text-base max-w-[46ch] mx-auto">
-            {price("basic-training-blueprint-plus")} per programme. One payment, lifetime access,
-            secure checkout by Stripe.
+            {CLUB_PRICE} a month for everything, or {FROM_PRICE} once for a single programme you
+            keep for life. Secure checkout by Stripe.
           </p>
-          <div className="mt-9 flex justify-center">
-            <Link to="/programmes" className="btn-signal w-full sm:w-auto">
-              Choose your programme <ArrowRight className="h-3.5 w-3.5" />
+          <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Link to="/pricing" className="btn-signal press tap w-full sm:w-auto text-center">
+              Join the Club <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+            </Link>
+            <Link to="/programmes" className="btn-ghost press tap w-full sm:w-auto text-center">
+              Buy a programme
             </Link>
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+function DoorCard({
+  eyebrow,
+  price: amount,
+  unit,
+  line,
+  points,
+  cta,
+  to,
+  primary,
+}: {
+  eyebrow: string;
+  price: string;
+  unit: string;
+  line: string;
+  points: readonly string[];
+  cta: string;
+  to: "/pricing" | "/programmes";
+  primary?: boolean;
+}) {
+  return (
+    <div
+      className={`p-6 md:p-8 flex flex-col ring-1 ${
+        primary ? "ring-signal/60 bg-[#0d0d0d]" : "ring-border bg-background"
+      }`}
+    >
+      <p className={`eyebrow ${primary ? "text-signal" : "text-foreground-muted"}`}>{eyebrow}</p>
+      <p className="mt-3 font-display font-bold text-bone tracking-[-0.025em] text-[clamp(2rem,7vw,3rem)] leading-none">
+        {amount}
+        <span className="ml-2 text-foreground-muted text-sm font-normal tracking-normal">{unit}</span>
+      </p>
+      <p className="mt-3 text-foreground-muted text-sm">{line}</p>
+      <ul className="mt-6 space-y-3 flex-1">
+        {points.map((p) => (
+          <li key={p} className="flex items-start gap-2.5 min-w-0">
+            <Check
+              className={`h-3.5 w-3.5 shrink-0 mt-[3px] ${primary ? "text-signal" : "text-foreground-muted"}`}
+              strokeWidth={2.5}
+            />
+            <span className="min-w-0 text-bone/85 text-sm leading-[1.5]">{p}</span>
+          </li>
+        ))}
+      </ul>
+      <Link
+        to={to}
+        className={`${primary ? "btn-signal" : "btn-ghost"} press tap mt-7 w-full text-center`}
+      >
+        {cta} <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+      </Link>
+    </div>
   );
 }
 
