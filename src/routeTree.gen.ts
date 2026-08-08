@@ -22,6 +22,7 @@ import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes
 import { Route as MarketingSignUpRouteImport } from './routes/_marketing.sign-up'
 import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in'
 import { Route as MarketingResetPasswordRouteImport } from './routes/_marketing.reset-password'
+import { Route as MarketingPricingRouteImport } from './routes/_marketing.pricing'
 import { Route as MarketingMyProgrammesRouteImport } from './routes/_marketing.my-programmes'
 import { Route as MarketingForgotPasswordRouteImport } from './routes/_marketing.forgot-password'
 import { Route as MarketingCartRouteImport } from './routes/_marketing.cart'
@@ -149,6 +150,11 @@ const MarketingSignInRoute = MarketingSignInRouteImport.update({
 const MarketingResetPasswordRoute = MarketingResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => MarketingRoute,
+} as any)
+const MarketingPricingRoute = MarketingPricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => MarketingRoute,
 } as any)
 const MarketingMyProgrammesRoute = MarketingMyProgrammesRouteImport.update({
@@ -526,6 +532,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof MarketingCartRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
+  '/pricing': typeof MarketingPricingRoute
   '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
@@ -602,6 +609,7 @@ export interface FileRoutesByTo {
   '/cart': typeof MarketingCartRoute
   '/forgot-password': typeof MarketingForgotPasswordRoute
   '/my-programmes': typeof MarketingMyProgrammesRoute
+  '/pricing': typeof MarketingPricingRoute
   '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
@@ -674,6 +682,7 @@ export interface FileRoutesById {
   '/_marketing/cart': typeof MarketingCartRoute
   '/_marketing/forgot-password': typeof MarketingForgotPasswordRoute
   '/_marketing/my-programmes': typeof MarketingMyProgrammesRoute
+  '/_marketing/pricing': typeof MarketingPricingRoute
   '/_marketing/reset-password': typeof MarketingResetPasswordRoute
   '/_marketing/sign-in': typeof MarketingSignInRoute
   '/_marketing/sign-up': typeof MarketingSignUpRoute
@@ -753,6 +762,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/forgot-password'
     | '/my-programmes'
+    | '/pricing'
     | '/reset-password'
     | '/sign-in'
     | '/sign-up'
@@ -829,6 +839,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/forgot-password'
     | '/my-programmes'
+    | '/pricing'
     | '/reset-password'
     | '/sign-in'
     | '/sign-up'
@@ -900,6 +911,7 @@ export interface FileRouteTypes {
     | '/_marketing/cart'
     | '/_marketing/forgot-password'
     | '/_marketing/my-programmes'
+    | '/_marketing/pricing'
     | '/_marketing/reset-password'
     | '/_marketing/sign-in'
     | '/_marketing/sign-up'
@@ -1065,6 +1077,13 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof MarketingResetPasswordRouteImport
+      parentRoute: typeof MarketingRoute
+    }
+    '/_marketing/pricing': {
+      id: '/_marketing/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof MarketingPricingRouteImport
       parentRoute: typeof MarketingRoute
     }
     '/_marketing/my-programmes': {
@@ -1554,6 +1573,7 @@ interface MarketingRouteChildren {
   MarketingCartRoute: typeof MarketingCartRoute
   MarketingForgotPasswordRoute: typeof MarketingForgotPasswordRoute
   MarketingMyProgrammesRoute: typeof MarketingMyProgrammesRoute
+  MarketingPricingRoute: typeof MarketingPricingRoute
   MarketingResetPasswordRoute: typeof MarketingResetPasswordRoute
   MarketingSignInRoute: typeof MarketingSignInRoute
   MarketingSignUpRoute: typeof MarketingSignUpRoute
@@ -1576,6 +1596,7 @@ const MarketingRouteChildren: MarketingRouteChildren = {
   MarketingCartRoute: MarketingCartRoute,
   MarketingForgotPasswordRoute: MarketingForgotPasswordRoute,
   MarketingMyProgrammesRoute: MarketingMyProgrammesRoute,
+  MarketingPricingRoute: MarketingPricingRoute,
   MarketingResetPasswordRoute: MarketingResetPasswordRoute,
   MarketingSignInRoute: MarketingSignInRoute,
   MarketingSignUpRoute: MarketingSignUpRoute,
