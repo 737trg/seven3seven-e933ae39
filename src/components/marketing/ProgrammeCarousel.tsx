@@ -2,6 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PUBLIC_PROGRAMMES, statusLabel } from "@/data/publicProgrammes";
+import { CART_CATALOG, type CartItemSlug } from "@/lib/cart";
+
+function priceFor(slug: string): string | null {
+  const entry = CART_CATALOG[slug as CartItemSlug];
+  return entry ? `£${(entry.pricePence / 100).toFixed(2)}` : null;
+}
 
 export function ProgrammeCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -113,7 +119,13 @@ export function ProgrammeCarousel() {
                 <p className="text-bone/80 text-sm mt-3 max-w-[32ch] leading-relaxed">
                   {p.shortLine}
                 </p>
-                <div className="mt-6 inline-flex items-center gap-2 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-1.5 border-b border-bone/70 group-hover:border-signal group-hover:text-signal transition-colors">
+                <div className="mt-5 pt-4 border-t border-bone/20 flex items-center justify-between gap-3">
+                  <span className="font-display text-bone text-lg tabular">
+                    {priceFor(p.slug) ?? "Coming soon"}
+                  </span>
+                  <span className="eyebrow text-bone/70">{p.durationWeeks} weeks</span>
+                </div>
+                <div className="mt-5 inline-flex items-center gap-2 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-1.5 border-b border-bone/70 group-hover:border-signal group-hover:text-signal transition-colors">
                   View programme <ArrowRight className="h-3 w-3" />
                 </div>
               </div>
