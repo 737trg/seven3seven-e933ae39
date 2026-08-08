@@ -1,11 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Activity, CalendarDays, Trophy, Star, Flame } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import { useCustomerDashboard, type CustomerProgramme, type ActivityItem } from "@/lib/useCustomerDashboard";
 import { usePreferences } from "@/lib/usePreferences";
+import { computeStreak } from "@/lib/streak";
+import { StreakCard } from "@/components/dashboard/StreakCard";
+import { PersonalRecordsPanel } from "@/components/dashboard/PersonalRecordsPanel";
 import { recoverPendingPurchases } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
@@ -25,6 +28,10 @@ function MyProgrammesPage() {
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
   const { prefs, update: updatePrefs } = usePreferences(user?.id);
+  const streak = useMemo(
+    () => computeStreak(dashboard.programmes.flatMap((p) => p.completions.map((c) => c.completed_at))),
+    [dashboard.programmes],
+  );
   const recoveryRef = useRef<string | null>(null);
   useEffect(() => {
     if (!user?.id) return;
@@ -114,7 +121,7 @@ function MyProgrammesPage() {
             <StatStrip label="Active" value={dashboard.loading ? "—" : String(dashboard.activeCount)} />
             <StatStrip label="Current week" value={dashboard.loading ? "—" : dashboard.currentWeek ? String(dashboard.currentWeek) : "—"} />
             <StatStrip label="Sessions completed" value={dashboard.loading ? "—" : String(dashboard.sessionsCompleted)} />
-            <StatStrip label="Results logged" value={dashboard.loading ? "—" : String(dashboard.resultsLogged)} />
+            <StatStrip label="Day streak" value={dashboard.loading ? "—" : String(streak.current)} />
           </div>
         </div>
       </section>
@@ -152,8 +159,16 @@ function MyProgrammesPage() {
         <div aria-hidden className="hidden lg:block w-px bg-border/60" />
 
         <aside className="space-y-10 lg:pl-4 xl:pl-8">
+          <SidebarCard title="Consistency">
+            <StreakCard streak={streak} />
+          </SidebarCard>
+
           <SidebarCard title="Quick actions">
             <QuickActions programmes={dashboard.programmes} />
+          </SidebarCard>
+
+          <SidebarCard title="Personal records">
+            <PersonalRecordsPanel userId={user?.id} defaultUnit={prefs.units} />
           </SidebarCard>
 
           <SidebarCard title="Recent activity">
