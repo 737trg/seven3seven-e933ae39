@@ -6,6 +6,10 @@ import { formatClock } from "@/lib/programmeUtils";
 import { cueEnd, cueTick } from "@/lib/alertCue";
 import { supabase } from "@/integrations/supabase/client";
 import { inferLogKind, kindLabel, summariseResult } from "./logKind";
+import { suggestLoad } from "@/lib/loadSuggestion";
+import { prCandidateFrom, type PrCandidate } from "@/lib/prDetect";
+import { slugifyLift } from "@/lib/usePersonalRecords";
+import type { ReadinessAdaptation } from "@/lib/readiness";
 import type {
   BlockResult,
   BlockResultDraft,
@@ -189,15 +193,28 @@ function StrengthForm({
   state,
   setState,
   block,
+  suggestion,
 }: {
   state: BlockResultDraft;
   setState: (s: BlockResultDraft) => void;
   block: SessionBlock;
+  suggestion: { kg: number; reason: string } | null;
 }) {
   const sets = state.sets ?? [];
   const restSec = block.timer?.restSec ?? 90;
   const [restRemaining, setRestRemaining] = useState<number | null>(null);
   const restTick = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const applySuggestion = () => {
+    if (!suggestion) return;
+    setState({
+      ...state,
+      sets: (sets.length > 0 ? sets : [{ group: "top" as StrengthSetGroup }]).map((s) => ({
+        ...s,
+        weightKg: suggestion.kg,
+      })),
+    });
+  };
 
   useEffect(() => {
     if (restRemaining == null) return;
@@ -262,6 +279,22 @@ function StrengthForm({
 
   return (
     <div className="space-y-6">
+      {suggestion && (
+        <div className="border border-border px-4 py-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="eyebrow text-foreground-muted">Suggested working load</p>
+            <p className="text-bone font-display tabular text-xl leading-tight">{suggestion.kg} kg</p>
+            <p className="text-[10px] text-foreground-muted/80 mt-0.5">{suggestion.reason}</p>
+          </div>
+          <button
+            type="button"
+            onClick={applySuggestion}
+            className="press shrink-0 h-9 px-3 text-[10px] uppercase tracking-widest border border-bone text-bone"
+          >
+            Use
+          </button>
+        </div>
+      )}
       {restRemaining != null && (
         <div className="border border-signal/40 bg-signal/5 px-4 py-3 flex items-center justify-between">
           <span className="text-[10px] uppercase tracking-widest text-foreground-muted inline-flex items-center gap-1.5">
@@ -753,6 +786,8 @@ export interface LogDrawerProps {
   session: Session;
   block: SessionBlock;
   onSaved?: (r: BlockResult) => void;
+  /** Today's readiness, used to scale suggested loads. */
+  adaptation?: ReadinessAdaptation | null;
 }
 
 export function LogDrawer({
@@ -761,6 +796,7 @@ export function LogDrawer({
   session,
   block,
   onSaved,
+  adaptation,
 }: LogDrawerProps) {
   const isMobile = useIsMobile();
   const side = isMobile ? "bottom" : "right";
@@ -773,6 +809,16 @@ export function LogDrawer({
         dateISO: sessionDateISO,
       })
     : undefined;
+  const suggestion = useMemo(
+    () =>
+      suggestLoad(last, {
+        loadFactor: adaptation?.loadFactor ?? 1,
+        readinessLabel: adaptation?.label,
+      }),
+    [last, adaptation?.loadFactor, adaptation?.label],
+  );
+  const [pbCandidate, setPbCandidate] = useState<PrCandidate | null>(null);
+  const [pbSaving, setPbSaving] = useState(false);
 
   const [state, setState] = useState<BlockResultDraft>(() => {
     const draft = store.getDraft(session.id, block.id);
@@ -813,6 +859,42 @@ export function LogDrawer({
     // progress pages (which read workout_results) reflect this log.
     void mirrorResultToSupabase(result);
     onSaved?.(result);
+    if (kind === "strength" || kind === "olympic") {
+      // Offer to bank a personal best rather than making the athlete
+      // re-type it into their profile later.
+      void detectPb(result).then((candidate) => {
+        if (candidate) setPbCandidate(candidate);
+        else onOpenChange(false);
+      });
+      return;
+    }
+    onOpenChange(false);
+  };
+
+  const savePb = async () => {
+    if (!pbCandidate) return;
+    setPbSaving(true);
+    try {
+      const { data: userRes } = await supabase.auth.getUser();
+      const uid = userRes?.user?.id;
+      if (uid) {
+        await supabase.from("personal_records").insert({
+          user_id: uid,
+          lift_key: slugifyLift(pbCandidate.liftLabel),
+          lift_label: pbCandidate.liftLabel,
+          metric: "load",
+          value: pbCandidate.weightKg,
+          reps: pbCandidate.reps,
+          unit: "kg",
+          achieved_on: sessionDateISO,
+          source_session_id: session.id,
+        });
+      }
+    } catch {
+      /* non-fatal — the result itself is already saved */
+    }
+    setPbSaving(false);
+    setPbCandidate(null);
     onOpenChange(false);
   };
 
@@ -842,7 +924,7 @@ export function LogDrawer({
 
         <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
           {kind === "strength" || kind === "olympic" ? (
-            <StrengthForm state={state} setState={setState} block={block} />
+            <StrengthForm state={state} setState={setState} block={block} suggestion={suggestion} />
           ) : kind === "amrap" ? (
             <AmrapForm state={state} setState={setState} />
           ) : kind === "emom" ? (
@@ -885,7 +967,63 @@ export function LogDrawer({
             <Check className="h-3.5 w-3.5" /> Save result
           </button>
         </footer>
+
+        {pbCandidate && (
+          <div className="absolute inset-0 z-50 bg-background/95 backdrop-blur flex flex-col justify-end p-6">
+            <div className="border border-earned/60 p-5">
+              <p className="eyebrow text-earned">New personal best</p>
+              <p className="font-display text-bone text-2xl mt-2 leading-tight">
+                {pbCandidate.weightKg} kg × {pbCandidate.reps}
+              </p>
+              <p className="text-foreground-muted text-xs mt-2">
+                {pbCandidate.liftLabel} · estimated 1RM {pbCandidate.estimatedOneRm} kg
+                {pbCandidate.previousKg ? ` · previous best ${pbCandidate.previousKg} kg` : ""}
+              </p>
+              <div className="mt-5 flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPbCandidate(null);
+                    onOpenChange(false);
+                  }}
+                  className="h-11 px-4 border border-border text-[11px] uppercase tracking-widest text-foreground-muted hover:text-bone"
+                >
+                  Not now
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void savePb()}
+                  disabled={pbSaving}
+                  className="flex-1 h-11 bg-earned text-obsidian text-[11px] uppercase tracking-widest font-display disabled:opacity-60"
+                >
+                  {pbSaving ? "Saving…" : "Save personal best"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   );
+}
+
+/** Look up the stored best for this lift and compare it with what was logged. */
+async function detectPb(result: BlockResult): Promise<PrCandidate | null> {
+  try {
+    const { data: userRes } = await supabase.auth.getUser();
+    const uid = userRes?.user?.id;
+    if (!uid) return null;
+    const { data } = await supabase
+      .from("personal_records")
+      .select("value, reps")
+      .eq("user_id", uid)
+      .eq("lift_key", slugifyLift(result.exercise))
+      .eq("metric", "load")
+      .order("value", { ascending: false })
+      .limit(1);
+    const previous = data && data.length > 0 ? { value: Number(data[0].value), reps: data[0].reps } : null;
+    return prCandidateFrom(result, previous);
+  } catch {
+    return null;
+  }
 }

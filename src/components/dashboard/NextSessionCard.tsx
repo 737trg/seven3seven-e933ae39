@@ -22,6 +22,18 @@ export function NextSessionCard({
   const pct = stored !== null && stored > 0 ? Math.round(stored) : derived;
   const isNew = programme.state === "ready";
 
+  // Plans advance by completion, not by calendar — so a missed week never
+  // leaves stale sessions behind. Say so, rather than letting a long gap
+  // feel like failure.
+  const lastAt = programme.completions
+    .map((c) => c.completed_at)
+    .sort()
+    .pop();
+  const daysSince = lastAt
+    ? Math.floor((Date.now() - new Date(lastAt).getTime()) / 86_400_000)
+    : null;
+  const returning = !isNew && daysSince !== null && daysSince >= 10;
+
   return (
     <article className="hairline border-signal/40 elevated p-5 md:p-8">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
@@ -39,6 +51,11 @@ export function NextSessionCard({
       </div>
 
       <div className="mt-5">
+        {returning && (
+          <p className="text-[11px] text-foreground-muted mb-3 leading-snug">
+            {daysSince} days since your last session — nothing is lost. Your plan picks up exactly where you stopped.
+          </p>
+        )}
         <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-foreground-muted mb-2">
           <span>{next ? `${next.done} of ${next.total} sessions` : "Progress"}</span>
           <span className="text-bone tabular">{pct}%</span>
