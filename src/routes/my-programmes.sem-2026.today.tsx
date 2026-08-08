@@ -4,6 +4,8 @@ import { SEM, allSessions, isCore, sessionId } from "@/lib/sem/manifest";
 import { semStore, useSemProfile, useSemReadiness, currentSemWeek, type SemReadiness } from "@/lib/sem/store";
 import { ArrowRight, Download } from "lucide-react";
 import pdfAsset from "@/assets/sem-2026-download.pdf.asset.json";
+import { useScheduleOverrides } from "@/lib/useScheduleOverrides";
+import { SessionScheduleControls } from "@/components/dashboard/SessionScheduleControls";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/today")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -13,6 +15,7 @@ export const Route = createFileRoute("/my-programmes/sem-2026/today")({
 function TodayPage() {
   const profile = useSemProfile();
   const readiness = useSemReadiness();
+  const schedule = useScheduleOverrides("sem-2026");
   const week = currentSemWeek(profile.startDate) ?? 1;
   const wk = SEM.weeks.find((w) => w.week === week)!;
   const todayName = new Date().toLocaleDateString("en-GB", { weekday: "long" });
@@ -78,6 +81,7 @@ function TodayPage() {
                   <div className="min-w-0">
                     <p className="text-bone text-sm truncate">{s.title}</p>
                     <p className="text-foreground-muted text-[10px] uppercase tracking-widest">{s.recommended_day} · {s.pillar} · {s.duration}{!isCore(s) && " · OPTIONAL"}</p>
+                    <SessionScheduleControls sessionId={id} override={schedule.bySession[id]} onSet={schedule.set} onClear={schedule.clear} />
                   </div>
                   <Link to="/my-programmes/sem-2026/programme/s/$sessionId" params={{ sessionId: id }} className="text-foreground-muted hover:text-bone"><ArrowRight className="h-4 w-4" /></Link>
                 </li>

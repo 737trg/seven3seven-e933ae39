@@ -3,6 +3,8 @@ import { HrpShell } from "@/components/hrp/HrpShell";
 import { HRP, allSessions, isCore, sessionId } from "@/lib/hrp/manifest";
 import { hrpStore, useHrpProfile, useHrpReadiness, currentHrpWeek, type HrpReadiness } from "@/lib/hrp/store";
 import { ArrowRight } from "lucide-react";
+import { useScheduleOverrides } from "@/lib/useScheduleOverrides";
+import { SessionScheduleControls } from "@/components/dashboard/SessionScheduleControls";
 
 export const Route = createFileRoute("/my-programmes/hybrid-race-plan/today")({
   head: () => ({ meta: [{ title: "HYBRID RACE PLAN — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -12,6 +14,7 @@ export const Route = createFileRoute("/my-programmes/hybrid-race-plan/today")({
 function TodayPage() {
   const profile = useHrpProfile();
   const readiness = useHrpReadiness();
+  const schedule = useScheduleOverrides("hybrid-race-plan");
   const week = currentHrpWeek(profile.startDate) ?? 1;
   const wk = HRP.weeks.find((w) => w.week === week)!;
   const todayName = new Date().toLocaleDateString("en-GB", { weekday: "long" });
@@ -77,6 +80,7 @@ function TodayPage() {
                   <div className="min-w-0">
                     <p className="text-bone text-sm truncate">{s.title}</p>
                     <p className="text-foreground-muted text-[10px] uppercase tracking-widest">{s.recommended_day} · {s.pillar} · {s.duration}{!isCore(s) && " · OPTIONAL"}</p>
+                    <SessionScheduleControls sessionId={id} override={schedule.bySession[id]} onSet={schedule.set} onClear={schedule.clear} />
                   </div>
                   <Link to="/my-programmes/hybrid-race-plan/programme/s/$sessionId" params={{ sessionId: id }} className="text-foreground-muted hover:text-bone"><ArrowRight className="h-4 w-4" /></Link>
                 </li>
