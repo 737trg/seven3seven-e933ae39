@@ -1,11 +1,67 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import heroAsset from "@/assets/home-hero.jpg.asset.json";
 import founderAsset from "@/assets/founder-nico.jpg.asset.json";
 import todayShot from "@/assets/athx-today.png.asset.json";
-import progShot from "@/assets/athx-programme.png.asset.json";
 import progressShot from "@/assets/athx-progress.png.asset.json";
-import { PUBLIC_PROGRAMMES, statusLabel } from "@/data/publicProgrammes";
+import { PUBLIC_PROGRAMMES } from "@/data/publicProgrammes";
+import { CART_CATALOG, type CartItemSlug } from "@/lib/cart";
+import { Reveal } from "@/components/marketing/Reveal";
+
+const price = (slug: CartItemSlug) => `£${(CART_CATALOG[slug].pricePence / 100).toFixed(2)}`;
+
+const ROUTES: {
+  slug: CartItemSlug;
+  goal: string;
+  title: string;
+  line: string;
+  weeks: number;
+  image: string;
+}[] = [
+  {
+    slug: "basic-training-blueprint-plus",
+    goal: "Preparing for military selection",
+    title: "Basic Training Blueprint+",
+    line: "Running, strength and conditioning built to get you through assessment and basic training.",
+    weeks: 12,
+    image: PUBLIC_PROGRAMMES[0].image,
+  },
+  {
+    slug: "sem-2026",
+    goal: "Competing this season",
+    title: "S.E.M 2026",
+    line: "Strength, endurance and mixed-modal conditioning for competition preparation.",
+    weeks: 8,
+    image: PUBLIC_PROGRAMMES[1].image,
+  },
+  {
+    slug: "hybrid-race-plan",
+    goal: "Racing hybrid",
+    title: "Hybrid Race Plan",
+    line: "Run fitness, machine work and station conditioning with pacing you can hold.",
+    weeks: 12,
+    image: PUBLIC_PROGRAMMES[2].image,
+  },
+];
+
+const FAQS: { q: string; a: string }[] = [
+  {
+    q: "Do I need a full gym?",
+    a: "A standard gym covers everything. Sessions list the equipment used, and running and bodyweight work make up a large part of every programme.",
+  },
+  {
+    q: "What if I've never followed a structured plan?",
+    a: "Every session tells you the work, the order, the intent and the pacing. Nothing is left for you to design.",
+  },
+  {
+    q: "Do I keep the programme?",
+    a: "Yes. You buy it once — the interactive version stays in your account and the full PDF is yours to download and keep.",
+  },
+  {
+    q: "Can I get a refund?",
+    a: "Digital programmes are covered by our refund policy — see the refunds page for the full terms.",
+  },
+];
 
 const SITE = "https://737trg.com";
 
@@ -57,97 +113,84 @@ export const Route = createFileRoute("/_marketing/")({
 function HomePage() {
   return (
     <>
-      {/* HERO — image-first editorial: cinematic image, then text block below */}
-      <section className="relative">
+      {/* HERO — one screen: offer, price, action */}
+      <section className="relative min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-5rem)] flex items-end overflow-hidden">
         <img
           src={heroAsset.url}
-          alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
-          className="block w-full h-auto bg-background select-none"
+          alt="Hybrid athlete training in a gym"
+          className="absolute inset-0 w-full h-full object-cover object-[62%_center] select-none"
           draggable={false}
           fetchPriority="high"
           decoding="async"
         />
-        <div className="bg-background">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-28 pb-16 md:pb-24 lg:pb-28">
-            <h1 className="font-display font-bold text-bone leading-[0.88] tracking-[-0.03em] text-[clamp(2.75rem,8vw,6rem)] max-w-[12ch]">
-              TRAIN FOR<br />WHAT'S NEXT.
-            </h1>
-            <div className="mt-7 md:mt-9">
-              <Link
-                to="/programmes"
-                className="group inline-flex items-center gap-3 text-bone font-display uppercase text-[12px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
-              >
-                Explore programmes
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(9,9,9,0.72) 0%, rgba(9,9,9,0.25) 35%, rgba(9,9,9,0.85) 78%, rgba(9,9,9,1) 100%)",
+          }}
+        />
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:px-12 pb-14 md:pb-20 pt-32">
+          <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
+          <h1 className="mt-5 font-display font-bold text-bone leading-[0.9] tracking-[-0.03em] text-[clamp(2.5rem,7vw,5.5rem)] max-w-[16ch]">
+            Prepare for what<br />you're training for.
+          </h1>
+          <p className="mt-6 text-bone/85 text-base md:text-lg max-w-[52ch] leading-[1.55]">
+            Structured 8–12 week programmes for military preparation, competition and hybrid
+            racing. Follow every session in the app, log your work, and keep the full PDF.
+          </p>
+          <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Link to="/programmes" className="btn-signal w-full sm:w-auto">
+              Buy your programme — from {price("basic-training-blueprint-plus")}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <a href="#choose" className="btn-ghost w-full sm:w-auto">
+              Find your programme
+            </a>
           </div>
         </div>
       </section>
 
-      {/* PILLAR STRIP */}
-      <section aria-label="Pillars" className="border-y border-border/60 bg-background">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-[60px] md:h-[72px] lg:h-[84px] grid grid-cols-3 items-center text-center">
-          <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.32em] text-bone/75">Strength</span>
-          <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.32em] text-bone/75">Endurance</span>
-          <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.32em] text-bone/75">Performance</span>
+      {/* TRUST STRIP */}
+      <section aria-label="What's included" className="border-y border-border/60 bg-background">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5 grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-6">
+          {[
+            "Structured 8–12 week plan",
+            "Interactive session app",
+            "Full PDF you keep",
+            "Secure Stripe checkout",
+          ].map((t) => (
+            <span key={t} className="flex items-center gap-2.5 min-w-0">
+              <Check className="h-3.5 w-3.5 shrink-0 text-signal" strokeWidth={2.5} />
+              <span className="font-display uppercase text-[10px] md:text-[11px] tracking-[0.2em] text-bone/80 truncate">
+                {t}
+              </span>
+            </span>
+          ))}
         </div>
       </section>
 
-      {/* PROPOSITION — split: typography + layered app screens */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-5">
-            <p className="eyebrow mb-6">01 — Approach</p>
-            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.98] text-[clamp(2rem,4.5vw,3.75rem)]">
-              Programmes built to be followed.
-              <br />
-              <span className="text-foreground-muted">Not filed away.</span>
+      {/* CHOOSE — self-selection by goal */}
+      <section id="choose" className="scroll-mt-24 border-b border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-20 lg:pt-28 pb-6">
+          <Reveal>
+            <p className="eyebrow">01 — Choose</p>
+            <h2 className="mt-5 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[18ch]">
+              What are you training for?
             </h2>
-            <p className="text-bone/80 text-base md:text-lg mt-8 max-w-[42ch] leading-[1.55]">
-              Guided sessions. Integrated timers. Performance recorded as you train.
-            </p>
-            <p className="text-foreground-muted text-sm mt-5 max-w-[42ch]">
-              Buy once. Follow interactively. Keep the PDF.
-            </p>
-          </div>
-
-          {/* Layered app screens */}
-          <div className="lg:col-span-7 relative">
-            <div className="relative aspect-[5/4] w-full panel-dark grain overflow-hidden">
-              {/* back card */}
-              <div className="absolute right-[6%] top-[8%] w-[46%] aspect-[9/19] rotate-[4deg] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-border/60 overflow-hidden bg-black">
-                <img src={progressShot.url} alt="ATHX progress" className="w-full h-full object-cover object-top" loading="lazy" />
-              </div>
-              {/* front card */}
-              <div className="absolute left-[8%] bottom-[6%] w-[52%] aspect-[9/19] -rotate-[3deg] shadow-[0_40px_90px_-20px_rgba(0,0,0,0.9)] ring-1 ring-border overflow-hidden bg-black">
-                <img src={todayShot.url} alt="ATHX today screen" className="w-full h-full object-cover object-top" loading="lazy" />
-              </div>
-              <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 scrim-bottom" />
-              <p className="absolute bottom-4 right-5 eyebrow text-bone/60">ATHX 2026 — live app</p>
-            </div>
-          </div>
+          </Reveal>
         </div>
-      </section>
-
-      {/* PROGRAMMES — actual product cards */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-24 lg:pt-32 pb-10 lg:pb-12">
-          <div className="grid lg:grid-cols-12 gap-10">
-            <p className="eyebrow lg:col-span-2">02 — Programmes</p>
-            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[20ch]">
-              Built for a clear objective.
-            </h2>
-          </div>
-        </div>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-20 lg:pb-28">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-            {PUBLIC_PROGRAMMES.slice(0, 3).map((p) => (
-              <ProgrammeCard key={p.slug} programme={p} />
+            {ROUTES.map((r, i) => (
+              <Reveal key={r.slug} delay={i * 90}>
+                <GoalCard route={r} />
+              </Reveal>
             ))}
           </div>
-          <div className="mt-8 flex items-center justify-between">
-            <p className="eyebrow text-foreground-muted">First programmes — in development</p>
+          <div className="mt-7 flex items-center justify-between gap-4">
+            <p className="eyebrow text-foreground-muted">One payment. Lifetime access.</p>
             <Link to="/programmes" className="eyebrow text-bone inline-flex items-center gap-2 hover:text-signal transition-colors">
               All programmes <ArrowRight className="h-3 w-3" />
             </Link>
@@ -155,119 +198,121 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PRODUCT STORY — know today / record the result */}
-      <section className="border-t border-border/60 panel-dark">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-12 gap-10 mb-16">
-            <p className="eyebrow lg:col-span-2">03 — Product</p>
-            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[18ch]">
-              The programme.
-              <br />
-              <span className="text-foreground-muted">Built to be used.</span>
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-            <ProductPanel
-              eyebrow="Today"
-              title="Know today's work."
-              copy="Every session. Every block. Clearly laid out."
-              img={todayShot.url}
-              alt="ATHX today session interface"
-            />
-            <ProductPanel
-              eyebrow="Logging"
-              title="Record the result."
-              copy="Track weights, times and scores. Return knowing exactly what you did."
-              img={progressShot.url}
-              alt="ATHX progress and logging interface"
-            />
-          </div>
-
-          <div className="mt-10 grid lg:grid-cols-12 gap-10 items-end">
-            <div className="lg:col-span-8">
-              <p className="eyebrow mb-3 text-signal">Keep the PDF</p>
-              <p className="font-display text-bone text-2xl md:text-3xl tracking-[-0.02em] max-w-[28ch]">
-                The complete programme remains yours.
+      {/* WHAT YOU GET */}
+      <section className="panel-dark border-b border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28">
+          <Reveal>
+            <div className="grid lg:grid-cols-12 gap-8 items-end mb-14">
+              <div className="lg:col-span-7">
+                <p className="eyebrow">02 — What you get</p>
+                <h2 className="mt-5 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[16ch]">
+                  Built to be followed.
+                  <br />
+                  <span className="text-foreground-muted">Not filed away.</span>
+                </h2>
+              </div>
+              <p className="lg:col-span-5 text-bone/80 text-base md:text-lg max-w-[42ch] leading-[1.55]">
+                Every session is laid out, timed and logged. You open the app and train — no
+                interpreting a spreadsheet at the rack.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </Reveal>
 
-      {/* RTB — why */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-12 gap-10 mb-14">
-            <p className="eyebrow lg:col-span-2">04 — Why</p>
-            <h2 className="lg:col-span-10 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)]">
-              Why SEVEN3SEVEN?
-            </h2>
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+            <Reveal>
+              <ProductPanel
+                eyebrow="Guided sessions"
+                title="Know today's work."
+                copy="Every block, in order, with the intent and pacing written out."
+                img={todayShot.url}
+                alt="Session overview showing today's training blocks"
+              />
+            </Reveal>
+            <Reveal delay={110}>
+              <ProductPanel
+                eyebrow="Logging & timers"
+                title="Record the result."
+                copy="Live interval, AMRAP and rest timers. Weights, times and scores saved to your account."
+                img={progressShot.url}
+                alt="Progress screen showing logged lifts and completion"
+              />
+            </Reveal>
           </div>
-          <ol className="grid md:grid-cols-2 gap-x-16 gap-y-12">
-            <Rtb k="Structure" t="No guessing." />
-            <Rtb k="Progression" t="Every week has a purpose." />
-            <Rtb k="Measurement" t="Track what matters." />
-            <Rtb k="Clarity" t="Know exactly what to do." />
-            <Rtb k="Ownership" t="Buy once. Keep the programme." />
-          </ol>
-        </div>
-      </section>
 
-      {/* APPAREL TEASER — image panel */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
-          <div className="relative overflow-hidden aspect-[21/9] panel-dark grain">
-            <img
-              src={heroAsset.url}
-              alt=""
-              aria-hidden
-              className="absolute inset-0 w-full h-full object-cover object-[10%_30%] opacity-50 grayscale"
-            />
-            <div aria-hidden className="absolute inset-0" style={{background:"linear-gradient(90deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.5) 50%, rgba(8,8,8,0.9) 100%)"}} />
-            <div className="relative z-10 h-full flex flex-col justify-between p-8 lg:p-14">
-              <p className="eyebrow text-bone/70">05 — Apparel · Drop 01 in preparation</p>
-              <div className="grid lg:grid-cols-12 items-end gap-6">
-                <h2 className="lg:col-span-8 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.5rem)] max-w-[14ch]">
-                  Built to train.
-                  <br />
-                  <span className="text-foreground-muted">Designed to live in.</span>
-                </h2>
-                <div className="lg:col-span-4 lg:text-right">
-                  <Link to="/apparel" className="inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors">
-                    See the campaign <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
+          <Reveal>
+            <div className="mt-8 grid sm:grid-cols-2 gap-x-12 gap-y-8">
+              <Rtb k="The full PDF" t="Yours to download and keep, forever." />
+              <Rtb k="Progress that carries" t="Streaks, personal bests and week-by-week history." />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FOUNDER / PHILOSOPHY */}
-      <section className="border-t border-border/60">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-24 lg:py-32 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          <div className="lg:col-span-5">
+      <section className="border-b border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <Reveal className="lg:col-span-5">
             <img
               src={founderAsset.url}
-              alt="Nico, founder of SEVEN3SEVEN"
+              alt="Nico, founder of SEVEN3SEVEN, between sets in the gym"
               className="w-full aspect-[4/5] object-cover object-center"
               loading="lazy"
             />
-          </div>
-          <div className="lg:col-span-7">
-            <p className="eyebrow mb-6">06 — Philosophy</p>
-            <h2 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4.25rem)] max-w-[16ch]">
+          </Reveal>
+          <Reveal delay={100} className="lg:col-span-7">
+            <p className="eyebrow">03 — Who writes it</p>
+            <h2 className="mt-5 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(2rem,5vw,4rem)] max-w-[16ch]">
               Capability over specialisation.
             </h2>
-            <p className="text-bone/85 text-base md:text-lg mt-8 max-w-[46ch] leading-[1.55]">
-              Strength. Endurance. Conditioning. One complete approach — balanced, measurable, repeatable.
+            <p className="text-bone/85 text-base md:text-lg mt-7 max-w-[46ch] leading-[1.55]">
+              Strength, endurance and conditioning written into one balanced, measurable,
+              repeatable approach — the same programming used to prepare for selection,
+              competition and racing.
             </p>
             <Link
               to="/about"
-              className="mt-10 inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
+              className="mt-9 inline-flex items-center gap-3 text-bone font-display uppercase text-[11px] tracking-[0.28em] pb-2 border-b border-bone hover:border-signal hover:text-signal transition-colors"
             >
               Our approach <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-b border-border/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28 grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-4">
+            <p className="eyebrow">04 — Before you buy</p>
+            <h2 className="mt-5 font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-[clamp(1.75rem,4vw,3rem)] max-w-[14ch]">
+              Straight answers.
+            </h2>
+          </div>
+          <dl className="lg:col-span-8 grid sm:grid-cols-2 gap-x-12 gap-y-10">
+            {FAQS.map((f, i) => (
+              <Reveal key={f.q} delay={i * 70}>
+                <dt className="font-display text-bone text-lg md:text-xl tracking-[-0.02em]">{f.q}</dt>
+                <dd className="text-foreground-muted text-sm mt-3 leading-relaxed max-w-[42ch]">{f.a}</dd>
+              </Reveal>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* CLOSING CTA */}
+      <section>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-20 lg:py-28 text-center">
+          <p className="eyebrow text-signal">Start this week</p>
+          <h2 className="mt-5 font-display font-bold text-bone tracking-[-0.03em] leading-[0.92] text-[clamp(2.25rem,6vw,4.5rem)] max-w-[16ch] mx-auto">
+            Stop guessing.<br />Start training.
+          </h2>
+          <p className="mt-6 text-foreground-muted text-sm md:text-base max-w-[46ch] mx-auto">
+            {price("basic-training-blueprint-plus")} per programme. One payment, lifetime access,
+            secure checkout by Stripe.
+          </p>
+          <div className="mt-9 flex justify-center">
+            <Link to="/programmes" className="btn-signal w-full sm:w-auto">
+              Choose your programme <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
@@ -276,38 +321,37 @@ function HomePage() {
   );
 }
 
-function ProgrammeCard({ programme }: { programme: (typeof PUBLIC_PROGRAMMES)[number] }) {
+function GoalCard({ route }: { route: (typeof ROUTES)[number] }) {
   return (
     <Link
       to="/programmes/$slug"
-      params={{ slug: programme.slug }}
+      params={{ slug: route.slug }}
       className="group relative block overflow-hidden aspect-[4/5] panel-dark ring-1 ring-border hover:ring-bone/40 transition-all"
     >
       <img
-        src={programme.image}
-        alt={programme.title}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+        src={route.image}
+        alt={`${route.title} — ${route.goal}`}
+        className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.04]"
         loading="lazy"
       />
       <div aria-hidden className="absolute inset-0 scrim-bottom" />
       <div className="relative z-10 h-full p-6 lg:p-7 flex flex-col">
-        <div className="flex items-start justify-between">
-          <p className="eyebrow text-bone/80 tabular">{programme.num}</p>
-          <p className="eyebrow text-bone/55">{statusLabel(programme.status)}</p>
-        </div>
+        <p className="eyebrow text-bone/85">{route.goal}</p>
         <div className="flex-1" />
         <div>
-          <p className="eyebrow text-bone/70 mb-3">{programme.collection}</p>
-          <h3 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-3xl lg:text-4xl group-hover:text-signal transition-colors">
-            {programme.title}
+          <h3 className="font-display font-bold text-bone tracking-[-0.025em] leading-[0.95] text-2xl lg:text-3xl group-hover:text-signal transition-colors">
+            {route.title}
           </h3>
-          <p className="text-bone/75 text-sm mt-3 max-w-[28ch]">{programme.shortLine}</p>
+          <p className="text-bone/75 text-sm mt-3 max-w-[30ch]">{route.line}</p>
+          <div className="mt-5 pt-4 border-t border-bone/20 flex items-center justify-between">
+            <span className="font-display text-bone text-lg tabular">{price(route.slug)}</span>
+            <span className="eyebrow text-bone/70">{route.weeks} weeks</span>
+          </div>
         </div>
       </div>
     </Link>
   );
 }
-
 
 function ProductPanel({ eyebrow, title, copy, img, alt }: { eyebrow: string; title: string; copy: string; img: string; alt: string }) {
   return (
@@ -328,9 +372,9 @@ function ProductPanel({ eyebrow, title, copy, img, alt }: { eyebrow: string; tit
 
 function Rtb({ k, t }: { k: string; t: string }) {
   return (
-    <li className="border-t border-border/60 pt-5">
+    <div className="border-t border-border/60 pt-5">
       <p className="eyebrow text-signal mb-3">[ {k} ]</p>
-      <p className="font-display text-bone text-2xl md:text-3xl tracking-[-0.025em] leading-[1.05]">{t}</p>
-    </li>
+      <p className="font-display text-bone text-xl md:text-2xl tracking-[-0.025em] leading-[1.15]">{t}</p>
+    </div>
   );
 }
