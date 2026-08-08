@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/
 import { useIsMobile } from "@/hooks/use-mobile";
 import { store } from "@/lib/store";
 import { formatClock } from "@/lib/programmeUtils";
+import { cueEnd, cueTick } from "@/lib/alertCue";
 import { supabase } from "@/integrations/supabase/client";
 import { inferLogKind, kindLabel, summariseResult } from "./logKind";
 import type {
