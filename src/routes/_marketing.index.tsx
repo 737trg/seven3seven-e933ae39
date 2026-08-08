@@ -368,6 +368,8 @@ function HomePage() {
 function GoalCard({ route }: { route: (typeof ROUTES)[number] }) {
   return (
     <Link
+  return (
+    <Link
       to="/programmes/$slug"
       params={{ slug: route.slug }}
       className="group relative block overflow-hidden aspect-[4/5] panel-dark ring-1 ring-border hover:ring-bone/40 transition-all"
