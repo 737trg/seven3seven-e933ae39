@@ -5,6 +5,7 @@ import { hrpStore, useHrpProfile, useHrpReadiness, currentHrpWeek, type HrpReadi
 import { ArrowRight } from "lucide-react";
 import { useScheduleOverrides } from "@/lib/useScheduleOverrides";
 import { SessionScheduleControls } from "@/components/dashboard/SessionScheduleControls";
+import { ProgrammeUpdatedNote } from "@/components/dashboard/ProgrammeUpdatedNote";
 
 export const Route = createFileRoute("/my-programmes/hybrid-race-plan/today")({
   head: () => ({ meta: [{ title: "HYBRID RACE PLAN — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -26,6 +27,7 @@ function TodayPage() {
 
   return (
     <HrpShell eyebrow={`Week ${wk.week} · ${wk.phase}`} title={profile.displayName ? `Good work, ${profile.displayName}.` : "Today."}>
+      <ProgrammeUpdatedNote slug="hybrid-race-plan" noticeKey="content-refresh-2026" />
       {!profile.setupComplete && (
         <div className="mb-8 border border-signal/40 bg-signal/10 p-5">
           <p className="eyebrow text-signal mb-1">Setup</p>
