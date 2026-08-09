@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube } from "lucide-react";
 import { Seven3SevenLogo } from "./Seven3SevenLogo";
-import logoAsset from "@/assets/seven3seven-logo-v2.png.asset.json";
+import logoAsset from "@/assets/seven3seven-wordmark.png.asset.json";
 
 export function MarketingFooter() {
   return (
@@ -23,7 +23,7 @@ export function MarketingFooter() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-y-12 gap-x-8 lg:gap-x-10">
           {/* Brand statement */}
           <div className="col-span-2 md:col-span-4">
-            <Seven3SevenLogo height={22} asLink={false} />
+            <Seven3SevenLogo width={170} asLink={false} />
             <p className="text-foreground-muted text-sm mt-5 max-w-[32ch] leading-relaxed">
               Hybrid fitness and performance programmes. Built to be followed.
             </p>
