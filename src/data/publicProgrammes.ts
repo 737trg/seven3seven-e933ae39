@@ -1,5 +1,6 @@
 import basicImg from "@/assets/programme-basic-training.jpg.asset.json";
 import semImg from "@/assets/programme-sem.jpg.asset.json";
+import sem2027Img from "@/assets/sem-2027-cover.jpg.asset.json";
 import raceImg from "@/assets/programme-hybrid-race.jpg.asset.json";
 import mixedImg from "@/assets/programme-mixed.jpg.asset.json";
 
@@ -107,7 +108,7 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
     description:
       "A twelve-week competition-preparation programme built on progressive strength, structured run and machine development and event-specific mixed-modal conditioning.",
     durationWeeks: 12,
-    image: semImg.url,
+    image: sem2027Img.url,
     status: "live",
     whatYoullDo: [
       "Progressive heavy strength work",
