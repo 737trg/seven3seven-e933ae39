@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MetricStat } from "@/components/dashboard/MetricStat";
 import { MacroRing } from "@/components/dashboard/nutrition/MacroRing";
 
-export const Route = createFileRoute("/__ovftest")({ component: T });
+export const Route = createFileRoute("/ovftest")({ component: T });
 
 function T() {
   return (
