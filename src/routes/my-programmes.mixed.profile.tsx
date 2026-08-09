@@ -35,10 +35,10 @@ function ProfilePage() {
         </div>
 
         <div className="space-y-5">
-          <Text label="Back squat reference (kg)" value={p.backSquatKg?.toString() ?? ""}
-            onChange={(v) => mixedStore.saveProfile({ backSquatKg: v ? Number(v) : null })} />
-          <Text label="Strict press reference (kg)" value={p.strictPressKg?.toString() ?? ""}
-            onChange={(v) => mixedStore.saveProfile({ strictPressKg: v ? Number(v) : null })} />
+          <NumberText label="Back squat reference (kg)" value={p.backSquatKg}
+            onCommit={(n) => mixedStore.saveProfile({ backSquatKg: n })} />
+          <NumberText label="Strict press reference (kg)" value={p.strictPressKg}
+            onCommit={(n) => mixedStore.saveProfile({ strictPressKg: n })} />
           <label className="block">
             <span className="text-[10px] uppercase tracking-widest text-foreground-muted">Pain, limitations and coaching notes</span>
             <textarea rows={4} value={p.limitations} onChange={(e) => mixedStore.saveProfile({ limitations: e.target.value })}
