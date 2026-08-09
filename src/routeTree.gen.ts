@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Athx2026RouteImport } from './routes/athx-2026'
 import { Route as MarketingRouteImport } from './routes/_marketing'
@@ -92,6 +93,11 @@ import { Route as MyProgrammesSem2026ProgrammeSSessionIdRouteImport } from './ro
 import { Route as MyProgrammesHybridRacePlanProgrammeSSessionIdRouteImport } from './routes/my-programmes.hybrid-race-plan.programme.s.$sessionId'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme.s.$sessionId'
 
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -552,6 +558,7 @@ export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -634,6 +641,7 @@ export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -712,6 +720,7 @@ export interface FileRoutesById {
   '/_marketing': typeof MarketingRouteWithChildren
   '/athx-2026': typeof Athx2026Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/_app/calculator': typeof AppCalculatorRoute
   '/_app/learn': typeof AppLearnRoute
   '/_app/profile': typeof AppProfileRoute
@@ -797,6 +806,7 @@ export interface FileRouteTypes {
     | '/'
     | '/athx-2026'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -879,6 +889,7 @@ export interface FileRouteTypes {
     | '/'
     | '/athx-2026'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -956,6 +967,7 @@ export interface FileRouteTypes {
     | '/_marketing'
     | '/athx-2026'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/_app/calculator'
     | '/_app/learn'
     | '/_app/profile'
@@ -1041,6 +1053,7 @@ export interface RootRouteChildren {
   MarketingRoute: typeof MarketingRouteWithChildren
   Athx2026Route: typeof Athx2026Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   MyProgrammesAthx2026Route: typeof MyProgrammesAthx2026RouteWithChildren
   MyProgrammesBasicTrainingBlueprintPlusRoute: typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
@@ -1056,6 +1069,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -1907,6 +1927,7 @@ const rootRouteChildren: RootRouteChildren = {
   MarketingRoute: MarketingRouteWithChildren,
   Athx2026Route: Athx2026Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   MyProgrammesAthx2026Route: MyProgrammesAthx2026RouteWithChildren,
   MyProgrammesBasicTrainingBlueprintPlusRoute:
