@@ -3,29 +3,13 @@ import { BtbShell } from "@/components/btb/BtbShell";
 import { btbStore, useBtbProfile, type BtbUnits, type BtbExperience, type BtbEquipment } from "@/lib/btb/store";
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
+import { useDraftFields, parseNumberField, parseIntField, parseTimeField } from "@/lib/useDraftFields";
 
 export const Route = createFileRoute("/my-programmes/basic-training-blueprint-plus/profile")({
   head: () => ({ meta: [{ title: "Basic Training Blueprint+ — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProfilePage,
 });
 
-function safeNum(v: string, max = 1000): number | null {
-  if (!v.trim()) return null;
-  const n = Number(v);
-  if (!Number.isFinite(n) || n < 0 || n > max) return null;
-  return Math.round(n * 10) / 10;
-}
-function safeInt(v: string, min: number, max: number): number | null {
-  if (!v.trim()) return null;
-  const n = parseInt(v, 10);
-  if (!Number.isFinite(n) || n < min || n > max) return null;
-  return n;
-}
-function safeTime(v: string): string | null {
-  const t = v.trim();
-  if (!t) return null;
-  return /^\d{1,2}:\d{2}$/.test(t) ? t : null;
-}
 function safeDate(v: string): string | null {
   if (!v) return null;
   return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null;
@@ -45,6 +29,26 @@ function ProfilePage() {
   const profile = useBtbProfile();
   const [form, setForm] = useState(profile);
   const [saved, setSaved] = useState(false);
+  const { errors, valueOf, setDraftValue, clearDraft, setError } = useDraftFields();
+
+  function commitTwoKm() {
+    const raw = valueOf("currentTwoKm", form.currentTwoKm);
+    const { value, error } = parseTimeField(raw);
+    setError("currentTwoKm", error);
+    if (!error) { setForm((f) => ({ ...f, currentTwoKm: value })); clearDraft("currentTwoKm"); }
+  }
+  function commitNum(key: "deadliftBaseline" | "medicineBallBaseline", max: number) {
+    const raw = valueOf(key, form[key]);
+    const { value, error } = parseNumberField(raw, max);
+    setError(key, error);
+    if (!error) { setForm((f) => ({ ...f, [key]: value })); clearDraft(key); }
+  }
+  function commitDays() {
+    const raw = valueOf("availableDays", form.availableDays);
+    const { value, error } = parseIntField(raw, 3, 6);
+    setError("availableDays", error);
+    if (!error) { setForm((f) => ({ ...f, availableDays: value })); clearDraft("availableDays"); }
+  }
 
   useEffect(() => {
     if (!form.displayName && user?.user_metadata?.display_name) {
@@ -55,7 +59,25 @@ function ProfilePage() {
 
   function save(e: React.FormEvent) {
     e.preventDefault();
-    btbStore.saveProfile({ ...form, setupComplete: true });
+    const twoKm = parseTimeField(valueOf("currentTwoKm", form.currentTwoKm));
+    const dl = parseNumberField(valueOf("deadliftBaseline", form.deadliftBaseline), 500);
+    const mb = parseNumberField(valueOf("medicineBallBaseline", form.medicineBallBaseline), 30);
+    const days = parseIntField(valueOf("availableDays", form.availableDays), 3, 6);
+    setError("currentTwoKm", twoKm.error);
+    setError("deadliftBaseline", dl.error);
+    setError("medicineBallBaseline", mb.error);
+    setError("availableDays", days.error);
+    if (twoKm.error || dl.error || mb.error || days.error) return;
+    const next = {
+      ...form,
+      currentTwoKm: twoKm.value,
+      deadliftBaseline: dl.value,
+      medicineBallBaseline: mb.value,
+      availableDays: days.value,
+    };
+    setForm(next);
+    ["currentTwoKm", "deadliftBaseline", "medicineBallBaseline", "availableDays"].forEach(clearDraft);
+    btbStore.saveProfile({ ...next, setupComplete: true });
     setSaved(true);
     setTimeout(() => setSaved(false), 1800);
   }
@@ -91,17 +113,17 @@ function ProfilePage() {
             <option value="Experienced">Experienced</option>
           </select>
         </Field>
-        <Field label="Current 2 km (mm:ss)">
-          <input value={form.currentTwoKm ?? ""} onChange={(e) => setForm({ ...form, currentTwoKm: safeTime(e.target.value) })} className="btb-input" placeholder="e.g. 10:30" />
+        <Field label="Current 2 km (mm:ss)" error={errors.currentTwoKm}>
+          <input inputMode="numeric" value={valueOf("currentTwoKm", form.currentTwoKm)} onChange={(e) => setDraftValue("currentTwoKm", e.target.value.slice(0, 8))} onBlur={commitTwoKm} className="btb-input" placeholder="e.g. 10:30" />
         </Field>
-        <Field label={`Deadlift baseline (${form.units})`}>
-          <input value={form.deadliftBaseline?.toString() ?? ""} onChange={(e) => setForm({ ...form, deadliftBaseline: safeNum(e.target.value, 500) })} className="btb-input" placeholder="0" />
+        <Field label={`Deadlift baseline (${form.units})`} error={errors.deadliftBaseline}>
+          <input inputMode="decimal" value={valueOf("deadliftBaseline", form.deadliftBaseline)} onChange={(e) => setDraftValue("deadliftBaseline", e.target.value.slice(0, 6))} onBlur={() => commitNum("deadliftBaseline", 500)} className="btb-input" placeholder="0" />
         </Field>
-        <Field label="Seated med-ball throw (m)">
-          <input value={form.medicineBallBaseline?.toString() ?? ""} onChange={(e) => setForm({ ...form, medicineBallBaseline: safeNum(e.target.value, 10) })} className="btb-input" placeholder="0" />
+        <Field label="Seated med-ball throw (m)" error={errors.medicineBallBaseline}>
+          <input inputMode="decimal" value={valueOf("medicineBallBaseline", form.medicineBallBaseline)} onChange={(e) => setDraftValue("medicineBallBaseline", e.target.value.slice(0, 6))} onBlur={() => commitNum("medicineBallBaseline", 30)} className="btb-input" placeholder="0" />
         </Field>
-        <Field label="Available training days">
-          <input value={form.availableDays?.toString() ?? ""} onChange={(e) => setForm({ ...form, availableDays: safeInt(e.target.value, 3, 6) })} className="btb-input" placeholder="3-6" />
+        <Field label="Available training days" error={errors.availableDays}>
+          <input inputMode="numeric" value={valueOf("availableDays", form.availableDays)} onChange={(e) => setDraftValue("availableDays", e.target.value.slice(0, 2))} onBlur={commitDays} className="btb-input" placeholder="3-6" />
         </Field>
         <Field label="Equipment access">
           <select value={form.equipmentLevel} onChange={(e) => setForm({ ...form, equipmentLevel: e.target.value as BtbEquipment })} className="btb-input">
@@ -126,11 +148,12 @@ function ProfilePage() {
   );
 }
 
-function Field({ label, children, full }: { label: string; children: React.ReactNode; full?: boolean }) {
+function Field({ label, children, full, error }: { label: string; children: React.ReactNode; full?: boolean; error?: string }) {
   return (
     <label className={`block ${full ? "lg:col-span-2" : ""}`}>
       <span className="eyebrow text-foreground-muted">{label}</span>
       <span className="mt-2 block">{children}</span>
+      {error && <span className="mt-1 block text-signal text-[11px]">{error}</span>}
     </label>
   );
 }
