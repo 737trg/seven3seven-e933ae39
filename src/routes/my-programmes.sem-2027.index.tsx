@@ -54,11 +54,11 @@ function SemCover() {
         <div className="relative z-10 flex-1 flex flex-col justify-end max-w-[1280px] mx-auto w-full px-6 lg:px-10 pb-20 pt-40">
           <div className="grid lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-8">
-              <p className="eyebrow mb-8">Programme 02 · Compete</p>
+              <p className="eyebrow mb-8">Programme 04 · Compete</p>
               <h1 className="font-display font-bold text-bone leading-[0.92] tracking-tight text-[clamp(3.5rem,11vw,9rem)]">
                 S.E.M.
                 <br />
-                8.
+                2027.
               </h1>
               <p className="font-display text-foreground-muted text-xl md:text-2xl mt-8 max-w-xl leading-snug">
                 Strong enough to lift heavy.
@@ -70,7 +70,7 @@ function SemCover() {
             </div>
             <div className="lg:col-span-4 flex flex-col gap-6">
               <ul className="text-xs uppercase tracking-widest text-foreground-muted space-y-2.5">
-                <Row k="Duration" v="Eight weeks" />
+                <Row k="Duration" v="Twelve weeks" />
                 <Row k="Core training" v="Five days" />
                 <Row k="Optional development" v="One day" />
                 <Row k="Pillars" v="Strength · Endurance · MetCon" />
@@ -110,7 +110,7 @@ function SemCover() {
           <div className="mt-20 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-widest text-foreground-muted border-t border-border pt-6">
             <span>SEVEN3SEVEN · Compete</span>
             <span>Intermediate to advanced · Individual or pairs</span>
-            <span>v1.0.0 · Beta</span>
+            <span>Season 2027</span>
           </div>
         </div>
       </section>
