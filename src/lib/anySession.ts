@@ -25,6 +25,11 @@ import {
   sessionId as mixedSessionId,
   blockId as mixedBlockId,
 } from "@/lib/mixed/manifest";
+import {
+  TOTAL,
+  sessionId as totalSessionId,
+  blockId as totalBlockId,
+} from "@/lib/total/manifest";
 
 export type ProgrammeContext = {
   /** Product slug (matches DB `products.slug`). */
@@ -468,6 +473,7 @@ function resolveById(id: string): ResolvedSession | undefined {
   if (id.startsWith("btb-")) return resolveBtb(id);
   if (id.startsWith("hrp-")) return resolveHrp(id);
   if (id.startsWith("mixed-")) return resolveMixed(id);
+  if (id.startsWith("total-")) return resolveTotal(id);
   if (id.startsWith("sem27-")) return resolveSem27(id);
   if (id.startsWith("sem8-") || id.startsWith("sem-")) return resolveSem(id);
   return resolveAthx(id);
