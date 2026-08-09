@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { Dumbbell, LineChart, HeartPulse, Trophy } from "lucide-react";
+import { Dumbbell, LineChart, HeartPulse, Trophy, Apple } from "lucide-react";
 
-export type DashboardTab = "train" | "progress" | "body" | "club";
+export type DashboardTab = "train" | "progress" | "body" | "fuel" | "club";
 
 export const DASHBOARD_TABS: { key: DashboardTab; label: string; icon: typeof Dumbbell }[] = [
   { key: "train", label: "Train", icon: Dumbbell },
   { key: "progress", label: "Progress", icon: LineChart },
   { key: "body", label: "Body", icon: HeartPulse },
+  { key: "fuel", label: "Fuel", icon: Apple },
   { key: "club", label: "Club", icon: Trophy },
 ];
 
@@ -42,7 +43,7 @@ export function DashboardBottomNav({ tab }: { tab: DashboardTab }) {
       className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-background/95 backdrop-blur"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <ul className="grid grid-cols-4">
+      <ul className="grid grid-cols-5">
         {DASHBOARD_TABS.map(({ key, label, icon: Icon }) => {
           const active = key === tab;
           return (

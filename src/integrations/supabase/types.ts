@@ -150,6 +150,144 @@ export type Database = {
           },
         ]
       }
+      food_entries: {
+        Row: {
+          barcode: string | null
+          brand: string | null
+          calories: number
+          carbs_g: number
+          created_at: string
+          fat_g: number
+          grams: number | null
+          id: string
+          logged_on: string
+          meal: string
+          name: string
+          protein_g: number
+          saved: boolean
+          serving_label: string | null
+          source: string
+          user_id: string
+        }
+        Insert: {
+          barcode?: string | null
+          brand?: string | null
+          calories?: number
+          carbs_g?: number
+          created_at?: string
+          fat_g?: number
+          grams?: number | null
+          id?: string
+          logged_on?: string
+          meal?: string
+          name: string
+          protein_g?: number
+          saved?: boolean
+          serving_label?: string | null
+          source?: string
+          user_id: string
+        }
+        Update: {
+          barcode?: string | null
+          brand?: string | null
+          calories?: number
+          carbs_g?: number
+          created_at?: string
+          fat_g?: number
+          grams?: number | null
+          id?: string
+          logged_on?: string
+          meal?: string
+          name?: string
+          protein_g?: number
+          saved?: boolean
+          serving_label?: string | null
+          source?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      hydration_logs: {
+        Row: {
+          created_at: string
+          id: string
+          logged_on: string
+          ml: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          logged_on?: string
+          ml: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          logged_on?: string
+          ml?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      nutrition_targets: {
+        Row: {
+          activity_level: string | null
+          age: number | null
+          basis_weight_kg: number | null
+          calories: number
+          carbs_g: number
+          created_at: string
+          fat_g: number
+          goal: string | null
+          height_cm: number | null
+          method: string
+          protein_g: number
+          protein_per_kg: number
+          sex: string | null
+          updated_at: string
+          user_id: string
+          water_ml: number
+        }
+        Insert: {
+          activity_level?: string | null
+          age?: number | null
+          basis_weight_kg?: number | null
+          calories?: number
+          carbs_g?: number
+          created_at?: string
+          fat_g?: number
+          goal?: string | null
+          height_cm?: number | null
+          method?: string
+          protein_g?: number
+          protein_per_kg?: number
+          sex?: string | null
+          updated_at?: string
+          user_id: string
+          water_ml?: number
+        }
+        Update: {
+          activity_level?: string | null
+          age?: number | null
+          basis_weight_kg?: number | null
+          calories?: number
+          carbs_g?: number
+          created_at?: string
+          fat_g?: number
+          goal?: string | null
+          height_cm?: number | null
+          method?: string
+          protein_g?: number
+          protein_per_kg?: number
+          sex?: string | null
+          updated_at?: string
+          user_id?: string
+          water_ml?: number
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string
