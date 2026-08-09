@@ -126,12 +126,78 @@ export function FuelTab({
                 ))}
                 <button
                   type="button"
+                  onClick={() => {
+                    setWaterDraft(String(waterMl));
+                    setWaterEdit((v) => !v);
+                  }}
+                  className="tap press h-10 px-3 inline-flex items-center gap-1.5 border border-border/60 text-bone text-[10px] uppercase tracking-widest font-display hover:border-bone"
+                >
+                  <Pencil className="h-3.5 w-3.5" strokeWidth={1.5} /> Correct
+                </button>
+                <button
+                  type="button"
                   onClick={() => void nutrition.clearWater()}
                   className="tap press h-10 px-3 text-foreground-muted text-[10px] uppercase tracking-widest font-display"
                 >
                   Reset
                 </button>
               </div>
+
+              {waterEdit && (
+                <div className="mt-4 pt-4 border-t border-border/60 space-y-3">
+                  <div className="flex gap-2">
+                    <input
+                      className="h-11 w-full bg-surface-raised/40 border border-border/60 px-3 text-bone text-sm focus:outline-none focus:border-bone"
+                      inputMode="numeric"
+                      aria-label="Total water for the day in millilitres"
+                      placeholder="Total ml for the day"
+                      value={waterDraft}
+                      onChange={(e) => setWaterDraft(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const ml = Number(waterDraft);
+                        if (!Number.isFinite(ml) || ml < 0) return;
+                        await nutrition.setWaterTotal(ml);
+                        setWaterEdit(false);
+                      }}
+                      className="tap press h-11 px-4 shrink-0 border border-border text-bone font-display text-[10px] uppercase tracking-[0.22em]"
+                    >
+                      Set
+                    </button>
+                  </div>
+                  {waterEntries.length > 0 && (
+                    <ul className="divide-y divide-border/60">
+                      {waterEntries.map((w) => (
+                        <li key={w.id} className="flex items-center justify-between gap-3 py-2">
+                          <input
+                            className="h-9 w-24 bg-surface-raised/40 border border-border/60 px-2 text-bone text-sm tabular focus:outline-none focus:border-bone"
+                            inputMode="numeric"
+                            aria-label="Amount in millilitres"
+                            defaultValue={String(w.ml)}
+                            onBlur={(e) => {
+                              const ml = Number(e.target.value);
+                              if (Number.isFinite(ml) && ml > 0 && ml !== w.ml) void nutrition.updateWaterEntry(w.id, ml);
+                            }}
+                          />
+                          <span className="text-foreground-muted text-[11px] tabular flex-1">
+                            {new Date(w.created_at).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                          <button
+                            type="button"
+                            aria-label="Remove drink"
+                            onClick={() => void nutrition.removeWaterEntry(w.id)}
+                            className="tap press text-foreground-muted hover:text-signal"
+                          >
+                            <Trash2 className="h-4 w-4" strokeWidth={1.5} />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="space-y-4">
