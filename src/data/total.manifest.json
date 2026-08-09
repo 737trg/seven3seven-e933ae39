@@ -1,0 +1,4850 @@
+{
+ "id": "build-total",
+ "slug": "build-total",
+ "public_title": "BUILD TOTAL",
+ "title": "BUILD TOTAL",
+ "subtitle": "8-Week Powerlifting Performance Programme",
+ "tagline": "Squat. Bench. Deadlift.",
+ "public_path": "/programmes/build-total",
+ "site_card": {
+  "eyebrow": "BUILD",
+  "title": "TOTAL",
+  "description": "Squat. Bench. Deadlift.",
+  "duration_label": "8 WEEKS",
+  "status": "published_when_entitled_route_is_ready",
+  "cta": "VIEW PROGRAMME"
+ },
+ "duration_weeks": 8,
+ "sessions_per_week": {
+  "core": 4,
+  "optional": 1
+ },
+ "description": "A focused eight-week powerlifting build-and-peak programme using competition-lift practice, targeted volume, submaximal singles, autoregulation, a mid-block pivot and a competition or testing taper.",
+ "intended_athlete": "Adults with at least six months of consistent barbell training who can already squat, bench press and deadlift safely and train four core days per week.",
+ "not_for": [
+  "Complete beginners who need to learn the three lifts",
+  "Injury rehabilitation or medical clearance",
+  "Athletes seeking an unsupervised rapid weight cut",
+  "Equipped powerlifting without qualified modification",
+  "Athletes unable to recover from four lifting days"
+ ],
+ "entry_gate": [
+  "Has at least six months of consistent barbell training and can perform the squat, bench press and deadlift with repeatable technique.",
+  "Can complete four lifting sessions per week, normally 60-90 minutes, and protect at least two non-lifting days.",
+  "Has a trustworthy recent competition-standard 1RM or technically clean 2-5 repetition set for each lift.",
+  "Can train with safeties and/or competent spotters and has access to a barbell, plates, rack and bench.",
+  "Is not relying on this programme to diagnose pain, rehabilitate injury or teach unfamiliar maximal lifting without in-person coaching."
+ ],
+ "profile_fields": [
+  {
+   "id": "start_date",
+   "label": "Programme start date",
+   "type": "date",
+   "required": true
+  },
+  {
+   "id": "week_8_path",
+   "label": "Week 8 outcome",
+   "type": "select",
+   "options": [
+    "Competition",
+    "Gym test",
+    "Training peak without max test"
+   ],
+   "required": true
+  },
+  {
+   "id": "event_date",
+   "label": "Competition or test date",
+   "type": "date",
+   "required": false
+  },
+  {
+   "id": "ruleset",
+   "label": "Federation/ruleset",
+   "type": "text",
+   "required": false
+  },
+  {
+   "id": "squat_reference_kg",
+   "label": "Squat reference max",
+   "type": "number",
+   "unit": "kg",
+   "required": true
+  },
+  {
+   "id": "bench_reference_kg",
+   "label": "Bench press reference max",
+   "type": "number",
+   "unit": "kg",
+   "required": true
+  },
+  {
+   "id": "deadlift_reference_kg",
+   "label": "Deadlift reference max",
+   "type": "number",
+   "unit": "kg",
+   "required": true
+  },
+  {
+   "id": "squat_style",
+   "label": "Competition squat style",
+   "type": "select",
+   "options": [
+    "High bar",
+    "Low bar",
+    "Other coached setup"
+   ],
+   "required": true
+  },
+  {
+   "id": "deadlift_style",
+   "label": "Competition deadlift style",
+   "type": "select",
+   "options": [
+    "Conventional",
+    "Sumo"
+   ],
+   "required": true
+  },
+  {
+   "id": "equipment_access",
+   "label": "Available equipment",
+   "type": "multi_select",
+   "options_from": "equipment.primary",
+   "required": true
+  },
+  {
+   "id": "rack_heights",
+   "label": "Known squat and bench rack heights",
+   "type": "text",
+   "required": false
+  },
+  {
+   "id": "bodyweight_kg",
+   "label": "Current bodyweight",
+   "type": "number",
+   "unit": "kg",
+   "required": false
+  },
+  {
+   "id": "weight_class",
+   "label": "Competition weight class, if applicable",
+   "type": "text",
+   "required": false
+  },
+  {
+   "id": "limitations_notes",
+   "label": "Pain, limitations and coaching notes",
+   "type": "long_text",
+   "required": false
+  }
+ ],
+ "readiness_options": [
+  {
+   "id": "green",
+   "label": "Green - ready",
+   "action": "Complete the prescription. The stated RPE cap still applies."
+  },
+  {
+   "id": "amber",
+   "label": "Amber - under-recovered",
+   "action": "Remove the top single or cap it at RPE 6, reduce back-off load 5%, remove one work set and omit the final accessory."
+  },
+  {
+   "id": "red",
+   "label": "Red - materially fatigued or unwell",
+   "action": "Use 2-3 technique sets at 50-60% only or end the session. Do not move heavy work to the next day."
+  },
+  {
+   "id": "pain_changes_movement",
+   "label": "Pain changes movement",
+   "action": "Stop the painful lift. Do not test it with more load; use a pain-free option only with appropriate guidance or seek assessment."
+  }
+ ],
+ "foundation": [
+  {
+   "id": "total-foundation-01",
+   "title": "What eight weeks can honestly do",
+   "summary": "Eight weeks can organise and express existing capacity; it cannot replace years of technical practice and muscle development.",
+   "points": [
+    "Build useful submaximal volume before reducing repetitions and raising specificity.",
+    "Practise the competition lifts frequently enough to improve skill without maxing them constantly.",
+    "Use top singles to rehearse heavy technique and calibrate readiness, not to prove strength every week.",
+    "Reduce fatigue in Week 4, intensify in Weeks 5-6 and taper in Weeks 7-8.",
+    "Finish with a competition, controlled gym test or training peak according to the athlete profile."
+   ],
+   "coach_rule": "A programme can reveal strength only when it first creates training the athlete can recover from."
+  },
+  {
+   "id": "total-foundation-02",
+   "title": "The weekly structure",
+   "summary": "Four core lifting days spread specific practice and muscle-building work across the week.",
+   "points": [
+    "Monday: competition squat priority plus competition bench volume.",
+    "Tuesday: competition bench priority plus deadlift variation or volume.",
+    "Thursday: squat secondary work plus bench variation or specific volume.",
+    "Saturday: competition deadlift priority plus light bench technique.",
+    "Sunday: optional easy recovery and a lesson; it never replaces a core lifting day."
+   ],
+   "coach_rule": "Move days when necessary, but preserve the order and avoid compressing all four sessions into consecutive days."
+  },
+  {
+   "id": "total-foundation-03",
+   "title": "How to use every prescription",
+   "summary": "Percentages organise the plan; RPE caps protect it from day-to-day variation and false precision.",
+   "points": [
+    "Calculate percentages from the reference max recorded before Week 1.",
+    "Round working loads down to the nearest available increment when the exact number is unavailable.",
+    "A top single is one technically clean repetition at the stated RPE - never a hidden max attempt.",
+    "Back-off work stops when the RPE cap, movement standard or prescribed repetitions can no longer be met.",
+    "Log the actual load, repetitions, RPE, standards and any change; never auto-fill the published prescription as completed."
+   ],
+   "coach_rule": "When percentage and RPE disagree, use the lighter load that preserves the prescribed effort and technique."
+  },
+  {
+   "id": "total-foundation-04",
+   "title": "The programme is not an injury test",
+   "summary": "Powerlifting training can be performed safely, but high load does not make pain irrelevant.",
+   "points": [
+    "Use correctly positioned safeties and competent spotters for squat and bench press.",
+    "Do not grind through pain that changes bar path, range, stance, grip or bracing.",
+    "Do not repeat failed repetitions in normal training.",
+    "Stop for chest pain, fainting, severe breathlessness, sudden neurological symptoms or another concerning acute symptom and seek urgent medical help.",
+    "Return after injury, illness, pregnancy or a medical issue with appropriate professional guidance."
+   ],
+   "coach_rule": "The app cannot see the lift, inspect equipment or assess symptoms. Text and timers do not replace competent coaching or healthcare."
+  }
+ ],
+ "weekly_structure": [
+  {
+   "day": "Monday",
+   "focus": "Competition squat + competition bench volume",
+   "priority": "core"
+  },
+  {
+   "day": "Tuesday",
+   "focus": "Competition bench + deadlift secondary",
+   "priority": "core"
+  },
+  {
+   "day": "Wednesday",
+   "focus": "Rest",
+   "priority": "rest"
+  },
+  {
+   "day": "Thursday",
+   "focus": "Squat secondary + bench secondary",
+   "priority": "core"
+  },
+  {
+   "day": "Friday",
+   "focus": "Rest",
+   "priority": "rest"
+  },
+  {
+   "day": "Saturday",
+   "focus": "Competition deadlift + bench technique",
+   "priority": "core"
+  },
+  {
+   "day": "Sunday",
+   "focus": "Optional easy recovery + education",
+   "priority": "optional"
+  }
+ ],
+ "phases": [
+  {
+   "name": "Accumulate",
+   "weeks": "1-3",
+   "purpose": "Calibrate, build volume and strengthen competition positions without failure."
+  },
+  {
+   "name": "Pivot",
+   "weeks": "4",
+   "purpose": "Reduce load, sets and accessories to dissipate fatigue."
+  },
+  {
+   "name": "Intensify",
+   "weeks": "5-6",
+   "purpose": "Raise competition specificity and practise controlled heavy singles."
+  },
+  {
+   "name": "Realise and Peak",
+   "weeks": "7-8",
+   "purpose": "Rehearse openers, reduce volume and express a valid total or controlled training peak."
+  }
+ ],
+ "reference_max_policy": {
+  "definition": "A current defensible planning number from a recent valid single or technically clean 2-5 rep set using the intended competition style.",
+  "e1rm_formula": "load * (1 + reps / 30)",
+  "rules": [
+   "Do not use an old all-time max with different equipment, bodyweight or standard.",
+   "Do not update the reference max mid-block.",
+   "Round percentages down when necessary.",
+   "RPE and movement standards override the calculated load."
+  ]
+ },
+ "rpe_scale": [
+  {
+   "rpe": 10,
+   "rir": "0",
+   "meaning": "Maximum effort; no further repetition possible",
+   "programme_use": "Testing only; never a normal work-set target."
+  },
+  {
+   "rpe": 9.5,
+   "rir": "0-1",
+   "meaning": "No extra rep certain; perhaps a tiny load increase",
+   "programme_use": "Only a final test attempt when appropriate."
+  },
+  {
+   "rpe": 9,
+   "rir": "About 1",
+   "meaning": "Very hard but technically complete",
+   "programme_use": "Possible test/third attempt; not routine volume."
+  },
+  {
+   "rpe": 8.5,
+   "rir": "About 1-2",
+   "meaning": "Heavy, controlled, another rep likely",
+   "programme_use": "Highest programmed training single in Week 6."
+  },
+  {
+   "rpe": 8,
+   "rir": "About 2",
+   "meaning": "Hard, repeatable and technically stable",
+   "programme_use": "Heavy singles and final work sets."
+  },
+  {
+   "rpe": 7,
+   "rir": "About 3",
+   "meaning": "Solid submaximal work",
+   "programme_use": "Most early-block singles and volume."
+  },
+  {
+   "rpe": 6,
+   "rir": "About 4+",
+   "meaning": "Comfortable technique work",
+   "programme_use": "Primer, deload and first-week calibration."
+  }
+ ],
+ "competition_standards": {
+  "scope": "These summaries follow the IPF technical rulebook effective 1 March 2026. Other federations may differ. Always verify the current rules for the athlete event.",
+  "squat": {
+   "commands": [
+    "Squat",
+    "Rack"
+   ],
+   "standard": "Begin motionless and erect with knees locked. Descend until the top of the legs at the hip joint is lower than the top of the knees. Return to an upright, knees-locked finish and wait for Rack.",
+   "common_failures": [
+    "Missing depth",
+    "Unlocking or moving before the command",
+    "Downward movement during the ascent",
+    "Feet stepping or moving laterally before Rack",
+    "Failing to finish erect with knees locked"
+   ]
+  },
+  "bench_press": {
+   "commands": [
+    "Start",
+    "Press",
+    "Rack"
+   ],
+   "standard": "Begin with elbows locked and the body in the required position. Lower the bar to the chest or abdominal area and the underside of both elbow joints to at least level with or below the top of each shoulder joint, hold it motionless, press to locked elbows and wait for Rack.",
+   "common_failures": [
+    "Ignoring a command",
+    "Bar not motionless before Press",
+    "Head, shoulders or buttocks losing required contact",
+    "Feet lifting or no longer remaining flat",
+    "Downward movement of the whole bar",
+    "Failing the current elbow-depth requirement"
+   ]
+  },
+  "deadlift": {
+   "commands": [
+    "Down"
+   ],
+   "standard": "Lift the bar until standing erect with knees locked and the front of the shoulders behind the imaginary projection of the bar. Hold the bar motionless until Down, then return it under control with both hands.",
+   "common_failures": [
+    "Downward movement before the finish",
+    "Soft knees or incomplete lockout",
+    "Supporting the bar on the thighs",
+    "Moving the feet before Down",
+    "Dropping or releasing the bar"
+   ]
+  },
+  "attempts": "Three attempts are allowed on each lift; the best valid squat, bench press and deadlift form the total. Normal IPF attempts use 2.5 kg increments, with specific exceptions for records."
+ },
+ "equipment": {
+  "primary": [
+   "20 kg or 15 kg barbell as appropriate",
+   "Calibrated or reliable plates",
+   "Secure collars",
+   "Power rack with adjustable safeties",
+   "Stable flat bench",
+   "Competent spotters or safety arms",
+   "Pulling/rowing equipment",
+   "Basic leg and hamstring accessory equipment"
+  ],
+  "competition_specific": [
+   "Singlet and legal clothing for the chosen federation",
+   "Belt if used",
+   "Knee sleeves if used",
+   "Wrist wraps if used",
+   "Deadlift socks",
+   "Appropriate shoes",
+   "Rack-height information"
+  ],
+  "principle": "Use the safest stable variation that preserves the intended muscle or movement function. Competition practice should use the athlete competition setup whenever practical."
+ },
+ "variation_library": [
+  {
+   "need": "Squat control and depth",
+   "default": "Two-count pause squat",
+   "alternatives": [
+    "Tempo squat",
+    "High-bar squat"
+   ],
+   "rule": "Choose one for Weeks 1-4 and do not rotate weekly."
+  },
+  {
+   "need": "Bench control and triceps volume",
+   "default": "Close-grip paused bench press",
+   "alternatives": [
+    "Spoto press",
+    "Long-pause bench press"
+   ],
+   "rule": "Keep shoulder and wrist positions tolerable; use safeties."
+  },
+  {
+   "need": "Deadlift position off the floor",
+   "default": "Two-count pause deadlift below the knee",
+   "alternatives": [
+    "Tempo deadlift",
+    "Two-centimetre deficit deadlift"
+   ],
+   "rule": "Use a lighter load and stop if the variation changes the competition stance or grip unintentionally."
+  },
+  {
+   "need": "Quadriceps and single-leg strength",
+   "default": "Bulgarian split squat or leg press",
+   "alternatives": [
+    "Reverse lunge",
+    "Belt squat"
+   ],
+   "rule": "Select a stable pain-free option and progress repetitions before load."
+  },
+  {
+   "need": "Upper back",
+   "default": "Chest-supported row",
+   "alternatives": [
+    "Cable row",
+    "One-arm dumbbell row"
+   ],
+   "rule": "Avoid turning the movement into lumbar fatigue before deadlifting."
+  },
+  {
+   "need": "Hamstrings",
+   "default": "Seated or lying leg curl",
+   "alternatives": [
+    "Nordic regression",
+    "Slider leg curl"
+   ],
+   "rule": "Use controlled repetitions and avoid failure soreness that alters the next squat or deadlift."
+  }
+ ],
+ "attempt_planner": {
+  "scope": "Coaching heuristics, not federation rules or guaranteed percentages. The final choice responds to recent legal singles, readiness and coach judgement.",
+  "opener": {
+   "starting_band": "Often about 88-92% of a current defensible max",
+   "effort": "RPE 7-8",
+   "rule": "A weight already demonstrated to full standard and available on a poor day."
+  },
+  "second": {
+   "starting_band": "Often about 94-98% of a current defensible max",
+   "effort": "RPE 8-9",
+   "rule": "Secure a strong total. Adjust from opener speed and standard."
+  },
+  "third": {
+   "starting_band": "Day-dependent; no automatic percentage",
+   "effort": "RPE 9-10 only when testing is appropriate",
+   "rule": "Choose after the second. A small valid personal best beats an invented target and a miss."
+  },
+  "failed_attempt_rule": "Do not automatically add load after a miss. Repeat or reduce unless a competent coach identifies a clear correctable reason and the next attempt remains safe."
+ },
+ "progress": {
+  "tests": [
+   "Reference maxes before Week 1",
+   "Weekly competition-lift top single load/RPE where prescribed",
+   "Week 7 opener rehearsals",
+   "Week 8 valid squat, bench press, deadlift and total or RPE-8 training peak"
+  ],
+  "weekly_metrics": [
+   "Core sessions completed /4",
+   "Optional recovery completed",
+   "Education completed",
+   "Readiness",
+   "Actual loads and repetitions",
+   "RPE and RIR",
+   "Competition standard passed",
+   "Pain or modification",
+   "Bodyweight optional"
+  ],
+  "completion_rule": "Four core sessions is a full week. Optional recovery and education are tracked separately.",
+  "success_definition": "A stronger or more technically reliable valid total, better submaximal execution, or a clearer next-block decision. No increase is guaranteed in eight weeks."
+ },
+ "calculators": [
+  {
+   "id": "total-e1rm",
+   "name": "Estimated 1RM",
+   "formula": "load * (1 + reps / 30)",
+   "guardrail": "Use only for 2-5 technically clean competition-standard repetitions. It is an estimate, not a result."
+  },
+  {
+   "id": "total-percentage-load",
+   "name": "Percentage load",
+   "formula": "reference_max * percentage / 100",
+   "guardrail": "Round down to the nearest available increment and obey the RPE cap."
+  },
+  {
+   "id": "total-volume-load",
+   "name": "Volume load",
+   "formula": "sets * reps * load",
+   "guardrail": "Useful for like-for-like context only; it does not measure fatigue or training quality by itself."
+  },
+  {
+   "id": "total-three-lift-total",
+   "name": "Three-lift total",
+   "formula": "best_valid_squat + best_valid_bench + best_valid_deadlift",
+   "guardrail": "Count only valid competition-standard lifts."
+  },
+  {
+   "id": "total-plate-loader",
+   "name": "Plate loader",
+   "formula": "(target_load - bar_and_collars) / 2",
+   "guardrail": "Confirm the actual bar, collars, plate availability and equal loading on both sides."
+  }
+ ],
+ "learn": [
+  {
+   "id": "total-learn-01",
+   "title": "Powerlifting is skill-specific strength",
+   "summary": "The sport rewards the heaviest valid squat, bench press and deadlift, so muscle, force production and competition execution all matter.",
+   "points": [
+    "Specific practice improves the exact task tested.",
+    "Hypertrophy and accessories support future force production but do not replace the competition lifts.",
+    "Technical consistency matters more as load rises.",
+    "A valid total is three successful best lifts, not the sum of gym rumours."
+   ]
+  },
+  {
+   "id": "total-learn-02",
+   "title": "Reference max, percentage and rounding",
+   "summary": "A reference max is a current, defensible planning number - not an all-time lift from a different bodyweight or standard.",
+   "points": [
+    "Use a recent valid single or a clean 2-5 rep set.",
+    "For a 2-5 rep set, the app may estimate 1RM with Epley and must label it an estimate.",
+    "Do not increase the reference max during the block because one day felt easy.",
+    "Round loads down when plates cannot create the exact percentage.",
+    "The RPE cap overrides the percentage on a poor day."
+   ]
+  },
+  {
+   "id": "total-learn-03",
+   "title": "RPE and repetitions in reserve",
+   "summary": "RPE estimates how many technically acceptable repetitions remain; it improves with practice and is less accurate far from failure.",
+   "points": [
+    "RPE 10 means no repetition remains; RPE 9 roughly one; RPE 8 roughly two.",
+    "Rate the set immediately after racking or lowering the bar.",
+    "Use bar speed, position and prior experience together.",
+    "Do not call a slow technical breakdown RPE 8 because the bar eventually moved.",
+    "The plan never requires perfect RPE accuracy; it requires honest conservative decisions."
+   ],
+   "reference": [
+    {
+     "rpe": 10,
+     "rir": "0",
+     "meaning": "Maximum effort; no further repetition possible",
+     "programme_use": "Testing only; never a normal work-set target."
+    },
+    {
+     "rpe": 9.5,
+     "rir": "0-1",
+     "meaning": "No extra rep certain; perhaps a tiny load increase",
+     "programme_use": "Only a final test attempt when appropriate."
+    },
+    {
+     "rpe": 9,
+     "rir": "About 1",
+     "meaning": "Very hard but technically complete",
+     "programme_use": "Possible test/third attempt; not routine volume."
+    },
+    {
+     "rpe": 8.5,
+     "rir": "About 1-2",
+     "meaning": "Heavy, controlled, another rep likely",
+     "programme_use": "Highest programmed training single in Week 6."
+    },
+    {
+     "rpe": 8,
+     "rir": "About 2",
+     "meaning": "Hard, repeatable and technically stable",
+     "programme_use": "Heavy singles and final work sets."
+    },
+    {
+     "rpe": 7,
+     "rir": "About 3",
+     "meaning": "Solid submaximal work",
+     "programme_use": "Most early-block singles and volume."
+    },
+    {
+     "rpe": 6,
+     "rir": "About 4+",
+     "meaning": "Comfortable technique work",
+     "programme_use": "Primer, deload and first-week calibration."
+    }
+   ]
+  },
+  {
+   "id": "total-learn-04",
+   "title": "Why the plan uses volume, frequency and specificity",
+   "summary": "More training can produce more adaptation, but returns diminish and recoverability differs between athletes and lifts.",
+   "points": [
+    "Bench press is practised frequently because each exposure can remain small and technically focused.",
+    "Squat and deadlift volume is spread across competition and secondary exposures.",
+    "Sets fall as intensity and competition specificity rise.",
+    "The dose is a starting prescription, not proof that every athlete needs the same volume.",
+    "Persistent performance decline means the athlete needs less stress, not more motivation copy."
+   ]
+  },
+  {
+   "id": "total-learn-05",
+   "title": "Top singles are practice, not weekly tests",
+   "summary": "A submaximal single rehearses setup, bracing, commands and confidence with low repetition fatigue.",
+   "points": [
+    "Warm up with the fewest jumps that create readiness.",
+    "Stop the single at the prescribed RPE even if a heavier lift appears available.",
+    "A miss ends heavy loading for that lift that day.",
+    "The Week 6 ceiling is RPE 8.5, not a disguised max.",
+    "The Week 7 single should look like an opener: confident, legal and repeatable."
+   ]
+  },
+  {
+   "id": "total-learn-06",
+   "title": "Squat execution and standards",
+   "summary": "Begin motionless and erect with knees locked. Descend until the top of the legs at the hip joint is lower than the top of the knees. Return to an upright, knees-locked finish and wait for Rack.",
+   "points": [
+    "Set rack and safety heights before loading.",
+    "Brace before the walkout and use the fewest stable steps.",
+    "Train the depth that must pass, not the depth that only looks close from one angle.",
+    "Keep the bar over a stable mid-foot path appropriate to the athlete style.",
+    "Practise Squat and Rack commands during selected singles."
+   ]
+  },
+  {
+   "id": "total-learn-07",
+   "title": "Bench press execution and standards",
+   "summary": "Begin with elbows locked and the body in the required position. Lower the bar to the chest or abdominal area and the underside of both elbow joints to at least level with or below the top of each shoulder joint, hold it motionless, press to locked elbows and wait for Rack.",
+   "points": [
+    "Use safeties and a competent handoff when available.",
+    "Set grip, upper back and feet before unracking.",
+    "Practise the current elbow-depth requirement and a motionless pause.",
+    "Press without losing required body contact or foot position.",
+    "Use Start, Press and Rack commands during selected singles."
+   ]
+  },
+  {
+   "id": "total-learn-08",
+   "title": "Deadlift execution and standards",
+   "summary": "Lift the bar until standing erect with knees locked and the front of the shoulders behind the imaginary projection of the bar. Hold the bar motionless until Down, then return it under control with both hands.",
+   "points": [
+    "Choose conventional or sumo before the block and avoid changing without a coaching reason.",
+    "Create tension before breaking the floor.",
+    "Keep the bar close without supporting it on the thighs.",
+    "Finish knees and hips together, then wait for Down.",
+    "Return the bar under control with both hands."
+   ]
+  },
+  {
+   "id": "total-learn-09",
+   "title": "Accessories build capacity; they do not win recovery battles",
+   "summary": "Accessories target muscle and positions that support the three lifts while keeping fatigue proportionate.",
+   "points": [
+    "Most accessory sets finish with 2-3 good repetitions available.",
+    "Choose stable movements that can be progressed and logged.",
+    "Remove accessories before removing important competition-lift work on an Amber day.",
+    "Accessories reduce sharply after Week 6 and disappear during the final taper.",
+    "Do not turn assistance work into unlogged conditioning."
+   ]
+  },
+  {
+   "id": "total-learn-10",
+   "title": "Rest, recovery and readiness",
+   "summary": "Hard sets need enough rest to reproduce force; weeks need enough recovery to express adaptation.",
+   "points": [
+    "Rest 3-5 minutes for main work and longer when a heavy single genuinely requires it.",
+    "Use 90-180 seconds for accessories according to performance.",
+    "Protect an individualised sleep opportunity and routine.",
+    "Do not catch up missed heavy sessions by doubling the next day.",
+    "Use readiness to modify the dose, not to manufacture an excuse for testing."
+   ]
+  },
+  {
+   "id": "total-learn-11",
+   "title": "Food, protein and bodyweight",
+   "summary": "Strength training requires sufficient energy, protein, carbohydrate and fluid; aggressive weight manipulation can compete with performance.",
+   "points": [
+    "A protein intake around 1.4-2.0 g/kg/day is sufficient for most exercising adults according to the cited ISSN position stand.",
+    "Use carbohydrate around demanding training according to preference and tolerance.",
+    "Keep normal hydration and practise meet-day food before Week 8.",
+    "Do not begin an acute weight cut from a generic app instruction.",
+    "For a short weigh-in, choose a class that can be reached without dangerous improvisation and use qualified sports-dietetic support for any manipulation."
+   ]
+  },
+  {
+   "id": "total-learn-12",
+   "title": "Pain, injury and pelvic-health awareness",
+   "summary": "Powerlifting injury incidence appears relatively low per training hour, but painful conditions that affect training are common and evidence does not identify one simple cause.",
+   "points": [
+    "Pain that changes movement ends the lift for that day.",
+    "Avoid diagnosing an injury from the exercise name or a social-media checklist.",
+    "Seek appropriate assessment for persistent, worsening or neurological symptoms.",
+    "Female and male lifters can experience pelvic-floor symptoms; leaking is common enough to discuss but should not be dismissed as inevitable.",
+    "Technique and load management matter, but no programme can promise injury prevention."
+   ]
+  },
+  {
+   "id": "total-learn-13",
+   "title": "Why and how the taper works",
+   "summary": "The taper reduces fatigue faster than fitness disappears, but the exact best taper remains individual and powerlifting-specific evidence is limited.",
+   "points": [
+    "Training volume falls substantially across Weeks 7-8.",
+    "Heavy technique remains briefly through opener rehearsal.",
+    "Deadlift work finishes earlier because many lifters experience greater recovery cost, but this remains individual.",
+    "Accessories disappear before the test.",
+    "Do not add missed volume, novel conditioning or hard failure work because the taper feels easy."
+   ]
+  },
+  {
+   "id": "total-learn-14",
+   "title": "Attempt selection and meet-day decisions",
+   "summary": "The opener establishes the total, the second builds it and the third responds to the day.",
+   "points": [
+    "Choose an opener already demonstrated to competition standard and available on a poor day.",
+    "Use the second to secure a strong total before chasing a speculative third.",
+    "Select the third from the speed, standard and RPE of the second attempt.",
+    "A failed attempt is normally repeated or increased only with a clear technical reason and coach judgement.",
+    "At IPF competition, second and third attempts must be submitted within one minute; rules on changes vary by attempt and lift."
+   ]
+  },
+  {
+   "id": "total-learn-15",
+   "title": "After Week 8",
+   "summary": "A peak is followed by recovery and review, not an immediate second peak.",
+   "points": [
+    "Take several days away from heavy lifting after a maximal test or competition.",
+    "Review successful lifts, failed standards, readiness, pain and bodyweight context.",
+    "Update reference maxes only from valid results.",
+    "Choose one technical and one physical priority for the next block.",
+    "Return to accumulation before another peak unless the next event demands a carefully coached exception."
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "title": "International Powerlifting Federation - Technical Rulebook effective 1 March 2026",
+   "url": "https://www.powerlifting.sport/fileadmin/ipf/data/rules/technical-rules/english/2026_IPF_Technical_Rulebook__effective_01_March_2026__v3.pdf",
+   "use": "Current competition order, attempts, commands and lift standards. Checked 9 August 2026."
+  },
+  {
+   "title": "ACSM Position Stand - Resistance Training Prescription (2026)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/41843416/",
+   "use": "Current evidence synthesis for strength, hypertrophy and resistance-training prescription."
+  },
+  {
+   "title": "Pelland et al. - Resistance Training Dose Response (2026)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/41343037/",
+   "use": "Weekly volume and frequency show diminishing returns rather than one universal optimum."
+  },
+  {
+   "title": "Zourdos et al. - Repetitions-in-Reserve RPE Scale (2016)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/26049792/",
+   "use": "RIR-based RPE as a practical load-regulation tool."
+  },
+  {
+   "title": "Helms et al. - RPE versus Percentage Loading (2018)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/29628895/",
+   "use": "Both approaches improved strength in trained males across eight weeks; RPE permits individual load adjustment."
+  },
+  {
+   "title": "Pritchard et al. - Tapering and Peaking Maximal Strength (2020)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/32917000/",
+   "use": "Supports a one-to-two-week taper with substantial volume reduction and short training cessation, while acknowledging limited powerlifting-specific evidence."
+  },
+  {
+   "title": "Grgic et al. - Inter-set Rest and Strength (2018)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/28933024/",
+   "use": "Longer rest intervals are generally useful for maximising strength performance in trained lifters."
+  },
+  {
+   "title": "Effects of Non-failure versus Failure Training (2026)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/42410632/",
+   "use": "Non-failure training is at least as effective for most outcomes and showed a small dynamic-strength advantage in the meta-analysis."
+  },
+  {
+   "title": "Tung et al. - Injuries in Weightlifting and Powerlifting (2024)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/39650568/",
+   "use": "Current injury epidemiology and the limits of available evidence."
+  },
+  {
+   "title": "ISSN Position Stand - Protein and Exercise (2017)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/28642676/",
+   "use": "Protein guidance for exercising adults."
+  },
+  {
+   "title": "Walsh et al. - Sleep and the Athlete Consensus (2021)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/33144349/",
+   "use": "Individualised sleep assessment and recovery guidance."
+  },
+  {
+   "title": "Campbell et al. - Rapid Weight Loss Practices in Powerlifters (2023)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/37697737/",
+   "use": "High prevalence and negative perceptions associated with acute weight cutting under short weigh-in conditions."
+  }
+ ],
+ "rules_checked_date": "2026-08-09",
+ "safety": "Training and maximal lifting carry risk. This programme cannot assess medical conditions, injury, technique, equipment or spotting remotely. Use appropriate safeties and competent spotters, stop for concerning symptoms or pain that changes movement, and obtain qualified coaching or healthcare when needed.",
+ "app_experience": {
+  "content_policy": {
+   "runtime_source": "BUILD_TOTAL_App_Manifest.json",
+   "pdf_role": "Optional entitled download and visual reference only. The app must contain the complete programme and education without the PDF.",
+   "non_negotiable": "Foundation, rules, education, readiness, attempt planning, progress and safety are athlete-facing product content."
+  },
+  "primary_navigation": [
+   {
+    "id": "overview",
+    "label": "Overview",
+    "purpose": "Scope, entry gate, weekly structure, phases and equipment."
+   },
+   {
+    "id": "train",
+    "label": "Train",
+    "purpose": "Ordered sessions, prescriptions, standards and logging."
+   },
+   {
+    "id": "learn",
+    "label": "Learn",
+    "purpose": "All foundation and education modules from day one."
+   },
+   {
+    "id": "progress",
+    "label": "Progress",
+    "purpose": "Reference maxes, top singles, work sets, valid attempts, total and calculators."
+   },
+   {
+    "id": "meet",
+    "label": "Meet",
+    "purpose": "Commands, standards, rack heights, warm-up and attempt planner."
+   },
+   {
+    "id": "profile",
+    "label": "Profile",
+    "purpose": "Pathway, maxes, styles, equipment and limitations."
+   }
+  ],
+  "onboarding_sequence": [
+   {
+    "step": 1,
+    "title": "What eight weeks can do",
+    "render": [
+     "description",
+     "intended_athlete",
+     "foundation[total-foundation-01]"
+    ]
+   },
+   {
+    "step": 2,
+    "title": "Before Week 1",
+    "render": [
+     "entry_gate"
+    ],
+    "behaviour": "Render every item in full and require an answer. Route unmet technical prerequisites to an on-ramp or in-person coaching message."
+   },
+   {
+    "step": 3,
+    "title": "Choose the Week 8 path",
+    "render": [
+     "profile_fields.week_8_path",
+     "competition_standards.scope"
+    ]
+   },
+   {
+    "step": 4,
+    "title": "Set reference maxes",
+    "render": [
+     "reference_max_policy",
+     "calculators[total-e1rm]",
+     "profile_fields.squat_reference_kg",
+     "profile_fields.bench_reference_kg",
+     "profile_fields.deadlift_reference_kg"
+    ]
+   },
+   {
+    "step": 5,
+    "title": "Set styles, equipment and rules",
+    "render": [
+     "profile_fields",
+     "equipment",
+     "competition_standards"
+    ]
+   },
+   {
+    "step": 6,
+    "title": "Understand RPE and readiness",
+    "render": [
+     "rpe_scale",
+     "readiness_options"
+    ]
+   },
+   {
+    "step": 7,
+    "title": "Safety and start",
+    "render": [
+     "safety",
+     "foundation[total-foundation-04]"
+    ]
+   }
+  ],
+  "session_preflight": [
+   "purpose",
+   "duration_minutes",
+   "intensity",
+   "readiness action",
+   "ordered blocks",
+   "percentage and RPE cap",
+   "competition/variation standard",
+   "rest",
+   "log fields"
+  ],
+  "weekly_education": "Every optional Sunday lesson is also available independently in Learn. Lesson completion and optional recovery completion are separate states.",
+  "pdf_independence_test": "Block the PDF URL in testing. Onboarding, Train, Learn, Progress and Meet must remain complete."
+ },
+ "weeks": [
+  {
+   "week": 1,
+   "phase": "Accumulate",
+   "title": "Calibrate, do not prove",
+   "objective": "Establish honest loads, competition standards and repeatable volume.",
+   "intensity": "Main work RPE 6-7; accessories 2-3 RIR.",
+   "checkpoint": "Record every work-set load, RPE and standard. Do not increase the reference max during the block.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 6-7; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w1-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 6.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 5 @ 70%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "4 x 5 @ 67.5%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Split squat or leg press - 3 x 8-10 @ 2-3 RIR | Leg curl - 3 x 10-12 @ 2 RIR | Weighted plank - 3 x 30-45 seconds",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w1-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w1-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w1-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 6-7; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w1-s2-b1"
+      },
+      {
+       "name": "Competition bench - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 6.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s2-b2"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 4 @ 70%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s2-b3"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Pause deadlift 3 x 5 @ 60%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s2-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 4 x 8-10 @ 2 RIR | Lat pulldown - 3 x 8-12 @ 2 RIR | Rear-delt raise - 2 x 12-15 @ 2-3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w1-s2-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w1-s2-b6"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w1-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Main work RPE 6-7; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w1-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Pause squat 4 x 5 @ 60%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Close-grip paused bench 3 x 6 @ 60%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Romanian deadlift - 3 x 6 @ RPE 7 | One-arm or cable row - 3 x 10 @ 2 RIR | Triceps pressdown - 3 x 10-12 @ 2 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w1-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w1-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w1-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 6-7; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w1-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 6.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s4-b2"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "3 x 4 @ 70%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s4-b3"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 55%; full commands on final rep of each set",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w1-s4-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown or pull-up - 3 x 8-10 @ 2 RIR | Triceps extension - 3 x 10-12 @ 2 RIR | Optional curl - 2 x 10-12 @ 2 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w1-s4-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w1-s4-b6"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w1-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w1-s5-b1"
+      },
+      {
+       "name": "Reference max, percentage and rounding",
+       "kind": "education",
+       "instruction": "A reference max is a current, defensible planning number - not an all-time lift from a different bodyweight or standard. Use a recent valid single or a clean 2-5 rep set. For a 2-5 rep set, the app may estimate 1RM with Epley and must label it an estimate. Do not increase the reference max during the block because one day felt easy. Round loads down when plates cannot create the exact percentage. The RPE cap overrides the percentage on a poor day.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-02",
+       "id": "total-w1-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w1-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 2,
+   "phase": "Accumulate",
+   "title": "Add useful work",
+   "objective": "Increase exposure while keeping all repetitions technically repeatable.",
+   "intensity": "Main work RPE 7; accessories 2 RIR.",
+   "checkpoint": "Record every work-set load, RPE and standard. Do not increase the reference max during the block.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w2-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "5 x 4 @ 72.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "5 x 4 @ 70%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Split squat or leg press - 3 x 8-10 @ 2-3 RIR | Leg curl - 3 x 10-12 @ 2 RIR | Weighted plank - 3 x 30-45 seconds",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w2-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w2-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w2-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w2-s2-b1"
+      },
+      {
+       "name": "Competition bench - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s2-b2"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 4 @ 72.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s2-b3"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Pause deadlift 4 x 4 @ 62.5%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s2-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 4 x 8-10 @ 2 RIR | Lat pulldown - 3 x 8-12 @ 2 RIR | Rear-delt raise - 2 x 12-15 @ 2-3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w2-s2-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w2-s2-b6"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w2-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Main work RPE 7; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w2-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Pause squat 4 x 5 @ 62.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Close-grip paused bench 3 x 6 @ 62.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Romanian deadlift - 3 x 6 @ RPE 7 | One-arm or cable row - 3 x 10 @ 2 RIR | Triceps pressdown - 3 x 10-12 @ 2 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w2-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w2-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w2-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w2-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s4-b2"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 4 @ 72.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s4-b3"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 57.5%; full commands on final rep of each set",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w2-s4-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown or pull-up - 3 x 8-10 @ 2 RIR | Triceps extension - 3 x 10-12 @ 2 RIR | Optional curl - 2 x 10-12 @ 2 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w2-s4-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w2-s4-b6"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w2-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w2-s5-b1"
+      },
+      {
+       "name": "Squat execution and standards",
+       "kind": "education",
+       "instruction": "Begin motionless and erect with knees locked. Descend until the top of the legs at the hip joint is lower than the top of the knees. Return to an upright, knees-locked finish and wait for Rack. Set rack and safety heights before loading. Brace before the walkout and use the fewest stable steps. Train the depth that must pass, not the depth that only looks close from one angle. Keep the bar over a stable mid-foot path appropriate to the athlete style. Practise Squat and Rack commands during selected singles.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-06",
+       "id": "total-w2-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w2-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 3,
+   "phase": "Accumulate",
+   "title": "Highest volume, still submaximal",
+   "objective": "Complete the block high point without failure, missed depth or forced repetitions.",
+   "intensity": "Main work RPE 7-8; accessories 2 RIR.",
+   "checkpoint": "Record every work-set load, RPE and standard. Do not increase the reference max during the block.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7-8; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w3-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "5 x 4 @ 75%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "5 x 4 @ 72.5%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Split squat or leg press - 3 x 8-10 @ 2-3 RIR | Leg curl - 3 x 10-12 @ 2 RIR | Weighted plank - 3 x 30-45 seconds",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w3-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w3-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w3-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7-8; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w3-s2-b1"
+      },
+      {
+       "name": "Competition bench - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s2-b2"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "5 x 3 @ 77.5%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s2-b3"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Pause deadlift 4 x 4 @ 65%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s2-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 4 x 8-10 @ 2 RIR | Lat pulldown - 3 x 8-12 @ 2 RIR | Rear-delt raise - 2 x 12-15 @ 2-3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w3-s2-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w3-s2-b6"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w3-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Main work RPE 7-8; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w3-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Pause squat 4 x 4 @ 65%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Close-grip paused bench 4 x 5 @ 65%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Romanian deadlift - 3 x 6 @ RPE 7 | One-arm or cable row - 3 x 10 @ 2 RIR | Triceps pressdown - 3 x 10-12 @ 2 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w3-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w3-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w3-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7-8; accessories 2 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w3-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s4-b2"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 3 @ 77.5%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s4-b3"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 60%; full commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w3-s4-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown or pull-up - 3 x 8-10 @ 2 RIR | Triceps extension - 3 x 10-12 @ 2 RIR | Optional curl - 2 x 10-12 @ 2 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w3-s4-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w3-s4-b6"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w3-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w3-s5-b1"
+      },
+      {
+       "name": "Accessories build capacity; they do not win recovery battles",
+       "kind": "education",
+       "instruction": "Accessories target muscle and positions that support the three lifts while keeping fatigue proportionate. Most accessory sets finish with 2-3 good repetitions available. Choose stable movements that can be progressed and logged. Remove accessories before removing important competition-lift work on an Amber day. Accessories reduce sharply after Week 6 and disappear during the final taper. Do not turn assistance work into unlogged conditioning.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-09",
+       "id": "total-w3-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w3-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 4,
+   "phase": "Pivot",
+   "title": "Reduce fatigue on purpose",
+   "objective": "Keep movement practice while cutting loading stress and accessory volume.",
+   "intensity": "Main work RPE 5-6; no top singles.",
+   "checkpoint": "Record every work-set load, RPE and standard. Do not increase the reference max during the block.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 5-6; no top singles.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w4-s1-b1"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "Competition squat 3 x 4 @ 60%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s1-b2"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 4 @ 60%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s1-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Leg press - 1-2 x 8 easy | Leg curl - 1-2 x 10 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w4-s1-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w4-s1-b5"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w4-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 5-6; no top singles.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w4-s2-b1"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 60%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s2-b2"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Pause deadlift 2 x 4 @ 50-55%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s2-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 2 x 8 easy | Rear-delt raise - 1-2 x 12 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w4-s2-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w4-s2-b5"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w4-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Main work RPE 5-6; no top singles.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w4-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Pause squat 2 x 4 @ 50-55%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Close-grip paused bench 2 x 5 @ 55%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Romanian deadlift - 2 x 5 @ RPE 5-6 | Triceps pressdown - 2 x 10 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w4-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w4-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w4-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 5-6; no top singles.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w4-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "Competition deadlift 3 x 3 @ 60%; cap RPE 6",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s4-b2"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 2 x 3 @ 50-55%; full commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w4-s4-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown - 2 x 8 easy | Triceps extension - 2 x 10 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w4-s4-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w4-s4-b5"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w4-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w4-s5-b1"
+      },
+      {
+       "name": "Rest, recovery and readiness",
+       "kind": "education",
+       "instruction": "Hard sets need enough rest to reproduce force; weeks need enough recovery to express adaptation. Rest 3-5 minutes for main work and longer when a heavy single genuinely requires it. Use 90-180 seconds for accessories according to performance. Protect an individualised sleep opportunity and routine. Do not catch up missed heavy sessions by doubling the next day. Use readiness to modify the dose, not to manufacture an excuse for testing.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-10",
+       "id": "total-w4-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w4-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 5,
+   "phase": "Intensify",
+   "title": "Heavier, more specific",
+   "objective": "Return from the pivot with competition lifts and controlled heavy singles.",
+   "intensity": "Main work RPE 7.5-8; accessories 2-3 RIR.",
+   "checkpoint": "Record every work-set load, RPE and standard. Do not increase the reference max during the block.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7.5-8; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w5-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 3 @ 80%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "Competition bench 4 x 4 @ 75%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Split squat or leg press - 2 x 8 @ 3 RIR | Leg curl - 2 x 10 @ 3 RIR | Weighted plank - 2 sets",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w5-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w5-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w5-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7.5-8; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w5-s2-b1"
+      },
+      {
+       "name": "Competition bench - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s2-b2"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "4 x 3 @ 80%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s2-b3"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Competition deadlift 3 x 4 @ 70%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s2-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 3 x 8 @ 2-3 RIR | Lat pulldown - 2 x 8-10 @ 3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w5-s2-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w5-s2-b6"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w5-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Main work RPE 7.5-8; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w5-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Competition squat 3 x 4 @ 72.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 4 @ 72.5%; one-count pause",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Romanian deadlift - 2 x 5 @ RPE 6-7 | Triceps pressdown - 2 x 10 @ 3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w5-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w5-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w5-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Main work RPE 7.5-8; accessories 2-3 RIR.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w5-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s4-b2"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "3 x 3 @ 82.5%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s4-b3"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 65%; full commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w5-s4-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown or pull-up - 2 x 8 @ 3 RIR | Triceps extension - 2 x 10 @ 3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w5-s4-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w5-s4-b6"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w5-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w5-s5-b1"
+      },
+      {
+       "name": "Top singles are practice, not weekly tests",
+       "kind": "education",
+       "instruction": "A submaximal single rehearses setup, bracing, commands and confidence with low repetition fatigue. Warm up with the fewest jumps that create readiness. Stop the single at the prescribed RPE even if a heavier lift appears available. A miss ends heavy loading for that lift that day. The Week 6 ceiling is RPE 8.5, not a disguised max. The Week 7 single should look like an opener: confident, legal and repeatable.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-05",
+       "id": "total-w5-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w5-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 6,
+   "phase": "Intensify",
+   "title": "Heavy rehearsal without a max",
+   "objective": "Reach the block intensity ceiling while leaving a technically valid repetition in reserve.",
+   "intensity": "Top singles RPE 8.5 maximum; back-offs RPE 8 maximum.",
+   "checkpoint": "Record every work-set load, RPE and standard. Do not increase the reference max during the block.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Top singles RPE 8.5 maximum; back-offs RPE 8 maximum.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w6-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 8.5 maximum",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "3 x 3 @ 82.5%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "Competition bench 4 x 3 @ 77.5%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Split squat or leg press - 2 x 8 @ 3 RIR | Leg curl - 2 x 10 @ 3 RIR | Weighted plank - 2 sets",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w6-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w6-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w6-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Top singles RPE 8.5 maximum; back-offs RPE 8 maximum.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w6-s2-b1"
+      },
+      {
+       "name": "Competition bench - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 8.5 maximum",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s2-b2"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "3 x 2 @ 85%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s2-b3"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Competition deadlift 3 x 3 @ 72.5%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s2-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 3 x 8 @ 2-3 RIR | Lat pulldown - 2 x 8-10 @ 3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w6-s2-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w6-s2-b6"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w6-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Top singles RPE 8.5 maximum; back-offs RPE 8 maximum.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w6-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Competition squat 3 x 3 @ 75%; cap RPE 7.5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 75%; full pause",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Romanian deadlift - 2 x 5 @ RPE 6-7 | Triceps pressdown - 2 x 10 @ 3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w6-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w6-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w6-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Top singles RPE 8.5 maximum; back-offs RPE 8 maximum.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w6-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - top single",
+       "kind": "lift",
+       "instruction": "1 x 1 @ RPE 8.5 maximum",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s4-b2"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "3 x 2 @ 85%; cap RPE 8",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s4-b3"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 2 @ 70%; full commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w6-s4-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown or pull-up - 2 x 8 @ 3 RIR | Triceps extension - 2 x 10 @ 3 RIR",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w6-s4-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w6-s4-b6"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w6-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w6-s5-b1"
+      },
+      {
+       "name": "Attempt selection and meet-day decisions",
+       "kind": "education",
+       "instruction": "The opener establishes the total, the second builds it and the third responds to the day. Choose an opener already demonstrated to competition standard and available on a poor day. Use the second to secure a strong total before chasing a speculative third. Select the third from the speed, standard and RPE of the second attempt. A failed attempt is normally repeated or increased only with a clear technical reason and coach judgement. At IPF competition, second and third attempts must be submitted within one minute; rules on changes vary by attempt and lift.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-14",
+       "id": "total-w6-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w6-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 7,
+   "phase": "Realise",
+   "title": "Openers and fatigue reduction",
+   "objective": "Rehearse confident opening attempts, cut volume and leave the gym fresher.",
+   "intensity": "Singles RPE 7.5-8; all other work RPE 7 or lower.",
+   "checkpoint": "Record every work-set load, RPE and standard. Finalise openers, warm-up jumps and equipment.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Singles RPE 7.5-8; all other work RPE 7 or lower.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w7-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "Opener rehearsal: 1 x 1 @ RPE 7.5-8 under commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "2 x 2 @ 75%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 3 @ 67.5%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Leg curl - 1-2 x 8 easy | Plank - 1-2 sets",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w7-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w7-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w7-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Singles RPE 7.5-8; all other work RPE 7 or lower.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w7-s2-b1"
+      },
+      {
+       "name": "Competition bench - top single",
+       "kind": "lift",
+       "instruction": "Opener rehearsal: 1 x 1 @ RPE 7.5-8 under commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s2-b2"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "2 x 2 @ 75%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s2-b3"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Competition deadlift 2 x 2 @ 60%; fast and exact",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s2-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Chest-supported row - 2 x 8 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w7-s2-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w7-s2-b6"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w7-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Singles RPE 7.5-8; all other work RPE 7 or lower.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w7-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "Competition squat 2 x 2 @ 65%; no slow repetitions",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 2 @ 65%; full commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Triceps pressdown - 1-2 x 8 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w7-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w7-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w7-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Deadlift strength + bench technique",
+     "pillar": "Deadlift + Bench",
+     "purpose": "Build the competition deadlift and maintain bench skill.",
+     "duration_minutes": 80,
+     "intensity": "Singles RPE 7.5-8; all other work RPE 7 or lower.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition deadlift. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w7-s4-b1"
+      },
+      {
+       "name": "Competition deadlift - top single",
+       "kind": "lift",
+       "instruction": "Opener rehearsal: 1 x 1 @ RPE 7.5-8 under commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s4-b2"
+      },
+      {
+       "name": "Competition deadlift - back-off work",
+       "kind": "lift",
+       "instruction": "2 x 2 @ 70%; cap RPE 7",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_deadlift",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s4-b3"
+      },
+      {
+       "name": "Competition bench - technique",
+       "kind": "lift",
+       "instruction": "Competition bench 2 x 2 @ 60%; full commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w7-s4-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "Complete in order. Lat pulldown - 1-2 x 8 easy",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w7-s4-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w7-s4-b6"
+      }
+     ],
+     "coach_note": "The deadlift single ends before a miss. Lower every repetition under control.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w7-s4",
+     "session": 4,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w7-s5-b1"
+      },
+      {
+       "name": "Why and how the taper works",
+       "kind": "education",
+       "instruction": "The taper reduces fatigue faster than fitness disappears, but the exact best taper remains individual and powerlifting-specific evidence is limited. Training volume falls substantially across Weeks 7-8. Heavy technique remains briefly through opener rehearsal. Deadlift work finishes earlier because many lifters experience greater recovery cost, but this remains individual. Accessories disappear before the test. Do not add missed volume, novel conditioning or hard failure work because the taper feels easy.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-13",
+       "id": "total-w7-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w7-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  },
+  {
+   "week": 8,
+   "phase": "Peak",
+   "title": "Taper, execute, review",
+   "objective": "Remove fatigue, keep confidence and express a valid total only when readiness supports it.",
+   "intensity": "Primers RPE 6 or lower; testing/competition follows attempt plan.",
+   "checkpoint": "Record every work-set load, RPE and standard. Record valid attempts, total, bodyweight context and recovery plan.",
+   "sessions": [
+    {
+     "recommended_day": "Monday",
+     "title": "Squat strength + bench volume",
+     "pillar": "Squat + Bench",
+     "purpose": "Build the competition squat while accumulating technically consistent bench volume.",
+     "duration_minutes": 80,
+     "intensity": "Primers RPE 6 or lower; testing/competition follows attempt plan.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition squat. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w8-s1-b1"
+      },
+      {
+       "name": "Competition squat - top single",
+       "kind": "lift",
+       "instruction": "Final squat primer: 1 x 1 @ RPE 6 under commands",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s1-b2"
+      },
+      {
+       "name": "Competition squat - back-off work",
+       "kind": "lift",
+       "instruction": "2 x 2 @ 60%; fast and exact",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_squat",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s1-b3"
+      },
+      {
+       "name": "Competition bench - volume",
+       "kind": "lift",
+       "instruction": "Final bench primer: 1 x 1 @ RPE 6, then 2 x 2 @ 60%",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s1-b4"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "No accessory work. Finish the session, eat, hydrate and recover.",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w8-s1-b5"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w8-s1-b6"
+      }
+     ],
+     "coach_note": "Squat quality is the priority. Bench volume must not become a second maximal session.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w8-s1",
+     "session": 1,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Tuesday",
+     "title": "Bench strength + deadlift secondary",
+     "pillar": "Bench + Deadlift",
+     "purpose": "Build competition bench strength and practise deadlift positions below the highest-fatigue range.",
+     "duration_minutes": 80,
+     "intensity": "Primers RPE 6 or lower; testing/competition follows attempt plan.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition bench press. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w8-s2-b1"
+      },
+      {
+       "name": "Competition bench - back-off work",
+       "kind": "lift",
+       "instruction": "Competition bench 3 x 2 @ 55%; long pauses, RPE 5",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "competition_bench",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s2-b2"
+      },
+      {
+       "name": "Deadlift secondary work",
+       "kind": "lift",
+       "instruction": "Final deadlift primer: 1 x 1 @ RPE 6, then 2 x 1 @ 55-60%",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "deadlift_variation",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s2-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "No accessory work. Finish the session, eat, hydrate and recover.",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w8-s2-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w8-s2-b5"
+      }
+     ],
+     "coach_note": "Use a real pause. A touch-and-go repetition is not a competition-bench repetition.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w8-s2",
+     "session": 2,
+     "duration": "80 min"
+    },
+    {
+     "recommended_day": "Thursday",
+     "title": "Squat secondary + bench secondary",
+     "pillar": "Technique + Muscle",
+     "purpose": "Accumulate targeted volume, strengthen positions and retain enough recovery for Saturday deadlift.",
+     "duration_minutes": 75,
+     "intensity": "Primers RPE 6 or lower; testing/competition follows attempt plan.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's squat and bench secondary work. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w8-s3-b1"
+      },
+      {
+       "name": "Squat secondary work",
+       "kind": "lift",
+       "instruction": "No loaded squat. Rehearse rack height, commands and warm-up plan only.",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "squat_secondary",
+       "priority": "main",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s3-b2"
+      },
+      {
+       "name": "Bench secondary work",
+       "kind": "lift",
+       "instruction": "Command rehearsal: 3 singles at 50%, 60% and no more than 70%; RPE 5 maximum",
+       "standard": "Every repetition meets the chosen competition standard or the clearly stated variation standard. Stop before a miss or technical breakdown.",
+       "log": [
+        "actual_load_kg",
+        "completed_sets",
+        "completed_reps",
+        "set_rpe",
+        "standard_notes"
+       ],
+       "lift": "bench_secondary",
+       "priority": "secondary",
+       "rest": "3-5 minutes; longer before a heavy single when genuinely needed",
+       "id": "total-w8-s3-b3"
+      },
+      {
+       "name": "Accessory capacity",
+       "kind": "accessory",
+       "instruction": "No accessory work. Finish the session, eat, hydrate and recover.",
+       "standard": "Use controlled range and the stated RIR/RPE. No forced repetitions or failure.",
+       "log": [
+        "exercise_options",
+        "loads",
+        "reps",
+        "rir",
+        "modifications"
+       ],
+       "rest": "90-180 seconds",
+       "id": "total-w8-s3-b4"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w8-s3-b5"
+      }
+     ],
+     "coach_note": "Secondary work serves the competition lifts. Do not turn variations into ego lifts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w8-s3",
+     "session": 3,
+     "duration": "75 min"
+    },
+    {
+     "recommended_day": "Saturday",
+     "title": "Competition or controlled total test",
+     "pillar": "Peak + Test",
+     "purpose": "Express the best valid total available today without forcing a predetermined number.",
+     "duration_minutes": 180,
+     "intensity": "Primers RPE 6 or lower; testing/competition follows attempt plan.",
+     "priority": "core",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "General and specific warm-up",
+       "kind": "warmup",
+       "instruction": "5-8 minutes easy movement, then 2-4 mobility or activation drills that improve today's competition platform lifts. Build through empty-bar and progressively heavier sets using low repetitions. Warm up; do not pre-fatigue.",
+       "standard": "The final warm-up is technically clean, below RPE 6 and leaves the athlete ready for the first work set.",
+       "log": [
+        "warmup_notes"
+       ],
+       "id": "total-w8-s4-b1"
+      },
+      {
+       "name": "Select the Week 8 path",
+       "kind": "decision",
+       "instruction": "Competition: follow the event and federation. Gym test: simulate three attempts per lift with safeties, spotters and full standards. Training peak: take one single per lift up to RPE 8 and stop.",
+       "standard": "The athlete selects one path before warming up. No spontaneous weight cut, fourth attempt or repeated miss.",
+       "log": [
+        "selected_path"
+       ],
+       "id": "total-w8-s4-b2"
+      },
+      {
+       "name": "Squat, bench press and deadlift attempts",
+       "kind": "test",
+       "instruction": "Use the saved attempt plan. Complete squat, then bench press, then deadlift. For a gym test, take up to three attempts per lift and allow full recovery. Stop a lift after pain, unsafe equipment, repeated technical failure or a missed second attempt without a clear safe reason to continue.",
+       "standard": "Only valid competition-standard lifts count toward the total.",
+       "log": [
+        "squat_attempts",
+        "bench_attempts",
+        "deadlift_attempts",
+        "valid_lifts",
+        "total_kg",
+        "bodyweight_kg"
+       ],
+       "id": "total-w8-s4-b3"
+      },
+      {
+       "name": "Review and downshift",
+       "kind": "recovery",
+       "instruction": "Walk or cycle easily for 3-5 minutes if useful. Record exact work, readiness, pain, first technical limiter and the next decision.",
+       "standard": "Leave with a written record and no unreported changes.",
+       "log": [
+        "session_rpe",
+        "pain_score",
+        "first_limiter",
+        "next_decision"
+       ],
+       "id": "total-w8-s4-b4"
+      }
+     ],
+     "coach_note": "A total requires valid lifts. The day is not rescued by unsafe attempts.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w8-s4",
+     "session": 4,
+     "duration": "180 min"
+    },
+    {
+     "recommended_day": "Sunday",
+     "title": "Optional recovery + education",
+     "pillar": "Recovery + Learn",
+     "purpose": "Improve recovery and turn programme education into one practical decision.",
+     "duration_minutes": 35,
+     "intensity": "RPE 2-4; optional.",
+     "priority": "optional",
+     "readiness_adjustment": "Complete the readiness check before training. Percentage loads never override the RPE cap, movement standard or pain rule.",
+     "blocks": [
+      {
+       "name": "Easy recovery",
+       "kind": "recovery",
+       "instruction": "20-30 minutes easy walk, cycle, row or swim at conversational effort. Reduce to 10-20 minutes or complete relaxed mobility only when tired.",
+       "standard": "Finish feeling better than you started. This is not conditioning and is genuinely optional.",
+       "log": [
+        "mode",
+        "duration_minutes",
+        "rpe"
+       ],
+       "id": "total-w8-s5-b1"
+      },
+      {
+       "name": "After Week 8",
+       "kind": "education",
+       "instruction": "A peak is followed by recovery and review, not an immediate second peak. Take several days away from heavy lifting after a maximal test or competition. Review successful lifts, failed standards, readiness, pain and bodyweight context. Update reference maxes only from valid results. Choose one technical and one physical priority for the next block. Return to accumulation before another peak unless the next event demands a carefully coached exception.",
+       "standard": "Record one decision that changes training, recovery or meet preparation.",
+       "log": [
+        "lesson_complete",
+        "reflection"
+       ],
+       "learn_module_id": "total-learn-15",
+       "id": "total-w8-s5-b2"
+      }
+     ],
+     "coach_note": "Skip this session when complete rest better supports the following week.",
+     "log_fields": [
+      "readiness",
+      "bodyweight_optional",
+      "actual_loads",
+      "reps",
+      "rpe",
+      "standards",
+      "pain",
+      "notes"
+     ],
+     "id": "total-w8-s5",
+     "session": 5,
+     "duration": "35 min"
+    }
+   ]
+  }
+ ]
+}
