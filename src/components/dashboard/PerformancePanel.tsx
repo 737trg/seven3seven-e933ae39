@@ -161,7 +161,7 @@ function MovementCard({
 
       {summary.history.length > 1 && (
         <div className="mt-3 opacity-80">
-          <Sparkline values={summary.history.map((r) => comparableValue(r))} invert={summary.direction === "lower"} />
+          <Sparkline values={summary.history.map((r) => comparableValue(r))} direction={summary.direction} />
         </div>
       )}
     </button>
