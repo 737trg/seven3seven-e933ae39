@@ -92,6 +92,10 @@
     -webkit-text-size-adjust: 100%;
     overflow-x: clip;
   }
+  /* Long unbroken words (food names, movement names) must never widen the page. */
+  body {
+    overflow-wrap: break-word;
+  }
   ::selection {
     background: var(--signal);
     color: var(--bone);

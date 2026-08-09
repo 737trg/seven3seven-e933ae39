@@ -26,9 +26,9 @@ export function MacroRing({
   const c = 2 * Math.PI * r;
   const remaining = Math.round(target - consumed);
   return (
-    <div className="flex flex-col items-center gap-2 shrink-0">
-      <div className="relative" style={{ width: size, height: size }}>
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+    <div className="flex min-w-0 flex-col items-center gap-2">
+      <div className="relative w-full aspect-square" style={{ maxWidth: size }}>
+        <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
           <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="currentColor" strokeWidth={stroke} className="text-border" />
           <circle
             cx={size / 2}
@@ -45,16 +45,16 @@ export function MacroRing({
           />
         </svg>
         <div className="absolute inset-0 grid place-items-center text-center">
-          <div>
-            <p className="font-display text-bone tabular leading-none" style={{ fontSize: size / 4.2 }}>
+          <div className="min-w-0 px-1">
+            <p className="font-display text-bone tabular leading-none text-lg sm:text-xl">
               {Math.round(consumed)}
             </p>
-            <p className="text-foreground-muted text-[9px] tabular mt-0.5">/ {Math.round(target)}{unit}</p>
+            <p className="text-foreground-muted text-[9px] tabular mt-0.5 truncate">/ {Math.round(target)}{unit}</p>
           </div>
         </div>
       </div>
-      <p className="eyebrow text-foreground-muted text-center">{label}</p>
-      <p className={`text-[10px] tabular -mt-1 ${status === "hit" ? "text-earned" : status === "over" ? "text-signal" : "text-foreground-muted"}`}>
+      <p className="eyebrow text-foreground-muted text-center truncate max-w-full">{label}</p>
+      <p className={`text-[10px] tabular -mt-1 text-center truncate max-w-full ${status === "hit" ? "text-earned" : status === "over" ? "text-signal" : "text-foreground-muted"}`}>
         {remaining >= 0 ? `${remaining}${unit ?? ""} left` : `${Math.abs(remaining)}${unit ?? ""} over`}
       </p>
     </div>

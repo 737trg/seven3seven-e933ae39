@@ -91,7 +91,7 @@ export function FuelTab({
               </p>
             )}
 
-            <div className="flex gap-4 overflow-x-auto no-scrollbar pb-1">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pb-1">
               <MacroRing label="Calories" consumed={totals.calories} target={targets.calories} size={104} />
               <MacroRing label="Protein" consumed={totals.protein_g} target={targets.protein_g} unit="g" />
               <MacroRing label="Carbs" consumed={totals.carbs_g} target={targets.carbs_g} unit="g" />

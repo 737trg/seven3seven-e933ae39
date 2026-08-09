@@ -16,22 +16,22 @@ export function MetricStat({
   icon?: ReactNode;
 }) {
   return (
-    <div className="hairline elevated p-4 min-w-[9.5rem]">
-      <div className="flex items-center justify-between gap-2">
-        <p className="eyebrow text-foreground-muted">{label}</p>
-        {icon && <span className="text-foreground-muted">{icon}</span>}
+    <div className="hairline elevated p-4 min-w-0">
+      <div className="flex min-w-0 items-center justify-between gap-2">
+        <p className="eyebrow text-foreground-muted min-w-0 truncate">{label}</p>
+        {icon && <span className="text-foreground-muted shrink-0">{icon}</span>}
       </div>
-      <p className="font-display text-bone text-2xl md:text-3xl tabular mt-2 tracking-tight">{value}</p>
+      <p className="font-display text-bone text-xl sm:text-2xl md:text-3xl tabular mt-2 tracking-tight truncate">{value}</p>
       {delta && (
         <p
-          className={`mt-1.5 text-[11px] tabular ${
+          className={`mt-1.5 text-[11px] tabular break-words ${
             delta.good === null ? "text-foreground-muted" : delta.good ? "text-earned" : "text-signal"
           }`}
         >
           {delta.text}
         </p>
       )}
-      {sub && <p className="mt-1 text-foreground-muted text-[10px] uppercase tracking-widest">{sub}</p>}
+      {sub && <p className="mt-1 text-foreground-muted text-[10px] uppercase tracking-widest truncate">{sub}</p>}
     </div>
   );
 }
