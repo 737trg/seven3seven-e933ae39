@@ -1,39 +1,36 @@
 /**
- * Local-only profile, RX/Scaled track and readiness for TOTAL.
+ * Local-only profile and readiness for BUILD TOTAL.
  * Authoritative results live in the database (session_completions, workout_results).
  */
 import { useSyncExternalStore } from "react";
 
-export type TotalTrack = "rx" | "scaled";
-export type TotalReadiness = "ready" | "average" | "heavy" | "pain_changes_movement";
+export type TotalReadiness = "green" | "amber" | "red";
 
 export type TotalProfile = {
   displayName: string;
   startDate: string | null;
-  loadReference: "Male" | "Female" | "";
+  week8Path: "Competition" | "Gym test" | "Training peak without max test" | "";
+  eventDate: string | null;
+  ruleset: string;
+  squatKg: number | null;
+  benchKg: number | null;
+  deadliftKg: number | null;
   equipment: string[];
-  pullingOption: string;
-  hangingTrunkOption: string;
-  ropeOption: string;
-  backSquatKg: number | null;
-  strictPressKg: number | null;
   limitations: string;
-  defaultTrack: TotalTrack;
   setupComplete: boolean;
 };
 
 const DEFAULT: TotalProfile = {
   displayName: "",
   startDate: null,
-  loadReference: "",
+  week8Path: "",
+  eventDate: null,
+  ruleset: "",
+  squatKg: null,
+  benchKg: null,
+  deadliftKg: null,
   equipment: [],
-  pullingOption: "",
-  hangingTrunkOption: "",
-  ropeOption: "",
-  backSquatKg: null,
-  strictPressKg: null,
   limitations: "",
-  defaultTrack: "scaled",
   setupComplete: false,
 };
 
@@ -61,14 +58,13 @@ function write<T>(k: string, value: T) {
 
 let _profile: TotalProfile | null = null;
 let _readiness: Record<string, TotalReadiness> | null = null;
-let _tracks: Record<string, TotalTrack> | null = null;
 let _started: { started: boolean; at: string | null } | null = null;
 
 export const totalStore = {
   configureUser(userId: string | null) {
     if (activeUserId === userId) return;
     activeUserId = userId;
-    _profile = null; _readiness = null; _tracks = null; _started = null;
+    _profile = null; _readiness = null; _started = null;
     emit();
   },
   getProfile(): TotalProfile {
@@ -107,21 +103,6 @@ export const totalStore = {
     const k = key("readiness");
     if (k) write(k, next);
   },
-  getTracks(): Record<string, TotalTrack> {
-    if (_tracks) return _tracks;
-    const k = key("tracks");
-    _tracks = k ? read(k, {}) : {};
-    return _tracks;
-  },
-  getTrack(sessionId: string): TotalTrack {
-    return totalStore.getTracks()[sessionId] ?? totalStore.getProfile().defaultTrack;
-  },
-  setTrack(sessionId: string, value: TotalTrack) {
-    const next = { ...totalStore.getTracks(), [sessionId]: value };
-    _tracks = next;
-    const k = key("tracks");
-    if (k) write(k, next);
-  },
 };
 
 export function useTotalProfile(): TotalProfile {
@@ -132,9 +113,6 @@ export function useTotalStarted() {
 }
 export function useTotalReadiness() {
   return useSyncExternalStore(subscribe, totalStore.getReadiness, totalStore.getReadiness);
-}
-export function useTotalTracks() {
-  return useSyncExternalStore(subscribe, totalStore.getTracks, totalStore.getTracks);
 }
 
 /** Returns 1..8 based on start date, clamped. Null if no start date. */
