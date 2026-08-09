@@ -39,6 +39,12 @@ export interface FoodEntry {
 
 export type NewFoodEntry = Omit<FoodEntry, "id" | "created_at">;
 
+export interface HydrationEntry {
+  id: string;
+  ml: number;
+  created_at: string;
+}
+
 const DEFAULT_TARGETS: NutritionTargets = {
   calories: 2200,
   protein_g: 150,
@@ -66,6 +72,7 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
   const [recent, setRecent] = useState<FoodEntry[]>([]);
   const [history, setHistory] = useState<{ date: string; calories: number; protein_g: number }[]>([]);
   const [waterMl, setWaterMl] = useState(0);
+  const [waterEntries, setWaterEntries] = useState<HydrationEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const load = useCallback(async () => {
     if (!userId) {
@@ -74,6 +81,7 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
       setRecent([]);
       setHistory([]);
       setWaterMl(0);
+      setWaterEntries([]);
       setLoading(false);
       return;
     }
@@ -85,7 +93,7 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
       supabase.from("nutrition_targets").select("*").eq("user_id", userId).maybeSingle(),
       supabase.from("food_entries").select(SELECT).eq("user_id", userId).eq("logged_on", day).order("created_at", { ascending: true }),
       supabase.from("food_entries").select(SELECT).eq("user_id", userId).gte("logged_on", sinceISO).lte("logged_on", day).order("created_at", { ascending: false }),
-      supabase.from("hydration_logs").select("ml").eq("user_id", userId).eq("logged_on", day),
+      supabase.from("hydration_logs").select("id, ml, created_at").eq("user_id", userId).eq("logged_on", day).order("created_at", { ascending: true }),
     ]);
     if (t.data) {
       setTargets({
@@ -132,7 +140,9 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
         .map(([date, v]) => ({ date, calories: Math.round(v.calories), protein_g: Math.round(v.protein_g) }))
         .sort((a, b) => a.date.localeCompare(b.date)),
     );
-    setWaterMl((water.data ?? []).reduce((sum, r) => sum + Number(r.ml), 0));
+    const waterRows = (water.data ?? []) as HydrationEntry[];
+    setWaterEntries(waterRows);
+    setWaterMl(waterRows.reduce((sum, r) => sum + Number(r.ml), 0));
     setLoading(false);
   }, [userId, day]);
   useEffect(() => {
@@ -196,8 +206,25 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
   const removeEntry = useCallback(
     async (id: string) => {
       setEntries((prev) => prev.filter((e) => e.id !== id));
-      await supabase.from("food_entries").delete().eq("id", id);
+      const { error } = await supabase.from("food_entries").delete().eq("id", id);
       await load();
+      return error ? { error: error.message } : {};
+    },
+    [load],
+  );
+  const updateEntry = useCallback(
+    async (
+      id: string,
+      patch: Partial<Pick<FoodEntry, "meal" | "name" | "brand" | "serving_label" | "grams" | "calories" | "protein_g" | "carbs_g" | "fat_g">>,
+    ) => {
+      setEntries((prev) => prev.map((e) => (e.id === id ? { ...e, ...patch } : e)));
+      const { error } = await supabase.from("food_entries").update(patch).eq("id", id);
+      if (error) {
+        await load();
+        return { error: error.message };
+      }
+      await load();
+      return {};
     },
     [load],
   );
