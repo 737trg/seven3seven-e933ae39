@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-import { build-totalStore } from "@/lib/build-total/store";
+import { totalStore } from "@/lib/total/store";
 
 const BASE = "/my-programmes/build-total";
 const primary = [
@@ -26,7 +26,7 @@ export function TotalShell({ children, eyebrow, title }: { children: ReactNode; 
   const { items, loading: entLoading } = useEntitlements(user?.id);
 
   useEffect(() => {
-    build-totalStore.configureUser(user?.id ?? null);
+    totalStore.configureUser(user?.id ?? null);
   }, [user?.id]);
 
   if (!authLoading && !user) return <GateSignIn />;
