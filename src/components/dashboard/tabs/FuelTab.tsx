@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
-import { Droplets, Plus, Settings2, Trash2 } from "lucide-react";
+import { Droplets, Pencil, Plus, Settings2, Trash2 } from "lucide-react";
 import { SectionCard } from "@/components/dashboard/SectionCard";
 import { ClubLock } from "@/components/dashboard/ClubLock";
 import { LineChart } from "@/components/dashboard/LineChart";
 import { MacroRing } from "@/components/dashboard/nutrition/MacroRing";
 import { AddFoodSheet } from "@/components/dashboard/nutrition/AddFoodSheet";
+import { EditFoodSheet } from "@/components/dashboard/nutrition/EditFoodSheet";
 import { TargetsSheet } from "@/components/dashboard/nutrition/TargetsSheet";
-import { useNutrition } from "@/lib/useNutrition";
+import { useNutrition, type FoodEntry } from "@/lib/useNutrition";
 import { useBodyMetrics } from "@/lib/useBodyMetrics";
 import { MEALS, dayLabel, ringState, shiftDay, todayISO, type Meal } from "@/lib/nutrition";
 
@@ -28,8 +29,11 @@ export function FuelTab({
   const [addOpen, setAddOpen] = useState(false);
   const [addMeal, setAddMeal] = useState<Meal>("breakfast");
   const [targetsOpen, setTargetsOpen] = useState(false);
+  const [editing, setEditing] = useState<FoodEntry | null>(null);
+  const [waterEdit, setWaterEdit] = useState(false);
+  const [waterDraft, setWaterDraft] = useState("");
 
-  const { targets, entries, totals, waterMl, history, recent } = nutrition;
+  const { targets, entries, totals, waterMl, waterEntries, history, recent } = nutrition;
   const latestWeightKg = body.items.find((m) => m.weight_kg != null)?.weight_kg ?? null;
   const water = ringState(waterMl, targets.water_ml);
 
