@@ -149,6 +149,8 @@ export function useCustomerDashboard(userId: string | undefined, entitlements: E
             for (const w of SEM.weeks) for (const s of w.sessions) if (`sem8-w${w.week}-s${s.session}` === sessionId || `sem-w${w.week}-s${s.session}` === sessionId) return s.title;
           } else if (slug === "sem-2027") {
             for (const w of SEM27.weeks) for (const s of w.sessions) if (`sem27-w${w.week}-s${s.session}` === sessionId) return s.title;
+          } else if (slug === "mixed") {
+            for (const w of MIXED.weeks) for (const s of w.sessions) if (`mixed-w${w.week}-s${s.session}` === sessionId) return s.title;
           } else if (slug === "athx-2026") {
             const s = ATHX.weeks.flatMap((w) => w.sessions).find((x) => x.id === sessionId);
             return s?.title;

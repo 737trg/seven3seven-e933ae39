@@ -5,13 +5,14 @@ import { useSyncExternalStore } from 'react';
  * Storage key MUST stay `s3s.cart.v1` — existing BTB+ and S.E.M. product
  * pages already read/write this key.
  */
-export type CartItemSlug = 'basic-training-blueprint-plus' | 'sem-2026' | 'sem-2027' | 'hybrid-race-plan';
+export type CartItemSlug = 'basic-training-blueprint-plus' | 'sem-2026' | 'sem-2027' | 'hybrid-race-plan' | 'mixed';
 
 export type CartState = {
   hasBtb?: boolean;
   hasSem?: boolean;
   hasSem27?: boolean;
   hasHrp?: boolean;
+  hasMixed?: boolean;
 };
 
 const KEY = 's3s.cart.v1';
@@ -89,6 +90,7 @@ export const cart = {
     if (slug === 'sem-2026') c.hasSem = true;
     if (slug === 'sem-2027') c.hasSem27 = true;
     if (slug === 'hybrid-race-plan') c.hasHrp = true;
+    if (slug === 'mixed') c.hasMixed = true;
     write(c);
   },
   remove(slug: CartItemSlug) {
@@ -97,6 +99,7 @@ export const cart = {
     if (slug === 'sem-2026') c.hasSem = false;
     if (slug === 'sem-2027') c.hasSem27 = false;
     if (slug === 'hybrid-race-plan') c.hasHrp = false;
+    if (slug === 'mixed') c.hasMixed = false;
     write(c);
   },
   clear() {
@@ -108,10 +111,11 @@ export const cart = {
     if (state.hasSem) list.push('sem-2026');
     if (state.hasSem27) list.push('sem-2027');
     if (state.hasHrp) list.push('hybrid-race-plan');
+    if (state.hasMixed) list.push('mixed');
     return list;
   },
   isEmpty(state: CartState = read()): boolean {
-    return !state.hasBtb && !state.hasSem && !state.hasSem27 && !state.hasHrp;
+    return !state.hasBtb && !state.hasSem && !state.hasSem27 && !state.hasHrp && !state.hasMixed;
   },
 };
 
@@ -149,5 +153,12 @@ export const CART_CATALOG: Record<CartItemSlug, {
     durationLabel: '12-week programme',
     pricePence: 1999,
     stripePriceId: 'hybrid_race_plan_lifetime',
+  },
+  mixed: {
+    slug: 'mixed',
+    title: 'MIXED',
+    durationLabel: '12-week programme',
+    pricePence: 1999,
+    stripePriceId: 'mixed_lifetime',
   },
 };
