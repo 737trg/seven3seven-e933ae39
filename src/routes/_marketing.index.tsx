@@ -77,6 +77,14 @@ const ROUTES: {
     weeks: 12,
     image: PUBLIC_PROGRAMMES[4].image,
   },
+  {
+    slug: "build-total",
+    goal: "Building a bigger total",
+    title: "TOTAL",
+    line: "Eight weeks of competition squat, bench press and deadlift work peaking into a valid total.",
+    weeks: 8,
+    image: PUBLIC_PROGRAMMES[5].image,
+  },
 ];
 
 const FAQS: { q: string; a: string }[] = [

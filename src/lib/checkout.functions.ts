@@ -22,6 +22,7 @@ const SLUG_TO_LOOKUP: Record<string, string> = {
   'sem-2027': 'sem_2027_lifetime',
   'hybrid-race-plan': 'hybrid_race_plan_lifetime',
   mixed: 'mixed_lifetime',
+  'build-total': 'build_total_lifetime',
 };
 
 async function resolveOrCreateCustomer(

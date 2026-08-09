@@ -5,7 +5,7 @@ import { useSyncExternalStore } from 'react';
  * Storage key MUST stay `s3s.cart.v1` — existing BTB+ and S.E.M. product
  * pages already read/write this key.
  */
-export type CartItemSlug = 'basic-training-blueprint-plus' | 'sem-2026' | 'sem-2027' | 'hybrid-race-plan' | 'mixed';
+export type CartItemSlug = 'basic-training-blueprint-plus' | 'sem-2026' | 'sem-2027' | 'hybrid-race-plan' | 'mixed' | 'build-total';
 
 export type CartState = {
   hasBtb?: boolean;
@@ -13,6 +13,7 @@ export type CartState = {
   hasSem27?: boolean;
   hasHrp?: boolean;
   hasMixed?: boolean;
+  hasTotal?: boolean;
 };
 
 const KEY = 's3s.cart.v1';
@@ -91,6 +92,7 @@ export const cart = {
     if (slug === 'sem-2027') c.hasSem27 = true;
     if (slug === 'hybrid-race-plan') c.hasHrp = true;
     if (slug === 'mixed') c.hasMixed = true;
+    if (slug === 'build-total') c.hasTotal = true;
     write(c);
   },
   remove(slug: CartItemSlug) {
@@ -100,6 +102,7 @@ export const cart = {
     if (slug === 'sem-2027') c.hasSem27 = false;
     if (slug === 'hybrid-race-plan') c.hasHrp = false;
     if (slug === 'mixed') c.hasMixed = false;
+    if (slug === 'build-total') c.hasTotal = false;
     write(c);
   },
   clear() {
@@ -112,10 +115,11 @@ export const cart = {
     if (state.hasSem27) list.push('sem-2027');
     if (state.hasHrp) list.push('hybrid-race-plan');
     if (state.hasMixed) list.push('mixed');
+    if (state.hasTotal) list.push('build-total');
     return list;
   },
   isEmpty(state: CartState = read()): boolean {
-    return !state.hasBtb && !state.hasSem && !state.hasSem27 && !state.hasHrp && !state.hasMixed;
+    return !state.hasBtb && !state.hasSem && !state.hasSem27 && !state.hasHrp && !state.hasMixed && !state.hasTotal;
   },
 };
 
@@ -160,5 +164,12 @@ export const CART_CATALOG: Record<CartItemSlug, {
     durationLabel: '12-week programme',
     pricePence: 1999,
     stripePriceId: 'mixed_lifetime',
+  },
+  'build-total': {
+    slug: 'build-total',
+    title: 'TOTAL',
+    durationLabel: '8-week programme',
+    pricePence: 1999,
+    stripePriceId: 'build_total_lifetime',
   },
 };

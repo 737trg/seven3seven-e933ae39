@@ -25,6 +25,11 @@ import {
   sessionId as mixedSessionId,
   blockId as mixedBlockId,
 } from "@/lib/mixed/manifest";
+import {
+  TOTAL,
+  sessionId as totalSessionId,
+  blockId as totalBlockId,
+} from "@/lib/total/manifest";
 
 export type ProgrammeContext = {
   /** Product slug (matches DB `products.slug`). */
@@ -468,6 +473,7 @@ function resolveById(id: string): ResolvedSession | undefined {
   if (id.startsWith("btb-")) return resolveBtb(id);
   if (id.startsWith("hrp-")) return resolveHrp(id);
   if (id.startsWith("mixed-")) return resolveMixed(id);
+  if (id.startsWith("total-")) return resolveTotal(id);
   if (id.startsWith("sem27-")) return resolveSem27(id);
   if (id.startsWith("sem8-") || id.startsWith("sem-")) return resolveSem(id);
   return resolveAthx(id);
@@ -546,6 +552,53 @@ function resolveMixed(id: string): ResolvedSession | undefined {
           programmeId: "mixed",
           backHref: `/my-programmes/mixed/programme/s/${id}`,
           programmeHref: "/my-programmes/mixed/programme",
+          isAthx: false,
+        },
+      };
+    }
+  }
+  return undefined;
+}
+/**
+ * BUILD TOTAL — powerlifting. Blocks are lift / accessory prescriptions with
+ * rest guidance; there is no RX/Scaled split and no metcon timers.
+ */
+function resolveTotal(id: string): ResolvedSession | undefined {
+  for (const w of TOTAL.weeks) {
+    for (const s of w.sessions) {
+      if (totalSessionId(w.week, s.session) !== id) continue;
+      const blocks: SessionBlock[] = s.blocks.map((b, i) => {
+        const lines = buildLines(b.instruction);
+        if (b.rest) lines.push(`Rest — ${b.rest}`);
+        return {
+          id: totalBlockId(w.week, s.session, i),
+          order: i + 1,
+          kind: resolveKind(b.kind, b.name, b.instruction),
+          title: b.name,
+          timer: parseTimer(b.timer),
+          lines,
+          note: b.standard ?? undefined,
+        };
+      });
+      const session: Session = {
+        id,
+        weekNumber: w.week,
+        day: toDay(s.recommended_day, s.session),
+        title: s.title,
+        category: "strength",
+        duration: s.duration ?? `${s.duration_minutes} min`,
+        purpose: s.purpose,
+        expectedEffort: s.intensity ?? "",
+        blocks,
+        coachNote: s.coach_note,
+      };
+      return {
+        session,
+        programme: {
+          slug: "build-total",
+          programmeId: "build-total",
+          backHref: `/my-programmes/build-total/programme/s/${id}`,
+          programmeHref: "/my-programmes/build-total/programme",
           isAthx: false,
         },
       };
