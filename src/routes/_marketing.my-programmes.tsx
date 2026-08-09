@@ -17,11 +17,12 @@ import {
 import { TrainTab } from "@/components/dashboard/tabs/TrainTab";
 import { ProgressTab } from "@/components/dashboard/tabs/ProgressTab";
 import { BodyTab } from "@/components/dashboard/tabs/BodyTab";
+import { FuelTab } from "@/components/dashboard/tabs/FuelTab";
 import { ClubTab } from "@/components/dashboard/tabs/ClubTab";
 import { recoverPendingPurchases } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
-const TABS: DashboardTab[] = ["train", "progress", "body", "club"];
+const TABS: DashboardTab[] = ["train", "progress", "body", "fuel", "club"];
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
   validateSearch: (search: Record<string, unknown>): { tab: DashboardTab } => {
@@ -182,6 +183,7 @@ function DashboardPage() {
           />
         )}
         {tab === "body" && <BodyTab userId={user?.id} units={prefs.units} club={club} />}
+        {tab === "fuel" && <FuelTab userId={user?.id} units={prefs.units} club={club} />}
         {tab === "club" && <ClubTab userId={user?.id} membership={membership} />}
       </main>
 
