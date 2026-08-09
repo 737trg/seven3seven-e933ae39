@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as OvftestRouteImport } from './routes/ovftest'
 import { Route as Athx2026RouteImport } from './routes/athx-2026'
 import { Route as MarketingRouteImport } from './routes/_marketing'
 import { Route as AppRouteImport } from './routes/_app'
@@ -103,11 +102,6 @@ const UnsubscribeRoute = UnsubscribeRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OvftestRoute = OvftestRouteImport.update({
-  id: '/ovftest',
-  path: '/ovftest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Athx2026Route = Athx2026RouteImport.update({
@@ -570,7 +564,6 @@ const MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
-  '/ovftest': typeof OvftestRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/calculator': typeof AppCalculatorRoute
@@ -655,7 +648,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
-  '/ovftest': typeof OvftestRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/calculator': typeof AppCalculatorRoute
@@ -736,7 +728,6 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_marketing': typeof MarketingRouteWithChildren
   '/athx-2026': typeof Athx2026Route
-  '/ovftest': typeof OvftestRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/_app/calculator': typeof AppCalculatorRoute
@@ -824,7 +815,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/athx-2026'
-    | '/ovftest'
     | '/sitemap.xml'
     | '/unsubscribe'
     | '/calculator'
@@ -909,7 +899,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/athx-2026'
-    | '/ovftest'
     | '/sitemap.xml'
     | '/unsubscribe'
     | '/calculator'
@@ -989,7 +978,6 @@ export interface FileRouteTypes {
     | '/_app'
     | '/_marketing'
     | '/athx-2026'
-    | '/ovftest'
     | '/sitemap.xml'
     | '/unsubscribe'
     | '/_app/calculator'
@@ -1077,7 +1065,6 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   MarketingRoute: typeof MarketingRouteWithChildren
   Athx2026Route: typeof Athx2026Route
-  OvftestRoute: typeof OvftestRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -1108,13 +1095,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ovftest': {
-      id: '/ovftest'
-      path: '/ovftest'
-      fullPath: '/ovftest'
-      preLoaderRoute: typeof OvftestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/athx-2026': {
@@ -1967,7 +1947,6 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   MarketingRoute: MarketingRouteWithChildren,
   Athx2026Route: Athx2026Route,
-  OvftestRoute: OvftestRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
