@@ -273,6 +273,42 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
     await supabase.from("hydration_logs").delete().eq("user_id", userId).eq("logged_on", day);
     await load();
   }, [userId, day, load]);
+  const updateWaterEntry = useCallback(
+    async (id: string, ml: number) => {
+      if (!Number.isFinite(ml) || ml <= 0) return { error: "Enter an amount above zero." };
+      const { error } = await supabase.from("hydration_logs").update({ ml: Math.round(ml) }).eq("id", id);
+      await load();
+      return error ? { error: error.message } : {};
+    },
+    [load],
+  );
+  const removeWaterEntry = useCallback(
+    async (id: string) => {
+      setWaterEntries((prev) => prev.filter((w) => w.id !== id));
+      const { error } = await supabase.from("hydration_logs").delete().eq("id", id);
+      await load();
+      return error ? { error: error.message } : {};
+    },
+    [load],
+  );
+  /** Replace the day's hydration with a single corrected total. */
+  const setWaterTotal = useCallback(
+    async (ml: number) => {
+      if (!userId) return { error: "Not signed in" };
+      if (!Number.isFinite(ml) || ml < 0) return { error: "Enter a valid amount." };
+      await supabase.from("hydration_logs").delete().eq("user_id", userId).eq("logged_on", day);
+      if (ml > 0) {
+        const { error } = await supabase.from("hydration_logs").insert({ user_id: userId, logged_on: day, ml: Math.round(ml) });
+        if (error) {
+          await load();
+          return { error: error.message };
+        }
+      }
+      await load();
+      return {};
+    },
+    [userId, day, load],
+  );
   const totals = useMemo(
     () =>
       entries.reduce(
@@ -292,11 +328,13 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
     recent,
     history,
     waterMl,
+    waterEntries,
     totals,
     loading,
     saveTargets,
     addEntry,
     removeEntry,
+    updateEntry,
     copyDay,
     addWater,
     clearWater,
