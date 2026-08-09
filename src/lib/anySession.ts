@@ -15,6 +15,11 @@ import {
   sessionId as semSessionId,
   blockId as semBlockId,
 } from "@/lib/sem/manifest";
+import {
+  SEM27,
+  sessionId as sem27SessionId,
+  blockId as sem27BlockId,
+} from "@/lib/sem2027/manifest";
 
 export type ProgrammeContext = {
   /** Product slug (matches DB `products.slug`). */
@@ -117,6 +122,75 @@ function refineTimer(spec: TimerSpec | undefined, title: string, instruction?: s
 function inferBlockKind(name: string, instruction?: string | null): BlockKind {
   const n = name.toLowerCase();
   const t = `${n} ${(instruction ?? "").toLowerCase()}`;
+  if (/(warm[- ]?up|mobility prep|activation|primer|prepare|^prep$)/.test(n)) return "warmup";
+  if (/(cool[- ]?down|stretch|down-?regulate|breath)/.test(n)) return "cooldown";
+  if (/(^|\b)(log|reflection|debrief|record|finish)\b/.test(n)) return "log";
+  const liftWords = /(squat|deadlift|press|bench|clean|snatch|jerk|pull[- ]?up|chin[- ]?up|dip|curl|row(?!\s*erg)|hinge|lunge|split squat|calf raise|tibialis|kettlebell|barbell|dumbbell|isometric|iso pull|mid[- ]?thigh|hip thrust|glute bridge|good morning|farmer|carry|hold|plank|hang)/;
+  const setsReps = /\b\d+\s*[x×]\s*\d+/;
+  if (/(accessor|assistance|support|carry|hold|core|durability)/.test(n)) return "assistance";
+  if (/(main strength|strength|main lift|primary lift|top set|back[- ]?off|hypertroph)/.test(n)) return "mainLift";
+  if (liftWords.test(t) || setsReps.test(t)) return "mainLift";
+  return "conditioning";
+}
+
+/**
+ * Map the semantic `kind` supplied by the newer programme manifests onto the
+ * runner's block kinds. Anything unknown falls back to text inference so a new
+ * vocabulary entry can never produce an undefined kind.
+ */
+const MANIFEST_KIND_MAP: Record<string, BlockKind> = {
+  warmup: "warmup",
+  prep: "warmup",
+  cooldown: "cooldown",
+  recovery: "cooldown",
+  mobility_recovery: "warmup",
+  log: "log",
+  strength: "mainLift",
+  power: "mainLift",
+  hypertrophy: "mainLift",
+  station_strength: "mainLift",
+  assistance: "assistance",
+  sled: "assistance",
+  skill: "assistance",
+  station: "conditioning",
+  conditioning: "conditioning",
+  metcon: "conditioning",
+  race: "conditioning",
+  event_h: "conditioning",
+  event_g: "conditioning",
+  run: "conditioning",
+  run_interval: "conditioning",
+  ski: "conditioning",
+  aerobic: "conditioning",
+  endurance: "conditioning",
+  hybrid_brick: "conditioning",
+  emom: "conditioning",
+  amrap_density: "conditioning",
+  test: "conditioning",
+  training: "conditioning",
+  guidance: "log",
+  education: "log",
+  alternative: "log",
+};
+
+function resolveKind(kind: string | undefined | null, name: string, instruction?: string | null): BlockKind {
+  if (kind) {
+    const mapped = MANIFEST_KIND_MAP[String(kind).toLowerCase()];
+    if (mapped === "cooldown" && /mobility|warm/.test(name.toLowerCase())) return "warmup";
+    if (mapped) {
+      // "training" is a catch-all in some manifests — infer from the text instead.
+      if (mapped === "conditioning" && (kind === "training" || kind === "test")) {
+        return inferBlockKind(name, instruction);
+      }
+      return mapped;
+    }
+  }
+  return inferBlockKind(name, instruction);
+}
+
+function legacyInferBlockKind(name: string, instruction?: string | null): BlockKind {
+  const n = name.toLowerCase();
+  const t = `${n} ${(instruction ?? "").toLowerCase()}`;
   if (/(warm[- ]?up|mobility prep|activation|primer)/.test(n)) return "warmup";
   if (/(cool[- ]?down|stretch|down-?regulate|breath)/.test(n)) return "cooldown";
   if (/(^|\b)(log|reflection|debrief|record|finish)\b/.test(n)) return "log";
@@ -194,7 +268,7 @@ function resolveBtb(id: string): ResolvedSession | undefined {
       const blocks: SessionBlock[] = s.blocks.map((b, i) => ({
         id: btbBlockId(w.week, s.session, i),
         order: i + 1,
-        kind: inferBlockKind(b.name, b.instruction),
+        kind: resolveKind((b as { kind?: string }).kind, b.name, b.instruction),
         title: b.name,
         timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
         lines: buildLines(b.instruction, { rpe: b.rpe, rest: b.rest, scaling: b.scaling, log: b.log }),
@@ -256,7 +330,7 @@ function resolveHrp(id: string): ResolvedSession | undefined {
           mobility_recovery: b.name.toLowerCase().includes("cool") ? "cooldown" : "warmup",
           log: "log",
         };
-        const inferred = b.kind ? kindMap[b.kind] : inferBlockKind(b.name, b.instruction);
+        const inferred = resolveKind(b.kind, b.name, b.instruction);
         return {
           id: hrpBlockId(w.week, s.session, i),
           order: i + 1,
@@ -307,7 +381,7 @@ function resolveSem(id: string): ResolvedSession | undefined {
         return {
           id: semBlockId(w.week, s.session, i),
           order: i + 1,
-          kind: inferBlockKind(b.name, b.instruction),
+          kind: resolveKind((b as { kind?: string }).kind, b.name, b.instruction),
           title: b.name,
           timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
           lines: buildLines(b.instruction, { categorySpecific: cs }),
@@ -342,8 +416,53 @@ function resolveSem(id: string): ResolvedSession | undefined {
 }
 
 export function resolveSession(id: string): ResolvedSession | undefined {
+  return resolveById(id);
+}
+
+function resolveSem27(id: string): ResolvedSession | undefined {
+  for (const w of SEM27.weeks) {
+    for (const s of w.sessions) {
+      if (sem27SessionId(w.week, s.session) !== id) continue;
+      const blocks: SessionBlock[] = s.blocks.map((b, i) => ({
+        id: sem27BlockId(w.week, s.session, i),
+        order: i + 1,
+        kind: resolveKind((b as { kind?: string }).kind, b.name, b.instruction),
+        title: b.name,
+        timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
+        lines: buildLines(b.instruction),
+        note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
+      }));
+      const session: Session = {
+        id,
+        weekNumber: w.week,
+        day: toDay(s.recommended_day, s.session),
+        title: s.title,
+        category: "mixed",
+        duration: s.duration,
+        purpose: s.purpose,
+        expectedEffort: s.coach_note ?? "",
+        blocks,
+        coachNote: s.coach_note,
+      };
+      return {
+        session,
+        programme: {
+          slug: "sem-2027",
+          programmeId: "sem-2027",
+          backHref: `/my-programmes/sem-2027/programme/s/${id}`,
+          programmeHref: "/my-programmes/sem-2027/programme",
+          isAthx: false,
+        },
+      };
+    }
+  }
+  return undefined;
+}
+
+function resolveById(id: string): ResolvedSession | undefined {
   if (id.startsWith("btb-")) return resolveBtb(id);
   if (id.startsWith("hrp-")) return resolveHrp(id);
+  if (id.startsWith("sem27-")) return resolveSem27(id);
   if (id.startsWith("sem8-") || id.startsWith("sem-")) return resolveSem(id);
   return resolveAthx(id);
 }
