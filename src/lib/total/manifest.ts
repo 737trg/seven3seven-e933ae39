@@ -4,12 +4,12 @@ export type TotalBlock = {
   name: string;
   kind?: string | null;
   instruction?: string | null;
-  rx?: string | null;
-  scaled?: string | null;
-  stimulus?: string | null;
+  standard?: string | null;
+  lift?: string | null;
+  priority?: string | null;
+  rest?: string | null;
   timer?: string | null;
   log?: string[] | null;
-  standard?: string | null;
   id?: string;
 };
 
@@ -26,7 +26,7 @@ export type TotalSession = {
   coach_note?: string;
   education?: string;
   log_fields?: string[];
-  readiness_adjustment?: Record<string, string>;
+  readiness_adjustment?: string;
   blocks: TotalBlock[];
   id?: string;
 };
@@ -45,7 +45,8 @@ export type TotalFoundation = {
   id: string;
   title: string;
   summary: string;
-  sections: { title: string; points: string[] }[];
+  points?: string[];
+  sections?: { title: string; points: string[] }[];
   coach_rule?: string;
 };
 
@@ -81,10 +82,13 @@ export type TotalManifest = {
   readiness_options: { id: string; label: string; action: string }[];
   weekly_structure: { day: string; focus: string; priority: string }[];
   phases: { name: string; weeks: string; purpose: string }[];
-  rx_scaled_policy: Record<string, unknown>;
   equipment: Record<string, unknown>;
-  training_reference: Record<string, unknown>;
-  movement_scaling: { movement: string; rx: string; scaled: string; success_standard: string }[];
+  reference_max_policy: Record<string, unknown>;
+  rpe_scale: { rpe: number; rir: string; meaning: string; programme_use: string }[];
+  competition_standards: Record<string, unknown>;
+  variation_library: { need: string; default: string; alternatives: string[]; rule: string }[];
+  attempt_planner: Record<string, unknown>;
+  not_for: string[];
   progress: Record<string, unknown>;
   calculators: { id: string; name: string; formula: string; guardrail: string }[];
   learn: TotalLearnModule[];
