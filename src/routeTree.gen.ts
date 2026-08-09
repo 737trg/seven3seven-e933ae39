@@ -44,6 +44,7 @@ import { Route as MyProgrammesSem2027IndexRouteImport } from './routes/my-progra
 import { Route as MyProgrammesSem2026IndexRouteImport } from './routes/my-programmes.sem-2026.index'
 import { Route as MyProgrammesMixedIndexRouteImport } from './routes/my-programmes.mixed.index'
 import { Route as MyProgrammesHybridRacePlanIndexRouteImport } from './routes/my-programmes.hybrid-race-plan.index'
+import { Route as MyProgrammesBuildTotalIndexRouteImport } from './routes/my-programmes.build-total.index'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusIndexRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.index'
 import { Route as MarketingProgrammesIndexRouteImport } from './routes/_marketing.programmes.index'
 import { Route as WorkoutSessionIdDoneRouteImport } from './routes/workout.$sessionId.done'
@@ -74,6 +75,12 @@ import { Route as MyProgrammesHybridRacePlanProfileRouteImport } from './routes/
 import { Route as MyProgrammesHybridRacePlanLearnRouteImport } from './routes/my-programmes.hybrid-race-plan.learn'
 import { Route as MyProgrammesHybridRacePlanEventRouteImport } from './routes/my-programmes.hybrid-race-plan.event'
 import { Route as MyProgrammesHybridRacePlanCalculatorRouteImport } from './routes/my-programmes.hybrid-race-plan.calculator'
+import { Route as MyProgrammesBuildTotalTodayRouteImport } from './routes/my-programmes.build-total.today'
+import { Route as MyProgrammesBuildTotalProgressRouteImport } from './routes/my-programmes.build-total.progress'
+import { Route as MyProgrammesBuildTotalProgrammeRouteImport } from './routes/my-programmes.build-total.programme'
+import { Route as MyProgrammesBuildTotalProfileRouteImport } from './routes/my-programmes.build-total.profile'
+import { Route as MyProgrammesBuildTotalLearnRouteImport } from './routes/my-programmes.build-total.learn'
+import { Route as MyProgrammesBuildTotalCalculatorRouteImport } from './routes/my-programmes.build-total.calculator'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusTodayRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.today'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgressRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.progress'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme'
@@ -101,6 +108,7 @@ import { Route as MyProgrammesSem2027ProgrammeIndexRouteImport } from './routes/
 import { Route as MyProgrammesSem2026ProgrammeIndexRouteImport } from './routes/my-programmes.sem-2026.programme.index'
 import { Route as MyProgrammesMixedProgrammeIndexRouteImport } from './routes/my-programmes.mixed.programme.index'
 import { Route as MyProgrammesHybridRacePlanProgrammeIndexRouteImport } from './routes/my-programmes.hybrid-race-plan.programme.index'
+import { Route as MyProgrammesBuildTotalProgrammeIndexRouteImport } from './routes/my-programmes.build-total.programme.index'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme.index'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -113,6 +121,7 @@ import { Route as MyProgrammesSem2027ProgrammeSSessionIdRouteImport } from './ro
 import { Route as MyProgrammesSem2026ProgrammeSSessionIdRouteImport } from './routes/my-programmes.sem-2026.programme.s.$sessionId'
 import { Route as MyProgrammesMixedProgrammeSSessionIdRouteImport } from './routes/my-programmes.mixed.programme.s.$sessionId'
 import { Route as MyProgrammesHybridRacePlanProgrammeSSessionIdRouteImport } from './routes/my-programmes.hybrid-race-plan.programme.s.$sessionId'
+import { Route as MyProgrammesBuildTotalProgrammeSSessionIdRouteImport } from './routes/my-programmes.build-total.programme.s.$sessionId'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme.s.$sessionId'
 
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
@@ -293,6 +302,12 @@ const MyProgrammesHybridRacePlanIndexRoute =
     path: '/',
     getParentRoute: () => MyProgrammesHybridRacePlanRoute,
   } as any)
+const MyProgrammesBuildTotalIndexRoute =
+  MyProgrammesBuildTotalIndexRouteImport.update({
+    id: '/my-programmes/build-total/',
+    path: '/my-programmes/build-total/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const MyProgrammesBasicTrainingBlueprintPlusIndexRoute =
   MyProgrammesBasicTrainingBlueprintPlusIndexRouteImport.update({
     id: '/',
@@ -470,6 +485,42 @@ const MyProgrammesHybridRacePlanCalculatorRoute =
     path: '/calculator',
     getParentRoute: () => MyProgrammesHybridRacePlanRoute,
   } as any)
+const MyProgrammesBuildTotalTodayRoute =
+  MyProgrammesBuildTotalTodayRouteImport.update({
+    id: '/my-programmes/build-total/today',
+    path: '/my-programmes/build-total/today',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MyProgrammesBuildTotalProgressRoute =
+  MyProgrammesBuildTotalProgressRouteImport.update({
+    id: '/my-programmes/build-total/progress',
+    path: '/my-programmes/build-total/progress',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MyProgrammesBuildTotalProgrammeRoute =
+  MyProgrammesBuildTotalProgrammeRouteImport.update({
+    id: '/my-programmes/build-total/programme',
+    path: '/my-programmes/build-total/programme',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MyProgrammesBuildTotalProfileRoute =
+  MyProgrammesBuildTotalProfileRouteImport.update({
+    id: '/my-programmes/build-total/profile',
+    path: '/my-programmes/build-total/profile',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MyProgrammesBuildTotalLearnRoute =
+  MyProgrammesBuildTotalLearnRouteImport.update({
+    id: '/my-programmes/build-total/learn',
+    path: '/my-programmes/build-total/learn',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MyProgrammesBuildTotalCalculatorRoute =
+  MyProgrammesBuildTotalCalculatorRouteImport.update({
+    id: '/my-programmes/build-total/calculator',
+    path: '/my-programmes/build-total/calculator',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const MyProgrammesBasicTrainingBlueprintPlusTodayRoute =
   MyProgrammesBasicTrainingBlueprintPlusTodayRouteImport.update({
     id: '/today',
@@ -626,6 +677,12 @@ const MyProgrammesHybridRacePlanProgrammeIndexRoute =
     path: '/',
     getParentRoute: () => MyProgrammesHybridRacePlanProgrammeRoute,
   } as any)
+const MyProgrammesBuildTotalProgrammeIndexRoute =
+  MyProgrammesBuildTotalProgrammeIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => MyProgrammesBuildTotalProgrammeRoute,
+  } as any)
 const MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute =
   MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRouteImport.update({
     id: '/',
@@ -696,6 +753,12 @@ const MyProgrammesHybridRacePlanProgrammeSSessionIdRoute =
     path: '/s/$sessionId',
     getParentRoute: () => MyProgrammesHybridRacePlanProgrammeRoute,
   } as any)
+const MyProgrammesBuildTotalProgrammeSSessionIdRoute =
+  MyProgrammesBuildTotalProgrammeSSessionIdRouteImport.update({
+    id: '/s/$sessionId',
+    path: '/s/$sessionId',
+    getParentRoute: () => MyProgrammesBuildTotalProgrammeRoute,
+  } as any)
 const MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute =
   MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRouteImport.update({
     id: '/s/$sessionId',
@@ -756,6 +819,12 @@ export interface FileRoutesByFullPath {
   '/my-programmes/basic-training-blueprint-plus/programme': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeRouteWithChildren
   '/my-programmes/basic-training-blueprint-plus/progress': typeof MyProgrammesBasicTrainingBlueprintPlusProgressRoute
   '/my-programmes/basic-training-blueprint-plus/today': typeof MyProgrammesBasicTrainingBlueprintPlusTodayRoute
+  '/my-programmes/build-total/calculator': typeof MyProgrammesBuildTotalCalculatorRoute
+  '/my-programmes/build-total/learn': typeof MyProgrammesBuildTotalLearnRoute
+  '/my-programmes/build-total/profile': typeof MyProgrammesBuildTotalProfileRoute
+  '/my-programmes/build-total/programme': typeof MyProgrammesBuildTotalProgrammeRouteWithChildren
+  '/my-programmes/build-total/progress': typeof MyProgrammesBuildTotalProgressRoute
+  '/my-programmes/build-total/today': typeof MyProgrammesBuildTotalTodayRoute
   '/my-programmes/hybrid-race-plan/calculator': typeof MyProgrammesHybridRacePlanCalculatorRoute
   '/my-programmes/hybrid-race-plan/event': typeof MyProgrammesHybridRacePlanEventRoute
   '/my-programmes/hybrid-race-plan/learn': typeof MyProgrammesHybridRacePlanLearnRoute
@@ -786,6 +855,7 @@ export interface FileRoutesByFullPath {
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programmes/': typeof MarketingProgrammesIndexRoute
   '/my-programmes/basic-training-blueprint-plus/': typeof MyProgrammesBasicTrainingBlueprintPlusIndexRoute
+  '/my-programmes/build-total/': typeof MyProgrammesBuildTotalIndexRoute
   '/my-programmes/hybrid-race-plan/': typeof MyProgrammesHybridRacePlanIndexRoute
   '/my-programmes/mixed/': typeof MyProgrammesMixedIndexRoute
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
@@ -798,11 +868,13 @@ export interface FileRoutesByFullPath {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/my-programmes/basic-training-blueprint-plus/programme/': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
+  '/my-programmes/build-total/programme/': typeof MyProgrammesBuildTotalProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme/': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/mixed/programme/': typeof MyProgrammesMixedProgrammeIndexRoute
   '/my-programmes/sem-2026/programme/': typeof MyProgrammesSem2026ProgrammeIndexRoute
   '/my-programmes/sem-2027/programme/': typeof MyProgrammesSem2027ProgrammeIndexRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
+  '/my-programmes/build-total/programme/s/$sessionId': typeof MyProgrammesBuildTotalProgrammeSSessionIdRoute
   '/my-programmes/hybrid-race-plan/programme/s/$sessionId': typeof MyProgrammesHybridRacePlanProgrammeSSessionIdRoute
   '/my-programmes/mixed/programme/s/$sessionId': typeof MyProgrammesMixedProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
@@ -855,6 +927,11 @@ export interface FileRoutesByTo {
   '/my-programmes/basic-training-blueprint-plus/profile': typeof MyProgrammesBasicTrainingBlueprintPlusProfileRoute
   '/my-programmes/basic-training-blueprint-plus/progress': typeof MyProgrammesBasicTrainingBlueprintPlusProgressRoute
   '/my-programmes/basic-training-blueprint-plus/today': typeof MyProgrammesBasicTrainingBlueprintPlusTodayRoute
+  '/my-programmes/build-total/calculator': typeof MyProgrammesBuildTotalCalculatorRoute
+  '/my-programmes/build-total/learn': typeof MyProgrammesBuildTotalLearnRoute
+  '/my-programmes/build-total/profile': typeof MyProgrammesBuildTotalProfileRoute
+  '/my-programmes/build-total/progress': typeof MyProgrammesBuildTotalProgressRoute
+  '/my-programmes/build-total/today': typeof MyProgrammesBuildTotalTodayRoute
   '/my-programmes/hybrid-race-plan/calculator': typeof MyProgrammesHybridRacePlanCalculatorRoute
   '/my-programmes/hybrid-race-plan/event': typeof MyProgrammesHybridRacePlanEventRoute
   '/my-programmes/hybrid-race-plan/learn': typeof MyProgrammesHybridRacePlanLearnRoute
@@ -881,6 +958,7 @@ export interface FileRoutesByTo {
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/programmes': typeof MarketingProgrammesIndexRoute
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusIndexRoute
+  '/my-programmes/build-total': typeof MyProgrammesBuildTotalIndexRoute
   '/my-programmes/hybrid-race-plan': typeof MyProgrammesHybridRacePlanIndexRoute
   '/my-programmes/mixed': typeof MyProgrammesMixedIndexRoute
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026IndexRoute
@@ -893,11 +971,13 @@ export interface FileRoutesByTo {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/my-programmes/basic-training-blueprint-plus/programme': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
+  '/my-programmes/build-total/programme': typeof MyProgrammesBuildTotalProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/mixed/programme': typeof MyProgrammesMixedProgrammeIndexRoute
   '/my-programmes/sem-2026/programme': typeof MyProgrammesSem2026ProgrammeIndexRoute
   '/my-programmes/sem-2027/programme': typeof MyProgrammesSem2027ProgrammeIndexRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
+  '/my-programmes/build-total/programme/s/$sessionId': typeof MyProgrammesBuildTotalProgrammeSSessionIdRoute
   '/my-programmes/hybrid-race-plan/programme/s/$sessionId': typeof MyProgrammesHybridRacePlanProgrammeSSessionIdRoute
   '/my-programmes/mixed/programme/s/$sessionId': typeof MyProgrammesMixedProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
@@ -959,6 +1039,12 @@ export interface FileRoutesById {
   '/my-programmes/basic-training-blueprint-plus/programme': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeRouteWithChildren
   '/my-programmes/basic-training-blueprint-plus/progress': typeof MyProgrammesBasicTrainingBlueprintPlusProgressRoute
   '/my-programmes/basic-training-blueprint-plus/today': typeof MyProgrammesBasicTrainingBlueprintPlusTodayRoute
+  '/my-programmes/build-total/calculator': typeof MyProgrammesBuildTotalCalculatorRoute
+  '/my-programmes/build-total/learn': typeof MyProgrammesBuildTotalLearnRoute
+  '/my-programmes/build-total/profile': typeof MyProgrammesBuildTotalProfileRoute
+  '/my-programmes/build-total/programme': typeof MyProgrammesBuildTotalProgrammeRouteWithChildren
+  '/my-programmes/build-total/progress': typeof MyProgrammesBuildTotalProgressRoute
+  '/my-programmes/build-total/today': typeof MyProgrammesBuildTotalTodayRoute
   '/my-programmes/hybrid-race-plan/calculator': typeof MyProgrammesHybridRacePlanCalculatorRoute
   '/my-programmes/hybrid-race-plan/event': typeof MyProgrammesHybridRacePlanEventRoute
   '/my-programmes/hybrid-race-plan/learn': typeof MyProgrammesHybridRacePlanLearnRoute
@@ -989,6 +1075,7 @@ export interface FileRoutesById {
   '/workout/$sessionId/done': typeof WorkoutSessionIdDoneRoute
   '/_marketing/programmes/': typeof MarketingProgrammesIndexRoute
   '/my-programmes/basic-training-blueprint-plus/': typeof MyProgrammesBasicTrainingBlueprintPlusIndexRoute
+  '/my-programmes/build-total/': typeof MyProgrammesBuildTotalIndexRoute
   '/my-programmes/hybrid-race-plan/': typeof MyProgrammesHybridRacePlanIndexRoute
   '/my-programmes/mixed/': typeof MyProgrammesMixedIndexRoute
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
@@ -1001,11 +1088,13 @@ export interface FileRoutesById {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/my-programmes/basic-training-blueprint-plus/programme/': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
+  '/my-programmes/build-total/programme/': typeof MyProgrammesBuildTotalProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme/': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/mixed/programme/': typeof MyProgrammesMixedProgrammeIndexRoute
   '/my-programmes/sem-2026/programme/': typeof MyProgrammesSem2026ProgrammeIndexRoute
   '/my-programmes/sem-2027/programme/': typeof MyProgrammesSem2027ProgrammeIndexRoute
   '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRoute
+  '/my-programmes/build-total/programme/s/$sessionId': typeof MyProgrammesBuildTotalProgrammeSSessionIdRoute
   '/my-programmes/hybrid-race-plan/programme/s/$sessionId': typeof MyProgrammesHybridRacePlanProgrammeSSessionIdRoute
   '/my-programmes/mixed/programme/s/$sessionId': typeof MyProgrammesMixedProgrammeSSessionIdRoute
   '/my-programmes/sem-2026/programme/s/$sessionId': typeof MyProgrammesSem2026ProgrammeSSessionIdRoute
@@ -1066,6 +1155,12 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus/programme'
     | '/my-programmes/basic-training-blueprint-plus/progress'
     | '/my-programmes/basic-training-blueprint-plus/today'
+    | '/my-programmes/build-total/calculator'
+    | '/my-programmes/build-total/learn'
+    | '/my-programmes/build-total/profile'
+    | '/my-programmes/build-total/programme'
+    | '/my-programmes/build-total/progress'
+    | '/my-programmes/build-total/today'
     | '/my-programmes/hybrid-race-plan/calculator'
     | '/my-programmes/hybrid-race-plan/event'
     | '/my-programmes/hybrid-race-plan/learn'
@@ -1096,6 +1191,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId/done'
     | '/programmes/'
     | '/my-programmes/basic-training-blueprint-plus/'
+    | '/my-programmes/build-total/'
     | '/my-programmes/hybrid-race-plan/'
     | '/my-programmes/mixed/'
     | '/my-programmes/sem-2026/'
@@ -1108,11 +1204,13 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/my-programmes/basic-training-blueprint-plus/programme/'
+    | '/my-programmes/build-total/programme/'
     | '/my-programmes/hybrid-race-plan/programme/'
     | '/my-programmes/mixed/programme/'
     | '/my-programmes/sem-2026/programme/'
     | '/my-programmes/sem-2027/programme/'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
+    | '/my-programmes/build-total/programme/s/$sessionId'
     | '/my-programmes/hybrid-race-plan/programme/s/$sessionId'
     | '/my-programmes/mixed/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
@@ -1165,6 +1263,11 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus/profile'
     | '/my-programmes/basic-training-blueprint-plus/progress'
     | '/my-programmes/basic-training-blueprint-plus/today'
+    | '/my-programmes/build-total/calculator'
+    | '/my-programmes/build-total/learn'
+    | '/my-programmes/build-total/profile'
+    | '/my-programmes/build-total/progress'
+    | '/my-programmes/build-total/today'
     | '/my-programmes/hybrid-race-plan/calculator'
     | '/my-programmes/hybrid-race-plan/event'
     | '/my-programmes/hybrid-race-plan/learn'
@@ -1191,6 +1294,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId/done'
     | '/programmes'
     | '/my-programmes/basic-training-blueprint-plus'
+    | '/my-programmes/build-total'
     | '/my-programmes/hybrid-race-plan'
     | '/my-programmes/mixed'
     | '/my-programmes/sem-2026'
@@ -1203,11 +1307,13 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/my-programmes/basic-training-blueprint-plus/programme'
+    | '/my-programmes/build-total/programme'
     | '/my-programmes/hybrid-race-plan/programme'
     | '/my-programmes/mixed/programme'
     | '/my-programmes/sem-2026/programme'
     | '/my-programmes/sem-2027/programme'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
+    | '/my-programmes/build-total/programme/s/$sessionId'
     | '/my-programmes/hybrid-race-plan/programme/s/$sessionId'
     | '/my-programmes/mixed/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
@@ -1268,6 +1374,12 @@ export interface FileRouteTypes {
     | '/my-programmes/basic-training-blueprint-plus/programme'
     | '/my-programmes/basic-training-blueprint-plus/progress'
     | '/my-programmes/basic-training-blueprint-plus/today'
+    | '/my-programmes/build-total/calculator'
+    | '/my-programmes/build-total/learn'
+    | '/my-programmes/build-total/profile'
+    | '/my-programmes/build-total/programme'
+    | '/my-programmes/build-total/progress'
+    | '/my-programmes/build-total/today'
     | '/my-programmes/hybrid-race-plan/calculator'
     | '/my-programmes/hybrid-race-plan/event'
     | '/my-programmes/hybrid-race-plan/learn'
@@ -1298,6 +1410,7 @@ export interface FileRouteTypes {
     | '/workout/$sessionId/done'
     | '/_marketing/programmes/'
     | '/my-programmes/basic-training-blueprint-plus/'
+    | '/my-programmes/build-total/'
     | '/my-programmes/hybrid-race-plan/'
     | '/my-programmes/mixed/'
     | '/my-programmes/sem-2026/'
@@ -1310,11 +1423,13 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/my-programmes/basic-training-blueprint-plus/programme/'
+    | '/my-programmes/build-total/programme/'
     | '/my-programmes/hybrid-race-plan/programme/'
     | '/my-programmes/mixed/programme/'
     | '/my-programmes/sem-2026/programme/'
     | '/my-programmes/sem-2027/programme/'
     | '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
+    | '/my-programmes/build-total/programme/s/$sessionId'
     | '/my-programmes/hybrid-race-plan/programme/s/$sessionId'
     | '/my-programmes/mixed/programme/s/$sessionId'
     | '/my-programmes/sem-2026/programme/s/$sessionId'
@@ -1336,6 +1451,13 @@ export interface RootRouteChildren {
   MyProgrammesSem2027Route: typeof MyProgrammesSem2027RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  MyProgrammesBuildTotalCalculatorRoute: typeof MyProgrammesBuildTotalCalculatorRoute
+  MyProgrammesBuildTotalLearnRoute: typeof MyProgrammesBuildTotalLearnRoute
+  MyProgrammesBuildTotalProfileRoute: typeof MyProgrammesBuildTotalProfileRoute
+  MyProgrammesBuildTotalProgrammeRoute: typeof MyProgrammesBuildTotalProgrammeRouteWithChildren
+  MyProgrammesBuildTotalProgressRoute: typeof MyProgrammesBuildTotalProgressRoute
+  MyProgrammesBuildTotalTodayRoute: typeof MyProgrammesBuildTotalTodayRoute
+  MyProgrammesBuildTotalIndexRoute: typeof MyProgrammesBuildTotalIndexRoute
   ApiPublicHooksNotificationsRoute: typeof ApiPublicHooksNotificationsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -1590,6 +1712,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesHybridRacePlanIndexRouteImport
       parentRoute: typeof MyProgrammesHybridRacePlanRoute
     }
+    '/my-programmes/build-total/': {
+      id: '/my-programmes/build-total/'
+      path: '/my-programmes/build-total'
+      fullPath: '/my-programmes/build-total/'
+      preLoaderRoute: typeof MyProgrammesBuildTotalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/my-programmes/basic-training-blueprint-plus/': {
       id: '/my-programmes/basic-training-blueprint-plus/'
       path: '/'
@@ -1800,6 +1929,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesHybridRacePlanCalculatorRouteImport
       parentRoute: typeof MyProgrammesHybridRacePlanRoute
     }
+    '/my-programmes/build-total/today': {
+      id: '/my-programmes/build-total/today'
+      path: '/my-programmes/build-total/today'
+      fullPath: '/my-programmes/build-total/today'
+      preLoaderRoute: typeof MyProgrammesBuildTotalTodayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/build-total/progress': {
+      id: '/my-programmes/build-total/progress'
+      path: '/my-programmes/build-total/progress'
+      fullPath: '/my-programmes/build-total/progress'
+      preLoaderRoute: typeof MyProgrammesBuildTotalProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/build-total/programme': {
+      id: '/my-programmes/build-total/programme'
+      path: '/my-programmes/build-total/programme'
+      fullPath: '/my-programmes/build-total/programme'
+      preLoaderRoute: typeof MyProgrammesBuildTotalProgrammeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/build-total/profile': {
+      id: '/my-programmes/build-total/profile'
+      path: '/my-programmes/build-total/profile'
+      fullPath: '/my-programmes/build-total/profile'
+      preLoaderRoute: typeof MyProgrammesBuildTotalProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/build-total/learn': {
+      id: '/my-programmes/build-total/learn'
+      path: '/my-programmes/build-total/learn'
+      fullPath: '/my-programmes/build-total/learn'
+      preLoaderRoute: typeof MyProgrammesBuildTotalLearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-programmes/build-total/calculator': {
+      id: '/my-programmes/build-total/calculator'
+      path: '/my-programmes/build-total/calculator'
+      fullPath: '/my-programmes/build-total/calculator'
+      preLoaderRoute: typeof MyProgrammesBuildTotalCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/my-programmes/basic-training-blueprint-plus/today': {
       id: '/my-programmes/basic-training-blueprint-plus/today'
       path: '/today'
@@ -1989,6 +2160,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesHybridRacePlanProgrammeIndexRouteImport
       parentRoute: typeof MyProgrammesHybridRacePlanProgrammeRoute
     }
+    '/my-programmes/build-total/programme/': {
+      id: '/my-programmes/build-total/programme/'
+      path: '/'
+      fullPath: '/my-programmes/build-total/programme/'
+      preLoaderRoute: typeof MyProgrammesBuildTotalProgrammeIndexRouteImport
+      parentRoute: typeof MyProgrammesBuildTotalProgrammeRoute
+    }
     '/my-programmes/basic-training-blueprint-plus/programme/': {
       id: '/my-programmes/basic-training-blueprint-plus/programme/'
       path: '/'
@@ -2072,6 +2250,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/my-programmes/hybrid-race-plan/programme/s/$sessionId'
       preLoaderRoute: typeof MyProgrammesHybridRacePlanProgrammeSSessionIdRouteImport
       parentRoute: typeof MyProgrammesHybridRacePlanProgrammeRoute
+    }
+    '/my-programmes/build-total/programme/s/$sessionId': {
+      id: '/my-programmes/build-total/programme/s/$sessionId'
+      path: '/s/$sessionId'
+      fullPath: '/my-programmes/build-total/programme/s/$sessionId'
+      preLoaderRoute: typeof MyProgrammesBuildTotalProgrammeSSessionIdRouteImport
+      parentRoute: typeof MyProgrammesBuildTotalProgrammeRoute
     }
     '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId': {
       id: '/my-programmes/basic-training-blueprint-plus/programme/s/$sessionId'
@@ -2436,6 +2621,24 @@ const WorkoutSessionIdRouteChildren: WorkoutSessionIdRouteChildren = {
 const WorkoutSessionIdRouteWithChildren =
   WorkoutSessionIdRoute._addFileChildren(WorkoutSessionIdRouteChildren)
 
+interface MyProgrammesBuildTotalProgrammeRouteChildren {
+  MyProgrammesBuildTotalProgrammeIndexRoute: typeof MyProgrammesBuildTotalProgrammeIndexRoute
+  MyProgrammesBuildTotalProgrammeSSessionIdRoute: typeof MyProgrammesBuildTotalProgrammeSSessionIdRoute
+}
+
+const MyProgrammesBuildTotalProgrammeRouteChildren: MyProgrammesBuildTotalProgrammeRouteChildren =
+  {
+    MyProgrammesBuildTotalProgrammeIndexRoute:
+      MyProgrammesBuildTotalProgrammeIndexRoute,
+    MyProgrammesBuildTotalProgrammeSSessionIdRoute:
+      MyProgrammesBuildTotalProgrammeSSessionIdRoute,
+  }
+
+const MyProgrammesBuildTotalProgrammeRouteWithChildren =
+  MyProgrammesBuildTotalProgrammeRoute._addFileChildren(
+    MyProgrammesBuildTotalProgrammeRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   MarketingRoute: MarketingRouteWithChildren,
@@ -2452,6 +2655,14 @@ const rootRouteChildren: RootRouteChildren = {
   MyProgrammesSem2027Route: MyProgrammesSem2027RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  MyProgrammesBuildTotalCalculatorRoute: MyProgrammesBuildTotalCalculatorRoute,
+  MyProgrammesBuildTotalLearnRoute: MyProgrammesBuildTotalLearnRoute,
+  MyProgrammesBuildTotalProfileRoute: MyProgrammesBuildTotalProfileRoute,
+  MyProgrammesBuildTotalProgrammeRoute:
+    MyProgrammesBuildTotalProgrammeRouteWithChildren,
+  MyProgrammesBuildTotalProgressRoute: MyProgrammesBuildTotalProgressRoute,
+  MyProgrammesBuildTotalTodayRoute: MyProgrammesBuildTotalTodayRoute,
+  MyProgrammesBuildTotalIndexRoute: MyProgrammesBuildTotalIndexRoute,
   ApiPublicHooksNotificationsRoute: ApiPublicHooksNotificationsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
@@ -2461,13 +2672,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
