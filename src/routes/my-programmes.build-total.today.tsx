@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TotalShell } from "@/components/total/TotalShell";
 import { TOTAL, isCore, sessionId } from "@/lib/total/manifest";
-import { totalStore, useTotalProfile, useTotalReadiness, useTotalTracks, currentTotalWeek, type TotalReadiness, type TotalTrack } from "@/lib/total/store";
+import { totalStore, useTotalProfile, useTotalReadiness, currentTotalWeek, type TotalReadiness } from "@/lib/total/store";
 import { ArrowRight } from "lucide-react";
 import pdfAsset from "@/assets/build-total-download.pdf.asset.json";
 import { PdfDownloadLink } from "@/components/dashboard/PdfDownloadLink";
@@ -16,7 +16,6 @@ export const Route = createFileRoute("/my-programmes/build-total/today")({
 function TodayPage() {
   const profile = useTotalProfile();
   const readiness = useTotalReadiness();
-  const tracks = useTotalTracks();
   const schedule = useScheduleOverrides("build-total");
   const week = currentTotalWeek(profile.startDate) ?? 1;
   const wk = TOTAL.weeks.find((w) => w.week === week) ?? TOTAL.weeks[0];
@@ -24,9 +23,8 @@ function TodayPage() {
   const todayCore = wk.sessions.find((s) => isCore(s) && s.recommended_day.toLowerCase() === todayName.toLowerCase());
   const current = todayCore ?? wk.sessions.find(isCore)!;
   const currentId = sessionId(wk.week, current.session);
-  const readinessValue = (readiness[currentId] ?? "ready") as TotalReadiness;
-  const track = (tracks[currentId] ?? profile.defaultTrack) as TotalTrack;
-  const adj = current.readiness_adjustment ?? {};
+  const readinessValue = (readiness[currentId] ?? "green") as TotalReadiness;
+  const adj = current.readiness_adjustment;
 
   return (
     <TotalShell eyebrow={`Week ${wk.week} · ${wk.phase}`} title={profile.displayName ? `Good work, ${profile.displayName}.` : "Today."}>
@@ -57,21 +55,6 @@ function TodayPage() {
           </div>
 
           <div className="mt-10">
-            <p className="eyebrow mb-3">Today's track</p>
-            <div className="flex gap-2">
-              {(["rx", "scaled"] as TotalTrack[]).map((t) => (
-                <button key={t} onClick={() => totalStore.setTrack(currentId, t)}
-                  className={`h-10 px-5 text-[10px] uppercase tracking-[0.22em] font-display border ${track === t ? "bg-bone text-obsidian border-bone" : "border-border text-bone"}`}>
-                  {t === "rx" ? "RX" : "Scaled"}
-                </button>
-              ))}
-            </div>
-            <p className="text-foreground-muted text-xs mt-3 max-w-[60ch]">
-              Scaled is coached training, not a failed version of RX. Choose RX only when the prescription keeps the stated stimulus, set sizes and target time.
-            </p>
-          </div>
-
-          <div className="mt-10">
             <p className="eyebrow mb-3">Readiness</p>
             <div className="flex flex-wrap gap-2">
               {TOTAL.readiness_options.map((r) => (
@@ -82,7 +65,7 @@ function TodayPage() {
               ))}
             </div>
             <p className="text-foreground-muted text-xs mt-3 max-w-[60ch]">
-              {adj[readinessValue] ?? TOTAL.readiness_options.find((r) => r.id === readinessValue)?.action}
+              {TOTAL.readiness_options.find((r) => r.id === readinessValue)?.action}
             </p>
           </div>
         </section>
