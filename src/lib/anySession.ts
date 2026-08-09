@@ -268,7 +268,7 @@ function resolveBtb(id: string): ResolvedSession | undefined {
       const blocks: SessionBlock[] = s.blocks.map((b, i) => ({
         id: btbBlockId(w.week, s.session, i),
         order: i + 1,
-        kind: inferBlockKind(b.name, b.instruction),
+        kind: resolveKind((b as { kind?: string }).kind, b.name, b.instruction),
         title: b.name,
         timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
         lines: buildLines(b.instruction, { rpe: b.rpe, rest: b.rest, scaling: b.scaling, log: b.log }),
@@ -330,7 +330,7 @@ function resolveHrp(id: string): ResolvedSession | undefined {
           mobility_recovery: b.name.toLowerCase().includes("cool") ? "cooldown" : "warmup",
           log: "log",
         };
-        const inferred = b.kind ? kindMap[b.kind] : inferBlockKind(b.name, b.instruction);
+        const inferred = resolveKind(b.kind, b.name, b.instruction);
         return {
           id: hrpBlockId(w.week, s.session, i),
           order: i + 1,
@@ -381,7 +381,7 @@ function resolveSem(id: string): ResolvedSession | undefined {
         return {
           id: semBlockId(w.week, s.session, i),
           order: i + 1,
-          kind: inferBlockKind(b.name, b.instruction),
+          kind: resolveKind((b as { kind?: string }).kind, b.name, b.instruction),
           title: b.name,
           timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
           lines: buildLines(b.instruction, { categorySpecific: cs }),
@@ -418,6 +418,7 @@ function resolveSem(id: string): ResolvedSession | undefined {
 export function resolveSession(id: string): ResolvedSession | undefined {
   if (id.startsWith("btb-")) return resolveBtb(id);
   if (id.startsWith("hrp-")) return resolveHrp(id);
+  if (id.startsWith("sem27-")) return resolveSem27(id);
   if (id.startsWith("sem8-") || id.startsWith("sem-")) return resolveSem(id);
   return resolveAthx(id);
 }
