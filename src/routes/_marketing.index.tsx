@@ -113,7 +113,7 @@ export const Route = createFileRoute("/_marketing/")({
         content:
           "Join the SEVEN3SEVEN Club for £14.99/month and unlock every hybrid training programme, or buy one outright from £19.99 and keep it for life.",
       },
-      { property: "og:title", content: "SEVEN3SEVEN — Hybrid Fitness | Performance" },
+      { property: "og:title", content: "SEVEN3SEVEN — Train for what's next" },
       {
         property: "og:description",
         content: "Every programme for £14.99/month, or buy one outright. Built to be followed, not filed away.",
