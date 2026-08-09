@@ -89,7 +89,7 @@ export function usePreferences(userId: string | undefined) {
           primary_product_id: next.primary_product_id,
           units: next.units,
           training_days: next.training_days,
-          settings: { notifications: next.notifications },
+          settings: { notifications: { ...next.notifications } } as unknown as Record<string, never>,
           onboarding_completed_at: next.onboarding_completed_at,
         },
         { onConflict: "user_id" },
