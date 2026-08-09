@@ -67,8 +67,7 @@ function TodayPage() {
             <p className="text-foreground-muted text-xs mt-3 max-w-[60ch]">
               {TOTAL.readiness_options.find((r) => r.id === readinessValue)?.action}
             </p>
-            {adj && <p className="text-foreground-muted text-xs mt-2 max-w-[60ch]">{adj}
-            </p>
+            {adj && <p className="text-foreground-muted text-xs mt-2 max-w-[60ch]">{adj}</p>}
           </div>
         </section>
 
