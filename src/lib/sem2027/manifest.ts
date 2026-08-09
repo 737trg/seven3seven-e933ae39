@@ -1,9 +1,17 @@
-import raw from "@/data/sem2027.manifest.json";
 import type { SemManifest, SemSession, SemWeek } from "@/lib/sem/manifest";
 
 export type { SemBlock, SemSession, SemWeek, SemManifest } from "@/lib/sem/manifest";
 
-export const SEM27: SemManifest = raw as unknown as SemManifest;
+/**
+ * Paid content holder. Starts empty — the real manifest is fetched from an
+ * entitlement-checked server function and merged in via `hydrateSEM27`,
+ * so paid workouts are never shipped in the client bundle.
+ */
+export const SEM27: SemManifest = { weeks: [] } as unknown as SemManifest;
+
+export function hydrateSEM27(data: unknown): void {
+  Object.assign(SEM27 as object, data as object);
+}
 
 export function sessionId(week: number, session: number): string {
   return `sem27-w${week}-s${session}`;

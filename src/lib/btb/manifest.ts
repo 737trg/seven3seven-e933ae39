@@ -1,4 +1,3 @@
-import raw from "@/data/btb.manifest.json";
 
 export type BtbBlock = {
   name: string;
@@ -53,7 +52,16 @@ export type BtbManifest = {
   calculator?: any;
 };
 
-export const BTB: BtbManifest = raw as unknown as BtbManifest;
+/**
+ * Paid content holder. Starts empty — the real manifest is fetched from an
+ * entitlement-checked server function and merged in via `hydrateBTB`,
+ * so paid workouts are never shipped in the client bundle.
+ */
+export const BTB: BtbManifest = { weeks: [] } as unknown as BtbManifest;
+
+export function hydrateBTB(data: unknown): void {
+  Object.assign(BTB as object, data as object);
+}
 
 export type BtbSessionId = string;
 

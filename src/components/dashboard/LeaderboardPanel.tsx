@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Trophy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-
-type Row = {
-  user_id: string;
-  display_name: string;
-  sessions_completed: number;
-  total_seconds: number;
-  is_me: boolean;
-};
+import { getMonthlyLeaderboard, type LeaderboardRow as Row } from "@/lib/leaderboard.functions";
 
 function monthStart() {
   const now = new Date();
@@ -29,17 +22,17 @@ export function LeaderboardPanel({ userId }: { userId: string | undefined }) {
   const load = useCallback(async () => {
     if (!userId) { setLoading(false); return; }
     setLoading(true);
-    const [prefRes, boardRes] = await Promise.all([
+    const [prefRes, boardRows] = await Promise.all([
       supabase
         .from("user_preferences")
         .select("leaderboard_opt_in, leaderboard_name")
         .eq("user_id", userId)
         .maybeSingle(),
-      supabase.rpc("monthly_leaderboard", { _month_start: monthStart() }),
+      getMonthlyLeaderboard({ data: { monthStart: monthStart() } }).catch(() => [] as Row[]),
     ]);
     setOptedIn(!!prefRes.data?.leaderboard_opt_in);
     setName(prefRes.data?.leaderboard_name ?? "");
-    setRows(((boardRes.data as Row[] | null) ?? []).slice(0, 10));
+    setRows(boardRows ?? []);
     setLoading(false);
   }, [userId]);
 
@@ -75,7 +68,7 @@ export function LeaderboardPanel({ userId }: { userId: string | undefined }) {
         <ol className="space-y-2">
           {rows.map((row, i) => (
             <li
-              key={row.user_id}
+              key={`${row.rank}-${row.display_name}`}
               className={`flex items-center gap-3 text-xs ${row.is_me ? "text-signal" : "text-bone"}`}
             >
               <span className="tabular w-5 text-foreground-muted">{i + 1}</span>

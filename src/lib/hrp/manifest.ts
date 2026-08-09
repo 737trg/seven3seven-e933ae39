@@ -1,4 +1,3 @@
-import raw from "@/data/hrp.manifest.json";
 
 export type HrpBlock = {
   name: string;
@@ -83,7 +82,16 @@ export type HrpManifest = {
   progress_metrics?: any;
 };
 
-export const HRP: HrpManifest = raw as unknown as HrpManifest;
+/**
+ * Paid content holder. Starts empty — the real manifest is fetched from an
+ * entitlement-checked server function and merged in via `hydrateHRP`,
+ * so paid workouts are never shipped in the client bundle.
+ */
+export const HRP: HrpManifest = { weeks: [] } as unknown as HrpManifest;
+
+export function hydrateHRP(data: unknown): void {
+  Object.assign(HRP as object, data as object);
+}
 
 export type SessionId = string;
 

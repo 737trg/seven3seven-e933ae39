@@ -1,4 +1,3 @@
-import raw from "@/data/sem8.manifest.json";
 
 export type SemBlock = {
   name: string;
@@ -67,7 +66,16 @@ export type SemManifest = {
   progress_metrics?: any;
 };
 
-export const SEM: SemManifest = raw as unknown as SemManifest;
+/**
+ * Paid content holder. Starts empty — the real manifest is fetched from an
+ * entitlement-checked server function and merged in via `hydrateSEM`,
+ * so paid workouts are never shipped in the client bundle.
+ */
+export const SEM: SemManifest = { weeks: [] } as unknown as SemManifest;
+
+export function hydrateSEM(data: unknown): void {
+  Object.assign(SEM as object, data as object);
+}
 
 export type SessionId = string;
 
