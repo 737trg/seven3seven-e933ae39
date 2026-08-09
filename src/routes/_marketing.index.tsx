@@ -163,7 +163,7 @@ function HomePage() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(9,9,9,0.70) 0%, rgba(9,9,9,0.62) 30%, rgba(9,9,9,0.74) 55%, rgba(9,9,9,0.94) 85%, rgba(9,9,9,1) 100%)",
+              "linear-gradient(180deg, rgba(9,9,9,0.66) 0%, rgba(9,9,9,0.42) 28%, rgba(9,9,9,0.58) 58%, rgba(9,9,9,0.9) 86%, rgba(9,9,9,1) 100%)",
           }}
         />
         <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x py-20 md:py-24 flex flex-col items-center text-center">
