@@ -78,7 +78,7 @@ function UnsubscribePage() {
             <button
               onClick={confirm}
               disabled={busy}
-              className="btn-primary w-full disabled:opacity-60"
+              className="btn-signal w-full disabled:opacity-60"
             >
               {busy ? "Unsubscribing…" : "Confirm unsubscribe"}
             </button>
