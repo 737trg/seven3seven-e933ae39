@@ -1,51 +1,60 @@
-# Progress & Body — make the data actually mean something
+# Nutrition: targets, tracking, hydration
 
-Right now both tabs are lists of raw rows. A number with no context isn't insight. This turns them into a proper performance surface: categorised benchmarks, deltas, trends, and a desktop layout that earns the price.
+A proper food + hydration layer, built to the same standard as Progress and Body. New **Fuel** tab in the dashboard.
 
-## 1. A real movement catalogue
+## 1. Calorie & protein calculator
 
-Today every logged lift is free text, so "Main set" sits next to a 5k. Introduce a curated catalogue that every PB entry maps to.
+One short setup flow (age, sex, height, weight, activity level, goal: cut / maintain / gain).
 
-**Strength (load)** — Back squat, Front squat, Deadlift, Trap-bar deadlift, Bench press, Strict press, Push press, Overhead squat, Power clean, Clean & jerk, Snatch, Weighted pull-up, Hip thrust.
+- Energy: Mifflin-St Jeor BMR x activity multiplier (1.2 sedentary -> 1.9 very active), then goal adjust (-15% cut, +10% gain).
+- Protein: 2.0 g/kg default, slider 1.6-2.2.
+- Fat: 0.8 g/kg. Carbs: whatever calories remain.
+- Weight auto-pulls from the latest body metric, so targets stay current; recalculate prompt when bodyweight moves more than 2 kg.
+- Targets are editable — the calculator is a starting point, not a cage.
 
-**Bodyweight (reps)** — Strict pull-ups, Press-ups (2 min), Sit-ups (2 min), Dips, Max plank hold.
+## 2. Daily log
 
-**Run (time)** — 400 m, 800 m, 1 km, 1 mile, 1.5 mile, 2 km, 5 km, 10 km, Half marathon, Marathon.
+- **Widget strip at the top**: Calories left, Protein left, Carbs, Fat, Water. Each is a ring/bar that fills as you log, turns green (`--earned`) on target, amber over.
+- **Meal sections**: Breakfast, Lunch, Dinner, Snacks. Add food to any of them.
+- **Adding food** — three routes:
+  1. **Barcode scan** — camera scan in-browser, looked up against Open Food Facts (free, open, no API key, ~3M products incl. UK supermarkets). Choose portion, add.
+  2. **Search** — text search of the same database, plus your own saved foods.
+  3. **Quick add** — just calories and protein, for when you can't be bothered. This matters: apps die when logging is a chore.
+- **Recents & favourites** — one tap to re-add anything eaten in the last 14 days.
+- **Copy yesterday** / **save a meal** so repeat eaters log a day in seconds.
+- Day switcher with a 7-day strip; swipe/arrow between days.
 
-**Machine (time)** — 500 m / 1 km / 2 km row, 500 m / 1 km ski, 1 km / 4 km bike erg.
+## 3. Hydration
 
-Each entry carries: key, label, category, discipline, metric, default unit, direction (higher or lower is better). Logging a PB becomes a searchable picker over this list, with "custom movement" still allowed. Existing records keep working — unmatched keys fall into an "Other" group.
+Simple tile: target (35 ml per kg bodyweight, editable), tap buttons for 250 ml / 500 ml / custom, filling bar, streak of days on target.
 
-## 2. Progress tab rebuild
+## 4. Insight, not just numbers
 
-- **Headline strip** — total PBs, PBs this month, movements tracked, biggest recent improvement.
-- **Two segmented sections: Strength and Cardio** (plus Other when present). No more one flat list.
-- **Strength grid** — one card per movement: current best, estimated 1RM, date, delta vs. first entry, mini sparkline, and relative strength (× bodyweight, from the latest body metric).
-- **Cardio grid** — one card per distance: best time as mm:ss, pace per km, delta vs. first, sparkline. Time entries normalise to seconds internally so PBs sort correctly.
-- **Trend detail** — tapping a card opens a full trend view for that movement (chart, every entry, add-entry shortcut) instead of a dropdown buried in a panel.
-- **Standards** — regrouped to match the new categories, shown as progress bars with "x kg to target" copy.
-- Empty states suggest concrete first benchmarks ("Log your 5k and your back squat to unlock trends").
+Under the log: 7-day averages vs target (calories, protein), adherence percentage, and a plain-English line — "Protein averaging 132 g against a 160 g target — add a shake or a fourth protein feed." Ties into training: on Club accounts, a session-day vs rest-day calorie split.
 
-## 3. Body tab rebuild
+## 5. Where it lives
 
-- **Widget row** — starting weight, current weight, change (signed, colour-cued), 30-day trend arrow.
-- **Weight chart** — line chart over 30 / 90 / 365 / all ranges with a 7-day rolling average so daily noise doesn't dominate.
-- **Composition & recovery** — body-fat % and resting HR each get a compact chart with current value, change and range selector.
-- **Log entry** — a single sheet with today prefilled (weight, body fat, RHR, note), unit-aware, upserting the day.
-- **History** — collapsed beneath the charts, not the first thing you see.
-- Insight line under the charts, e.g. "Down 1.8 kg over 8 weeks — steady rate."
-
-## 4. Premium layout
-
-- **Mobile** — one column with a consistent card rhythm, horizontally scrolling widget strip, sheet-based logging instead of cramped inline forms, thumb-reachable actions.
-- **Desktop** — 12-column grid: charts get real width, strength and cardio sit side by side, sticky section headings, hover tooltips on chart points.
-- Consistent card language across both tabs (hairlines, raised surfaces, tabular figures) using existing tokens only.
+- New **Fuel** tab in the dashboard nav (Train / Progress / Body / Fuel / Club) — five tabs still fits the mobile bar.
+- Club-gated, same `ClubLock` treatment as Body. This is exactly the sort of thing that makes £14.99 stick.
+- Desktop: two-column — widgets and log left, insight and hydration right.
 
 ## Technical notes
 
-- New `src/lib/movementCatalogue.ts`: catalogue plus helpers (categorise a `lift_key`, time formatting, pace maths, e1RM, direction-aware best).
-- Charts: a small local SVG line chart extending the existing `Sparkline` (axis labels, range windowing, hover dot) — no new charting dependency.
-- `usePersonalRecords` gains derived selectors (grouped by category, best per movement, deltas). Schema unchanged; time PBs normalise to seconds using the existing `unit` column.
-- New components under `src/components/dashboard/`: `MetricStat`, `LineChart`, `MovementCard`, `StrengthSection`, `CardioSection`, `BodyOverview`, `LogPbSheet`, `LogBodySheet`. `ProgressTab.tsx` and `BodyTab.tsx` become thin composers.
-- Club gating (`ClubLock`) stays exactly as-is; no pricing or access changes.
-- No database migration required.
+- **Database** (one migration, RLS scoped to `auth.uid()`, GRANTs included):
+  - `nutrition_targets` — user, calories, protein/carb/fat g, water ml, method (calculated/manual), inputs used.
+  - `food_entries` — user, date, meal, food name, brand, barcode, serving description, grams, calories and macros, source (barcode/search/quick/custom), plus a `saved` flag for favourites.
+  - `hydration_logs` — user, date, ml.
+- **Food data**: Open Food Facts REST API, called from a server function (`src/lib/nutrition.functions.ts`) so we cache and normalise per-100g values into per-serving; no key, no cost, attribution in the footer of the tab.
+- **Barcode scan**: native `BarcodeDetector` where supported (Android Chrome), `@zxing/browser` fallback (iOS Safari). Camera permission requested only on tap; manual entry always available if it's denied or unsupported.
+- New components under `src/components/dashboard/`: `MacroRing`, `NutritionWidgets`, `MealSection`, `FoodSearchSheet`, `BarcodeScanSheet`, `QuickAddSheet`, `HydrationCard`, `TargetsCalculatorSheet`, and `tabs/FuelTab.tsx`.
+- `src/lib/nutrition.ts` for the maths (BMR, TDEE, macro split, hydration target) — pure functions, unit-aware via existing `units` preference.
+- No new charting dependency; reuse `LineChart` for the 7-day calorie/protein trend.
+
+## Build order
+
+1. Migration + `useNutrition` hooks.
+2. Calculator and targets.
+3. Manual/quick-add log with widget strip and meals.
+4. Open Food Facts search.
+5. Barcode scanning.
+6. Hydration + insights + desktop layout.
