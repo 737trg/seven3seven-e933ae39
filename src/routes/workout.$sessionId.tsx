@@ -7,7 +7,8 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { resolveSession, type ResolvedSession } from "@/lib/anySession";
+import { resolveSession, programmeSlugForSessionId, type ResolvedSession } from "@/lib/anySession";
+import { useProgrammeContent } from "@/lib/programmeContent";
 import { supabase } from "@/integrations/supabase/client";
 import { sessionProgressMeta } from "@/lib/nextSession";
 import { recordSessionCompletion } from "@/lib/progress.functions";
@@ -46,9 +47,11 @@ function WorkoutRoute() {
     select: (state) => state.location.pathname.endsWith("/done"),
   });
   const { sessionId } = useParams({ from: "/workout/$sessionId" });
-  const resolved = resolveSession(sessionId);
+  const contentSlug = programmeSlugForSessionId(sessionId);
+  const content = useProgrammeContent(contentSlug, contentSlug !== "athx-2026");
+  const resolved = content.ready ? resolveSession(sessionId) : undefined;
   const programme = resolved?.programme;
-  const slug = programme?.slug ?? "athx-2026";
+  const slug = programme?.slug ?? contentSlug;
   const programmeId = programme?.programmeId ?? "athx-2026";
   const programmeName =
     slug === "basic-training-blueprint-plus"
@@ -61,7 +64,15 @@ function WorkoutRoute() {
 
   return (
     <ProgrammeAccessGate slug={slug} programmeId={programmeId} programmeName={programmeName}>
-      {isDoneRoute ? <Outlet /> : <WorkoutPage resolved={resolved} />}
+      {!content.ready ? (
+        <div className="min-h-dvh grid place-items-center px-6">
+          <p className="text-sm text-muted-foreground">Loading your session…</p>
+        </div>
+      ) : isDoneRoute ? (
+        <Outlet />
+      ) : (
+        <WorkoutPage resolved={resolved} />
+      )}
     </ProgrammeAccessGate>
   );
 }
