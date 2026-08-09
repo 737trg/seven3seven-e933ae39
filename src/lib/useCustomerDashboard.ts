@@ -5,6 +5,7 @@ import { HRP } from "@/lib/hrp/manifest";
 import { BTB } from "@/lib/btb/manifest";
 import { SEM } from "@/lib/sem/manifest";
 import { SEM27 } from "@/lib/sem2027/manifest";
+import { MIXED } from "@/lib/mixed/manifest";
 import { PROGRAMME as ATHX } from "@/data/programme";
 
 type EnrolmentRow = {
