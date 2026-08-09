@@ -3,23 +3,18 @@ import { HrpShell } from "@/components/hrp/HrpShell";
 import { hrpStore, useHrpProfile, type HrpUnits, type HrpFormat, type HrpEvent, type HrpCategory, type HrpSex, type HrpTrack } from "@/lib/hrp/store";
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
+import { useDraftFields, parseNumberField } from "@/lib/useDraftFields";
 
 export const Route = createFileRoute("/my-programmes/hybrid-race-plan/profile")({
   head: () => ({ meta: [{ title: "HYBRID RACE PLAN — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProfilePage,
 });
 
-function safeNum(v: string, max = 1000): number | null {
-  if (!v.trim()) return null;
-  const n = Number(v);
-  if (!Number.isFinite(n) || n < 0 || n > max) return null;
-  return Math.round(n * 10) / 10;
-}
-
 function ProfilePage() {
   const { user } = useAuth();
   const profile = useHrpProfile();
   const [saved, setSaved] = useState(false);
+  const { errors, valueOf, setDraftValue, clearDraft, setError } = useDraftFields();
 
   useEffect(() => {
     if (!profile.displayName && user?.user_metadata?.display_name) {
@@ -28,21 +23,38 @@ function ProfilePage() {
   }, [user, profile.displayName]);
 
   function field<K extends keyof typeof profile>(k: K, label: string, type: "text" | "date" | "number" = "text", placeholder?: string) {
+    const key = String(k);
+    const commit = () => {
+      const raw = valueOf(key, profile[k]);
+      if (type === "number") {
+        const { value, error } = parseNumberField(raw, 1000);
+        setError(key, error);
+        if (error) return;
+        hrpStore.saveProfile({ [k]: value } as any);
+      } else {
+        hrpStore.saveProfile({ [k]: raw.slice(0, 120) } as any);
+      }
+      clearDraft(key);
+    };
     return (
       <label className="grid grid-cols-[200px_1fr] items-center gap-3 text-sm">
         <span className="text-foreground-muted uppercase tracking-widest text-[10px]">{label}</span>
+        <span className="block">
         <input
-          type={type}
-          value={(profile[k] as any) ?? ""}
+          type={type === "number" ? "text" : type}
+          inputMode={type === "number" ? "decimal" : undefined}
+          value={type === "date" ? ((profile[k] as any) ?? "") : valueOf(key, profile[k])}
           placeholder={placeholder}
           maxLength={120}
           onChange={(e) => {
-            const v = e.target.value;
-            if (type === "number") hrpStore.saveProfile({ [k]: safeNum(v) } as any);
-            else hrpStore.saveProfile({ [k]: v.slice(0, 120) } as any);
+            if (type === "date") { hrpStore.saveProfile({ [k]: e.target.value } as any); return; }
+            setDraftValue(key, e.target.value);
           }}
-          className="h-10 bg-transparent border border-border px-3 text-bone tabular"
+          onBlur={type === "date" ? undefined : commit}
+          className="h-10 w-full bg-transparent border border-border px-3 text-bone tabular"
         />
+        {errors[key] && <span className="mt-1 block text-signal text-[11px]">{errors[key]}</span>}
+        </span>
       </label>
     );
   }

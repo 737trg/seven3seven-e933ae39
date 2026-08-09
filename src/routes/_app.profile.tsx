@@ -99,15 +99,24 @@ function Row({ label, value }: { label: string; value: string }) {
 function NumberField({
   label, value, unit, onChange,
 }: { label: string; value: number; unit: string; onChange: (v: number) => void }) {
+  const [draft, setDraft] = useState<string | null>(null);
   return (
     <label className="block">
       <span className="block eyebrow mb-1.5">{label}</span>
       <div className="flex items-baseline gap-2 border-b border-border focus-within:border-bone py-2">
         <input
-          type="number"
-          step="0.5"
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
+          type="text"
+          inputMode="decimal"
+          value={draft ?? String(value)}
+          onChange={(e) => setDraft(e.target.value.slice(0, 6))}
+          onBlur={() => {
+            const raw = (draft ?? "").trim();
+            setDraft(null);
+            if (draft === null) return;
+            const n = Number(raw);
+            if (raw === "" || !Number.isFinite(n) || n < 0) return;
+            onChange(Math.round(n * 10) / 10);
+          }}
           className="bg-transparent outline-none text-bone tabular text-2xl font-display w-full min-w-0"
         />
         <span className="text-foreground-muted text-xs uppercase tracking-widest">{unit}</span>

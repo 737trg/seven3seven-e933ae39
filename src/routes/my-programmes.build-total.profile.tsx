@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { NumberText } from "@/components/forms/NumberText";
 import { TotalShell } from "@/components/total/TotalShell";
 import { TOTAL } from "@/lib/total/manifest";
 import { totalStore, useTotalProfile } from "@/lib/total/store";
@@ -34,12 +35,12 @@ function ProfilePage() {
         </div>
 
         <div className="space-y-5">
-          <Text label="Squat reference max (kg)" value={p.squatKg?.toString() ?? ""}
-            onChange={(v) => totalStore.saveProfile({ squatKg: v ? Number(v) : null })} />
-          <Text label="Bench press reference max (kg)" value={p.benchKg?.toString() ?? ""}
-            onChange={(v) => totalStore.saveProfile({ benchKg: v ? Number(v) : null })} />
-          <Text label="Deadlift reference max (kg)" value={p.deadliftKg?.toString() ?? ""}
-            onChange={(v) => totalStore.saveProfile({ deadliftKg: v ? Number(v) : null })} />
+          <NumberText label="Squat reference max (kg)" value={p.squatKg}
+            onCommit={(n) => totalStore.saveProfile({ squatKg: n })} />
+          <NumberText label="Bench press reference max (kg)" value={p.benchKg}
+            onCommit={(n) => totalStore.saveProfile({ benchKg: n })} />
+          <NumberText label="Deadlift reference max (kg)" value={p.deadliftKg}
+            onCommit={(n) => totalStore.saveProfile({ deadliftKg: n })} />
           <label className="block">
             <span className="text-[10px] uppercase tracking-widest text-foreground-muted">Pain, limitations and coaching notes</span>
             <textarea rows={4} value={p.limitations} onChange={(e) => totalStore.saveProfile({ limitations: e.target.value })}
