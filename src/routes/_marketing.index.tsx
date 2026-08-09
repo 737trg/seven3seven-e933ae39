@@ -166,6 +166,12 @@ function HomePage() {
           }}
         />
         <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-28 md:pt-32">
+          <img
+            src={heroWordmark.url}
+            alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
+            className="block w-[240px] sm:w-[300px] lg:w-[380px] h-auto mb-6 md:mb-8 select-none"
+            draggable={false}
+          />
           <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
           <h1 className="mt-4 md:mt-5 display-xl text-bone max-w-[16ch]">
             Train like it matters.
