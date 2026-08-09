@@ -15,6 +15,9 @@ import {
   type DashboardTab,
 } from "@/components/shell/DashboardNav";
 import { TrainTab } from "@/components/dashboard/tabs/TrainTab";
+import { ComebackCard } from "@/components/dashboard/ComebackCard";
+import { InstallPrompt } from "@/components/shell/InstallPrompt";
+import { OnboardingFlow } from "@/components/onboarding/OnboardingFlow";
 import { ProgressTab } from "@/components/dashboard/tabs/ProgressTab";
 import { BodyTab } from "@/components/dashboard/tabs/BodyTab";
 import { FuelTab } from "@/components/dashboard/tabs/FuelTab";
@@ -44,13 +47,24 @@ function DashboardPage() {
   const { user, loading: authLoading } = useAuth();
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
-  const { prefs, update: updatePrefs } = usePreferences(user?.id);
+  const { prefs, update: updatePrefs, loading: prefsLoading } = usePreferences(user?.id);
   const membership = useMembership(user?.id);
   const club = membership.hasClubAccess;
   const streak = useMemo(
     () => computeStreak(dashboard.programmes.flatMap((p) => p.completions.map((c) => c.completed_at))),
     [dashboard.programmes],
   );
+
+  /** Days since the most recent completed session, or null if never trained. */
+  const daysSinceLast = useMemo(() => {
+    const stamps = dashboard.programmes
+      .flatMap((p) => p.completions.map((c) => c.completed_at))
+      .filter(Boolean)
+      .sort();
+    const last = stamps[stamps.length - 1];
+    if (!last) return null;
+    return Math.floor((Date.now() - new Date(last).getTime()) / 86_400_000);
+  }, [dashboard.programmes]);
 
   const recoveryRef = useRef<string | null>(null);
   useEffect(() => {
@@ -114,8 +128,25 @@ function DashboardPage() {
 
   const today = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
 
+  const needsOnboarding =
+    !!user &&
+    !prefsLoading &&
+    !dashboard.loading &&
+    !prefs.onboarding_completed_at &&
+    dashboard.programmes.length > 0;
+  const resumeTo = focus ? programmePath(focus, "continue") : undefined;
+
   return (
     <>
+      {needsOnboarding && user && (
+        <OnboardingFlow
+          userId={user.id}
+          units={prefs.units}
+          programmes={dashboard.programmes}
+          update={updatePrefs}
+          onDone={() => { /* prefs update flips the flag */ }}
+        />
+      )}
       <section className="border-b border-border/60">
         <div className="max-w-[1200px] mx-auto container-x pt-7 md:pt-12 pb-5 md:pb-8">
           <div className="flex flex-wrap items-center gap-3 mb-3">
@@ -154,6 +185,11 @@ function DashboardPage() {
       </div>
 
       <main className="max-w-[1200px] mx-auto container-x pt-6 pb-28 md:pb-20">
+        {tab === "train" && daysSinceLast !== null && daysSinceLast >= 5 && (
+          <div className="mb-6">
+            <ComebackCard daysSince={daysSinceLast} resumeTo={resumeTo} />
+          </div>
+        )}
         {tab === "train" && (
           <TrainTab
             loading={dashboard.loading}
@@ -188,6 +224,7 @@ function DashboardPage() {
       </main>
 
       <DashboardBottomNav tab={tab} />
+      <InstallPrompt sessionsCompleted={dashboard.sessionsCompleted} />
       <p className="sr-only">This area is private and excluded from search.</p>
     </>
   );
