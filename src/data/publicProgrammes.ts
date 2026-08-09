@@ -3,6 +3,7 @@ import semImg from "@/assets/programme-sem.jpg.asset.json";
 import sem2027Img from "@/assets/sem-2027-cover.jpg.asset.json";
 import raceImg from "@/assets/programme-hybrid-race.jpg.asset.json";
 import mixedImg from "@/assets/programme-mixed.jpg.asset.json";
+import totalImg from "@/assets/build-total-cover.jpg.asset.json";
 
 export type PublicProgrammeStatus = "in-development" | "releasing-soon" | "live";
 
@@ -161,6 +162,31 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
         description:
           "For athletes needing reduced complexity, lighter loading and more accessible progressions.",
       },
+    ],
+  },
+  {
+    num: "06",
+    slug: "build-total",
+    title: "TOTAL",
+    collection: "BUILD",
+    shortLine: "Squat. Bench. Deadlift.",
+    description:
+      "An eight-week powerlifting programme built around the competition squat, bench press and deadlift — calibrated loads, RPE caps, competition standards and a peak into a valid total.",
+    durationWeeks: 8,
+    image: totalImg.url,
+    status: "live",
+    whatYoullDo: [
+      "Competition squat, bench press and deadlift",
+      "Calibrated percentage and RPE work",
+      "Controlled heavy singles",
+      "Targeted accessory volume",
+      "Opener rehearsal and attempt planning",
+      "A peak week into a valid total or training peak",
+    ],
+    bestFor: [
+      "Lifters with at least six months of consistent barbell training",
+      "Athletes preparing for a first or next powerlifting meet",
+      "Lifters who want a structured eight-week strength peak",
     ],
   },
 ];
