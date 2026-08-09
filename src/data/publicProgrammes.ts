@@ -104,6 +104,9 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
     title: "MIXED",
     collection: "BUILD",
     shortLine: "Strength. Skill. Conditioning.",
+    title: "MIXED",
+    collection: "BUILD",
+    shortLine: "Strength. Skill. Conditioning.",
     description:
       "A functional training programme built around barbell work, gymnastics elements, engine work and mixed-modal conditioning.",
     durationWeeks: 8,
