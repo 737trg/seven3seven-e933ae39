@@ -338,6 +338,9 @@ export function useNutrition(userId: string | undefined, day: string = todayISO(
     copyDay,
     addWater,
     clearWater,
+    updateWaterEntry,
+    removeWaterEntry,
+    setWaterTotal,
     refresh: load,
   };
 }
