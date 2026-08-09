@@ -8,6 +8,7 @@ import { SEM27 } from "@/lib/sem2027/manifest";
 import { MIXED } from "@/lib/mixed/manifest";
 import { TOTAL } from "@/lib/total/manifest";
 import { PROGRAMME as ATHX } from "@/data/programme";
+import { ensureProgrammeContents } from "@/lib/programmeContent";
 
 type EnrolmentRow = {
   id: string;
@@ -94,6 +95,10 @@ export function useCustomerDashboard(userId: string | undefined, entitlements: E
 
     (async () => {
       setState((prev) => ({ ...prev, loading: true }));
+      // Paid programme content is fetched per entitlement before any manifest
+      // lookups below can run.
+      await ensureProgrammeContents(entitlements.map((e) => e.slug));
+      if (!active) return;
       const productIds = entitlements.map((e) => e.product_id);
       const [enrolmentsRes, completionsRes, resultsRes] = await Promise.all([
         supabase

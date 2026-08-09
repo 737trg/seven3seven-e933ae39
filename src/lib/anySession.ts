@@ -429,6 +429,17 @@ export function resolveSession(id: string): ResolvedSession | undefined {
   return resolveById(id);
 }
 
+/** Product slug that owns a session id — used to load its gated content. */
+export function programmeSlugForSessionId(id: string): string {
+  if (id.startsWith("btb-")) return "basic-training-blueprint-plus";
+  if (id.startsWith("hrp-")) return "hybrid-race-plan";
+  if (id.startsWith("mixed-")) return "mixed";
+  if (id.startsWith("total-")) return "build-total";
+  if (id.startsWith("sem27-")) return "sem-2027";
+  if (id.startsWith("sem8-") || id.startsWith("sem-")) return "sem-2026";
+  return "athx-2026";
+}
+
 function resolveSem27(id: string): ResolvedSession | undefined {
   for (const w of SEM27.weeks) {
     for (const s of w.sessions) {
