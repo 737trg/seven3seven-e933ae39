@@ -80,6 +80,7 @@ import { Route as MarketingCheckoutCancelRouteImport } from './routes/_marketing
 import { Route as MyProgrammesSem2026ProgrammeIndexRouteImport } from './routes/my-programmes.sem-2026.programme.index'
 import { Route as MyProgrammesHybridRacePlanProgrammeIndexRouteImport } from './routes/my-programmes.hybrid-race-plan.programme.index'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme.index'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
@@ -480,6 +481,12 @@ const MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute =
     path: '/',
     getParentRoute: () => MyProgrammesBasicTrainingBlueprintPlusProgrammeRoute,
   } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -585,6 +592,7 @@ export interface FileRoutesByFullPath {
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/my-programmes/basic-training-blueprint-plus/programme/': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme/': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/sem-2026/programme/': typeof MyProgrammesSem2026ProgrammeIndexRoute
@@ -656,6 +664,7 @@ export interface FileRoutesByTo {
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/my-programmes/basic-training-blueprint-plus/programme': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/sem-2026/programme': typeof MyProgrammesSem2026ProgrammeIndexRoute
@@ -736,6 +745,7 @@ export interface FileRoutesById {
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/my-programmes/basic-training-blueprint-plus/programme/': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme/': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/sem-2026/programme/': typeof MyProgrammesSem2026ProgrammeIndexRoute
@@ -815,6 +825,7 @@ export interface FileRouteTypes {
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
     | '/api/public/payments/webhook'
+    | '/lovable/email/queue/process'
     | '/my-programmes/basic-training-blueprint-plus/programme/'
     | '/my-programmes/hybrid-race-plan/programme/'
     | '/my-programmes/sem-2026/programme/'
@@ -886,6 +897,7 @@ export interface FileRouteTypes {
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
     | '/api/public/payments/webhook'
+    | '/lovable/email/queue/process'
     | '/my-programmes/basic-training-blueprint-plus/programme'
     | '/my-programmes/hybrid-race-plan/programme'
     | '/my-programmes/sem-2026/programme'
@@ -965,6 +977,7 @@ export interface FileRouteTypes {
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
     | '/api/public/payments/webhook'
+    | '/lovable/email/queue/process'
     | '/my-programmes/basic-training-blueprint-plus/programme/'
     | '/my-programmes/hybrid-race-plan/programme/'
     | '/my-programmes/sem-2026/programme/'
@@ -984,6 +997,7 @@ export interface RootRouteChildren {
   MyProgrammesSem2026Route: typeof MyProgrammesSem2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1485,6 +1499,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRouteImport
       parentRoute: typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeRoute
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -1811,6 +1832,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyProgrammesSem2026Route: MyProgrammesSem2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
