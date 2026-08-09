@@ -3,6 +3,7 @@ import { Menu, ShoppingBag, X, User, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Seven3SevenLogo } from "./Seven3SevenLogo";
 import { useAuth } from "@/lib/useAuth";
+import { useMembership } from "@/lib/useMembership";
 import { cart, useCart } from "@/lib/cart";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -17,6 +18,7 @@ export function MarketingHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
   const { user, loading } = useAuth();
+  const membership = useMembership(user?.id);
   const cartState = useCart();
   const count = cart.slugs(cartState).length;
 
@@ -132,13 +134,23 @@ export function MarketingHeader() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="px-5 py-4 flex flex-col" aria-label="Mobile">
-            <Link
-              to="/pricing"
-              onClick={() => setOpen(false)}
-              className="btn-signal press tap mb-4 w-full text-center"
-            >
-              Join the Club — £14.99/mo
-            </Link>
+            {membership.hasClubAccess ? (
+              <Link
+                to="/my-programmes"
+                onClick={() => setOpen(false)}
+                className="btn-signal press tap mb-4 w-full text-center"
+              >
+                Resume training
+              </Link>
+            ) : (
+              <Link
+                to="/pricing"
+                onClick={() => setOpen(false)}
+                className="btn-signal press tap mb-4 w-full text-center"
+              >
+                Join the Club — £14.99/mo
+              </Link>
+            )}
             {NAV.map((n) => (
               <Link
                 key={n.to}
