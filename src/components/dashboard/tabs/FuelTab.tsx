@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
-import { Droplets, Plus, Settings2, Trash2 } from "lucide-react";
+import { Droplets, Pencil, Plus, Settings2, Trash2 } from "lucide-react";
 import { SectionCard } from "@/components/dashboard/SectionCard";
 import { ClubLock } from "@/components/dashboard/ClubLock";
 import { LineChart } from "@/components/dashboard/LineChart";
 import { MacroRing } from "@/components/dashboard/nutrition/MacroRing";
 import { AddFoodSheet } from "@/components/dashboard/nutrition/AddFoodSheet";
+import { EditFoodSheet } from "@/components/dashboard/nutrition/EditFoodSheet";
 import { TargetsSheet } from "@/components/dashboard/nutrition/TargetsSheet";
-import { useNutrition } from "@/lib/useNutrition";
+import { useNutrition, type FoodEntry } from "@/lib/useNutrition";
 import { useBodyMetrics } from "@/lib/useBodyMetrics";
 import { MEALS, dayLabel, ringState, shiftDay, todayISO, type Meal } from "@/lib/nutrition";
 
@@ -28,8 +29,11 @@ export function FuelTab({
   const [addOpen, setAddOpen] = useState(false);
   const [addMeal, setAddMeal] = useState<Meal>("breakfast");
   const [targetsOpen, setTargetsOpen] = useState(false);
+  const [editing, setEditing] = useState<FoodEntry | null>(null);
+  const [waterEdit, setWaterEdit] = useState(false);
+  const [waterDraft, setWaterDraft] = useState("");
 
-  const { targets, entries, totals, waterMl, history, recent } = nutrition;
+  const { targets, entries, totals, waterMl, waterEntries, history, recent } = nutrition;
   const latestWeightKg = body.items.find((m) => m.weight_kg != null)?.weight_kg ?? null;
   const water = ringState(waterMl, targets.water_ml);
 
@@ -122,12 +126,78 @@ export function FuelTab({
                 ))}
                 <button
                   type="button"
+                  onClick={() => {
+                    setWaterDraft(String(waterMl));
+                    setWaterEdit((v) => !v);
+                  }}
+                  className="tap press h-10 px-3 inline-flex items-center gap-1.5 border border-border/60 text-bone text-[10px] uppercase tracking-widest font-display hover:border-bone"
+                >
+                  <Pencil className="h-3.5 w-3.5" strokeWidth={1.5} /> Correct
+                </button>
+                <button
+                  type="button"
                   onClick={() => void nutrition.clearWater()}
                   className="tap press h-10 px-3 text-foreground-muted text-[10px] uppercase tracking-widest font-display"
                 >
                   Reset
                 </button>
               </div>
+
+              {waterEdit && (
+                <div className="mt-4 pt-4 border-t border-border/60 space-y-3">
+                  <div className="flex gap-2">
+                    <input
+                      className="h-11 w-full bg-surface-raised/40 border border-border/60 px-3 text-bone text-sm focus:outline-none focus:border-bone"
+                      inputMode="numeric"
+                      aria-label="Total water for the day in millilitres"
+                      placeholder="Total ml for the day"
+                      value={waterDraft}
+                      onChange={(e) => setWaterDraft(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const ml = Number(waterDraft);
+                        if (!Number.isFinite(ml) || ml < 0) return;
+                        await nutrition.setWaterTotal(ml);
+                        setWaterEdit(false);
+                      }}
+                      className="tap press h-11 px-4 shrink-0 border border-border text-bone font-display text-[10px] uppercase tracking-[0.22em]"
+                    >
+                      Set
+                    </button>
+                  </div>
+                  {waterEntries.length > 0 && (
+                    <ul className="divide-y divide-border/60">
+                      {waterEntries.map((w) => (
+                        <li key={w.id} className="flex items-center justify-between gap-3 py-2">
+                          <input
+                            className="h-9 w-24 bg-surface-raised/40 border border-border/60 px-2 text-bone text-sm tabular focus:outline-none focus:border-bone"
+                            inputMode="numeric"
+                            aria-label="Amount in millilitres"
+                            defaultValue={String(w.ml)}
+                            onBlur={(e) => {
+                              const ml = Number(e.target.value);
+                              if (Number.isFinite(ml) && ml > 0 && ml !== w.ml) void nutrition.updateWaterEntry(w.id, ml);
+                            }}
+                          />
+                          <span className="text-foreground-muted text-[11px] tabular flex-1">
+                            {new Date(w.created_at).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                          <button
+                            type="button"
+                            aria-label="Remove drink"
+                            onClick={() => void nutrition.removeWaterEntry(w.id)}
+                            className="tap press text-foreground-muted hover:text-signal"
+                          >
+                            <Trash2 className="h-4 w-4" strokeWidth={1.5} />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -156,21 +226,36 @@ export function FuelTab({
                       <ul className="mt-3 divide-y divide-border/60">
                         {rows.map((entry) => (
                           <li key={entry.id} className="flex items-center justify-between gap-3 py-2.5">
-                            <div className="min-w-0">
+                            <button
+                              type="button"
+                              onClick={() => setEditing(entry)}
+                              className="tap press min-w-0 flex-1 text-left"
+                              aria-label={`Edit ${entry.name}`}
+                            >
                               <p className="text-bone text-sm truncate">{entry.name}</p>
                               <p className="text-foreground-muted text-[11px] tabular">
                                 {entry.serving_label ? `${entry.serving_label} · ` : ""}
                                 {Math.round(entry.calories)} kcal · {entry.protein_g}P / {entry.carbs_g}C / {entry.fat_g}F
                               </p>
-                            </div>
-                            <button
-                              type="button"
-                              aria-label={`Remove ${entry.name}`}
-                              onClick={() => void nutrition.removeEntry(entry.id)}
-                              className="tap press text-foreground-muted hover:text-signal shrink-0"
-                            >
-                              <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                             </button>
+                            <div className="flex items-center gap-1 shrink-0">
+                              <button
+                                type="button"
+                                aria-label={`Edit ${entry.name}`}
+                                onClick={() => setEditing(entry)}
+                                className="tap press text-foreground-muted hover:text-bone p-1"
+                              >
+                                <Pencil className="h-4 w-4" strokeWidth={1.5} />
+                              </button>
+                              <button
+                                type="button"
+                                aria-label={`Remove ${entry.name}`}
+                                onClick={() => void nutrition.removeEntry(entry.id)}
+                                className="tap press text-foreground-muted hover:text-signal p-1"
+                              >
+                                <Trash2 className="h-4 w-4" strokeWidth={1.5} />
+                              </button>
+                            </div>
                           </li>
                         ))}
                       </ul>
@@ -209,6 +294,12 @@ export function FuelTab({
         meal={addMeal}
         recent={recent}
         onAdd={nutrition.addEntry}
+      />
+      <EditFoodSheet
+        entry={editing}
+        onClose={() => setEditing(null)}
+        onSave={nutrition.updateEntry}
+        onDelete={nutrition.removeEntry}
       />
       <TargetsSheet
         open={targetsOpen}
