@@ -5,11 +5,12 @@ import { useSyncExternalStore } from 'react';
  * Storage key MUST stay `s3s.cart.v1` — existing BTB+ and S.E.M. product
  * pages already read/write this key.
  */
-export type CartItemSlug = 'basic-training-blueprint-plus' | 'sem-2026' | 'hybrid-race-plan';
+export type CartItemSlug = 'basic-training-blueprint-plus' | 'sem-2026' | 'sem-2027' | 'hybrid-race-plan';
 
 export type CartState = {
   hasBtb?: boolean;
   hasSem?: boolean;
+  hasSem27?: boolean;
   hasHrp?: boolean;
 };
 
@@ -86,6 +87,7 @@ export const cart = {
     const c = read();
     if (slug === 'basic-training-blueprint-plus') c.hasBtb = true;
     if (slug === 'sem-2026') c.hasSem = true;
+    if (slug === 'sem-2027') c.hasSem27 = true;
     if (slug === 'hybrid-race-plan') c.hasHrp = true;
     write(c);
   },
@@ -93,6 +95,7 @@ export const cart = {
     const c = read();
     if (slug === 'basic-training-blueprint-plus') c.hasBtb = false;
     if (slug === 'sem-2026') c.hasSem = false;
+    if (slug === 'sem-2027') c.hasSem27 = false;
     if (slug === 'hybrid-race-plan') c.hasHrp = false;
     write(c);
   },
@@ -103,11 +106,12 @@ export const cart = {
     const list: CartItemSlug[] = [];
     if (state.hasBtb) list.push('basic-training-blueprint-plus');
     if (state.hasSem) list.push('sem-2026');
+    if (state.hasSem27) list.push('sem-2027');
     if (state.hasHrp) list.push('hybrid-race-plan');
     return list;
   },
   isEmpty(state: CartState = read()): boolean {
-    return !state.hasBtb && !state.hasSem && !state.hasHrp;
+    return !state.hasBtb && !state.hasSem && !state.hasSem27 && !state.hasHrp;
   },
 };
 
@@ -131,6 +135,13 @@ export const CART_CATALOG: Record<CartItemSlug, {
     durationLabel: '8-week programme',
     pricePence: 1999,
     stripePriceId: 'sem_2026_lifetime',
+  },
+  'sem-2027': {
+    slug: 'sem-2027',
+    title: 'S.E.M 2027',
+    durationLabel: '12-week programme',
+    pricePence: 1999,
+    stripePriceId: 'sem_2027_lifetime',
   },
   'hybrid-race-plan': {
     slug: 'hybrid-race-plan',

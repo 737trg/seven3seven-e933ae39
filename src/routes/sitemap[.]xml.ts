@@ -15,6 +15,7 @@ const entries: SitemapEntry[] = [
   { path: "/pricing", changefreq: "weekly", priority: "0.9" },
   { path: "/programmes/basic-training-blueprint-plus", changefreq: "weekly", priority: "0.9" },
   { path: "/programmes/sem-2026", changefreq: "weekly", priority: "0.9" },
+  { path: "/programmes/sem-2027", changefreq: "weekly", priority: "0.9" },
   { path: "/programmes/hybrid-race-plan", changefreq: "weekly", priority: "0.9" },
   { path: "/apparel", changefreq: "monthly", priority: "0.7" },
   { path: "/about", changefreq: "monthly", priority: "0.7" },
