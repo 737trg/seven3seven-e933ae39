@@ -3,6 +3,7 @@ import { CalendarDays, LineChart, BookOpen, User, Flame, Trophy, Calculator, Lay
 import { Wordmark } from "@/components/shell/Wordmark";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
+import { useProgrammeContent } from "@/lib/programmeContent";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { sem27Store } from "@/lib/sem2027/store";
@@ -25,6 +26,7 @@ export function Sem27Shell({ children, eyebrow, title }: { children: ReactNode; 
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const { user, loading: authLoading } = useAuth();
   const { items, loading: entLoading } = useEntitlements(user?.id);
+  const content = useProgrammeContent("sem-2027", !!user);
 
   useEffect(() => {
     sem27Store.configureUser(user?.id ?? null);
@@ -32,6 +34,7 @@ export function Sem27Shell({ children, eyebrow, title }: { children: ReactNode; 
 
   if (!authLoading && !user) return <GateSignIn />;
   if (!authLoading && !entLoading && !items.some((i) => i.slug === "sem-2027")) return <GateNoEntitlement />;
+  if (!content.ready) return <ContentLoading />;
 
   return (
     <div className="min-h-dvh bg-background text-foreground flex">
@@ -125,6 +128,14 @@ export function Sem27Shell({ children, eyebrow, title }: { children: ReactNode; 
           })}
         </ul>
       </nav>
+    </div>
+  );
+}
+
+function ContentLoading() {
+  return (
+    <div className="min-h-dvh bg-background text-foreground grid place-items-center px-6">
+      <p className="text-sm text-muted-foreground">Loading your programme…</p>
     </div>
   );
 }
