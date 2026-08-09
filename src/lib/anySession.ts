@@ -416,6 +416,50 @@ function resolveSem(id: string): ResolvedSession | undefined {
 }
 
 export function resolveSession(id: string): ResolvedSession | undefined {
+  return resolveById(id);
+}
+
+function resolveSem27(id: string): ResolvedSession | undefined {
+  for (const w of SEM27.weeks) {
+    for (const s of w.sessions) {
+      if (sem27SessionId(w.week, s.session) !== id) continue;
+      const blocks: SessionBlock[] = s.blocks.map((b, i) => ({
+        id: sem27BlockId(w.week, s.session, i),
+        order: i + 1,
+        kind: resolveKind((b as { kind?: string }).kind, b.name, b.instruction),
+        title: b.name,
+        timer: refineTimer(parseTimer(b.timer), b.name, b.instruction),
+        lines: buildLines(b.instruction),
+        note: [b.rpe ? `RPE ${b.rpe}` : "", b.rest ? `Rest ${b.rest}` : "", b.scaling ? `Scaling: ${b.scaling}` : ""].filter(Boolean).join(" · ") || undefined,
+      }));
+      const session: Session = {
+        id,
+        weekNumber: w.week,
+        day: toDay(s.recommended_day, s.session),
+        title: s.title,
+        category: "mixed",
+        duration: s.duration,
+        purpose: s.purpose,
+        expectedEffort: s.coach_note ?? "",
+        blocks,
+        coachNote: s.coach_note,
+      };
+      return {
+        session,
+        programme: {
+          slug: "sem-2027",
+          programmeId: "sem-2027",
+          backHref: `/my-programmes/sem-2027/programme/s/${id}`,
+          programmeHref: "/my-programmes/sem-2027/programme",
+          isAthx: false,
+        },
+      };
+    }
+  }
+  return undefined;
+}
+
+function resolveById(id: string): ResolvedSession | undefined {
   if (id.startsWith("btb-")) return resolveBtb(id);
   if (id.startsWith("hrp-")) return resolveHrp(id);
   if (id.startsWith("sem27-")) return resolveSem27(id);
