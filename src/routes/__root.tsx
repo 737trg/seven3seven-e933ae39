@@ -103,6 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/app-icon-180.png" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap",
@@ -117,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "SEVEN3SEVEN",
           alternateName: "Seven3Seven",
           url: "https://737trg.com",
-          logo: "https://737trg.com/favicon.ico",
+          logo: "https://737trg.com/app-icon-512.png",
         }),
       },
       {
