@@ -1,4 +1,4 @@
-import { BodyMetricsPanel } from "@/components/dashboard/BodyMetricsPanel";
+import { BodyOverviewPanel } from "@/components/dashboard/BodyOverviewPanel";
 import { ClubLock } from "@/components/dashboard/ClubLock";
 import { SectionCard } from "@/components/dashboard/SectionCard";
 
@@ -15,7 +15,7 @@ export function BodyTab({
     <div className="space-y-6">
       <SectionCard title="Body metrics">
         <ClubLock unlocked={club} blurb="Track bodyweight, body fat and resting heart rate alongside your training.">
-          <BodyMetricsPanel userId={userId} units={units} />
+          <BodyOverviewPanel userId={userId} units={units} />
         </ClubLock>
       </SectionCard>
 

@@ -15,6 +15,8 @@ export type PersonalRecord = {
 
 export type NewPersonalRecord = {
   lift_label: string;
+  /** Optional catalogue key; falls back to a slug of the label. */
+  lift_key?: string;
   metric: string;
   value: number;
   reps?: number | null;
@@ -64,7 +66,7 @@ export function usePersonalRecords(userId: string | undefined) {
       if (!userId) return { error: "Not signed in" };
       const { error } = await supabase.from("personal_records").insert({
         user_id: userId,
-        lift_key: slugifyLift(record.lift_label),
+        lift_key: record.lift_key ?? slugifyLift(record.lift_label),
         lift_label: record.lift_label.trim(),
         metric: record.metric,
         value: record.value,
