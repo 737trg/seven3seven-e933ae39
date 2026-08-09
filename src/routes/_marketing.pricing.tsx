@@ -135,6 +135,16 @@ function PricingPage() {
             <button onClick={manage} disabled={busy} className="press mt-7 h-12 px-6 inline-flex items-center justify-center border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display">
               Manage membership
             </button>
+          ) : membership.hasClubAccess ? (
+            <div className="mt-7">
+              <p className="eyebrow text-signal">You already have full access</p>
+              <p className="body-sm mt-2">
+                As a founding customer every Club feature is unlocked on your account, free.
+              </p>
+              <Link to="/my-programmes" className="press tap mt-4 h-12 px-6 inline-flex items-center justify-center border border-border text-bone text-[11px] uppercase tracking-[0.28em] font-display hover:border-bone">
+                Go to dashboard
+              </Link>
+            </div>
           ) : (
             <button onClick={join} disabled={busy} className="press mt-7 h-12 px-6 inline-flex items-center justify-center bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display">
               {busy ? "Opening…" : "Join the Club"}
