@@ -114,7 +114,7 @@ function ProfilePage() {
           </select>
         </Field>
         <Field label="Current 2 km (mm:ss)" error={errors.currentTwoKm}>
-          <input inputMode="numeric" value={valueOf("currentTwoKm", form.currentTwoKm)} onChange={(e) => setDraftValue("currentTwoKm", e.target.value.slice(0, 8))} onBlur={commitTwoKm} className="btb-input" placeholder="e.g. 10:30" />
+          <input type="text" inputMode="text" autoCapitalize="none" autoCorrect="off" value={valueOf("currentTwoKm", form.currentTwoKm)} onChange={(e) => setDraftValue("currentTwoKm", e.target.value.slice(0, 8))} onBlur={commitTwoKm} className="btb-input" placeholder="e.g. 10:30" />
         </Field>
         <Field label={`Deadlift baseline (${form.units})`} error={errors.deadliftBaseline}>
           <input inputMode="decimal" value={valueOf("deadliftBaseline", form.deadliftBaseline)} onChange={(e) => setDraftValue("deadliftBaseline", e.target.value.slice(0, 6))} onBlur={() => commitNum("deadliftBaseline", 500)} className="btb-input" placeholder="0" />
