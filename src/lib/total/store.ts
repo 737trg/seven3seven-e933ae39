@@ -137,12 +137,12 @@ export function useTotalTracks() {
   return useSyncExternalStore(subscribe, totalStore.getTracks, totalStore.getTracks);
 }
 
-/** Returns 1..12 based on start date, clamped. Null if no start date. */
+/** Returns 1..8 based on start date, clamped. Null if no start date. */
 export function currentTotalWeek(startISO: string | null): number | null {
   if (!startISO) return null;
   const start = new Date(startISO + "T00:00:00");
   if (Number.isNaN(start.getTime())) return null;
   const days = Math.floor((Date.now() - start.getTime()) / 86_400_000);
   if (days < 0) return 1;
-  return Math.min(12, Math.max(1, Math.floor(days / 7) + 1));
+  return Math.min(8, Math.max(1, Math.floor(days / 7) + 1));
 }

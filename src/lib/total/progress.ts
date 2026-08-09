@@ -15,7 +15,7 @@ const EMPTY: TotalProgress = {
 };
 
 /** Real session_completions + workout_results for the TOTAL product. */
-export function useTotalProgress(userId: string | undefined, productSlug = "total") {
+export function useTotalProgress(userId: string | undefined, productSlug = "build-total") {
   const [state, setState] = useState<TotalProgress>({ ...EMPTY, loading: true });
 
   useEffect(() => {
