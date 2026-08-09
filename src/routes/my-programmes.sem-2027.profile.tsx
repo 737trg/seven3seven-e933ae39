@@ -3,6 +3,7 @@ import { Sem27Shell } from "@/components/sem2027/Sem27Shell";
 import { sem27Store, useSem27Profile, type Sem27Units, type Sem27Format, type Sem27Category, type Sem27Sex, type Sem27Mode } from "@/lib/sem2027/store";
 import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
+import { useDraftFields, parseNumberField } from "@/lib/useDraftFields";
 import pdfAsset from "@/assets/sem-2027-download.pdf.asset.json";
 import { PdfDownloadLink } from "@/components/dashboard/PdfDownloadLink";
 
@@ -11,17 +12,11 @@ export const Route = createFileRoute("/my-programmes/sem-2027/profile")({
   component: ProfilePage,
 });
 
-function safeNum(v: string, max = 1000): number | null {
-  if (!v.trim()) return null;
-  const n = Number(v);
-  if (!Number.isFinite(n) || n < 0 || n > max) return null;
-  return Math.round(n * 10) / 10;
-}
-
 function ProfilePage() {
   const { user } = useAuth();
   const profile = useSem27Profile();
   const [saved, setSaved] = useState(false);
+  const { errors, valueOf, setDraftValue, clearDraft, setError } = useDraftFields();
 
   useEffect(() => {
     if (!profile.displayName && user?.user_metadata?.display_name) {
@@ -30,25 +25,38 @@ function ProfilePage() {
   }, [user, profile.displayName]);
 
   function field<K extends keyof typeof profile>(k: K, label: string, type: "text" | "date" | "number" = "text", placeholder?: string) {
+    const key = String(k);
+    const commit = () => {
+      const raw = valueOf(key, profile[k]);
+      if (type === "number") {
+        const { value, error } = parseNumberField(raw, 1000);
+        setError(key, error);
+        if (error) return;
+        sem27Store.saveProfile({ [k]: value } as any);
+      } else {
+        sem27Store.saveProfile({ [k]: raw.slice(0, 80) } as any);
+      }
+      clearDraft(key);
+    };
     return (
       <label className="grid grid-cols-[180px_1fr] items-center gap-3 text-sm">
         <span className="text-foreground-muted uppercase tracking-widest text-[10px]">{label}</span>
+        <span className="block">
         <input
-          type={type}
-          value={(profile[k] as any) ?? ""}
+          type={type === "number" ? "text" : type}
+          inputMode={type === "number" ? "decimal" : undefined}
+          value={type === "date" ? ((profile[k] as any) ?? "") : valueOf(key, profile[k])}
           placeholder={placeholder}
           maxLength={80}
           onChange={(e) => {
-            const v = e.target.value;
-            if (type === "number") {
-              const n = safeNum(v);
-              sem27Store.saveProfile({ [k]: n } as any);
-            } else {
-              sem27Store.saveProfile({ [k]: v.slice(0, 80) } as any);
-            }
+            if (type === "date") { sem27Store.saveProfile({ [k]: e.target.value } as any); return; }
+            setDraftValue(key, e.target.value);
           }}
-          className="h-10 bg-transparent border border-border px-3 text-bone tabular"
+          onBlur={type === "date" ? undefined : commit}
+          className="h-10 w-full bg-transparent border border-border px-3 text-bone tabular"
         />
+        {errors[key] && <span className="mt-1 block text-signal text-[11px]">{errors[key]}</span>}
+        </span>
       </label>
     );
   }
