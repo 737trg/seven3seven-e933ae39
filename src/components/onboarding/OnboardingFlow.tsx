@@ -128,7 +128,7 @@ export function OnboardingFlow({
                     <span className="text-bone font-display uppercase text-xs tracking-[0.18em]">{p.name}</span>
                     {productId === p.product_id && <Check className="h-4 w-4 text-signal" strokeWidth={1.75} />}
                   </span>
-                  {p.subtitle && <span className="block body-sm mt-1.5">{p.subtitle}</span>}
+                  <span className="block body-sm mt-1.5">{p.state === "ready" ? "Ready to start" : p.state === "completed" ? "Completed" : "In progress"}</span>
                 </button>
               ))}
             </div>
