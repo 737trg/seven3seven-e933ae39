@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Athx2026RouteImport } from './routes/athx-2026'
 import { Route as MarketingRouteImport } from './routes/_marketing'
@@ -19,6 +20,7 @@ import { Route as MyProgrammesSem2026RouteImport } from './routes/my-programmes.
 import { Route as MyProgrammesHybridRacePlanRouteImport } from './routes/my-programmes.hybrid-race-plan'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/my-programmes.basic-training-blueprint-plus'
 import { Route as MyProgrammesAthx2026RouteImport } from './routes/my-programmes.athx-2026'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as MarketingSignUpRouteImport } from './routes/_marketing.sign-up'
 import { Route as MarketingSignInRouteImport } from './routes/_marketing.sign-in'
 import { Route as MarketingResetPasswordRouteImport } from './routes/_marketing.reset-password'
@@ -69,6 +71,7 @@ import { Route as MyProgrammesAthx2026ProgrammeRouteImport } from './routes/my-p
 import { Route as MyProgrammesAthx2026ProfileRouteImport } from './routes/my-programmes.athx-2026.profile'
 import { Route as MyProgrammesAthx2026LearnRouteImport } from './routes/my-programmes.athx-2026.learn'
 import { Route as MyProgrammesAthx2026CalculatorRouteImport } from './routes/my-programmes.athx-2026.calculator'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as MarketingProgrammesSem2026RouteImport } from './routes/_marketing.programmes.sem-2026'
 import { Route as MarketingProgrammesBasicTrainingBlueprintPlusRouteImport } from './routes/_marketing.programmes.basic-training-blueprint-plus'
 import { Route as MarketingProgrammesSlugRouteImport } from './routes/_marketing.programmes.$slug'
@@ -80,14 +83,22 @@ import { Route as MarketingCheckoutCancelRouteImport } from './routes/_marketing
 import { Route as MyProgrammesSem2026ProgrammeIndexRouteImport } from './routes/my-programmes.sem-2026.programme.index'
 import { Route as MyProgrammesHybridRacePlanProgrammeIndexRouteImport } from './routes/my-programmes.hybrid-race-plan.programme.index'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme.index'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as ApiPublicHooksNotificationsRouteImport } from './routes/api/public/hooks/notifications'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 import { Route as MyProgrammesSem2026ProgrammeSSessionIdRouteImport } from './routes/my-programmes.sem-2026.programme.s.$sessionId'
 import { Route as MyProgrammesHybridRacePlanProgrammeSSessionIdRouteImport } from './routes/my-programmes.hybrid-race-plan.programme.s.$sessionId'
 import { Route as MyProgrammesBasicTrainingBlueprintPlusProgrammeSSessionIdRouteImport } from './routes/my-programmes.basic-training-blueprint-plus.programme.s.$sessionId'
 
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -136,6 +147,11 @@ const MyProgrammesBasicTrainingBlueprintPlusRoute =
 const MyProgrammesAthx2026Route = MyProgrammesAthx2026RouteImport.update({
   id: '/my-programmes/athx-2026',
   path: '/my-programmes/athx-2026',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingSignUpRoute = MarketingSignUpRouteImport.update({
@@ -420,6 +436,11 @@ const MyProgrammesAthx2026CalculatorRoute =
     path: '/calculator',
     getParentRoute: () => MyProgrammesAthx2026Route,
   } as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketingProgrammesSem2026Route =
   MarketingProgrammesSem2026RouteImport.update({
     id: '/programmes/sem-2026',
@@ -481,6 +502,18 @@ const MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute =
     path: '/',
     getParentRoute: () => MyProgrammesBasicTrainingBlueprintPlusProgrammeRoute,
   } as any)
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -491,6 +524,12 @@ const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
     path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksNotificationsRoute =
+  ApiPublicHooksNotificationsRouteImport.update({
+    id: '/api/public/hooks/notifications',
+    path: '/api/public/hooks/notifications',
     getParentRoute: () => rootRouteImport,
   } as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
@@ -526,6 +565,7 @@ export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -543,6 +583,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   '/my-programmes/hybrid-race-plan': typeof MyProgrammesHybridRacePlanRouteWithChildren
@@ -556,6 +597,7 @@ export interface FileRoutesByFullPath {
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -591,8 +633,11 @@ export interface FileRoutesByFullPath {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/hooks/notifications': typeof ApiPublicHooksNotificationsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/my-programmes/basic-training-blueprint-plus/programme/': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme/': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/sem-2026/programme/': typeof MyProgrammesSem2026ProgrammeIndexRoute
@@ -604,6 +649,7 @@ export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
   '/athx-2026': typeof Athx2026Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/calculator': typeof AppCalculatorRoute
   '/learn': typeof AppLearnRoute
   '/profile': typeof AppProfileRoute
@@ -621,6 +667,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof MarketingResetPasswordRoute
   '/sign-in': typeof MarketingSignInRoute
   '/sign-up': typeof MarketingSignUpRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/workout/$sessionId': typeof WorkoutSessionIdRouteWithChildren
   '/checkout/cancel': typeof MarketingCheckoutCancelRoute
@@ -631,6 +678,7 @@ export interface FileRoutesByTo {
   '/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -663,8 +711,11 @@ export interface FileRoutesByTo {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/hooks/notifications': typeof ApiPublicHooksNotificationsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/my-programmes/basic-training-blueprint-plus/programme': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/sem-2026/programme': typeof MyProgrammesSem2026ProgrammeIndexRoute
@@ -678,6 +729,7 @@ export interface FileRoutesById {
   '/_marketing': typeof MarketingRouteWithChildren
   '/athx-2026': typeof Athx2026Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/_app/calculator': typeof AppCalculatorRoute
   '/_app/learn': typeof AppLearnRoute
   '/_app/profile': typeof AppProfileRoute
@@ -695,6 +747,7 @@ export interface FileRoutesById {
   '/_marketing/reset-password': typeof MarketingResetPasswordRoute
   '/_marketing/sign-in': typeof MarketingSignInRoute
   '/_marketing/sign-up': typeof MarketingSignUpRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/my-programmes/athx-2026': typeof MyProgrammesAthx2026RouteWithChildren
   '/my-programmes/basic-training-blueprint-plus': typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   '/my-programmes/hybrid-race-plan': typeof MyProgrammesHybridRacePlanRouteWithChildren
@@ -709,6 +762,7 @@ export interface FileRoutesById {
   '/_marketing/programmes/$slug': typeof MarketingProgrammesSlugRoute
   '/_marketing/programmes/basic-training-blueprint-plus': typeof MarketingProgrammesBasicTrainingBlueprintPlusRoute
   '/_marketing/programmes/sem-2026': typeof MarketingProgrammesSem2026Route
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/my-programmes/athx-2026/calculator': typeof MyProgrammesAthx2026CalculatorRoute
   '/my-programmes/athx-2026/learn': typeof MyProgrammesAthx2026LearnRoute
   '/my-programmes/athx-2026/profile': typeof MyProgrammesAthx2026ProfileRoute
@@ -744,8 +798,11 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/hooks/notifications': typeof ApiPublicHooksNotificationsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/my-programmes/basic-training-blueprint-plus/programme/': typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRoute
   '/my-programmes/hybrid-race-plan/programme/': typeof MyProgrammesHybridRacePlanProgrammeIndexRoute
   '/my-programmes/sem-2026/programme/': typeof MyProgrammesSem2026ProgrammeIndexRoute
@@ -759,6 +816,7 @@ export interface FileRouteTypes {
     | '/'
     | '/athx-2026'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -776,6 +834,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sign-in'
     | '/sign-up'
+    | '/email/unsubscribe'
     | '/my-programmes/athx-2026'
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/hybrid-race-plan'
@@ -789,6 +848,7 @@ export interface FileRouteTypes {
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
     | '/programmes/sem-2026'
+    | '/lovable/email/suppression'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -824,8 +884,11 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/api/public/hooks/notifications'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
     | '/my-programmes/basic-training-blueprint-plus/programme/'
     | '/my-programmes/hybrid-race-plan/programme/'
     | '/my-programmes/sem-2026/programme/'
@@ -837,6 +900,7 @@ export interface FileRouteTypes {
     | '/'
     | '/athx-2026'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/calculator'
     | '/learn'
     | '/profile'
@@ -854,6 +918,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sign-in'
     | '/sign-up'
+    | '/email/unsubscribe'
     | '/my-programmes/athx-2026'
     | '/workout/$sessionId'
     | '/checkout/cancel'
@@ -864,6 +929,7 @@ export interface FileRouteTypes {
     | '/programmes/$slug'
     | '/programmes/basic-training-blueprint-plus'
     | '/programmes/sem-2026'
+    | '/lovable/email/suppression'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -896,8 +962,11 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/api/public/hooks/notifications'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
     | '/my-programmes/basic-training-blueprint-plus/programme'
     | '/my-programmes/hybrid-race-plan/programme'
     | '/my-programmes/sem-2026/programme'
@@ -910,6 +979,7 @@ export interface FileRouteTypes {
     | '/_marketing'
     | '/athx-2026'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/_app/calculator'
     | '/_app/learn'
     | '/_app/profile'
@@ -927,6 +997,7 @@ export interface FileRouteTypes {
     | '/_marketing/reset-password'
     | '/_marketing/sign-in'
     | '/_marketing/sign-up'
+    | '/email/unsubscribe'
     | '/my-programmes/athx-2026'
     | '/my-programmes/basic-training-blueprint-plus'
     | '/my-programmes/hybrid-race-plan'
@@ -941,6 +1012,7 @@ export interface FileRouteTypes {
     | '/_marketing/programmes/$slug'
     | '/_marketing/programmes/basic-training-blueprint-plus'
     | '/_marketing/programmes/sem-2026'
+    | '/lovable/email/suppression'
     | '/my-programmes/athx-2026/calculator'
     | '/my-programmes/athx-2026/learn'
     | '/my-programmes/athx-2026/profile'
@@ -976,8 +1048,11 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
+    | '/api/public/hooks/notifications'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
     | '/my-programmes/basic-training-blueprint-plus/programme/'
     | '/my-programmes/hybrid-race-plan/programme/'
     | '/my-programmes/sem-2026/programme/'
@@ -991,17 +1066,30 @@ export interface RootRouteChildren {
   MarketingRoute: typeof MarketingRouteWithChildren
   Athx2026Route: typeof Athx2026Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   MyProgrammesAthx2026Route: typeof MyProgrammesAthx2026RouteWithChildren
   MyProgrammesBasicTrainingBlueprintPlusRoute: typeof MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren
   MyProgrammesHybridRacePlanRoute: typeof MyProgrammesHybridRacePlanRouteWithChildren
   MyProgrammesSem2026Route: typeof MyProgrammesSem2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
+  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksNotificationsRoute: typeof ApiPublicHooksNotificationsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
+  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -1070,6 +1158,13 @@ declare module '@tanstack/react-router' {
       path: '/my-programmes/athx-2026'
       fullPath: '/my-programmes/athx-2026'
       preLoaderRoute: typeof MyProgrammesAthx2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_marketing/sign-up': {
@@ -1422,6 +1517,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesAthx2026CalculatorRouteImport
       parentRoute: typeof MyProgrammesAthx2026Route
     }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_marketing/programmes/sem-2026': {
       id: '/_marketing/programmes/sem-2026'
       path: '/programmes/sem-2026'
@@ -1499,6 +1601,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeIndexRouteImport
       parentRoute: typeof MyProgrammesBasicTrainingBlueprintPlusProgrammeRoute
     }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
       path: '/lovable/email/queue/process'
@@ -1511,6 +1627,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/payments/webhook'
       fullPath: '/api/public/payments/webhook'
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/notifications': {
+      id: '/api/public/hooks/notifications'
+      path: '/api/public/hooks/notifications'
+      fullPath: '/api/public/hooks/notifications'
+      preLoaderRoute: typeof ApiPublicHooksNotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app/programme/w/$week': {
@@ -1825,14 +1948,20 @@ const rootRouteChildren: RootRouteChildren = {
   MarketingRoute: MarketingRouteWithChildren,
   Athx2026Route: Athx2026Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   MyProgrammesAthx2026Route: MyProgrammesAthx2026RouteWithChildren,
   MyProgrammesBasicTrainingBlueprintPlusRoute:
     MyProgrammesBasicTrainingBlueprintPlusRouteWithChildren,
   MyProgrammesHybridRacePlanRoute: MyProgrammesHybridRacePlanRouteWithChildren,
   MyProgrammesSem2026Route: MyProgrammesSem2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
+  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksNotificationsRoute: ApiPublicHooksNotificationsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
+  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
