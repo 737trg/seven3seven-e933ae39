@@ -11,10 +11,11 @@ function suppressedContext() {
   if (window.top !== window.self) return true;
   const h = window.location.hostname;
   return (
+    h === "localhost" ||
     h.startsWith("id-preview--") ||
     h.startsWith("preview--") ||
     h.endsWith("lovableproject.com") ||
-    h.endsWith("lovable.app") === false && h === "localhost"
+    h.endsWith("lovableproject-dev.com")
   );
 }
 
