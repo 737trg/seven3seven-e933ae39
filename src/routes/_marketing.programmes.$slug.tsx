@@ -31,8 +31,11 @@ export const Route = createFileRoute("/_marketing/programmes/$slug")({
   head: ({ loaderData }) => {
     const p = loaderData?.programme;
     const override = p ? SEO_OVERRIDES[p.slug] : undefined;
-    const title = override?.title ?? (p ? `${p.title} — SEVEN3SEVEN` : "Programme — SEVEN3SEVEN");
-    const desc = override?.description ?? p?.description ?? "Programme — SEVEN3SEVEN.";
+    const title = override?.title ?? (p ? `${p.title} — SEVEN3SEVEN` : "Programmes — SEVEN3SEVEN");
+    const desc =
+      override?.description ??
+      p?.description ??
+      "Explore the structured hybrid training programmes from SEVEN3SEVEN — strength, endurance and conditioning built to be followed session by session.";
     const url = p ? `${SITE}/programmes/${p.slug}` : `${SITE}/programmes`;
     const absImg = p?.image ? `${SITE}${p.image}` : undefined;
     return {
