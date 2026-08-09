@@ -36,11 +36,11 @@ function UnsubscribePage() {
     fetch(`/email/unsubscribe?token=${encodeURIComponent(t)}`)
       .then(async (res) => {
         const data = await res.json().catch(() => ({}));
-        if (!res.ok || data?.valid === false) {
-          setState(data?.alreadyUnsubscribed ? "already" : "invalid");
+        if (data?.reason === "already_unsubscribed") {
+          setState("already");
           return;
         }
-        setState(data?.alreadyUnsubscribed ? "already" : "valid");
+        setState(res.ok && data?.valid ? "valid" : "invalid");
       })
       .catch(() => setState("error"));
   }, []);
@@ -54,7 +54,9 @@ function UnsubscribePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),
       });
-      setState(res.ok ? "done" : "error");
+      const data = await res.json().catch(() => ({}));
+      if (data?.reason === "already_unsubscribed") setState("already");
+      else setState(res.ok && data?.success ? "done" : "error");
     } catch {
       setState("error");
     } finally {
