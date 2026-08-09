@@ -7,6 +7,7 @@ import pdfAsset from "@/assets/sem-2026-download.pdf.asset.json";
 import { PdfDownloadLink } from "@/components/dashboard/PdfDownloadLink";
 import { useScheduleOverrides } from "@/lib/useScheduleOverrides";
 import { SessionScheduleControls } from "@/components/dashboard/SessionScheduleControls";
+import { ProgrammeUpdatedNote } from "@/components/dashboard/ProgrammeUpdatedNote";
 
 export const Route = createFileRoute("/my-programmes/sem-2026/today")({
   head: () => ({ meta: [{ title: "S.E.M 2026 — Today" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -28,6 +29,7 @@ function TodayPage() {
 
   return (
     <SemShell eyebrow={`Week ${wk.week} · ${wk.phase}`} title={profile.displayName ? `Good work, ${profile.displayName}.` : "Today."}>
+      <ProgrammeUpdatedNote slug="sem-2026" noticeKey="content-refresh-2026" />
       {!profile.setupComplete && (
         <div className="mb-8 border border-signal/40 bg-signal/10 p-5">
           <p className="eyebrow text-signal mb-1">Setup</p>
