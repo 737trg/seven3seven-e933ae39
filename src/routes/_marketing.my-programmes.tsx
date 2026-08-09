@@ -1,39 +1,45 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Activity } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
-import heroAsset from "@/assets/seven3seven-hero.jpg.asset.json";
 import { useAuth } from "@/lib/useAuth";
 import { useEntitlements } from "@/lib/useEntitlements";
-import { useCustomerDashboard, type CustomerProgramme, type ActivityItem } from "@/lib/useCustomerDashboard";
+import { useCustomerDashboard, type CustomerProgramme } from "@/lib/useCustomerDashboard";
 import { usePreferences } from "@/lib/usePreferences";
 import { computeStreak } from "@/lib/streak";
 import { nextSessionFor } from "@/lib/nextSession";
-import { StreakCard } from "@/components/dashboard/StreakCard";
-import { PersonalRecordsPanel } from "@/components/dashboard/PersonalRecordsPanel";
-import { PbTrendPanel } from "@/components/dashboard/PbTrendPanel";
-import { BenchmarksPanel } from "@/components/dashboard/BenchmarksPanel";
-import { BodyMetricsPanel } from "@/components/dashboard/BodyMetricsPanel";
-import { LeaderboardPanel } from "@/components/dashboard/LeaderboardPanel";
-import { ClubLock } from "@/components/dashboard/ClubLock";
 import { useMembership } from "@/lib/useMembership";
 import { StatRow } from "@/components/dashboard/StatRow";
-import { NextSessionCard } from "@/components/dashboard/NextSessionCard";
-import { ProgrammeListCard } from "@/components/dashboard/ProgrammeListCard";
+import {
+  DashboardSegments,
+  DashboardBottomNav,
+  type DashboardTab,
+} from "@/components/shell/DashboardNav";
+import { TrainTab } from "@/components/dashboard/tabs/TrainTab";
+import { ProgressTab } from "@/components/dashboard/tabs/ProgressTab";
+import { BodyTab } from "@/components/dashboard/tabs/BodyTab";
+import { ClubTab } from "@/components/dashboard/tabs/ClubTab";
 import { recoverPendingPurchases } from "@/lib/checkout.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 
+const TABS: DashboardTab[] = ["train", "progress", "body", "club"];
+
 export const Route = createFileRoute("/_marketing/my-programmes")({
+  validateSearch: (search: Record<string, unknown>): { tab: DashboardTab } => {
+    const raw = String(search.tab ?? "train") as DashboardTab;
+    return { tab: TABS.includes(raw) ? raw : "train" };
+  },
   head: () => ({
     meta: [
-      { title: "My programmes — SEVEN3SEVEN" },
+      { title: "Dashboard — SEVEN3SEVEN" },
       { name: "robots", content: "noindex, nofollow" },
-      { name: "description", content: "Your owned SEVEN3SEVEN programmes." },
+      { name: "description", content: "Your SEVEN3SEVEN training dashboard." },
     ],
   }),
-  component: MyProgrammesPage,
+  component: DashboardPage,
 });
 
-function MyProgrammesPage() {
+function DashboardPage() {
+  const { tab } = Route.useSearch();
   const { user, loading: authLoading } = useAuth();
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);
@@ -44,13 +50,14 @@ function MyProgrammesPage() {
     () => computeStreak(dashboard.programmes.flatMap((p) => p.completions.map((c) => c.completed_at))),
     [dashboard.programmes],
   );
+
   const recoveryRef = useRef<string | null>(null);
   useEffect(() => {
     if (!user?.id) return;
     if (recoveryRef.current === user.id) return;
     recoveryRef.current = user.id;
     // Safety net: any complete Stripe session missing an entitlement (webhook
-    // drop, voucher redemption, closed tab) is fulfilled on library open.
+    // drop, voucher redemption, closed tab) is fulfilled on dashboard open.
     recoverPendingPurchases({ data: { environment: getStripeEnvironment() } })
       .then((res) => {
         if (res.ok && res.fulfilled.length > 0) entitlements.refresh?.();
@@ -63,8 +70,8 @@ function MyProgrammesPage() {
       <section className="min-h-[60vh] grid place-items-center px-5 py-20">
         <div className="max-w-md text-center">
           <p className="eyebrow text-signal mb-3">Members only</p>
-          <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">Sign in to access your programmes</h1>
-          <p className="text-foreground-muted text-sm mt-4">Your library, progress and downloads live behind your account.</p>
+          <h1 className="font-display font-bold text-bone text-3xl tracking-tight uppercase">Sign in to reach your dashboard</h1>
+          <p className="text-foreground-muted text-sm mt-4">Your training, progress and downloads live behind your account.</p>
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
             <Link to="/sign-in" className="h-12 px-6 inline-flex items-center justify-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">Sign in</Link>
             <Link to="/sign-up" className="h-12 px-6 inline-flex items-center justify-center border border-border text-bone text-xs uppercase tracking-widest font-display">Create account</Link>
@@ -83,8 +90,6 @@ function MyProgrammesPage() {
   const ready = dashboard.programmes.filter((p) => p.state === "ready");
   const active = dashboard.programmes.filter((p) => p.state === "active");
   const completed = dashboard.programmes.filter((p) => p.state === "completed");
-  // The athlete's highlighted programme: their explicit pick, otherwise the
-  // most recently trained active programme, otherwise the first ready one.
   const focus =
     dashboard.programmes.find((p) => p.product_id === prefs.primary_product_id) ??
     [...active].sort((a, b) =>
@@ -92,6 +97,7 @@ function MyProgrammesPage() {
     )[0] ??
     ready[0];
   const focusNext = nextSessionFor(focus);
+  const others = [...active, ...ready].filter((p) => p.product_id !== focus?.product_id);
   const setPrimary = (programme: CustomerProgramme) => {
     void updatePrefs({
       primary_product_id:
@@ -100,197 +106,88 @@ function MyProgrammesPage() {
   };
   const progressPct = dashboard.programmes.length
     ? Math.round(
-        dashboard.programmes.reduce((sum, programme) => sum + (programme.enrolment?.completion_pct ?? 0), 0) /
+        dashboard.programmes.reduce((sum, p) => sum + (p.enrolment?.completion_pct ?? 0), 0) /
           dashboard.programmes.length,
       )
     : 0;
 
-  const others = [...active, ...ready].filter((p) => p.product_id !== focus?.product_id);
+  const today = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
 
   return (
     <>
-      {/* Header: text-first on mobile, editorial image only from lg up. */}
       <section className="border-b border-border/60">
-        <div className="max-w-[1440px] mx-auto container-x pt-8 md:pt-14 lg:pt-16 pb-6 md:pb-10 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-12">
-          <div className="min-w-0">
-            <p className="eyebrow text-foreground-muted mb-3 break-words">
-              {displayName ? `${displayName} — Library` : "Your library"}
-            </p>
-            <h1 className="display-xl text-bone">
-              My programmes.
-            </h1>
-            <p className="lede mt-3 max-w-[46ch]">
-              Your training. Your progress. All in one place.
-            </p>
+        <div className="max-w-[1200px] mx-auto container-x pt-7 md:pt-12 pb-5 md:pb-8">
+          <div className="flex flex-wrap items-center gap-3 mb-3">
+            <p className="eyebrow text-foreground-muted">{today}</p>
+            {club && (
+              <span className="inline-flex items-center gap-1.5 border border-signal/50 px-2 py-1 text-signal font-display uppercase text-[9px] tracking-[0.22em]">
+                <ShieldCheck className="h-3 w-3" strokeWidth={1.75} /> Club
+              </span>
+            )}
           </div>
-          <img
-            src={heroAsset.url}
-            alt=""
-            aria-hidden
-            loading="lazy"
-            className="hidden lg:block w-[360px] xl:w-[440px] h-[200px] xl:h-[240px] object-cover object-center select-none"
-            draggable={false}
-          />
+          <h1 className="display-lg text-bone break-words">
+            {displayName ? `Welcome back, ${displayName}.` : "Welcome back."}
+          </h1>
+          <p className="lede mt-3 max-w-[46ch]">
+            {focusNext
+              ? `Next up: ${focusNext.title}.`
+              : "Pick a programme and your next session lands here."}
+          </p>
         </div>
       </section>
 
-      <div className="max-w-[1440px] mx-auto container-x">
-        <div className="py-6 md:py-8">
-          <StatRow
-            loading={dashboard.loading}
-            items={[
-              { label: "Active", value: String(dashboard.activeCount) },
-              { label: "Week", value: dashboard.currentWeek ? String(dashboard.currentWeek) : "—" },
-              { label: "Sessions", value: String(dashboard.sessionsCompleted) },
-              { label: "Streak", value: String(streak.current) },
-            ]}
-          />
-        </div>
+      <div className="max-w-[1200px] mx-auto container-x py-5 md:py-6">
+        <StatRow
+          loading={dashboard.loading}
+          items={[
+            { label: "Active", value: String(dashboard.activeCount) },
+            { label: "Week", value: dashboard.currentWeek ? String(dashboard.currentWeek) : "—" },
+            { label: "Sessions", value: String(dashboard.sessionsCompleted) },
+            { label: "Streak", value: String(streak.current) },
+          ]}
+        />
       </div>
 
-      <section className="max-w-[1440px] mx-auto container-x pb-16 lg:pb-20 grid lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,0.42fr)] gap-y-10 lg:gap-x-12 xl:gap-x-16">
-        <div className="space-y-10 lg:pr-4 xl:pr-8">
-          {focus && (
-            <NextSessionCard
-              programme={focus}
-              next={focusNext}
-              overviewHref={programmePath(focus, "cover")}
-            />
-          )}
+      <div className="max-w-[1200px] mx-auto container-x">
+        <DashboardSegments tab={tab} />
+      </div>
 
-          {dashboard.loading && dashboard.programmes.length === 0 && (
-            <div className="space-y-4" aria-hidden>
-              <div className="h-44 hairline bg-surface/20 animate-pulse" />
-              <div className="h-28 hairline bg-surface/20 animate-pulse" />
-            </div>
-          )}
+      <main className="max-w-[1200px] mx-auto container-x pt-6 pb-28 md:pb-20">
+        {tab === "train" && (
+          <TrainTab
+            loading={dashboard.loading}
+            focus={focus}
+            focusNext={focusNext}
+            others={others}
+            completed={completed}
+            primaryId={prefs.primary_product_id}
+            onPin={setPrimary}
+            streak={streak}
+            recent={dashboard.recent}
+            programmePath={programmePath}
+            stateLabel={stateLabel}
+          />
+        )}
+        {tab === "progress" && (
+          <ProgressTab
+            userId={user?.id}
+            units={prefs.units}
+            club={club}
+            totals={{
+              sessions: dashboard.sessionsCompleted,
+              results: dashboard.resultsLogged,
+              programmes: dashboard.programmes.length,
+              pct: progressPct,
+            }}
+          />
+        )}
+        {tab === "body" && <BodyTab userId={user?.id} units={prefs.units} club={club} />}
+        {tab === "club" && <ClubTab userId={user?.id} membership={membership} />}
+      </main>
 
-          {dashboard.programmes.length === 0 && !dashboard.loading && (
-            <div className="hairline elevated p-8 text-center">
-              <p className="display-sm text-bone">No programmes yet.</p>
-              <p className="body-sm mt-2">Pick a plan and your first session appears here.</p>
-              <Link to="/programmes" className="tap press mt-5 inline-flex items-center gap-2 eyebrow text-signal">
-                Browse programmes <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          )}
-
-          {others.length > 0 && (
-            <ProgrammeGroup title="Your programmes" programmes={others} primaryId={prefs.primary_product_id} onPin={setPrimary} />
-          )}
-
-          {completed.length > 0 && (
-            <ProgrammeGroup title="Completed" programmes={completed} primaryId={prefs.primary_product_id} onPin={setPrimary} />
-          )}
-        </div>
-
-        <div aria-hidden className="hidden lg:block w-px bg-border/60" />
-
-        <aside className="space-y-10 lg:pl-4 xl:pl-8">
-          <SidebarCard title="Consistency">
-            <StreakCard streak={streak} />
-          </SidebarCard>
-
-          <SidebarCard title="Personal records">
-            <PersonalRecordsPanel userId={user?.id} defaultUnit={prefs.units} />
-          </SidebarCard>
-
-          <SidebarCard title="PB trend">
-            <ClubLock unlocked={club} blurb="See how each lift has moved over time.">
-              <PbTrendPanel userId={user?.id} />
-            </ClubLock>
-          </SidebarCard>
-
-          <SidebarCard title="Standards">
-            <ClubLock unlocked={club} blurb="Score your bests against military entry, hybrid race and strength standards.">
-              <BenchmarksPanel userId={user?.id} />
-            </ClubLock>
-          </SidebarCard>
-
-          <SidebarCard title="Body metrics">
-            <ClubLock unlocked={club} blurb="Track bodyweight, body fat and resting heart rate alongside your training.">
-              <BodyMetricsPanel userId={user?.id} units={prefs.units} />
-            </ClubLock>
-          </SidebarCard>
-
-          <SidebarCard title="Leaderboard">
-            <ClubLock unlocked={club} blurb="Compete on monthly consistency with other members.">
-              <LeaderboardPanel userId={user?.id} />
-            </ClubLock>
-          </SidebarCard>
-
-          <SidebarCard title="Recent activity">
-            <RecentActivity items={dashboard.recent} />
-          </SidebarCard>
-
-          <SidebarCard title="Your progress">
-            <div className="flex items-center gap-5">
-              <ProgressRing pct={progressPct} />
-              <div className="space-y-1.5 text-xs min-w-0 flex-1">
-                <Row k="Sessions completed" v={String(dashboard.sessionsCompleted)} />
-                <Row k="Results logged" v={String(dashboard.resultsLogged)} />
-                <Row k="Programmes owned" v={String(dashboard.programmes.length)} />
-              </div>
-            </div>
-          </SidebarCard>
-
-          <SidebarCard title="Quick actions">
-            <SideLink to="/programmes" label="Browse programmes" />
-            <SideLink to="/account" label="My account" />
-          </SidebarCard>
-        </aside>
-      </section>
-
+      <DashboardBottomNav tab={tab} />
       <p className="sr-only">This area is private and excluded from search.</p>
     </>
-  );
-}
-
-function ProgrammeGroup({
-  title,
-  programmes,
-  primaryId,
-  onPin,
-}: {
-  title: string;
-  programmes: CustomerProgramme[];
-  primaryId: string | null;
-  onPin: (p: CustomerProgramme) => void;
-}) {
-  return (
-    <div>
-      <p className="eyebrow mb-4">{title}</p>
-      <div className="space-y-4">
-        {programmes.map((programme) => (
-          <ProgrammeListCard
-            key={programme.product_id}
-            programme={programme}
-            href={programmePath(programme, programme.state === "active" ? "continue" : "cover")}
-            cta={programme.state === "ready" ? "Start programme" : programme.state === "completed" ? "View programme" : "Continue training"}
-            stateLabel={stateLabel(programme.state)}
-            isPrimary={primaryId === programme.product_id}
-            onPin={onPin}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function RecentActivity({ items }: { items: ActivityItem[] }) {
-  if (items.length === 0) return <p className="text-foreground-muted text-xs uppercase tracking-[0.2em]">No activity yet.</p>;
-  return (
-    <ul className="space-y-3">
-      {items.map((item, i) => (
-        <li key={`${item.ts}-${i}`} className="flex items-start gap-3">
-          <Activity className="h-3.5 w-3.5 text-signal mt-0.5 shrink-0" />
-          <div className="min-w-0">
-            <p className="text-bone text-xs">{item.title}</p>
-            <p className="text-foreground-muted text-[10px] truncate">{item.sub}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
   );
 }
 
@@ -304,46 +201,4 @@ function stateLabel(state: CustomerProgramme["state"]) {
   if (state === "ready") return "Ready to start";
   if (state === "completed") return "Completed";
   return "Active";
-}
-
-function SidebarCard({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <p className="eyebrow mb-5 pb-4 border-b border-border/60">{title}</p>
-      {children}
-    </div>
-  );
-}
-
-function SideLink({ to, label }: { to: string; label: string }) {
-  return (
-    <Link to={to} className="press min-h-12 flex items-center justify-between py-4 text-bone text-sm hover:text-signal transition-colors border-b border-border/60 last:border-0">
-      <span>{label}</span>
-      <ArrowRight className="h-3 w-3" />
-    </Link>
-  );
-}
-
-function Row({ k, v }: { k: string; v: string }) {
-  return (
-    <div className="flex items-baseline justify-between gap-3">
-      <span className="text-foreground-muted">{k}</span>
-      <span className="text-bone tabular">{v}</span>
-    </div>
-  );
-}
-
-function ProgressRing({ pct }: { pct: number }) {
-  const r = 28;
-  const c = 2 * Math.PI * r;
-  const off = c * (1 - pct / 100);
-  return (
-    <div className="relative h-[80px] w-[80px] shrink-0">
-      <svg viewBox="0 0 70 70" className="h-full w-full -rotate-90">
-        <circle cx="35" cy="35" r={r} stroke="var(--surface-raised)" strokeWidth="4" fill="none" />
-        <circle cx="35" cy="35" r={r} stroke="var(--signal)" strokeWidth="4" fill="none" strokeDasharray={c} strokeDashoffset={off} strokeLinecap="round" />
-      </svg>
-      <span className="absolute inset-0 grid place-items-center text-bone font-display text-sm tabular">{pct}%</span>
-    </div>
-  );
 }
