@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { NumberText } from "@/components/forms/NumberText";
 import { MixedShell } from "@/components/mixed/MixedShell";
 import { MIXED } from "@/lib/mixed/manifest";
 import { mixedStore, useMixedProfile, type MixedTrack } from "@/lib/mixed/store";
