@@ -100,7 +100,7 @@ function SemCover() {
           <div className="mt-20 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-widest text-foreground-muted border-t border-border pt-6">
             <span>SEVEN3SEVEN · Race</span>
             <span>Intermediate to advanced · Hybrid athletes</span>
-            <span>v2.0.0</span>
+            <span>Twelve weeks · Race build</span>
           </div>
         </div>
       </section>

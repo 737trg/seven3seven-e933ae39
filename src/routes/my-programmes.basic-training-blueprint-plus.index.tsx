@@ -138,7 +138,7 @@ function BtbCover() {
           <div className="mt-20 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-widest text-foreground-muted border-t border-border pt-6">
             <span>SEVEN3SEVEN · Foundation</span>
             <span>Independent of the British Army and Ministry of Defence</span>
-            <span>v1.0.0</span>
+            <span>Twelve weeks · Selection build</span>
           </div>
         </div>
       </section>
