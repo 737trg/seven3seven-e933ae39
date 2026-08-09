@@ -69,6 +69,14 @@ const ROUTES: {
     weeks: 12,
     image: PUBLIC_PROGRAMMES[3].image,
   },
+  {
+    slug: "mixed",
+    goal: "Functional fitness",
+    title: "MIXED",
+    line: "Barbell strength, gymnastics skill and mixed-modal conditioning across RX and Scaled tracks.",
+    weeks: 12,
+    image: PUBLIC_PROGRAMMES[4].image,
+  },
 ];
 
 const FAQS: { q: string; a: string }[] = [

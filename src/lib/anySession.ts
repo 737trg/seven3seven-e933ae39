@@ -20,6 +20,11 @@ import {
   sessionId as sem27SessionId,
   blockId as sem27BlockId,
 } from "@/lib/sem2027/manifest";
+import {
+  MIXED,
+  sessionId as mixedSessionId,
+  blockId as mixedBlockId,
+} from "@/lib/mixed/manifest";
 
 export type ProgrammeContext = {
   /** Product slug (matches DB `products.slug`). */
@@ -462,7 +467,89 @@ function resolveSem27(id: string): ResolvedSession | undefined {
 function resolveById(id: string): ResolvedSession | undefined {
   if (id.startsWith("btb-")) return resolveBtb(id);
   if (id.startsWith("hrp-")) return resolveHrp(id);
+  if (id.startsWith("mixed-")) return resolveMixed(id);
   if (id.startsWith("sem27-")) return resolveSem27(id);
   if (id.startsWith("sem8-") || id.startsWith("sem-")) return resolveSem(id);
   return resolveAthx(id);
+}
+
+/**
+ * MIXED uses plain-English timers ("AMRAP 12", "For time - cap 15",
+ * "6 x 2 minutes work / 1 minute rest") rather than the token format the
+ * other manifests use, so it gets its own parser.
+ */
+function parseMixedTimer(raw: string | null | undefined): TimerSpec | undefined {
+  if (!raw) return undefined;
+  const s = String(raw).toLowerCase().trim();
+  if (!s || s === "none") return undefined;
+  const amrap = s.match(/amrap\s*(\d+)/);
+  if (amrap) return { type: "amrap", durationSec: Number(amrap[1]) * 60 };
+  const emom = s.match(/emom\s*(\d+)/);
+  if (emom) return { type: "emom", minutes: Number(emom[1]) };
+  const cap = s.match(/cap\s*(\d+)/);
+  if (cap) return { type: "rft", capSec: Number(cap[1]) * 60 };
+  const everyX = s.match(/every\s*(\d+)\s*minutes?\s*x\s*(\d+)/);
+  if (everyX) return { type: "emom", minutes: Number(everyX[1]) * Number(everyX[2]) };
+  const intervals = s.match(/(\d+)\s*x\s*([\d:.]+)\s*(minutes?|seconds?|min|sec)?\s*(?:work)?/);
+  if (intervals && /work|rest|\//.test(s)) {
+    const value = intervals[2];
+    const unit = intervals[3] ?? "minutes";
+    let workSec: number;
+    if (value.includes(":")) {
+      const [m, sec] = value.split(":");
+      workSec = Number(m) * 60 + Number(sec);
+    } else {
+      workSec = /sec/.test(unit) ? Number(value) : Number(value) * 60;
+    }
+    return { type: "intervals", workSec: Number.isFinite(workSec) ? workSec : undefined };
+  }
+  const quality = s.match(/(\d+)\s*minutes?/);
+  if (quality) return { type: "countdown", durationSec: Number(quality[1]) * 60 };
+  return { type: "stopwatch" };
+}
+
+function resolveMixed(id: string): ResolvedSession | undefined {
+  for (const w of MIXED.weeks) {
+    for (const s of w.sessions) {
+      if (mixedSessionId(w.week, s.session) !== id) continue;
+      const blocks: SessionBlock[] = s.blocks.map((b, i) => {
+        const lines = buildLines(b.instruction);
+        if (b.rx) lines.push(`RX — ${b.rx}`);
+        if (b.scaled) lines.push(`Scaled — ${b.scaled}`);
+        if (b.stimulus) lines.push(`Stimulus — ${b.stimulus}`);
+        return {
+          id: mixedBlockId(w.week, s.session, i),
+          order: i + 1,
+          kind: resolveKind(b.kind, b.name, b.instruction),
+          title: b.name,
+          timer: parseMixedTimer(b.timer),
+          lines,
+          note: b.standard ?? undefined,
+        };
+      });
+      const session: Session = {
+        id,
+        weekNumber: w.week,
+        day: toDay(s.recommended_day, s.session),
+        title: s.title,
+        category: "mixed",
+        duration: s.duration ?? `${s.duration_minutes} min`,
+        purpose: s.purpose,
+        expectedEffort: s.intensity ?? "",
+        blocks,
+        coachNote: s.coach_note,
+      };
+      return {
+        session,
+        programme: {
+          slug: "mixed",
+          programmeId: "mixed",
+          backHref: `/my-programmes/mixed/programme/s/${id}`,
+          programmeHref: "/my-programmes/mixed/programme",
+          isAthx: false,
+        },
+      };
+    }
+  }
+  return undefined;
 }

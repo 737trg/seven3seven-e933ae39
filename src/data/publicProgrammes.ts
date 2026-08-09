@@ -134,7 +134,7 @@ export const PUBLIC_PROGRAMMES: PublicProgramme[] = [
       "A functional training programme built around barbell work, gymnastics elements, engine work and mixed-modal conditioning.",
     durationWeeks: 8,
     image: mixedImg.url,
-    status: "in-development",
+    status: "live",
     whatYoullDo: [
       "Barbell strength",
       "Olympic lift variations",
