@@ -1,4 +1,3 @@
-import raw from "@/data/mixed.manifest.json";
 
 export type MixedBlock = {
   name: string;
@@ -93,7 +92,16 @@ export type MixedManifest = {
   weeks: MixedWeek[];
 };
 
-export const MIXED: MixedManifest = raw as unknown as MixedManifest;
+/**
+ * Paid content holder. Starts empty — the real manifest is fetched from an
+ * entitlement-checked server function and merged in via `hydrateMIXED`,
+ * so paid workouts are never shipped in the client bundle.
+ */
+export const MIXED: MixedManifest = { weeks: [] } as unknown as MixedManifest;
+
+export function hydrateMIXED(data: unknown): void {
+  Object.assign(MIXED as object, data as object);
+}
 
 export function sessionId(week: number, session: number): string {
   return `mixed-w${week}-s${session}`;

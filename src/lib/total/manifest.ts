@@ -1,4 +1,3 @@
-import raw from "@/data/total.manifest.json";
 
 export type TotalBlock = {
   name: string;
@@ -97,7 +96,16 @@ export type TotalManifest = {
   weeks: TotalWeek[];
 };
 
-export const TOTAL: TotalManifest = raw as unknown as TotalManifest;
+/**
+ * Paid content holder. Starts empty — the real manifest is fetched from an
+ * entitlement-checked server function and merged in via `hydrateTOTAL`,
+ * so paid workouts are never shipped in the client bundle.
+ */
+export const TOTAL: TotalManifest = { weeks: [] } as unknown as TotalManifest;
+
+export function hydrateTOTAL(data: unknown): void {
+  Object.assign(TOTAL as object, data as object);
+}
 
 export function sessionId(week: number, session: number): string {
   return `total-w${week}-s${session}`;
