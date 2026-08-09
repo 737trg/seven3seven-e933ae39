@@ -10,35 +10,48 @@ export const Route = createFileRoute("/my-programmes/build-total/calculator")({
 
 function CalculatorPage() {
   const [load, setLoad] = useState("");
-  const [reps, setReps] = useState("5");
-  const [best, setBest] = useState("");
-  const [worst, setWorst] = useState("");
-  const [total, setTotal] = useState("");
-  const [rounds, setRounds] = useState("");
+  const [reps, setReps] = useState("3");
+  const [refMax, setRefMax] = useState("");
+  const [pct, setPct] = useState("70");
+  const [sets, setSets] = useState("");
+  const [vReps, setVReps] = useState("");
+  const [vLoad, setVLoad] = useState("");
+  const [squat, setSquat] = useState("");
+  const [bench, setBench] = useState("");
+  const [dead, setDead] = useState("");
 
   const e1rm = Number(load) > 0 && Number(reps) > 0 ? Number(load) * (1 + Number(reps) / 30) : null;
-  const dropOff = Number(best) > 0 && Number(worst) > 0 ? ((Number(best) - Number(worst)) / Number(best)) * 100 : null;
-  const avgRound = Number(total) > 0 && Number(rounds) > 0 ? Number(total) / Number(rounds) : null;
+  const pctLoad = Number(refMax) > 0 && Number(pct) > 0 ? (Number(refMax) * Number(pct)) / 100 : null;
+  const volume = Number(sets) > 0 && Number(vReps) > 0 && Number(vLoad) > 0 ? Number(sets) * Number(vReps) * Number(vLoad) : null;
+  const total = Number(squat) + Number(bench) + Number(dead);
 
   return (
     <TotalShell eyebrow="Tools" title="Calculators">
-      <div className="grid lg:grid-cols-3 gap-8">
-        <Card title="Estimated 1RM" guardrail="An estimate for planning, not a maximal attempt. Use sets of 3-5 for the cleanest number.">
+      <div className="grid lg:grid-cols-2 gap-8">
+        <Card title="Estimated 1RM" guardrail="Use only for 2-5 technically clean competition-standard repetitions. It is an estimate, not a result.">
           <Field label="Load (kg)" value={load} onChange={setLoad} />
           <Field label="Reps" value={reps} onChange={setReps} />
           <Result v={e1rm ? `${e1rm.toFixed(1)} kg` : "—"} />
         </Card>
 
-        <Card title="Interval drop-off" guardrail="More than about 10% drop-off usually means the opening pace was too aggressive.">
-          <Field label="Best interval (sec or metres)" value={best} onChange={setBest} />
-          <Field label="Worst interval" value={worst} onChange={setWorst} />
-          <Result v={dropOff !== null ? `${dropOff.toFixed(1)}%` : "—"} />
+        <Card title="Percentage load" guardrail="Round down to the nearest available increment and obey the RPE cap.">
+          <Field label="Reference max (kg)" value={refMax} onChange={setRefMax} />
+          <Field label="Percentage" value={pct} onChange={setPct} />
+          <Result v={pctLoad ? `${pctLoad.toFixed(1)} kg` : "—"} />
         </Card>
 
-        <Card title="Average round time" guardrail="Compare rounds within one workout only; changing the load or movement resets the comparison.">
-          <Field label="Total time (sec)" value={total} onChange={setTotal} />
-          <Field label="Rounds" value={rounds} onChange={setRounds} />
-          <Result v={avgRound ? `${avgRound.toFixed(0)} sec` : "—"} />
+        <Card title="Volume load" guardrail="Compare like with like — the same lift, standard and rep range.">
+          <Field label="Sets" value={sets} onChange={setSets} />
+          <Field label="Reps" value={vReps} onChange={setVReps} />
+          <Field label="Load (kg)" value={vLoad} onChange={setVLoad} />
+          <Result v={volume ? `${volume.toFixed(0)} kg` : "—"} />
+        </Card>
+
+        <Card title="Competition total" guardrail="A total is the sum of the best valid squat, bench press and deadlift.">
+          <Field label="Best squat (kg)" value={squat} onChange={setSquat} />
+          <Field label="Best bench press (kg)" value={bench} onChange={setBench} />
+          <Field label="Best deadlift (kg)" value={dead} onChange={setDead} />
+          <Result v={total > 0 ? `${total.toFixed(1)} kg` : "—"} />
         </Card>
       </div>
 
@@ -67,19 +80,17 @@ function Card({ title, guardrail, children }: { title: string; guardrail: string
     </div>
   );
 }
+
 function Field({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   return (
     <label className="block">
       <span className="text-[10px] uppercase tracking-widest text-foreground-muted">{label}</span>
-      <input
-        inputMode="decimal"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full h-11 bg-transparent border border-border px-3 text-bone"
-      />
+      <input inputMode="decimal" value={value} onChange={(e) => onChange(e.target.value)}
+        className="mt-1 w-full h-11 bg-transparent border border-border px-3 text-bone" />
     </label>
   );
 }
+
 function Result({ v }: { v: string }) {
-  return <p className="font-display text-bone text-3xl tabular pt-2">{v}</p>;
+  return <p className="font-display text-bone text-3xl tabular mt-2 tracking-tight">{v}</p>;
 }
