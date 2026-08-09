@@ -1,8 +1,8 @@
-import { PersonalRecordsPanel } from "@/components/dashboard/PersonalRecordsPanel";
-import { PbTrendPanel } from "@/components/dashboard/PbTrendPanel";
+import { PerformancePanel } from "@/components/dashboard/PerformancePanel";
 import { BenchmarksPanel } from "@/components/dashboard/BenchmarksPanel";
 import { ClubLock } from "@/components/dashboard/ClubLock";
 import { SectionCard } from "@/components/dashboard/SectionCard";
+import { MetricStat } from "@/components/dashboard/MetricStat";
 
 export function ProgressTab({
   userId,
@@ -18,24 +18,21 @@ export function ProgressTab({
   return (
     <div className="space-y-6">
       <SectionCard title="Your progress">
-        <div className="flex items-center gap-5">
-          <ProgressRing pct={totals.pct} />
-          <div className="space-y-1.5 text-xs min-w-0 flex-1">
-            <Row k="Sessions completed" v={String(totals.sessions)} />
-            <Row k="Results logged" v={String(totals.results)} />
-            <Row k="Programmes owned" v={String(totals.programmes)} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:items-stretch">
+          <div className="hairline elevated p-4 flex items-center gap-4 col-span-2">
+            <ProgressRing pct={totals.pct} />
+            <div>
+              <p className="eyebrow text-foreground-muted">Programme completion</p>
+              <p className="text-bone text-sm mt-1">Across every programme you own.</p>
+            </div>
           </div>
+          <MetricStat label="Sessions done" value={String(totals.sessions)} />
+          <MetricStat label="Results logged" value={String(totals.results)} sub={`${totals.programmes} programmes`} />
         </div>
       </SectionCard>
 
-      <SectionCard title="Personal records">
-        <PersonalRecordsPanel userId={userId} defaultUnit={units} />
-      </SectionCard>
-
-      <SectionCard title="PB trend">
-        <ClubLock unlocked={club} blurb="See how each lift has moved over time.">
-          <PbTrendPanel userId={userId} />
-        </ClubLock>
+      <SectionCard title="Performance">
+        <PerformancePanel userId={userId} units={units} />
       </SectionCard>
 
       <SectionCard title="Standards">
@@ -43,15 +40,6 @@ export function ProgressTab({
           <BenchmarksPanel userId={userId} />
         </ClubLock>
       </SectionCard>
-    </div>
-  );
-}
-
-function Row({ k, v }: { k: string; v: string }) {
-  return (
-    <div className="flex items-baseline justify-between gap-3">
-      <span className="text-foreground-muted">{k}</span>
-      <span className="text-bone tabular">{v}</span>
     </div>
   );
 }
