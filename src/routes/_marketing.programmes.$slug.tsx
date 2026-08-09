@@ -20,7 +20,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   },
 };
 
-const PAID_SLUGS = new Set(["basic-training-blueprint-plus", "sem-2026", "hybrid-race-plan"]);
+const PAID_SLUGS = new Set(["basic-training-blueprint-plus", "sem-2026", "sem-2027", "hybrid-race-plan", "mixed"]);
 
 export const Route = createFileRoute("/_marketing/programmes/$slug")({
   loader: ({ params }) => {
@@ -110,7 +110,12 @@ function ProductPage() {
   }, [user?.id]);
 
   const isBtb = p.slug === "basic-training-blueprint-plus";
-  const isCartProduct = p.slug === "basic-training-blueprint-plus" || p.slug === "sem-2026" || p.slug === "hybrid-race-plan";
+  const isCartProduct =
+    p.slug === "basic-training-blueprint-plus" ||
+    p.slug === "sem-2026" ||
+    p.slug === "sem-2027" ||
+    p.slug === "hybrid-race-plan" ||
+    p.slug === "mixed";
   const cartSlug = isCartProduct ? (p.slug as CartItemSlug) : null;
   const inCart = cartSlug ? cart.slugs(cartState).includes(cartSlug) : false;
   const started = isBtb ? btbStarted.started : false;
