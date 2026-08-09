@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { TotalShell } from "@/components/total/TotalShell";
 import { findSession, blockId, TOTAL } from "@/lib/total/manifest";
-import { totalStore, useTotalTracks, useTotalProfile, type TotalTrack } from "@/lib/total/store";
+
 import { Flame } from "lucide-react";
 
 export const Route = createFileRoute("/my-programmes/build-total/programme/s/$sessionId")({
@@ -12,8 +12,6 @@ export const Route = createFileRoute("/my-programmes/build-total/programme/s/$se
 function SessionPage() {
   const { sessionId: sid } = useParams({ from: "/my-programmes/build-total/programme/s/$sessionId" });
   const ref = findSession(sid);
-  const profile = useTotalProfile();
-  const tracks = useTotalTracks();
 
   if (!ref) {
     return (
@@ -24,7 +22,6 @@ function SessionPage() {
     );
   }
   const { week, session } = ref;
-  const track = (tracks[sid] ?? profile.defaultTrack) as TotalTrack;
 
   return (
     <TotalShell eyebrow={`Week ${week.week} · ${week.phase}`} title={session.title}>
@@ -51,18 +48,6 @@ function SessionPage() {
             </div>
           )}
 
-          <div className="mt-8">
-            <p className="eyebrow mb-3">Track for this session</p>
-            <div className="flex gap-2">
-              {(["rx", "scaled"] as TotalTrack[]).map((t) => (
-                <button key={t} onClick={() => totalStore.setTrack(sid, t)}
-                  className={`h-10 px-5 text-[10px] uppercase tracking-[0.22em] font-display border ${track === t ? "bg-bone text-obsidian border-bone" : "border-border text-bone"}`}>
-                  {t === "rx" ? "RX" : "Scaled"}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <ol className="mt-10 space-y-6">
             {session.blocks.map((b, i) => (
               <li key={blockId(week.week, session.session, i)} className="border-t border-border pt-5">
@@ -72,14 +57,8 @@ function SessionPage() {
                 </div>
                 <h3 className="font-display text-bone text-lg lg:text-xl mt-2 tracking-tight">{b.name}</h3>
                 {b.instruction && <p className="text-foreground-muted text-sm mt-2 whitespace-pre-line">{b.instruction}</p>}
-                {(b.rx || b.scaled) && (
-                  <div className="mt-3 text-xs text-bone bg-surface-raised/40 border border-border p-3">
-                    <span className="eyebrow text-signal mr-2">{track === "rx" ? "RX" : "Scaled"}</span>
-                    {track === "rx" ? b.rx ?? b.scaled : b.scaled ?? b.rx}
-                  </div>
-                )}
-                {b.stimulus && <p className="text-foreground-muted text-xs mt-2"><span className="text-bone">Stimulus.</span> {b.stimulus}</p>}
-                {b.standard && <p className="text-foreground-muted text-xs mt-2"><span className="text-bone">Standard.</span> {b.standard}</p>}
+                {b.rest && <p className="text-foreground-muted text-xs mt-2"><span className="text-bone">Rest.</span> {b.rest}</p>}
+                                {b.standard && <p className="text-foreground-muted text-xs mt-2"><span className="text-bone">Standard.</span> {b.standard}</p>}
                 {b.log && b.log.length > 0 && (
                   <p className="mt-3 text-[10px] uppercase tracking-widest text-foreground-muted">Log · <span className="text-bone">{b.log.join(", ")}</span></p>
                 )}
@@ -101,12 +80,11 @@ function SessionPage() {
           </p>
           {session.readiness_adjustment && (
             <div className="mt-6 border border-border p-5">
-              <p className="eyebrow mb-2">Readiness adjustments</p>
-              {TOTAL.readiness_options.map((r) =>
-                session.readiness_adjustment?.[r.id] ? (
-                  <p key={r.id} className="text-bone text-xs mt-2"><span className="text-signal eyebrow mr-2">{r.label}</span>{session.readiness_adjustment[r.id]}</p>
-                ) : null,
-              )}
+              <p className="eyebrow mb-2">Readiness rule</p>
+              <p className="text-bone text-xs">{session.readiness_adjustment}</p>
+              {TOTAL.readiness_options.map((r) => (
+                <p key={r.id} className="text-foreground-muted text-xs mt-2"><span className="text-signal eyebrow mr-2">{r.label}</span>{r.action}</p>
+              ))}
             </div>
           )}
           {session.log_fields && session.log_fields.length > 0 && (
