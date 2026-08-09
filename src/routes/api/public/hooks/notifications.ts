@@ -42,8 +42,12 @@ export const Route = createFileRoute("/api/public/hooks/notifications")({
           return Response.json({ error: "Server configuration error" }, { status: 500 });
         }
 
-        const apiKey = request.headers.get("apikey");
-        if (!apiKey || apiKey !== import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"]) {
+        // Scheduler-only endpoint: require the server-side service role token
+        // (the publishable key is public, so it is not a credential).
+        const authHeader = request.headers.get("authorization") ?? "";
+        const bearer = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : "";
+        const apiKey = request.headers.get("apikey") ?? "";
+        if (bearer !== serviceKey && apiKey !== serviceKey) {
           return Response.json({ error: "Unauthorized" }, { status: 401 });
         }
 
