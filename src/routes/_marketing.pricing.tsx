@@ -113,9 +113,11 @@ function PricingPage() {
         </p>
       </section>
 
-      <section className="container-x max-w-[1200px] mx-auto pb-20 grid gap-6 md:grid-cols-2">
+      <section className="container-x max-w-[1200px] mx-auto pb-20">
+        <h2 className="display-sm text-bone mb-8">Choose how you train</h2>
+        <div className="grid gap-6 md:grid-cols-2">
         <div className="hairline elevated p-7 md:p-9 flex flex-col">
-          <p className="eyebrow text-signal">Club membership</p>
+          <h3 className="eyebrow text-signal">Club membership</h3>
           <p className="display-md text-bone mt-3">
             £14.99<span className="body-sm"> / month</span>
           </p>
@@ -153,7 +155,7 @@ function PricingPage() {
         </div>
 
         <div className="hairline p-7 md:p-9 flex flex-col">
-          <p className="eyebrow">One-off programme</p>
+          <h3 className="eyebrow">One-off programme</h3>
           <p className="display-md text-bone mt-3">
             From {FROM_PRICE}<span className="body-sm"> once</span>
           </p>
@@ -170,6 +172,7 @@ function PricingPage() {
             Browse programmes <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
+        </div>
       </section>
 
       {error && (
@@ -177,7 +180,7 @@ function PricingPage() {
       )}
 
       <section className="container-x max-w-[900px] mx-auto pb-24">
-        <p className="eyebrow mb-6">Common questions</p>
+        <h2 className="eyebrow mb-6">Common questions</h2>
         <div className="space-y-6">
           <Faq q="What happens if I cancel my membership?">
             You keep access until the end of the month you've paid for. After that the Club
