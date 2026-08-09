@@ -226,21 +226,36 @@ export function FuelTab({
                       <ul className="mt-3 divide-y divide-border/60">
                         {rows.map((entry) => (
                           <li key={entry.id} className="flex items-center justify-between gap-3 py-2.5">
-                            <div className="min-w-0">
+                            <button
+                              type="button"
+                              onClick={() => setEditing(entry)}
+                              className="tap press min-w-0 flex-1 text-left"
+                              aria-label={`Edit ${entry.name}`}
+                            >
                               <p className="text-bone text-sm truncate">{entry.name}</p>
                               <p className="text-foreground-muted text-[11px] tabular">
                                 {entry.serving_label ? `${entry.serving_label} · ` : ""}
                                 {Math.round(entry.calories)} kcal · {entry.protein_g}P / {entry.carbs_g}C / {entry.fat_g}F
                               </p>
-                            </div>
-                            <button
-                              type="button"
-                              aria-label={`Remove ${entry.name}`}
-                              onClick={() => void nutrition.removeEntry(entry.id)}
-                              className="tap press text-foreground-muted hover:text-signal shrink-0"
-                            >
-                              <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                             </button>
+                            <div className="flex items-center gap-1 shrink-0">
+                              <button
+                                type="button"
+                                aria-label={`Edit ${entry.name}`}
+                                onClick={() => setEditing(entry)}
+                                className="tap press text-foreground-muted hover:text-bone p-1"
+                              >
+                                <Pencil className="h-4 w-4" strokeWidth={1.5} />
+                              </button>
+                              <button
+                                type="button"
+                                aria-label={`Remove ${entry.name}`}
+                                onClick={() => void nutrition.removeEntry(entry.id)}
+                                className="tap press text-foreground-muted hover:text-signal p-1"
+                              >
+                                <Trash2 className="h-4 w-4" strokeWidth={1.5} />
+                              </button>
+                            </div>
                           </li>
                         ))}
                       </ul>
@@ -279,6 +294,12 @@ export function FuelTab({
         meal={addMeal}
         recent={recent}
         onAdd={nutrition.addEntry}
+      />
+      <EditFoodSheet
+        entry={editing}
+        onClose={() => setEditing(null)}
+        onSave={nutrition.updateEntry}
+        onDelete={nutrition.removeEntry}
       />
       <TargetsSheet
         open={targetsOpen}
