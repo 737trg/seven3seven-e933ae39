@@ -28,7 +28,7 @@ import { getStripeEnvironment } from "@/lib/stripe";
 const TABS: DashboardTab[] = ["train", "progress", "body", "fuel", "club"];
 
 export const Route = createFileRoute("/_marketing/my-programmes")({
-  validateSearch: (search: Record<string, unknown>): { tab: DashboardTab } => {
+  validateSearch: (search: Record<string, unknown>): { tab?: DashboardTab } => {
     const raw = String(search.tab ?? "train") as DashboardTab;
     return { tab: TABS.includes(raw) ? raw : "train" };
   },
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/_marketing/my-programmes")({
 });
 
 function DashboardPage() {
-  const { tab } = Route.useSearch();
+  const tab = Route.useSearch().tab ?? "train";
   const { user, loading: authLoading } = useAuth();
   const entitlements = useEntitlements(user?.id);
   const dashboard = useCustomerDashboard(user?.id, entitlements.items, entitlements.loading);

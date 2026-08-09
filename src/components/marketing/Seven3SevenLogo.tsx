@@ -1,17 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/seven3seven-logo-v2.png.asset.json";
+import logoAsset from "@/assets/seven3seven-wordmark.png.asset.json";
 
 interface Props {
   className?: string;
-  /** Approximate rendered height in px. Logo scales proportionally. */
-  height?: number;
+  /** Rendered width in px. The wordmark scales proportionally. */
+  width?: number;
   asLink?: boolean;
   label?: string;
 }
 
 export function Seven3SevenLogo({
   className = "",
-  height = 36,
+  width = 160,
   asLink = true,
   label = "SEVEN3SEVEN — Hybrid Fitness | Performance",
 }: Props) {
@@ -19,8 +19,8 @@ export function Seven3SevenLogo({
     <img
       src={logoAsset.url}
       alt={label}
-      height={height}
-      style={{ height, width: "auto" }}
+      width={width}
+      style={{ width, height: "auto" }}
       className={`block select-none ${className}`}
       draggable={false}
     />

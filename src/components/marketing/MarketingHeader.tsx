@@ -23,10 +23,11 @@ export function MarketingHeader() {
   const count = cart.slugs(cartState).length;
 
   return (
-    <header className="sticky top-0 z-40 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/50">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-16 lg:h-20 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-        <div className="lg:justify-self-start">
-          <Seven3SevenLogo height={26} />
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-[68px] lg:h-24 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+        <div className="lg:justify-self-start min-w-0">
+          <Seven3SevenLogo width={150} className="lg:hidden" />
+          <Seven3SevenLogo width={190} className="hidden lg:block" />
         </div>
 
         <nav className="hidden lg:flex items-center gap-10 lg:justify-self-center" aria-label="Primary">
