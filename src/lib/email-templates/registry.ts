@@ -1,4 +1,7 @@
 import type { ComponentType } from 'react'
+import { template as dailyReminderTemplate } from './daily-reminder'
+import { template as weeklyRecapTemplate } from './weekly-recap'
+import { template as streakRescueTemplate } from './streak-rescue'
 
 export interface TemplateEntry {
   component: ComponentType<any>
@@ -18,6 +21,7 @@ export interface TemplateEntry {
  *   // then add to TEMPLATES: 'welcome': welcomeTemplate
  */
 export const TEMPLATES: Record<string, TemplateEntry> = {
-  // Add templates here as they are created, e.g.:
-  // 'welcome': welcomeTemplate,
+  'daily-reminder': dailyReminderTemplate,
+  'weekly-recap': weeklyRecapTemplate,
+  'streak-rescue': streakRescueTemplate,
 }
