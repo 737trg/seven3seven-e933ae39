@@ -87,6 +87,7 @@ import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lova
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as ApiPublicHooksNotificationsRouteImport } from './routes/api/public/hooks/notifications'
 import { Route as AppProgrammeWWeekRouteImport } from './routes/_app.programme.w.$week'
 import { Route as AppProgrammeSSessionIdRouteImport } from './routes/_app.programme.s.$sessionId'
 import { Route as MyProgrammesSem2026ProgrammeSSessionIdRouteImport } from './routes/my-programmes.sem-2026.programme.s.$sessionId'
@@ -525,6 +526,12 @@ const ApiPublicPaymentsWebhookRoute =
     path: '/api/public/payments/webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksNotificationsRoute =
+  ApiPublicHooksNotificationsRouteImport.update({
+    id: '/api/public/hooks/notifications',
+    path: '/api/public/hooks/notifications',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AppProgrammeWWeekRoute = AppProgrammeWWeekRouteImport.update({
   id: '/w/$week',
   path: '/w/$week',
@@ -626,6 +633,7 @@ export interface FileRoutesByFullPath {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/hooks/notifications': typeof ApiPublicHooksNotificationsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -703,6 +711,7 @@ export interface FileRoutesByTo {
   '/my-programmes/sem-2026': typeof MyProgrammesSem2026IndexRoute
   '/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/hooks/notifications': typeof ApiPublicHooksNotificationsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -789,6 +798,7 @@ export interface FileRoutesById {
   '/my-programmes/sem-2026/': typeof MyProgrammesSem2026IndexRoute
   '/_app/programme/s/$sessionId': typeof AppProgrammeSSessionIdRoute
   '/_app/programme/w/$week': typeof AppProgrammeWWeekRoute
+  '/api/public/hooks/notifications': typeof ApiPublicHooksNotificationsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -874,6 +884,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/api/public/hooks/notifications'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -951,6 +962,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026'
     | '/programme/s/$sessionId'
     | '/programme/w/$week'
+    | '/api/public/hooks/notifications'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -1036,6 +1048,7 @@ export interface FileRouteTypes {
     | '/my-programmes/sem-2026/'
     | '/_app/programme/s/$sessionId'
     | '/_app/programme/w/$week'
+    | '/api/public/hooks/notifications'
     | '/api/public/payments/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
@@ -1061,6 +1074,7 @@ export interface RootRouteChildren {
   MyProgrammesSem2026Route: typeof MyProgrammesSem2026RouteWithChildren
   WorkoutSessionIdRoute: typeof WorkoutSessionIdRouteWithChildren
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksNotificationsRoute: typeof ApiPublicHooksNotificationsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -1615,6 +1629,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/notifications': {
+      id: '/api/public/hooks/notifications'
+      path: '/api/public/hooks/notifications'
+      fullPath: '/api/public/hooks/notifications'
+      preLoaderRoute: typeof ApiPublicHooksNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app/programme/w/$week': {
       id: '/_app/programme/w/$week'
       path: '/w/$week'
@@ -1936,6 +1957,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyProgrammesSem2026Route: MyProgrammesSem2026RouteWithChildren,
   WorkoutSessionIdRoute: WorkoutSessionIdRouteWithChildren,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksNotificationsRoute: ApiPublicHooksNotificationsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
@@ -1944,3 +1966,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
