@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TotalShell } from "@/components/total/TotalShell";
 import { TOTAL } from "@/lib/total/manifest";
-import { totalStore, useTotalProfile, type TotalTrack } from "@/lib/total/store";
+import { totalStore, useTotalProfile } from "@/lib/total/store";
 
 export const Route = createFileRoute("/my-programmes/build-total/profile")({
   head: () => ({ meta: [{ title: "TOTAL — Profile" }, { name: "robots", content: "noindex, nofollow" }] }),
@@ -10,7 +10,8 @@ export const Route = createFileRoute("/my-programmes/build-total/profile")({
 
 function ProfilePage() {
   const p = useTotalProfile();
-  const equipment = ((TOTAL.equipment as { primary?: string[] }).primary ?? []);
+  const equipment = (TOTAL.equipment as { primary?: string[] }).primary ?? [];
+  const policy = TOTAL.reference_max_policy as { definition?: string; rules?: string[] };
 
   return (
     <TotalShell eyebrow="Setup" title="Profile">
@@ -22,23 +23,23 @@ function ProfilePage() {
             <input type="date" value={p.startDate ?? ""} onChange={(e) => totalStore.saveProfile({ startDate: e.target.value || null })}
               className="mt-1 w-full h-11 bg-transparent border border-border px-3 text-bone" />
           </label>
-          <Select label="Published load reference" value={p.loadReference} options={["Male", "Female"]}
-            onChange={(v) => totalStore.saveProfile({ loadReference: v as "Male" | "Female" })} />
-          <Select label="Default track" value={p.defaultTrack === "rx" ? "RX" : "Scaled"} options={["RX", "Scaled"]}
-            onChange={(v) => totalStore.saveProfile({ defaultTrack: (v === "RX" ? "rx" : "scaled") as TotalTrack })} />
-          <Select label="Current pulling option" value={p.pullingOption} options={["Pull-up", "Banded pull-up", "Ring row"]}
-            onChange={(v) => totalStore.saveProfile({ pullingOption: v })} />
-          <Select label="Current hanging trunk option" value={p.hangingTrunkOption} options={["Toes-to-bar", "Hanging knee raise", "Sit-up"]}
-            onChange={(v) => totalStore.saveProfile({ hangingTrunkOption: v })} />
-          <Select label="Current rope option" value={p.ropeOption} options={["Double under", "Single under", "Line hop"]}
-            onChange={(v) => totalStore.saveProfile({ ropeOption: v })} />
+          <Select label="Week 8 outcome" value={p.week8Path} options={["Competition", "Gym test", "Training peak without max test"]}
+            onChange={(v) => totalStore.saveProfile({ week8Path: v as typeof p.week8Path })} />
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-widest text-foreground-muted">Competition or test date</span>
+            <input type="date" value={p.eventDate ?? ""} onChange={(e) => totalStore.saveProfile({ eventDate: e.target.value || null })}
+              className="mt-1 w-full h-11 bg-transparent border border-border px-3 text-bone" />
+          </label>
+          <Text label="Federation / ruleset" value={p.ruleset} onChange={(v) => totalStore.saveProfile({ ruleset: v })} />
         </div>
 
         <div className="space-y-5">
-          <Text label="Back squat reference (kg)" value={p.backSquatKg?.toString() ?? ""}
-            onChange={(v) => totalStore.saveProfile({ backSquatKg: v ? Number(v) : null })} />
-          <Text label="Strict press reference (kg)" value={p.strictPressKg?.toString() ?? ""}
-            onChange={(v) => totalStore.saveProfile({ strictPressKg: v ? Number(v) : null })} />
+          <Text label="Squat reference max (kg)" value={p.squatKg?.toString() ?? ""}
+            onChange={(v) => totalStore.saveProfile({ squatKg: v ? Number(v) : null })} />
+          <Text label="Bench press reference max (kg)" value={p.benchKg?.toString() ?? ""}
+            onChange={(v) => totalStore.saveProfile({ benchKg: v ? Number(v) : null })} />
+          <Text label="Deadlift reference max (kg)" value={p.deadliftKg?.toString() ?? ""}
+            onChange={(v) => totalStore.saveProfile({ deadliftKg: v ? Number(v) : null })} />
           <label className="block">
             <span className="text-[10px] uppercase tracking-widest text-foreground-muted">Pain, limitations and coaching notes</span>
             <textarea rows={4} value={p.limitations} onChange={(e) => totalStore.saveProfile({ limitations: e.target.value })}
@@ -60,14 +61,20 @@ function ProfilePage() {
             </div>
           </div>
 
-          <button
-            onClick={() => totalStore.saveProfile({ setupComplete: true })}
-            className="h-11 px-6 inline-flex items-center bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display"
-          >
-            {p.setupComplete ? "Saved" : "Save profile"}
+          <button onClick={() => totalStore.saveProfile({ setupComplete: true })}
+            className="h-11 px-6 inline-flex items-center bg-signal text-bone text-[11px] uppercase tracking-[0.28em] font-display">
+            Save setup
           </button>
         </div>
       </div>
+
+      <section className="mt-14 max-w-3xl border-t border-border pt-6">
+        <p className="eyebrow mb-2">Reference max policy</p>
+        <p className="text-foreground-muted text-sm">{policy?.definition}</p>
+        <ul className="text-bone text-sm space-y-1.5 mt-3">
+          {(policy?.rules ?? []).map((r) => <li key={r}>· {r}</li>)}
+        </ul>
+      </section>
     </TotalShell>
   );
 }
@@ -76,15 +83,18 @@ function Text({ label, value, onChange }: { label: string; value: string; onChan
   return (
     <label className="block">
       <span className="text-[10px] uppercase tracking-widest text-foreground-muted">{label}</span>
-      <input value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full h-11 bg-transparent border border-border px-3 text-bone" />
+      <input value={value} onChange={(e) => onChange(e.target.value)}
+        className="mt-1 w-full h-11 bg-transparent border border-border px-3 text-bone" />
     </label>
   );
 }
+
 function Select({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (v: string) => void }) {
   return (
     <label className="block">
       <span className="text-[10px] uppercase tracking-widest text-foreground-muted">{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full h-11 bg-background border border-border px-3 text-bone">
+      <select value={value} onChange={(e) => onChange(e.target.value)}
+        className="mt-1 w-full h-11 bg-background border border-border px-3 text-bone">
         <option value="">Select…</option>
         {options.map((o) => <option key={o} value={o}>{o}</option>)}
       </select>
