@@ -149,7 +149,7 @@ function HomePage() {
   return (
     <>
       {/* HERO — one screen: offer, price, action */}
-      <section className="relative min-h-[min(100svh-4rem,44rem)] lg:min-h-[calc(100svh-5rem)] flex items-end overflow-hidden">
+      <section className="relative min-h-[min(100svh-4rem,42rem)] lg:min-h-[calc(100svh-5rem)] flex items-center overflow-hidden">
         <img
           src={heroAsset.url}
           alt="SEVEN3SEVEN athlete pulling a heavy rope during a hybrid conditioning session"
@@ -163,37 +163,37 @@ function HomePage() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(9,9,9,0.72) 0%, rgba(9,9,9,0.25) 35%, rgba(9,9,9,0.85) 78%, rgba(9,9,9,1) 100%)",
+              "linear-gradient(180deg, rgba(9,9,9,0.66) 0%, rgba(9,9,9,0.42) 28%, rgba(9,9,9,0.58) 58%, rgba(9,9,9,0.9) 86%, rgba(9,9,9,1) 100%)",
           }}
         />
-        <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-10 md:pt-16 pointer-events-none">
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x py-20 md:py-24 flex flex-col items-center text-center">
           <img
             src={heroWordmark.url}
             alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
-            className="block w-[200px] md:w-[260px] lg:w-[300px] h-auto opacity-90 select-none hero-rise"
+            className="block w-[190px] md:w-[240px] lg:w-[268px] h-auto opacity-95 select-none hero-rise"
             draggable={false}
           />
-        </div>
-        <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-40 md:pt-56 hero-rise [animation-delay:160ms]">
-          <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
-          <h1 className="mt-4 md:mt-5 display-xl text-bone max-w-[16ch]">
+          <p className="mt-6 md:mt-7 eyebrow text-bone/70 hero-rise [animation-delay:100ms]">
+            Hybrid fitness · performance programmes
+          </p>
+          <h1 className="mt-3 md:mt-4 display-xl text-bone max-w-[15ch] hero-rise [animation-delay:160ms]">
             Train like it matters.
           </h1>
-          <p className="mt-5 lede max-w-[52ch]">
+          <p className="mt-5 lede max-w-[52ch] mx-auto hero-rise [animation-delay:220ms]">
             Structured 8–12 week programmes for military preparation, competition and hybrid
             racing. Join the Club for {CLUB_PRICE} a month and get everything, or buy one
             programme outright and keep it for life.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <Link to="/pricing" className="btn-signal press tap w-full sm:w-auto text-center">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full hero-rise [animation-delay:280ms]">
+            <Link to="/pricing" className="btn-signal press tap w-full sm:w-auto text-center justify-center">
               Join the Club — {CLUB_PRICE}/mo
               <ArrowRight className="h-3.5 w-3.5 shrink-0" />
             </Link>
-            <Link to="/programmes" className="btn-ghost press tap w-full sm:w-auto text-center">
+            <Link to="/programmes" className="btn-ghost press tap w-full sm:w-auto text-center justify-center">
               Buy a programme — from {FROM_PRICE}
             </Link>
           </div>
-          <p className="mt-4 eyebrow text-bone/60">
+          <p className="mt-5 eyebrow text-bone/60 hero-rise [animation-delay:340ms]">
             Cancel anytime · Lifetime access on one-off plans · Secure Stripe checkout
           </p>
         </div>
