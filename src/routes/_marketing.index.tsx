@@ -166,13 +166,15 @@ function HomePage() {
               "linear-gradient(180deg, rgba(9,9,9,0.72) 0%, rgba(9,9,9,0.25) 35%, rgba(9,9,9,0.85) 78%, rgba(9,9,9,1) 100%)",
           }}
         />
-        <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-28 md:pt-32">
+        <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-10 md:pt-16 pointer-events-none">
           <img
             src={heroWordmark.url}
             alt="SEVEN3SEVEN — Hybrid Fitness | Performance"
-            className="block w-[240px] sm:w-[300px] lg:w-[380px] h-auto mb-6 md:mb-8 select-none"
+            className="block w-[200px] md:w-[260px] lg:w-[300px] h-auto opacity-90 select-none hero-rise"
             draggable={false}
           />
+        </div>
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto container-x pb-12 md:pb-20 pt-40 md:pt-56 hero-rise [animation-delay:160ms]">
           <p className="eyebrow text-bone/70">Hybrid fitness · performance programmes</p>
           <h1 className="mt-4 md:mt-5 display-xl text-bone max-w-[16ch]">
             Train like it matters.

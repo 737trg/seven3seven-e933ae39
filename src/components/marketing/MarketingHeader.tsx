@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, ShoppingBag, X, User, LogOut } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Seven3SevenLogo } from "./Seven3SevenLogo";
 import { useAuth } from "@/lib/useAuth";
 import { useMembership } from "@/lib/useMembership";
@@ -21,13 +21,30 @@ export function MarketingHeader() {
   const membership = useMembership(user?.id);
   const cartState = useCart();
   const count = cart.slugs(cartState).length;
+  const [scrolled, setScrolled] = useState(false);
+  const overHero = pathname === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const transparent = overHero && !scrolled && !open;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-[68px] lg:h-24 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+    <header
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
+        transparent
+          ? "bg-transparent border-b border-transparent"
+          : "border-b border-border/70 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70"
+      }`}
+    >
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-[60px] lg:h-[76px] flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
         <div className="lg:justify-self-start min-w-0">
-          <Seven3SevenLogo width={150} className="lg:hidden" />
-          <Seven3SevenLogo width={190} className="hidden lg:block" />
+          <Seven3SevenLogo width={130} className="lg:hidden" />
+          <Seven3SevenLogo width={155} className="hidden lg:block" />
         </div>
 
         <nav className="hidden lg:flex items-center gap-10 lg:justify-self-center" aria-label="Primary">
