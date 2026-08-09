@@ -61,6 +61,14 @@ const ROUTES: {
     weeks: 12,
     image: PUBLIC_PROGRAMMES[2].image,
   },
+  {
+    slug: "sem-2027",
+    goal: "Competing next season",
+    title: "S.E.M 2027",
+    line: "Twelve weeks of progressive strength, engine work and event-specific conditioning.",
+    weeks: 12,
+    image: PUBLIC_PROGRAMMES[3].image,
+  },
 ];
 
 const FAQS: { q: string; a: string }[] = [
