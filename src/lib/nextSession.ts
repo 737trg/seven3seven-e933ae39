@@ -1,6 +1,7 @@
 import { HRP, coreSessions as hrpCore } from "@/lib/hrp/manifest";
 import { BTB, coreSessions as btbCore } from "@/lib/btb/manifest";
 import { SEM, coreSessions as semCore } from "@/lib/sem/manifest";
+import { SEM27, coreSessions as sem27Core } from "@/lib/sem2027/manifest";
 import { PROGRAMME as ATHX } from "@/data/programme";
 import type { CustomerProgramme } from "@/lib/useCustomerDashboard";
 
@@ -35,6 +36,10 @@ export function programmeSessionEntries(slug: string): SessionEntry[] {
     if (slug === "sem-2026") {
       void SEM;
       return semCore().map((s) => ({ id: s.id, title: s.session.title, week: s.week.week }));
+    }
+    if (slug === "sem-2027") {
+      void SEM27;
+      return sem27Core().map((s) => ({ id: s.id, title: s.session.title, week: s.week.week }));
     }
     if (slug === "athx-2026") {
       return ATHX.weeks.flatMap((w) =>
