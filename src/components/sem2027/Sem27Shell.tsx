@@ -163,7 +163,7 @@ function GateNoEntitlement() {
         <p className="text-foreground-muted text-sm mt-4">Purchases are opening soon. Once enrolled, your programme will appear in your library.</p>
         <div className="mt-8 flex justify-center gap-4">
           <Link to="/my-programmes" className="h-11 px-6 inline-flex items-center border border-border text-bone text-xs uppercase tracking-widest font-display">My programmes</Link>
-          <Link to="/programmes/sem-2027" className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">View product</Link>
+          <Link to="/programmes/$slug" params={{ slug: "sem-2027" }} className="h-11 px-6 inline-flex items-center bg-bone text-obsidian text-xs uppercase tracking-widest font-display">View product</Link>
         </div>
       </div>
     </section>
