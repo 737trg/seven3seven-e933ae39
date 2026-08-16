@@ -41,6 +41,22 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
+  // A failed dynamic import means the browser could not fetch a page chunk
+  // (stale cached HTML after a deploy, or a transient CDN hiccup). Recover
+  // automatically with a single hard reload instead of stranding the athlete
+  // on an error screen.
+  const isChunkError = /dynamically imported module|Importing a module script failed|ChunkLoadError|error loading dynamically imported module/i.test(
+    error?.message ?? "",
+  );
+  useEffect(() => {
+    if (!isChunkError || typeof window === "undefined") return;
+    const KEY = "s37_chunk_reload_at";
+    const last = Number(sessionStorage.getItem(KEY) ?? 0);
+    if (Date.now() - last < 30_000) return; // never loop
+    sessionStorage.setItem(KEY, String(Date.now()));
+    window.location.reload();
+  }, [isChunkError]);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -53,6 +69,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
+              if (isChunkError) {
+                window.location.reload();
+                return;
+              }
               router.invalidate();
               reset();
             }}
